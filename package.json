@@ -32,7 +32,7 @@
     "eslint-loader": "2.2.1",
     "less": "3.9.0",
     "less-loader": "5.0.0",
-    "mini-css-extract-plugin": "0.7.0",
+    "mini-css-extract-plugin": "0.8.0",
     "postcss-loader": "3.0.0",
     "svg-inline-loader": "0.8.0",
     "url-loader": "2.0.1",
