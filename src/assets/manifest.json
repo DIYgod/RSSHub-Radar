@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+
+  "name": "RSSHub radar",
+  "description": "Detects available RSS and RSSHub",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "rsshub.png",
+    "default_popup": "rsshub-radar.html"
+  },
+  "permissions": [
+    "activeTab"
+  ]
+}

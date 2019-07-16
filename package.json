@@ -1,0 +1,42 @@
+{
+  "name": "rsshub-radar",
+  "version": "0.0.1",
+  "description": "Browser extension that detects available RSS and RSSHub",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack -w --mode=production --progress --display-error-details --colors",
+    "build": "webpack --mode=production --progress --display-error-details --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DIYgod/RSSHub-radar.git"
+  },
+  "keywords": [
+    "rsshub",
+    "rss"
+  ],
+  "author": "DIYgod",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DIYgod/RSSHub-radar/issues"
+  },
+  "homepage": "https://github.com/DIYgod/RSSHub-radar#readme",
+  "devDependencies": {
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4",
+    "autoprefixer": "^9.6.1",
+    "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.0.3",
+    "css-loader": "^3.0.0",
+    "cssnano": "^4.1.10",
+    "eslint-loader": "^2.2.1",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.7.0",
+    "postcss-loader": "^3.0.0",
+    "svg-inline-loader": "^0.8.0",
+    "url-loader": "^2.0.1",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6"
+  }
+}
