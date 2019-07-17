@@ -11,7 +11,9 @@ module.exports = {
     devtool: 'source-map',
 
     entry: {
-        'rsshub-radar': './src/js/index.js',
+        'popup': './src/js/popup.js',
+        'content': './src/js/content.js',
+        'background': './src/js/background.js',
     },
 
     output: {

@@ -1,15 +1,23 @@
 {
-  "manifest_version": 2,
+    "manifest_version": 2,
 
-  "name": "RSSHub radar",
-  "description": "Detects available RSS and RSSHub",
-  "version": "1.0",
+    "name": "RSSHub radar",
+    "description": "Detect available RSS and RSSHub",
+    "version": "0.1",
 
-  "browser_action": {
-    "default_icon": "rsshub.png",
-    "default_popup": "rsshub-radar.html"
-  },
-  "permissions": [
-    "activeTab"
-  ]
+    "browser_action": {
+        "default_icon": "rsshub.png",
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [{
+        "matches": ["https://*/*", "http://*/*"],
+        "js": ["content.js"]
+    }],
+    "background" : {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "permissions": [
+        "activeTab"
+    ]
 }

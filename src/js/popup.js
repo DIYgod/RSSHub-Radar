@@ -1,0 +1,2 @@
+import '../css/index.less';
+
