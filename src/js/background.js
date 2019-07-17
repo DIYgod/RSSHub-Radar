@@ -10,6 +10,10 @@ function handlePageRSS (feeds) {
     }
 }
 
+chrome.browserAction.setBadgeBackgroundColor({
+    color: '#FF2800',
+});
+
 chrome.tabs.onActivated.addListener(function (tab) {
     chrome.tabs.sendMessage(tab.tabId, {
         text: 'getPageRSS',
@@ -17,7 +21,7 @@ chrome.tabs.onActivated.addListener(function (tab) {
 });
 
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-    if (msg.text === 'setPageRSS') {
+    if (msg.text === 'setPageRSS' && sender.tab.active) {
         handlePageRSS(msg.feeds);
     }
 });
