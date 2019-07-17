@@ -42,12 +42,14 @@ chrome.runtime.sendMessage(null, {
     feeds: getPageRSS(),
 });
 
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.text === 'getPageRSS') {
-        if (document.readyState === 'complete') {
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
             sendResponse(getPageRSS());
         } else {
-            sendResponse(null);
+            document.addEventListener('DOMContentLoaded', () => {
+                sendResponse(getPageRSS());
+            });
         }
     }
 });
