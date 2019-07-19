@@ -39,6 +39,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 use: [
+                    'template-string-optimize-loader',
                     {
                         loader: 'babel-loader',
                         options: {

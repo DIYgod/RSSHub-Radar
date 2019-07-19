@@ -1,13 +1,13 @@
+window.pageRSS = [];
+window.RSSHub = [];
+let currentTab = null;
+
 function handlePageRSS (feeds) {
-    if (feeds && feeds.length) {
-        chrome.browserAction.setBadgeText({
-            text: feeds.length + '',
-        });
-    } else {
-        chrome.browserAction.setBadgeText({
-            text: '',
-        });
-    }
+    chrome.browserAction.setBadgeText({
+        text: feeds.length ? (feeds.length + '') : '',
+        tabId: currentTab.tabId,
+    });
+    window.pageRSS = feeds;
 }
 
 chrome.browserAction.setBadgeBackgroundColor({
@@ -15,7 +15,8 @@ chrome.browserAction.setBadgeBackgroundColor({
 });
 
 chrome.tabs.onActivated.addListener(function (tab) {
-    chrome.tabs.sendMessage(tab.tabId, {
+    currentTab = tab;
+    chrome.tabs.sendMessage(currentTab.tabId, {
         text: 'getPageRSS',
     }, handlePageRSS);
 });
