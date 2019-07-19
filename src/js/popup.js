@@ -4,25 +4,26 @@ import ClipboardJS from 'clipboard';
 function generateList (type, list) {
     let result = '';
     if (list && list.length) {
-        document.querySelector(`.${type}`).style.display = 'block';
         list.forEach((item) => {
             result += `
             <li class="rss-item">
                 <img class="rss-image" src="${item.image}">
-                <div class="rss-info">
+                <a href="${item.url}" class="rss-info">
                     <div class="rss-title">${item.title}</div>
                     <div class="rss-url">${item.url}</div>
-                </div>
+                </a>
                 <div class="rss-action rss-copy" data-clipboard-text="${item.url}">复制</div>
             </li>
             `
         });
+        document.querySelector(`.${type} ul`).innerHTML = result;
+        document.querySelector('.no-rss').style.display = 'none';
+        document.querySelector(`.${type}`).style.display = 'block';
     }
-    return result;
 }
 
 const background = chrome.extension.getBackgroundPage();
-document.querySelector('.page-rss ul').innerHTML = generateList('page-rss', background.pageRSS);
+generateList('page-rss', background.pageRSS);
 
 const clipboard = new ClipboardJS('.rss-copy');
 clipboard.on('success', function(e) {
@@ -32,10 +33,10 @@ clipboard.on('success', function(e) {
     }, 1000);
 });
 
-document.querySelectorAll('.rss-info').forEach((ele) => {
+document.querySelectorAll('a').forEach((ele) => {
     ele.addEventListener('click', () => {
         chrome.tabs.create({
-            url: ele.querySelector('.rss-url').innerHTML,
+            url: ele.getAttribute('href'),
         });
     });
 });

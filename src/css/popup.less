@@ -28,6 +28,23 @@ body {
     }
 }
 
+.no-rss {
+    h2 {
+        font-size: 16px;
+        margin: 0 0 15px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    a {
+        color: #FF8549;
+        text-decoration: none;
+    }
+}
 .rss-item {
     display: flex;
     justify-content: space-between;
@@ -41,11 +58,14 @@ body {
     .rss-info {
         width: 180px;
         cursor: pointer;
+        display: block;
+        text-decoration: none;
+        color: #000;
 
         .rss-title {
             font-size: 13px;
             overflow: hidden;
-            text-overflow:ellipsis;
+            text-overflow: ellipsis;
             white-space: nowrap;
             margin-bottom: 1px;
         }
@@ -53,9 +73,8 @@ body {
         .rss-url {
             font-size: 12px;
             color: #aaa;
-            text-decoration: none;
             overflow: hidden;
-            text-overflow:ellipsis;
+            text-overflow: ellipsis;
             white-space: nowrap;
             display: block;
         }
