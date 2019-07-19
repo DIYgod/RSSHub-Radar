@@ -1,3 +1,82 @@
 body {
-    width: 300px;
+    width: 310px;
+    margin: 0;
+    padding: 15px 20px 20px;
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+.page-rss,
+.page-rsshub,
+.website-rsshub {
+    display: none;
+
+    h2 {
+        font-size: 16px;
+        margin: 0 0 15px;
+    }
+    
+    ul,
+    li {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    ul {
+        width: 300px;
+        margin: auto;
+    }
+}
+
+.rss-item {
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+
+    .rss-image {
+        width: 30px;
+        height: 30px;
+    }
+
+    .rss-info {
+        width: 180px;
+        cursor: pointer;
+
+        .rss-title {
+            font-size: 13px;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            margin-bottom: 1px;
+        }
+
+        .rss-url {
+            font-size: 12px;
+            color: #aaa;
+            text-decoration: none;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            display: block;
+        }
+    }
+
+    .rss-action {
+        width: 60px;
+        font-size: 13px;
+        color: #FF8549;
+        background: #fff;
+        border: 1px solid #FF8549;
+        line-height: 30px;
+        text-align: center;
+        transition: .2s;
+        border-radius: 4px;
+        cursor: pointer;
+        box-sizing: border-box;
+
+        &:hover {
+            color: #fff;
+            background: #FF8549;
+        }
+    }
 }
