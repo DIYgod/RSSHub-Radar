@@ -5017,7 +5017,7 @@ tar@^4:
     safe-buffer "^5.1.2"
     yallist "^3.0.3"
 
-template-string-optimize-loader@^3.0.0:
+template-string-optimize-loader@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/template-string-optimize-loader/-/template-string-optimize-loader-3.0.0.tgz#bd14db05dff4b6fa24d78641aced386176ce30e1"
   integrity sha512-1QOrBwIYHJSRZ9stM0f/YtT/Yivh2pHo+IfHD98qwn95A84gu5+OfpFgtquGryg3qVnz+Tg7eeGtmEK9vb8Zjw==
