@@ -1,4 +1,4 @@
-import '../css/popup.less';
+import '../../css/popup.less';
 import ClipboardJS from 'clipboard';
 
 function generateList (type, list) {
