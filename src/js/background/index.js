@@ -1,4 +1,5 @@
 import { handlePageRSS, handlePageRSSHub, handleWebsiteRSSHub } from './utils';
+import rules from './rules';
 
 chrome.tabs.onActivated.addListener(function (tab) {
     chrome.tabs.sendMessage(tab.tabId, {
