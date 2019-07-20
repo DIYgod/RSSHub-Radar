@@ -1,22 +1,7 @@
-window.pageRSS = [];
-window.RSSHub = [];
-let currentTab = null;
-
-function handlePageRSS (feeds) {
-    chrome.browserAction.setBadgeText({
-        text: feeds.length ? (feeds.length + '') : '',
-        tabId: currentTab.tabId,
-    });
-    window.pageRSS = feeds;
-}
-
-chrome.browserAction.setBadgeBackgroundColor({
-    color: '#FF2800',
-});
+import { handlePageRSS, handlePageRSSHub, handleWebsiteRSSHub } from './utils';
 
 chrome.tabs.onActivated.addListener(function (tab) {
-    currentTab = tab;
-    chrome.tabs.sendMessage(currentTab.tabId, {
+    chrome.tabs.sendMessage(tab.tabId, {
         text: 'getPageRSS',
     }, handlePageRSS);
 });
