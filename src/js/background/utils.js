@@ -61,7 +61,6 @@ function getPageRSSHub (url, tabId, done) {
                     path: ru.source,
                     handler: index,
                 }]);
-                console.log(url);
                 const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
                 if (result && result[0]) {
                     recognized.push(result[0]);
@@ -100,7 +99,6 @@ function getWebsiteRSSHub (url) {
             for (const subdomainRules in rules[domain]) {
                 domainRules.push(...rules[domain][subdomainRules]);
             }
-            console.log(domainRules);
             return domainRules.map((rule) => ({
                 title: rule.title,
                 url: rule.description,
