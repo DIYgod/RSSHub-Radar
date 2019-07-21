@@ -4,7 +4,7 @@ module.exports = {
             title: '分区视频',
             source: '/v/*tpath',
             target: (params) => {
-                const tid;
+                let tid;
                 switch (params.tpath) {
                     case 'douga/mad':
                         tid = '24';

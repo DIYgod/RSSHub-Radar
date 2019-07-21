@@ -11,7 +11,7 @@ function handleUrl (url) {
     return url;
 }
 
-function getPageRSS () {
+export function getPageRSS () {
     if (!pageRSS) {
         pageRSS = [];
         let types = [
@@ -45,8 +45,4 @@ function getPageRSS () {
         }
     }
     return pageRSS;
-}
-
-module.exports = {
-    getPageRSS,
 }

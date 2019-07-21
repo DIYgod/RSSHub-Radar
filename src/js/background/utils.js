@@ -1,3 +1,5 @@
+import rules from './rules';
+
 window.pageRSS = [];
 window.pageRSSHub = [];
 window.websiteRSSHub = [];
@@ -6,34 +8,42 @@ chrome.browserAction.setBadgeBackgroundColor({
     color: '#FF2800',
 });
 
-function setBadge () {
+function setBadge (id) {
+    chrome.browserAction.setBadgeText({
+        text: ((window.pageRSS.length + window.pageRSSHub.length) || '') + '',
+        tabId: id,
+    });
+}
+
+function getPageRSSHub (url, done) {
+    console.log(url);
+    done([]);
+}
+
+function getWebsiteRSSHub (url) {
+    return [];
+}
+
+export function handleRSS (feeds) {
     chrome.tabs.query({
         active: true,
         currentWindow: true,
     }, (tabs) => {
-        chrome.browserAction.setBadgeText({
-            text: (window.pageRSS.length + window.pageRSSHub.length) ? (window.pageRSS.length + window.pageRSSHub.length + '') : '',
-            tabId: tabs[0].id,
+        console.log(tabs);
+        const currentTab = tabs[0];
+
+        feeds && feeds.forEach((feed) => {
+            feed.image = currentTab.favIconUrl || feed.image;
         });
-     });
-}
+        window.pageRSS = feeds || [];
 
-function handlePageRSS (feeds) {
-    window.pageRSS = feeds || [];
-    setBadge();
-}
+        getPageRSSHub(currentTab.url, (feeds) => {
+            window.pageRSSHub = feeds || [];
+            setBadge(currentTab.id);
+        });
 
-function handlePageRSSHub (feeds) {
-    window.pageRSSHub = feeds || [];
-    setBadge();
-}
+        window.websiteRSSHub = getWebsiteRSSHub(currentTab.url) || [];
 
-function handleWebsiteRSSHub (feeds) {
-    window.websiteRSSHub = feeds || [];
-}
-
-module.exports = {
-    handlePageRSS,
-    handlePageRSSHub,
-    handleWebsiteRSSHub,
+        setBadge(currentTab.id);
+    });
 }
