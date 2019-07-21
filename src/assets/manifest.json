@@ -3,7 +3,7 @@
 
     "name": "RSSHub Radar",
     "description": "Browser extension to detect available RSS and RSSHub for current page",
-    "version": "0.1",
+    "version": "0.0.1",
     "homepage_url": "https://docs.rsshub.app",
 
     "browser_action": {
