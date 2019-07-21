@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "clipboard": "2.0.4",
+    "parse-domain": "2.3.1",
     "route-recognizer": "0.3.4"
   }
 }

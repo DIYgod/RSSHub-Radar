@@ -46,3 +46,12 @@ export function getPageRSS () {
     }
     return pageRSS;
 }
+
+export function runCode (code) {
+    try {
+        return eval(code);
+    } catch (e) {
+        console.warn('RSS radar error: ', e);
+        return {};
+    }
+}

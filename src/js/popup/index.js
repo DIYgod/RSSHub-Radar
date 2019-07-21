@@ -7,7 +7,7 @@ function generateList (type, list) {
         list.forEach((item) => {
             result += `
             <li class="rss-item">
-                <img class="rss-image" src="${item.image}">
+                <img class="rss-image" src="${item.image || './rsshub.png'}">
                 <a href="${item.url}" class="rss-info">
                     <div class="rss-title">${item.title}</div>
                     <div class="rss-url">${item.url}</div>
@@ -24,6 +24,7 @@ function generateList (type, list) {
 
 const background = chrome.extension.getBackgroundPage();
 generateList('page-rss', background.pageRSS);
+generateList('page-rsshub', background.pageRSSHub);
 
 const clipboard = new ClipboardJS('.rss-copy');
 clipboard.on('success', function(e) {
