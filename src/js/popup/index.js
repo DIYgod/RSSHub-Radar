@@ -12,7 +12,7 @@ function generateList (type, list) {
                     <div class="rss-title">${item.title}</div>
                     <div class="rss-url">${item.url}</div>
                 </a>
-                ${type === 'website-rsshub' ?
+                ${item.isDescription ?
                 `<a href="${item.url}" class="rss-action">文档</a>` :
                 `<div class="rss-action rss-copy" data-clipboard-text="${item.url}">复制</div>`
                 }

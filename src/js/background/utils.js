@@ -75,6 +75,12 @@ function getPageRSSHub (url, tabId, done) {
                                 title: rule[recog.handler].title,
                                 url: 'https://rsshub.app' + parsed,
                             });
+                        } else {
+                            result.push({
+                                title: rule[recog.handler].title,
+                                url: rule[recog.handler].description,
+                                isDescription: true,
+                            });
                         }
                         resolve();
                     });
@@ -102,6 +108,7 @@ function getWebsiteRSSHub (url) {
             return domainRules.map((rule) => ({
                 title: rule.title,
                 url: rule.description,
+                isDescription: true,
             }));
         } else {
             return [];
