@@ -1,12 +1,31 @@
-# RSSHub Radar
+<p align="center">
+<img src="https://i.loli.net/2019/04/23/5cbeb7e41414c.png" alt="RSSHub" width="100">
+</p>
+<h1 align="center">RSSHub Radar</h1>
 
-> Browser extension that detects available RSS and [RSSHub](https://github.com/DIYgod/RSSHub) in current page
+> RSSHub Radar 是一个探测当前页面可用的 RSS 和 [RSSHub](https://github.com/DIYgod/RSSHub) 的浏览器扩展 - 万物皆可 RSS
+
+[![version](https://img.shields.io/chrome-web-store/v/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
+[![users](https://img.shields.io/chrome-web-store/users/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
+[![rating](https://img.shields.io/chrome-web-store/rating/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
 
 ## 介绍
 
-探测当前页面可用的 RSS 和 [RSSHub](https://github.com/DIYgod/RSSHub) 的浏览器扩展
+![](https://i.imgur.com/9oZpzJe.jpg)
 
 [Telegram 群](https://t.me/rsshub)
+
+## 安装
+
+<a href="https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png" width="48" /></a>
+
+Chrome 审核中
+
+Firefox 以后可能会有
+
+## 参与我们
+
+补充规则：编辑 [/src/js/background/rules.js](https://github.com/DIYgod/RSSHub-Radar/blob/master/src/js/background/rules.js)
 
 ## 相关项目
 

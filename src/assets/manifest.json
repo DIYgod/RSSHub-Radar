@@ -2,8 +2,9 @@
     "manifest_version": 2,
 
     "name": "RSSHub Radar",
-    "description": "Detect available RSS and RSSHub",
+    "description": "Browser extension to detect available RSS and RSSHub for current page",
     "version": "0.1",
+    "homepage_url": "https://docs.rsshub.app",
 
     "browser_action": {
         "default_icon": "rsshub.png",

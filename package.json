@@ -1,7 +1,7 @@
 {
   "name": "rsshub-radar",
   "version": "0.0.1",
-  "description": "Browser extension that detects available RSS and RSSHub",
+  "description": "Browser extension to detect available RSS and RSSHub for current page",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack -w --mode=production --progress --display-error-details --colors",

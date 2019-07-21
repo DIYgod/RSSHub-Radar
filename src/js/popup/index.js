@@ -10,7 +10,7 @@ function generateList (type, list) {
                 <img class="rss-image" src="${item.image || './rsshub.png'}">
                 <a href="${item.url}" class="rss-info">
                     <div class="rss-title">${item.title}</div>
-                    <div class="rss-url">${item.url}</div>
+                    <div class="rss-url">${item.url.replace('https://', '').replace('http://', '')}</div>
                 </a>
                 ${item.isDescription ?
                 `<a href="${item.url}" class="rss-action">文档</a>` :

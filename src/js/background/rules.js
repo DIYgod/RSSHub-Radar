@@ -144,6 +144,26 @@ module.exports = {
             description: 'https://docs.rsshub.app/programming.html#github',
             source: '/:user/:repo/:branch/*filepath',
             target: '/github/file/:user/:repo/:branch/:filepath',
+        }, {
+            title: 'GitHub 仓库 Issue',
+            description: 'https://docs.rsshub.app/programming.html#github',
+            source: '/:user/:repo',
+            target: '/github/issue/:user/:repo',
+        }, {
+            title: 'GitHub 仓库 Pull Requests',
+            description: 'https://docs.rsshub.app/programming.html#github',
+            source: '/:user/:repo',
+            target: '/github/pull/:user/:repo',
+        }, {
+            title: 'GitHub 仓库 Stars',
+            description: 'https://docs.rsshub.app/programming.html#github',
+            source: '/:user/:repo',
+            target: '/github/stars/:user/:repo',
+        }, {
+            title: 'GitHub 仓库 Branches',
+            description: 'https://docs.rsshub.app/programming.html#github',
+            source: '/:user/:repo',
+            target: '/github/branches/:user/:repo',
         }],
     },
 };
