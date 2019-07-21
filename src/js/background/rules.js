@@ -59,7 +59,7 @@ module.exports = {
             title: 'Twitter 用户喜欢列表',
             description: 'https://docs.rsshub.app/social-media.html#%E7%94%A8%E6%88%B7%E5%96%9C%E6%AC%A2%E5%88%97%E8%A1%A8',
             source: '/:id',
-            target: '/twitter/:id',
+            target: '/twitter/likes/:id',
         }, {
             title: 'Twitter 列表时间线',
             description: 'https://docs.rsshub.app/social-media.html#%E5%88%97%E8%A1%A8%E6%97%B6%E9%97%B4%E7%BA%BF',
