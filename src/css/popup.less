@@ -1,7 +1,7 @@
 body {
     width: 310px;
     margin: 0;
-    padding: 15px 20px 10px;
+    padding: 15px 20px 0;
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 
@@ -9,6 +9,7 @@ body {
 .page-rsshub,
 .website-rsshub {
     display: none;
+    margin-bottom: 20px;
 
     h2 {
         font-size: 16px;
@@ -28,6 +29,8 @@ body {
 }
 
 .no-rss {
+    margin-bottom: 20px;
+
     h2 {
         font-size: 16px;
         margin: 0 0 15px;
@@ -48,7 +51,7 @@ body {
     display: flex;
     justify-content: space-between;
     height: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 
     .rss-image {
         width: 30px;
@@ -58,16 +61,18 @@ body {
     .rss-info {
         width: 180px;
         cursor: pointer;
-        display: block;
+        display: flex;
         text-decoration: none;
         color: #000;
+        line-height: 1;
+        flex-direction: column;
+        justify-content: space-between;
 
         .rss-title {
             font-size: 13px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            margin-bottom: 1px;
         }
 
         .rss-url {
@@ -92,6 +97,7 @@ body {
         border-radius: 4px;
         cursor: pointer;
         box-sizing: border-box;
+        text-decoration: none;
 
         &:hover {
             color: #fff;

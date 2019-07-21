@@ -12,7 +12,7 @@ chrome.browserAction.setBadgeBackgroundColor({
 
 function setBadge (id) {
     chrome.browserAction.setBadgeText({
-        text: ((window.pageRSS.length + window.pageRSSHub.length) || '') + '',
+        text: ((window.pageRSS.length + window.pageRSSHub.length) || (window.websiteRSSHub.length ? '·' : '')) + '',
         tabId: id,
     });
 }
@@ -26,8 +26,10 @@ function ruleHandler (rule, params, tabId, done) {
             reaultWithParams = rule.target;
         }
     
-        for (const param in params) {
-            reaultWithParams = reaultWithParams.replace(`/:${param}`, `/${params[param]}`);
+        if (reaultWithParams) {
+            for (const param in params) {
+                reaultWithParams = reaultWithParams.replace(`/:${param}`, `/${params[param]}`);
+            }
         }
     
         return reaultWithParams;
@@ -59,6 +61,7 @@ function getPageRSSHub (url, tabId, done) {
                     path: ru.source,
                     handler: index,
                 }]);
+                console.log(url);
                 const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
                 if (result && result[0]) {
                     recognized.push(result[0]);
@@ -89,7 +92,25 @@ function getPageRSSHub (url, tabId, done) {
 }
 
 function getWebsiteRSSHub (url) {
-    return [];
+    const parsedDomain = parseDomain(url);
+    if (parsedDomain) {
+        const domain = parsedDomain.domain + '.' + parsedDomain.tld;
+        if (rules[domain]) {
+            const domainRules = [];
+            for (const subdomainRules in rules[domain]) {
+                domainRules.push(...rules[domain][subdomainRules]);
+            }
+            console.log(domainRules);
+            return domainRules.map((rule) => ({
+                title: rule.title,
+                url: rule.description,
+            }));
+        } else {
+            return [];
+        }
+    } else {
+        return [];
+    }
 }
 
 export function handleRSS (feeds) {

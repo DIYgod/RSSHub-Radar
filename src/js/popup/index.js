@@ -12,7 +12,10 @@ function generateList (type, list) {
                     <div class="rss-title">${item.title}</div>
                     <div class="rss-url">${item.url}</div>
                 </a>
-                <div class="rss-action rss-copy" data-clipboard-text="${item.url}">复制</div>
+                ${type === 'website-rsshub' ?
+                `<a href="${item.url}" class="rss-action">文档</a>` :
+                '<div class="rss-action rss-copy" data-clipboard-text="${item.url}">复制</div>'
+                }
             </li>
             `
         });
@@ -25,6 +28,7 @@ function generateList (type, list) {
 const background = chrome.extension.getBackgroundPage();
 generateList('page-rss', background.pageRSS);
 generateList('page-rsshub', background.pageRSSHub);
+generateList('website-rsshub', background.websiteRSSHub);
 
 const clipboard = new ClipboardJS('.rss-copy');
 clipboard.on('success', function(e) {
