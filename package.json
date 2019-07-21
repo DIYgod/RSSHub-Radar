@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DIYgod/RSSHub-radar.git"
+    "url": "git+https://github.com/DIYgod/RSSHub-Radar.git"
   },
   "keywords": [
     "rsshub",
@@ -18,9 +18,9 @@
   "author": "DIYgod",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DIYgod/RSSHub-radar/issues"
+    "url": "https://github.com/DIYgod/RSSHub-Radar/issues"
   },
-  "homepage": "https://github.com/DIYgod/RSSHub-radar#readme",
+  "homepage": "https://github.com/DIYgod/RSSHub-Radar#readme",
   "devDependencies": {
     "@babel/core": "7.5.5",
     "@babel/preset-env": "7.5.5",

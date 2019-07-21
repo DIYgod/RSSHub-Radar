@@ -1,4 +1,4 @@
-# RSSHub-radar
+# RSSHub Radar
 
 > Browser extension that detects available RSS and [RSSHub](https://github.com/DIYgod/RSSHub) in current page
 
@@ -14,7 +14,7 @@
 
 ## Author
 
-**RSSHub-radar** © [DIYgod](https://github.com/DIYgod), Released under the [MIT](./LICENSE) License.<br>
+**RSSHub Radar** © [DIYgod](https://github.com/DIYgod), Released under the [MIT](./LICENSE) License.<br>
 Authored and maintained by DIYgod with help from contributors ([list](https://github.com/DIYgod/RSSHub-radar/contributors)).
 
 > Blog [@DIYgod](https://diygod.me) · GitHub [@DIYgod](https://github.com/DIYgod) · Twitter [@DIYgod](https://twitter.com/DIYgod) · Telegram Channel [@awesomeDIYgod](https://t.me/awesomeDIYgod)

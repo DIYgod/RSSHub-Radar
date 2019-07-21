@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
 
-    "name": "RSSHub radar",
+    "name": "RSSHub Radar",
     "description": "Detect available RSS and RSSHub",
     "version": "0.1",
 
