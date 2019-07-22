@@ -145,9 +145,8 @@ module.exports = {
         }, {
             title: 'GitHub 文件 Commits',
             description: 'https://docs.rsshub.app/programming.html#github',
-            source: '/:user/:repo/:branch/*filepath',
+            source: '/:user/:repo/blob/:branch/*filepath',
             target: '/github/file/:user/:repo/:branch/:filepath',
-            verification: (params) => (params.branch !== 'pull' && params.branch !== 'issues'),
         }],
     },
     'zhihu.com': {
