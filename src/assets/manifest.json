@@ -5,6 +5,11 @@
     "description": "Browser extension to detect available RSS and RSSHub for current page",
     "version": "0.0.1",
     "homepage_url": "https://docs.rsshub.app",
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
 
     "browser_action": {
         "default_icon": "rsshub.png",
