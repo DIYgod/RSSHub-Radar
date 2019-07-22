@@ -12,7 +12,7 @@ chrome.browserAction.setBadgeBackgroundColor({
 
 function setBadge (tabId) {
     chrome.browserAction.setBadgeText({
-        text: ((window.pageRSS.length + window.pageRSSHub.length) || (window.websiteRSSHub.length ? '·' : '')) + '',
+        text: ((window.pageRSS.length + window.pageRSSHub.length) || (window.websiteRSSHub.length ? ' ' : '')) + '',
         tabId,
     });
 }
@@ -65,13 +65,15 @@ function getPageRSSHub (url, tabId, done) {
             const recognized = [];
             rule.forEach((ru, index) => {
                 const router = new RouteRecognizer();
-                router.add([{
-                    path: ru.source,
-                    handler: index,
-                }]);
-                const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
-                if (result && result[0]) {
-                    recognized.push(result[0]);
+                if (ru.source) {
+                    router.add([{
+                        path: ru.source,
+                        handler: index,
+                    }]);
+                    const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
+                    if (result && result[0]) {
+                        recognized.push(result[0]);
+                    }
                 }
             });
             const result = [];

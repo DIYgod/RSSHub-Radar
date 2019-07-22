@@ -188,4 +188,78 @@ module.exports = {
             target: '/github/branches/:user/:repo',
         }],
     },
+    'zhihu.com': {
+        'www': [{
+            title: '知乎收藏夹',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            source: '/collection/:id',
+            target: '/zhihu/collection/:id',
+        }, {
+            title: '知乎用户动态',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            source: '/people/:id/activities',
+            target: '/zhihu/people/activities/:id',
+        }, {
+            title: '知乎用户回答',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            source: '/people/:id/answers',
+            target: '/zhihu/people/answers/:id',
+        }, {
+            title: '知乎用户想法',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            source: '/people/:id/pins',
+            target: '/zhihu/people/pins/:id',
+        },  {
+            title: '知乎热榜',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            source: '/hot',
+            target: '/zhihu/hotlist',
+        }, {
+            title: '知乎想法热榜',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            target: '/zhihu/pin/hotlist',
+        }, {
+            title: '知乎问题',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            source: '/question/:questionId',
+            target: '/zhihu/question/:questionId',
+        }, {
+            title: '知乎话题',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            source: '/topic/:topicId/:type',
+            target: '/zhihu/topic/:topicId',
+        }, {
+            title: '知乎新书',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            source: '/zhihu/bookstore/newest',
+            target: '/zhihu/pin/hotlist',
+        }, {
+            title: '知乎想法-24 小时新闻汇总',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            source: '/pin/special/972884951192113152',
+            target: '/zhihu/pin/daily',
+        }, {
+            title: '知乎书店-知乎周刊',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            source: '/pub/weekly',
+            target: '/zhihu/weekly',
+        }],
+        'zhuanlan': [{
+            title: '知乎专栏',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            source: '/:id',
+            target: '/zhihu/zhuanlan/:id',
+        }],
+        'daily': [{
+            title: '知乎日报',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            source: '',
+            target: '/zhihu/daily',
+        }, {
+            title: '知乎日报',
+            description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
+            source: '/*tpath',
+            target: '/zhihu/daily',
+        }],
+    },
 };
