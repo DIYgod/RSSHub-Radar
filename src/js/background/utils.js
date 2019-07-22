@@ -17,11 +17,11 @@ function setBadge (tabId) {
     });
 }
 
-function ruleHandler (rule, params, tabId, done) {
+function ruleHandler (rule, params, tabId, url, success, fail) {
     const run = () => {
         let reaultWithParams;
         if (typeof rule.target === 'function') {
-            reaultWithParams = rule.target(params);
+            reaultWithParams = rule.target(params, url);
         } else if (typeof rule.target === 'string') {
             reaultWithParams = rule.target;
         }
@@ -40,10 +40,18 @@ function ruleHandler (rule, params, tabId, done) {
             code: rule.script
         }, (result) => {
             params = Object.assign({}, result, params);
-            done(run());
+            if (!rule.verification || rule.verification(params)) {
+                success(run());
+            } else {
+                fail();
+            }
         });
     } else {
-        done(run());
+        if (!rule.verification || rule.verification(params)) {
+            success(run());
+        } else {
+            fail();
+        }
     }
 }
 
@@ -69,7 +77,7 @@ function getPageRSSHub (url, tabId, done) {
             const result = [];
             Promise.all(recognized.map((recog) => {
                 return new Promise((resolve) => {
-                    ruleHandler(rule[recog.handler], recog.params, tabId, (parsed) => {
+                    ruleHandler(rule[recog.handler], recog.params, tabId, url, (parsed) => {
                         if (parsed) {
                             result.push({
                                 title: rule[recog.handler].title,
@@ -83,8 +91,10 @@ function getPageRSSHub (url, tabId, done) {
                             });
                         }
                         resolve();
+                    }, () => {
+                        resolve();
                     });
-                })
+                });
             })).then(() => {
                 done(result);
             });
