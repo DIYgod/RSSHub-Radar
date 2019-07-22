@@ -262,4 +262,15 @@ module.exports = {
             target: '/zhihu/daily',
         }],
     },
+    'smzdm.com': {
+        'www': [{
+            title: '什么值得买关键词',
+            description: 'https://docs.rsshub.app/shopping.html#%E4%BB%80%E4%B9%88%E5%80%BC%E5%BE%97%E4%B9%B0',
+            target: '/smzdm/keyword/:keyword',
+        }, {
+            title: '什么值得买排行榜',
+            description: 'https://docs.rsshub.app/shopping.html#%E4%BB%80%E4%B9%88%E5%80%BC%E5%BE%97%E4%B9%B0',
+            source: '/top',
+        }],
+    },
 };
