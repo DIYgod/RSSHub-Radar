@@ -64,15 +64,31 @@ function getPageRSSHub (url, tabId, done) {
             const rule = rules[domain][subdomain || '.'];
             const recognized = [];
             rule.forEach((ru, index) => {
-                const router = new RouteRecognizer();
-                if (ru.source) {
-                    router.add([{
-                        path: ru.source,
-                        handler: index,
-                    }]);
-                    const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
-                    if (result && result[0]) {
-                        recognized.push(result[0]);
+                if (ru.source !== undefined) {
+                    if (ru.source instanceof Array) {
+                        ru.source.forEach((source) => {
+                            const router = new RouteRecognizer();
+                            router.add([{
+                                path: source,
+                                handler: index,
+                            }]);
+                            console.log(source, new URL(url).pathname.replace(/\/$/, ''));
+                            const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
+                            console.log(result);
+                            if (result && result[0]) {
+                                recognized.push(result[0]);
+                            }
+                        });
+                    } else if (typeof ru.source === 'string') {
+                        const router = new RouteRecognizer();
+                        router.add([{
+                            path: ru.source,
+                            handler: index,
+                        }]);
+                        const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
+                        if (result && result[0]) {
+                            recognized.push(result[0]);
+                        }
                     }
                 }
             });

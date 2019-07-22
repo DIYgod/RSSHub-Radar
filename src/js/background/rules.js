@@ -32,15 +32,7 @@ module.exports = {
         '.': [{
             title: '微博博主',
             description: 'https://docs.rsshub.app/social-media.html#%E5%BE%AE%E5%8D%9A',
-            source: '/u/:id',
-            target: '/weibo/user/:uid',
-            script: '({uid: document.querySelector(\'head\').innerHTML.match(/\\$CONFIG\\[\'uid\']=\'(\\d+)\'/)[1]})',
-            verification: (params) => params.uid,
-        }],
-        '.': [{
-            title: '微博博主',
-            description: 'https://docs.rsshub.app/social-media.html#%E5%BE%AE%E5%8D%9A',
-            source: '/:id',
+            source: ['/u/:id', '/:id'],
             target: '/weibo/user/:uid',
             script: '({uid: document.querySelector(\'head\').innerHTML.match(/\\$CONFIG\\[\'uid\']=\'(\\d+)\'/)[1]})',
             verification: (params) => params.uid,
@@ -121,6 +113,11 @@ module.exports = {
             source: '/:user',
             target: '/github/repos/:user',
         }, {
+            title: 'GitHub 用户 Followers',
+            description: 'https://docs.rsshub.app/programming.html#github',
+            source: '/:user',
+            target: '/github/user/followers/:user',
+        }, {
             title: 'GitHub Trending',
             description: 'https://docs.rsshub.app/programming.html#github',
             source: '/trending',
@@ -128,28 +125,13 @@ module.exports = {
         }, {
             title: 'GitHub 仓库 Issue',
             description: 'https://docs.rsshub.app/programming.html#github',
-            source: '/:user/:repo/issues',
-            target: '/github/issue/:user/:repo',
-        }, {
-            title: 'GitHub 仓库 Issue',
-            description: 'https://docs.rsshub.app/programming.html#github',
-            source: '/:user/:repo/issues/:id',
+            source: ['/:user/:repo/issues', '/:user/:repo/issues/:id'],
             target: '/github/issue/:user/:repo',
         }, {
             title: 'GitHub 仓库 Pull Requests',
             description: 'https://docs.rsshub.app/programming.html#github',
-            source: '/:user/:repo/pulls',
+            source: ['/:user/:repo/pulls', '/:user/:repo/pulls/:id'],
             target: '/github/pull/:user/:repo',
-        }, {
-            title: 'GitHub 仓库 Pull Requests',
-            description: 'https://docs.rsshub.app/programming.html#github',
-            source: '/:user/:repo/pulls/:id',
-            target: '/github/pull/:user/:repo',
-        }, {
-            title: 'GitHub 用户 Followers',
-            description: 'https://docs.rsshub.app/programming.html#github',
-            source: '/:user',
-            target: '/github/user/followers/:user',
         }, {
             title: 'GitHub 仓库 Stars',
             description: 'https://docs.rsshub.app/programming.html#github',
@@ -166,26 +148,6 @@ module.exports = {
             source: '/:user/:repo/:branch/*filepath',
             target: '/github/file/:user/:repo/:branch/:filepath',
             verification: (params) => (params.branch !== 'pull' && params.branch !== 'issues'),
-        }, {
-            title: 'GitHub 仓库 Issue',
-            description: 'https://docs.rsshub.app/programming.html#github',
-            source: '/:user/:repo',
-            target: '/github/issue/:user/:repo',
-        }, {
-            title: 'GitHub 仓库 Pull Requests',
-            description: 'https://docs.rsshub.app/programming.html#github',
-            source: '/:user/:repo',
-            target: '/github/pull/:user/:repo',
-        }, {
-            title: 'GitHub 仓库 Stars',
-            description: 'https://docs.rsshub.app/programming.html#github',
-            source: '/:user/:repo',
-            target: '/github/stars/:user/:repo',
-        }, {
-            title: 'GitHub 仓库 Branches',
-            description: 'https://docs.rsshub.app/programming.html#github',
-            source: '/:user/:repo',
-            target: '/github/branches/:user/:repo',
         }],
     },
     'zhihu.com': {
@@ -277,12 +239,7 @@ module.exports = {
         'docs': [{
             title: 'RSSHub 有新路由啦',
             description: 'https://docs.rsshub.app/program-update.html#rsshub',
-            source: '',
-            target: '/rsshub/rss',
-        }, {
-            title: 'RSSHub 有新路由啦',
-            description: 'https://docs.rsshub.app/program-update.html#rsshub',
-            source: '/*tpath',
+            source: ['', '/*tpath'],
             target: '/rsshub/rss',
         }],
     },
