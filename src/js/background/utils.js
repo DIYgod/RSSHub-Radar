@@ -10,10 +10,10 @@ chrome.browserAction.setBadgeBackgroundColor({
     color: '#FF2800',
 });
 
-function setBadge (id) {
+function setBadge (tabId) {
     chrome.browserAction.setBadgeText({
         text: ((window.pageRSS.length + window.pageRSSHub.length) || (window.websiteRSSHub.length ? '·' : '')) + '',
-        tabId: id,
+        tabId,
     });
 }
 
@@ -118,25 +118,20 @@ function getWebsiteRSSHub (url) {
     }
 }
 
-export function handleRSS (feeds) {
-    chrome.tabs.query({
-        active: true,
-        currentWindow: true,
-    }, (tabs) => {
-        const currentTab = tabs[0];
-
+export function handleRSS (feeds, tabId) {
+    chrome.tabs.get(tabId, (tab) => {
         feeds && feeds.forEach((feed) => {
-            feed.image = currentTab.favIconUrl || feed.image;
+            feed.image = tab.favIconUrl || feed.image;
         });
         window.pageRSS = feeds || [];
 
-        getPageRSSHub(currentTab.url, currentTab.id, (feeds) => {
+        getPageRSSHub(tab.url, tab.id, (feeds) => {
             window.pageRSSHub = feeds || [];
-            setBadge(currentTab.id);
+            setBadge(tab.id);
         });
 
-        window.websiteRSSHub = getWebsiteRSSHub(currentTab.url) || [];
+        window.websiteRSSHub = getWebsiteRSSHub(tab.url) || [];
 
-        setBadge(currentTab.id);
-    });
+        setBadge(tab.id);
+    })
 }
