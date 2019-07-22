@@ -125,22 +125,22 @@ module.exports = {
         }, {
             title: 'GitHub 仓库 Issue',
             description: 'https://docs.rsshub.app/programming.html#github',
-            source: ['/:user/:repo/issues', '/:user/:repo/issues/:id'],
+            source: ['/:user/:repo/issues', '/:user/:repo/issues/:id', '/:user/:repo'],
             target: '/github/issue/:user/:repo',
         }, {
             title: 'GitHub 仓库 Pull Requests',
             description: 'https://docs.rsshub.app/programming.html#github',
-            source: ['/:user/:repo/pulls', '/:user/:repo/pulls/:id'],
+            source: ['/:user/:repo/pulls', '/:user/:repo/pulls/:id', '/:user/:repo'],
             target: '/github/pull/:user/:repo',
         }, {
             title: 'GitHub 仓库 Stars',
             description: 'https://docs.rsshub.app/programming.html#github',
-            source: '/:user/:repo/stargazers',
+            source: ['/:user/:repo/stargazers', '/:user/:repo'],
             target: '/github/stars/:user/:repo',
         }, {
             title: 'GitHub 仓库 Branches',
             description: 'https://docs.rsshub.app/programming.html#github',
-            source: '/:user/:repo/branches',
+            source: ['/:user/:repo/branches', '/:user/:repo'],
             target: '/github/branches/:user/:repo',
         }, {
             title: 'GitHub 文件 Commits',
