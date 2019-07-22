@@ -277,6 +277,11 @@ module.exports = {
         'docs': [{
             title: 'RSSHub 有新路由啦',
             description: 'https://docs.rsshub.app/program-update.html#rsshub',
+            source: '',
+            target: '/rsshub/rss',
+        }, {
+            title: 'RSSHub 有新路由啦',
+            description: 'https://docs.rsshub.app/program-update.html#rsshub',
             source: '/*tpath',
             target: '/rsshub/rss',
         }],
