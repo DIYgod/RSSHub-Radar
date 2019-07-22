@@ -281,4 +281,13 @@ module.exports = {
             target: '/rsshub/rss',
         }],
     },
+    'ximalaya.com': {
+        'www': [{
+            title: '喜马拉雅专辑',
+            description: 'https://docs.rsshub.app/multimedia.html#%E5%96%9C%E9%A9%AC%E6%8B%89%E9%9B%85',
+            source: '/:type/:id',
+            target: '/ximalaya/album/:id/',
+            verification: (params) => parseInt(params.id) + '' === params.id,
+        }],
+    },
 };
