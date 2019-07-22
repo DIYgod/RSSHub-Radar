@@ -38,6 +38,12 @@ clipboard.on('success', function(e) {
     }, 1000);
 });
 
+document.querySelectorAll('.rss-image').forEach((ele) => {
+    ele.addEventListener('error', function () {
+        this.setAttribute('src', './rsshub.png');
+    });
+});
+
 document.querySelectorAll('a').forEach((ele) => {
     ele.addEventListener('click', () => {
         chrome.tabs.create({
