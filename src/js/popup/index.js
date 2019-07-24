@@ -26,28 +26,35 @@ function generateList (type, list) {
 }
 
 chrome.runtime.getBackgroundPage((background) => {
-    generateList('page-rss', background.pageRSS);
-    generateList('page-rsshub', background.pageRSSHub);
-    generateList('website-rsshub', background.websiteRSSHub);
-    
-    const clipboard = new ClipboardJS('.rss-copy');
-    clipboard.on('success', function(e) {
-        e.trigger.innerHTML = '已复制';
-        setTimeout(() => {
-            e.trigger.innerHTML = '复制';
-        }, 1000);
-    });
-    
-    document.querySelectorAll('.rss-image').forEach((ele) => {
-        ele.addEventListener('error', function () {
-            this.setAttribute('src', './rsshub.png');
+    chrome.tabs.query({
+        active: true,
+        currentWindow: true
+    }, (tabs) => {
+        const tabId = tabs[0].id;
+
+        generateList('page-rss', background.pageRSS[tabId]);
+        generateList('page-rsshub', background.pageRSSHub[tabId]);
+        generateList('website-rsshub', background.websiteRSSHub[tabId]);
+
+        const clipboard = new ClipboardJS('.rss-copy');
+        clipboard.on('success', function(e) {
+            e.trigger.innerHTML = '已复制';
+            setTimeout(() => {
+                e.trigger.innerHTML = '复制';
+            }, 1000);
         });
-    });
-    
-    document.querySelectorAll('a').forEach((ele) => {
-        ele.addEventListener('click', () => {
-            chrome.tabs.create({
-                url: ele.getAttribute('href'),
+
+        document.querySelectorAll('.rss-image').forEach((ele) => {
+            ele.addEventListener('error', function () {
+                this.setAttribute('src', './rsshub.png');
+            });
+        });
+
+        document.querySelectorAll('a').forEach((ele) => {
+            ele.addEventListener('click', () => {
+                chrome.tabs.create({
+                    url: ele.getAttribute('href'),
+                });
             });
         });
     });

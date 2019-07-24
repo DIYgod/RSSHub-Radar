@@ -2,9 +2,9 @@ import rules from './rules';
 import parseDomain from 'parse-domain';
 import RouteRecognizer from 'route-recognizer';
 
-window.pageRSS = [];
-window.pageRSSHub = [];
-window.websiteRSSHub = [];
+window.pageRSS = {};
+window.pageRSSHub = {};
+window.websiteRSSHub = {};
 
 chrome.browserAction.setBadgeBackgroundColor({
     color: '#FF2800',
@@ -12,7 +12,7 @@ chrome.browserAction.setBadgeBackgroundColor({
 
 function setBadge (tabId) {
     chrome.browserAction.setBadgeText({
-        text: ((window.pageRSS.length + window.pageRSSHub.length) || (window.websiteRSSHub.length ? ' ' : '')) + '',
+        text: ((window.pageRSS[tabId].length + window.pageRSSHub[tabId].length) || (window.websiteRSSHub[tabId].length ? ' ' : '')) + '',
         tabId,
     });
 }
@@ -146,20 +146,28 @@ function getWebsiteRSSHub (url) {
     }
 }
 
-export function handleRSS (feeds, tabId) {
-    chrome.tabs.get(tabId, (tab) => {
-        feeds && feeds.forEach((feed) => {
-            feed.image = tab.favIconUrl || feed.image;
+export function handleRSS (feeds, tabId, useCache) {
+    if (useCache && window.pageRSS[tabId]) {
+        setBadge(tabId);
+    } else {
+        chrome.tabs.get(tabId, (tab) => {
+            feeds && feeds.forEach((feed) => {
+                feed.image = tab.favIconUrl || feed.image;
+            });
+            window.pageRSS[tabId] = feeds || [];
+    
+            window.websiteRSSHub[tabId] = getWebsiteRSSHub(tab.url) || [];
+    
+            getPageRSSHub(tab.url, tabId, (feeds) => {
+                window.pageRSSHub[tabId] = feeds || [];
+                setBadge(tabId);
+            });
         });
-        window.pageRSS = feeds || [];
+    }
+}
 
-        getPageRSSHub(tab.url, tab.id, (feeds) => {
-            window.pageRSSHub = feeds || [];
-            setBadge(tab.id);
-        });
-
-        window.websiteRSSHub = getWebsiteRSSHub(tab.url) || [];
-
-        setBadge(tab.id);
-    })
+export function removeRSS (tabId) {
+    delete window.pageRSS[tabId];
+    delete window.websiteRSSHub[tabId];
+    delete window.pageRSSHub[tabId];
 }
