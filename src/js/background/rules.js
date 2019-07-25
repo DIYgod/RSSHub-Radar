@@ -16,12 +16,12 @@ module.exports = {
                 return `/bilibili/partion/${tid}`;
             },
         }, {
-            title: '视频评论',
+            title: 'bilibili 视频评论',
             description: 'https://docs.rsshub.app/social-media.html#bilibili',
             source: '/video/:aid',
             target: (params, url) => `/bilibili/video/reply/${params.aid.replace('av', '')}`
         }, {
-            title: '视频弹幕',
+            title: 'bilibili 视频弹幕',
             description: 'https://docs.rsshub.app/social-media.html#bilibili',
             source: '/video/:aid',
             target: (params, url) => {
