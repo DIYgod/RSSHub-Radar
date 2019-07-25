@@ -108,6 +108,28 @@ module.exports = {
                 ],
             },
             {
+                test: /\.scss$/,
+                use: [
+                    'vue-style-loader',
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2,
+                        },
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            config: {
+                                path: path.join(__dirname, 'postcss.config.js')
+                            }
+                        }
+                    },
+                    'sass-loader'
+                ],
+            },
+            {
                 test: /\.vue$/,
                 loader: 'vue-loader'
             },

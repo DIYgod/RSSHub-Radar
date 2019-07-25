@@ -2,24 +2,27 @@
   <div id="app">
     <el-container class="container">
         <el-aside width="200px">
-            <el-menu class="menu">
-                <el-header>Header</el-header>
-                <el-menu-item index="2">
-                    <i class="el-icon-menu"></i>
-                    <span slot="title">导航二</span>
-                </el-menu-item>
-                <el-menu-item index="3" disabled>
-                    <i class="el-icon-document"></i>
-                    <span slot="title">导航三</span>
-                </el-menu-item>
-                <el-menu-item index="4">
+            <el-menu
+                class="menu"
+                :default-active="this.$route.path"
+                @select="handleSelect">
+                <el-header
+                    class="header"
+                    height="80px">RSSHub Radar</el-header>
+                <el-menu-item index="/setting">
                     <i class="el-icon-setting"></i>
-                    <span slot="title">导航四</span>
+                    <span slot="title">设置</span>
                 </el-menu-item>
+                <el-menu-item index="/about">
+                    <i class="el-icon-coordinate"></i>
+                    <span slot="title">关于</span>
+                </el-menu-item>
+                <el-footer class="footer">@DIYgod</el-footer>
             </el-menu>
         </el-aside>
         <el-container>
-            <el-main><HelloWorld msg="Main"/></el-main>
+            <!-- <el-main><router-view></router-view></el-main> -->
+            <router-view></router-view>
         </el-container>
     </el-container>
   </div>
@@ -32,11 +35,18 @@ export default {
     name: 'app',
     components: {
         HelloWorld
+    },
+    methods: {
+        handleSelect(key, keyPath) {
+            this.$router.push(key);
+        },
     }
 }
 </script>
 
 <style lang="less">
+@color-primary: #f5712c;
+
 body {
     margin: 0;
     height: 100%;
@@ -53,5 +63,31 @@ body {
 
 .menu {
     height: 100%;
+
+    .el-menu-item {
+        &:focus {
+            background-color: transparent;
+        }
+        &:hover {
+            background-color: #fef1ea;
+        }
+    }
+}
+
+.header {
+    color: @color-primary;
+    line-height: 80px;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    line-height: 60px;
+    text-align: center;
+    font-size: 14px;
+    color: @color-primary;
 }
 </style>
