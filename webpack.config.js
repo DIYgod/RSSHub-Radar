@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
 
@@ -8,12 +9,17 @@ module.exports = {
 
     bail: true,
 
-    devtool: 'source-map',
+    devtool: false,
+
+    performance: {
+        maxEntrypointSize: 1000000,
+    },
 
     entry: {
         'popup': './src/js/popup/index.js',
         'content': './src/js/content/index.js',
         'background': './src/js/background/index.js',
+        'options': './src/js/options/index.js',
     },
 
     output: {
@@ -44,14 +50,24 @@ module.exports = {
                         loader: 'babel-loader',
                         options: {
                             cacheDirectory: true,
-                            presets: ['@babel/preset-env']
+                            presets: ['@babel/preset-env'],
+                            plugins: [
+                                [
+                                    "component",
+                                    {
+                                        "libraryName": "element-ui",
+                                        "styleLibraryName": "theme-chalk"
+                                    }
+                                ],
+                            ],
                         }
                     }
                 ]
             },
             {
-                test: /\.less$/,
+                test: /\.css$/,
                 use: [
+                    'vue-style-loader',
                     MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
@@ -67,10 +83,33 @@ module.exports = {
                             }
                         }
                     },
-                    {
-                        loader: 'less-loader',
-                    },
                 ],
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    'vue-style-loader',
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2,
+                        },
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            config: {
+                                path: path.join(__dirname, 'postcss.config.js')
+                            }
+                        }
+                    },
+                    'less-loader'
+                ],
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
             },
             {
                 test: /\.(png|jpg)$/,
@@ -82,6 +121,13 @@ module.exports = {
             {
                 test: /\.svg$/,
                 loader: 'svg-inline-loader'
+            },
+            {
+                test: /\.(ttf|woff)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                },
             },
         ]
     },
@@ -97,6 +143,7 @@ module.exports = {
                 copyUnmodified: true,
             },
         ]),
+        new VueLoaderPlugin(),
     ],
 
     node: {
