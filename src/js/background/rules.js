@@ -15,6 +15,19 @@ module.exports = {
                 }
                 return `/bilibili/partion/${tid}`;
             },
+        }, {
+            title: '视频评论',
+            description: 'https://docs.rsshub.app/social-media.html#bilibili',
+            source: '/video/:aid',
+            target: (params, url) => `/bilibili/video/reply/${params.aid.replace('av', '')}`
+        }, {
+            title: '视频弹幕',
+            description: 'https://docs.rsshub.app/social-media.html#bilibili',
+            source: '/video/:aid',
+            target: (params, url) => {
+                let pid = new URL(url).searchParams.get('p');
+                return `/bilibili/video/danmaku/${params.aid.replace('av', '')}/${pid ? pid : 1}`;
+            }
         }],
         space: [{
             title: 'bilibili UP 主动态',
@@ -170,7 +183,7 @@ module.exports = {
             description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
             source: '/people/:id/pins',
             target: '/zhihu/people/pins/:id',
-        },  {
+        }, {
             title: '知乎热榜',
             description: 'https://docs.rsshub.app/social-media.html#%E7%9F%A5%E4%B9%8E',
             source: '/hot',
