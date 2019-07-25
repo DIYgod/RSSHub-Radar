@@ -96,12 +96,12 @@ function getPageRSSHub (url, tabId, done) {
                     ruleHandler(rule[recog.handler], recog.params, tabId, url, (parsed) => {
                         if (parsed) {
                             result.push({
-                                title: rule[recog.handler].title,
+                                title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
                                 url: 'https://rsshub.app' + parsed,
                             });
                         } else {
                             result.push({
-                                title: rule[recog.handler].title,
+                                title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
                                 url: rule[recog.handler].description,
                                 isDescription: true,
                             });
@@ -122,6 +122,14 @@ function getPageRSSHub (url, tabId, done) {
     }
 }
 
+function formatBlank (str1, str2) {
+    if (str1 && str2) {
+        return str1 + ((str1[str1.length - 1].match(/[a-zA-Z0-9]/) || str2[0].match(/[a-zA-Z0-9]/)) ? ' ' : '') + str2;
+    } else {
+        return (str1 || '') + (str2 || '');
+    }
+}
+
 function getWebsiteRSSHub (url) {
     const parsedDomain = parseDomain(url);
     if (parsedDomain) {
@@ -129,10 +137,12 @@ function getWebsiteRSSHub (url) {
         if (rules[domain]) {
             const domainRules = [];
             for (const subdomainRules in rules[domain]) {
-                domainRules.push(...rules[domain][subdomainRules]);
+                if (subdomainRules[0] !== '_') {
+                    domainRules.push(...rules[domain][subdomainRules]);
+                }
             }
             return domainRules.map((rule) => ({
-                title: rule.title,
+                title: formatBlank(rules[domain]._name, rule.title),
                 url: rule.description,
                 isDescription: true,
             }));
