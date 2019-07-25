@@ -72,9 +72,7 @@ function getPageRSSHub (url, tabId, done) {
                                 path: source,
                                 handler: index,
                             }]);
-                            console.log(source, new URL(url).pathname.replace(/\/$/, ''));
                             const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
-                            console.log(result);
                             if (result && result[0]) {
                                 recognized.push(result[0]);
                             }
