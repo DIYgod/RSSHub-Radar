@@ -21,7 +21,7 @@
     }],
     "background" : {
         "scripts": ["background.js"],
-        "persistent": false
+        "persistent": true
     },
     "permissions": [
         "activeTab",
