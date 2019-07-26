@@ -19,13 +19,39 @@
 
 <a href="https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png" width="48" /></a>
 
-Chrome 审核中
-
 Firefox 以后可能会有
 
 ## 参与我们
 
-补充规则：编辑 [/src/js/background/rules.js](https://github.com/DIYgod/RSSHub-Radar/blob/master/src/js/background/rules.js)
+### 安装开发版本
+
+**安装依赖并构建项目：**
+
+```
+yarn
+yarn build
+```
+
+或者使用 npm
+
+```
+npm install
+npm run build
+```
+
+**安装扩展：**
+
+打开 <chrome://extensions/>
+
+点击左上角 加载已解压的扩展程序
+
+选择上一步构建出的 `dist` 目录
+
+### 补充 RSSHub 规则
+
+编辑 [/src/js/background/rules.js](https://github.com/DIYgod/RSSHub-Radar/blob/master/src/js/background/rules.js)
+
+规则说明待补充
 
 ## 相关项目
 
