@@ -41,9 +41,11 @@ npm run build
 
 **安装扩展：**
 
-打开 <chrome://extensions/>
+打开 `chrome://extensions/`
 
-点击左上角 加载已解压的扩展程序
+打开右上角 `开发者模式`
+
+点击左上角 `加载已解压的扩展程序`
 
 选择上一步构建出的 `dist` 目录
 
