@@ -1,10 +1,11 @@
+import '../../css/options.scss'
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App.vue';
 import Setting from './views/Setting.vue';
+import List from './views/List.vue';
 import About from './views/About.vue';
-import { Container, Menu, MenuItem, Aside, Header, Main, Footer } from 'element-ui';
-import '../../css/options.scss'
+import { Container, Menu, MenuItem, Aside, Header, Main, Footer, Input, Checkbox, Message, Loading } from 'element-ui';
 
 Vue.use(VueRouter);
 Vue.use(Container);
@@ -14,11 +15,18 @@ Vue.use(Aside);
 Vue.use(Header);
 Vue.use(Main);
 Vue.use(Footer);
+Vue.use(Input);
+Vue.use(Checkbox);
+Vue.use(Loading.directive);
+
+Vue.prototype.$loading = Loading.service;
+Vue.prototype.$message = Message;
 Vue.config.productionTip = false;
 
 const routes = [
     { path: '/', redirect: '/setting' },
     { path: '/setting', component: Setting },
+    { path: '/list', component: List },
     { path: '/about', component: About },
 ];
 const router = new VueRouter({

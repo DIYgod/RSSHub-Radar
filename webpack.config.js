@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
@@ -166,6 +167,9 @@ module.exports = {
             },
         ]),
         new VueLoaderPlugin(),
+        new webpack.DefinePlugin({
+            VERSION: JSON.stringify(require('./src/assets/manifest.json').version)
+        }),
     ],
 
     node: {

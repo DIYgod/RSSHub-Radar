@@ -1,7 +1,7 @@
 <template>
-    <div class="about">
+    <div class="list">
         <el-main>
-            <div class="title">关于</div>
+            <div class="title">支持列表</div>
             <div class="content">
                 未完成的功能
             </div>
@@ -11,14 +11,14 @@
 
 <script>
 export default {
-    name: 'About',
+    name: 'List',
     data: () => ({
     }),
 }
 </script>
 
 <style lang="less" scoped>
-.about {
+.list {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;

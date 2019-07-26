@@ -13,11 +13,15 @@
                     <i class="el-icon-setting"></i>
                     <span slot="title">设置</span>
                 </el-menu-item>
+                <el-menu-item index="/list">
+                    <i class="el-icon-magic-stick"></i>
+                    <span slot="title">支持列表</span>
+                </el-menu-item>
                 <el-menu-item index="/about">
                     <i class="el-icon-coordinate"></i>
                     <span slot="title">关于</span>
                 </el-menu-item>
-                <el-footer class="footer">@DIYgod</el-footer>
+                <el-footer class="footer">版本 v{{ version }}<br>© 2019 <a href="https://diygod.me">DIYgod</a></el-footer>
             </el-menu>
         </el-aside>
         <el-container>
@@ -36,6 +40,9 @@ export default {
     components: {
         HelloWorld
     },
+    data: () => ({
+        version: VERSION,
+    }),
     methods: {
         handleSelect(key, keyPath) {
             this.$router.push(key);
@@ -88,6 +95,28 @@ body {
     line-height: 60px;
     text-align: center;
     font-size: 14px;
-    color: @color-primary;
+    color: #999;
+    line-height: 25px;
+
+    a {
+        color: @color-primary;
+        text-decoration: none;
+    }
+}
+
+.el-menu-item {
+    i,
+    span {
+        transition: color .3s;
+    }
+
+    &.is-active {
+        color: #303133;
+
+        i,
+        span {
+            color: #f5712c;
+        }
+    }
 }
 </style>
