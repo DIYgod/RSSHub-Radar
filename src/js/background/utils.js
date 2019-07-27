@@ -1,10 +1,22 @@
 import rules from './rules';
 import parseDomain from 'parse-domain';
 import RouteRecognizer from 'route-recognizer';
+import { getConfig } from '../utils';
+let config;
 
 window.pageRSS = {};
 window.pageRSSHub = {};
 window.websiteRSSHub = {};
+
+getConfig((conf) => {
+    config = conf;
+});
+
+chrome.storage.onChanged.addListener((result) => {
+    if (result.config) {
+        config = result.config.newValue;
+    }
+});
 
 chrome.browserAction.setBadgeBackgroundColor({
     color: '#FF2800',
@@ -12,7 +24,7 @@ chrome.browserAction.setBadgeBackgroundColor({
 
 function setBadge (tabId) {
     chrome.browserAction.setBadgeText({
-        text: ((window.pageRSS[tabId].length + window.pageRSSHub[tabId].length) || (window.websiteRSSHub[tabId].length ? ' ' : '')) + '',
+        text: config.notice.badge ? (((window.pageRSS[tabId].length + window.pageRSSHub[tabId].length) || (window.websiteRSSHub[tabId].length ? ' ' : '')) + '') : '',
         tabId,
     });
 }
