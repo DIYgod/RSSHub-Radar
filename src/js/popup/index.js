@@ -17,7 +17,10 @@ function generateList (type, list) {
                 </a>
                 ${item.isDescription ?
                 `<a href="${url}" class="rss-action">文档</a>` :
-                `<div class="rss-action rss-copy" data-clipboard-text="${url}">复制</div>`
+                `<div class="rss-action rss-copy" data-clipboard-text="${url}">复制</div>
+                ${config.submitto.ttrss && config.submitto.ttrssDomain ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=subscribe&feed_url=${url}" class="rss-action rss-submitto-ttrss">订阅到 TTRSS</a>` : ''}
+                ${config.submitto.feedly ? `<a href="https://feedly.com/i/subscription/feed/${url}" class="rss-action rss-submitto-feedly">订阅到 Feedly</a>` : ''}
+                ${config.submitto.inoreader ? `<a href="https://www.inoreader.com/?add_feed=${url}" class="rss-action rss-submitto-inoreader">订阅到 Inoreader</a>` : ''}`
                 }
             </li>
             `

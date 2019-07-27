@@ -1,5 +1,5 @@
 body {
-    width: 310px;
+    min-width: 310px;
     margin: 0;
     padding: 20px 20px 5px;
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
@@ -23,8 +23,7 @@ body {
     }
 
     ul {
-        width: 300px;
-        margin: auto;
+        margin: 0 5px;
     }
 }
 
@@ -49,17 +48,17 @@ body {
 }
 .rss-item {
     display: flex;
-    justify-content: space-between;
     height: 30px;
     margin-bottom: 15px;
 
     .rss-image {
         width: 30px;
         height: 30px;
+        margin-right: 10px;
     }
 
     .rss-info {
-        width: 180px;
+        width: 200px;
         cursor: pointer;
         display: flex;
         text-decoration: none;
@@ -86,11 +85,12 @@ body {
     }
 
     .rss-action {
-        width: 60px;
+        white-space: nowrap;
+        padding: 0 10px;
         font-size: 13px;
-        color: #FF8549;
+        color: #FF2800;
         background: #fff;
-        border: 1px solid #FF8549;
+        border: 1px solid #FF2800;
         line-height: 30px;
         text-align: center;
         transition: .3s;
@@ -98,10 +98,57 @@ body {
         cursor: pointer;
         box-sizing: border-box;
         text-decoration: none;
+        margin-left: 10px;
+        min-width: 61px;
 
         &:hover {
             color: #fff;
-            background: #FF8549;
+            background: #FF2800;
         }
+
+        &.rss-copy {
+            width: 61px;
+        }
+
+        &.rss-submitto-ttrss {
+            color: #f28f34;
+            border: 1px solid #f28f34;
+
+            &:hover {
+                color: #fff;
+                background: #f28f34;
+            }
+        }
+
+        &.rss-submitto-feedly {
+            color: #2bb24c;
+            border: 1px solid #2bb24c;
+
+            &:hover {
+                color: #fff;
+                background: #2bb24c;
+            }
+        }
+
+        &.rss-submitto-inoreader {
+            color: #0099EB;
+            border: 1px solid #0099EB;
+
+            &:hover {
+                color: #fff;
+                background: #0099EB;
+            }
+        }
+    }
+}
+
+.website-rsshub {
+    .rss-info {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .rss-action {
+        margin-left: auto;
     }
 }
