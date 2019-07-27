@@ -97,7 +97,7 @@ function getPageRSSHub (url, tabId, done) {
                         if (parsed) {
                             result.push({
                                 title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
-                                url: 'https://rsshub.app' + parsed,
+                                url: '{rsshubDomain}' + parsed,
                             });
                         } else {
                             result.push({

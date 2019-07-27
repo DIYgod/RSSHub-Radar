@@ -18,6 +18,7 @@ export function getConfig (success) {
 }
 
 export function saveConfig (config, success) {
+    config.rsshubDomain = config.rsshubDomain.replace(/\/$/, '');
     chrome.storage.local.set({
         config,
     }, () => {
