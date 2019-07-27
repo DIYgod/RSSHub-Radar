@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "clipboard": "2.0.4",
-    "element-ui": "2.11.0",
+    "element-ui": "2.11.1",
     "parse-domain": "2.3.1",
     "route-recognizer": "0.3.4",
     "vue-router": "3.0.7"
