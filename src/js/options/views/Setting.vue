@@ -3,34 +3,36 @@
         <el-main>
             <div class="title">设置</div>
             <div class="content" v-loading="loading">
-                <div class="subtitle">常规</div>
-                <div class="setting-item">
-                    <div class="setting-name">自定义 RSSHub 域名</div>
-                    <div class="setting-input">
-                        <el-input @change="saveConfig" v-model="config.rsshubDomain" placeholder="请输入你的 RSSHub 域名，留空使用官方域名"></el-input>
+                <div v-if="!loading">
+                    <div class="subtitle">常规</div>
+                    <div class="setting-item">
+                        <div class="setting-name">自定义 RSSHub 域名</div>
+                        <div class="setting-input">
+                            <el-input @change="saveConfig" v-model="config.rsshubDomain" placeholder="请输入你的 RSSHub 域名，留空使用官方域名"></el-input>
+                        </div>
                     </div>
-                </div>
-                <div class="subtitle">通知与提醒</div>
-                <div class="setting-item">
-                    <div class="setting-name">角标提醒</div>
-                    <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.notice.badge">开启</el-checkbox>
+                    <div class="subtitle">通知与提醒</div>
+                    <div class="setting-item">
+                        <div class="setting-name">角标提醒</div>
+                        <div class="setting-input">
+                            <el-checkbox @change="saveConfig" v-model="config.notice.badge">开启</el-checkbox>
+                        </div>
                     </div>
-                </div>
-                <div class="subtitle">一键订阅</div>
-                <div class="setting-item">
-                    <div class="setting-name">Tiny Tiny RSS</div>
-                    <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.ttrss">开启</el-checkbox>
-                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.ttrss" v-model="config.submitto.ttrssDomain" placeholder="必填，请输入你的 Tiny Tiny RSS 地址"></el-input>
-                    </div>
-                    <div class="setting-name">Feedly</div>
-                    <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.feedly">开启</el-checkbox>
-                    </div>
-                    <div class="setting-name">Inoreader</div>
-                    <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.inoreader">开启</el-checkbox>
+                    <div class="subtitle">一键订阅</div>
+                    <div class="setting-item">
+                        <div class="setting-name">Tiny Tiny RSS</div>
+                        <div class="setting-input">
+                            <el-checkbox @change="saveConfig" v-model="config.submitto.ttrss">开启</el-checkbox>
+                            <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.ttrss" v-model="config.submitto.ttrssDomain" placeholder="必填，请输入你的 Tiny Tiny RSS 地址"></el-input>
+                        </div>
+                        <div class="setting-name">Feedly</div>
+                        <div class="setting-input">
+                            <el-checkbox @change="saveConfig" v-model="config.submitto.feedly">开启</el-checkbox>
+                        </div>
+                        <div class="setting-name">Inoreader</div>
+                        <div class="setting-input">
+                            <el-checkbox @change="saveConfig" v-model="config.submitto.inoreader">开启</el-checkbox>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -39,7 +41,7 @@
 </template>
 
 <script>
-import defaultConfig from '../../default-config';
+import { defaultConfig, getConfig, saveConfig } from '../../utils';
 
 export default {
     name: 'Setting',
@@ -53,15 +55,13 @@ export default {
     },
     methods: {
         getConfig() {
-            chrome.storage.local.get('config', (result) => {
-                this.config = Object.assign({}, defaultConfig, result.config);
+            getConfig((config) => {
+                this.config = config;
                 this.loading = false;
             });
         },
         saveConfig() {
-            chrome.storage.local.set({
-                config: this.config,
-            }, () => {
+            saveConfig(this.config, () => {
                 this.$message({
                     message: '保存成功',
                     type: 'success'
