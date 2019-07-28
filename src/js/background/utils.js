@@ -1,7 +1,7 @@
-import rules from './rules';
+import rules from '../common/rules';
 import parseDomain from 'parse-domain';
 import RouteRecognizer from 'route-recognizer';
-import { getConfig } from '../utils';
+import { getConfig } from '../common/config';
 let config;
 
 window.pageRSS = {};

@@ -1,6 +1,6 @@
 import '../../css/popup.less';
 import ClipboardJS from 'clipboard';
-import { getConfig } from '../utils';
+import { getConfig } from '../common/config';
 import settingIcon from '../../svg/setting.svg';
 let config;
 

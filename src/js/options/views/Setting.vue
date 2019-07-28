@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { defaultConfig, getConfig, saveConfig } from '../../utils';
+import { defaultConfig, getConfig, saveConfig } from '../../common/config';
 
 export default {
     name: 'Setting',
