@@ -10,6 +10,10 @@
                         <div class="setting-input">
                             <el-input @change="saveConfig" v-model="config.rsshubDomain" placeholder="请输入你的 RSSHub 域名，留空使用官方域名"></el-input>
                         </div>
+                        <div class="setting-name">快捷键</div>
+                        <div class="setting-input">
+                            <el-button size="medium" @click="toHotkey">点此设置</el-button>
+                        </div>
                     </div>
                     <div class="subtitle">通知与提醒</div>
                     <div class="setting-item">
@@ -68,6 +72,11 @@ export default {
                 });
             });
         },
+        toHotkey() {
+            chrome.tabs.create({
+                url: 'chrome://extensions/shortcuts'
+            });
+        },
     }
 }
 </script>
@@ -108,5 +117,17 @@ export default {
     height: 40px;
     display: flex;
     align-items: center;
+}
+
+.el-button:focus {
+    color: #606266;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+}
+
+.el-button:hover {
+    color: #f5712c;
+    border-color: #fcd4c0;
+    background-color: #fef1ea;
 }
 </style>
