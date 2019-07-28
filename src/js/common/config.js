@@ -12,9 +12,13 @@ export const defaultConfig = {
 };
 
 export function getConfig (success) {
-    chrome.storage.local.get('config', (result) => {
-        success(Object.assign({}, defaultConfig, result.config));
-    });
+    if (chrome.storage) {
+        chrome.storage.local.get('config', (result) => {
+            success(Object.assign({}, defaultConfig, result.config));
+        });
+    } else {
+        success(defaultConfig);
+    }
 }
 
 export function saveConfig (config, success) {
@@ -22,9 +26,11 @@ export function saveConfig (config, success) {
         config.rsshubDomain = defaultConfig.rsshubDomain;
     }
     config.rsshubDomain = config.rsshubDomain.replace(/\/$/, '');
-    chrome.storage.local.set({
-        config,
-    }, () => {
-        success();
-    });
+    if (chrome.storage) {
+        chrome.storage.local.set({
+            config,
+        }, () => {
+            success();
+        });
+    }
 }

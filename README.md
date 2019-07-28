@@ -12,9 +12,13 @@
 
 ## 介绍
 
-![](https://i.imgur.com/9oZpzJe.jpg)
-
 [Telegram 群](https://t.me/rsshub)
+
+RSSHub Radar 是 [RSSHub](https://github.com/DIYgod/RSSHub) 的衍生项目，她是一个可以帮助你快速发现和订阅当前网站自带的 RSS 及支持当前网站的 RSSHub 的浏览器扩展
+
+![](https://i.imgur.com/3z6kCEQ.jpg)
+
+![](https://i.imgur.com/euEIwkG.jpg)
 
 ## 安装
 
