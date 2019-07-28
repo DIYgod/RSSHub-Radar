@@ -24,16 +24,16 @@
                     </div>
                     <div class="subtitle">一键订阅</div>
                     <div class="setting-item">
-                        <div class="setting-name">Tiny Tiny RSS</div>
+                        <div class="setting-name">Tiny Tiny RSS <a target="_blank" href="https://ttrss.henry.wang/zh/"><i class="el-icon-info"></i></a></div>
                         <div class="setting-input">
                             <el-checkbox @change="saveConfig" v-model="config.submitto.ttrss">开启</el-checkbox>
                             <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.ttrss" v-model="config.submitto.ttrssDomain" placeholder="必填，请输入你的 Tiny Tiny RSS 地址"></el-input>
                         </div>
-                        <div class="setting-name">Feedly</div>
+                        <div class="setting-name">Feedly <a target="_blank" href="https://feedly.com/"><i class="el-icon-info"></i></a></div>
                         <div class="setting-input">
                             <el-checkbox @change="saveConfig" v-model="config.submitto.feedly">开启</el-checkbox>
                         </div>
-                        <div class="setting-name">Inoreader</div>
+                        <div class="setting-name">Inoreader <a target="_blank" href="https://www.inoreader.com/"><i class="el-icon-info"></i></a></div>
                         <div class="setting-input">
                             <el-checkbox @change="saveConfig" v-model="config.submitto.inoreader">开启</el-checkbox>
                         </div>
@@ -129,5 +129,10 @@ export default {
     color: #f5712c;
     border-color: #fcd4c0;
     background-color: #fef1ea;
+}
+
+.el-icon-info {
+    color: #777;
+    margin-left: 2px;
 }
 </style>

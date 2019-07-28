@@ -2,6 +2,7 @@ import '../../css/popup.less';
 import ClipboardJS from 'clipboard';
 import { getConfig } from '../common/config';
 import settingIcon from '../../svg/setting.svg';
+import aboutIcon from '../../svg/about.svg';
 let config;
 
 function generateList (type, list) {
@@ -27,12 +28,13 @@ function generateList (type, list) {
             `
         });
         document.querySelector(`.${type} ul`).innerHTML = result;
-        document.querySelector('.no-rss').style.display = 'none';
         document.querySelector(`.${type}`).style.display = 'block';
+        document.body.classList.add('something');
     }
 }
 
 document.querySelector('.icons-setting').innerHTML = settingIcon;
+document.querySelector('.icons-about').innerHTML = aboutIcon;
 
 chrome.runtime.getBackgroundPage((background) => {
     chrome.tabs.query({

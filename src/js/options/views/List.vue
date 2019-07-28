@@ -8,7 +8,7 @@
                     <el-collapse-item v-for="(rule, domain) in rules" :key="domain" :title="rule._name + ' - ' + domain">
                         <div v-for="(subrule, subdomain) in rule" v-if="subdomain[0] !== '_'" :key="subdomain">
                             <p v-for="subsubrule in subrule" :key="subsubrule.title">
-                                <a :href="subsubrule.description">{{ subsubrule.title }}</a>
+                                <a target="_blank" :href="subsubrule.description">{{ subsubrule.title }}</a>
                             </p>
                         </div>
                     </el-collapse-item>

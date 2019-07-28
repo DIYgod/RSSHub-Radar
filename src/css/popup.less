@@ -3,18 +3,29 @@ body {
     margin: 0;
     padding: 20px 20px 5px;
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+
+    &.something {
+        .no-rss {
+            display: none;
+        }
+
+        .icons {
+            right: 25px;
+        }
+    }
 }
 
 .icons {
     position: absolute;
-    right: 25px;
+    right: 16px;
     top: 21px;
 
     .icons-item {
-        width: 20px;
+        width: 18px;
         display: inline-block;
         fill: #999;
         transition: .3s;
+        margin-left: 5px;
 
         &:hover {
             fill: #000;
