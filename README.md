@@ -3,7 +3,8 @@
 </p>
 <h1 align="center">RSSHub Radar</h1>
 
-> RSSHub Radar 是一个探测当前页面可用的 RSS 和 [RSSHub](https://github.com/DIYgod/RSSHub) 的浏览器扩展 - 万物皆可 RSS
+> RSSHub Radar 是 [RSSHub](https://github.com/DIYgod/RSSHub) 的衍生项目，她是一个可以帮助你快速发现和订阅当前网站自带的 RSS 及支持当前网站的 RSSHub 的浏览器扩展
+> 万物皆可 RSS
 
 [![version](https://img.shields.io/chrome-web-store/v/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
 [![users](https://img.shields.io/chrome-web-store/users/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
