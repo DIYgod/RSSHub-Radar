@@ -6,7 +6,7 @@ export const defaultConfig = {
     submitto: {
         ttrss: false,
         ttrssDomain: '',
-        feedly: false,
+        feedly: true,
         inoreader: false,
     }
 };

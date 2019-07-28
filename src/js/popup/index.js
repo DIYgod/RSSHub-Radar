@@ -1,6 +1,7 @@
 import '../../css/popup.less';
 import ClipboardJS from 'clipboard';
 import { getConfig } from '../utils';
+import settingIcon from '../../svg/setting.svg';
 let config;
 
 function generateList (type, list) {
@@ -30,6 +31,8 @@ function generateList (type, list) {
         document.querySelector(`.${type}`).style.display = 'block';
     }
 }
+
+document.querySelector('.icons-setting').innerHTML = settingIcon;
 
 chrome.runtime.getBackgroundPage((background) => {
     chrome.tabs.query({

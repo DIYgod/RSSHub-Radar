@@ -5,6 +5,23 @@ body {
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 
+.icons {
+    position: absolute;
+    right: 25px;
+    top: 22px;
+
+    .icons-item {
+        width: 20px;
+        display: inline-block;
+        fill: #999;
+        transition: .3s;
+
+        &:hover {
+            fill: #000;
+        }
+    }
+}
+
 .page-rss,
 .page-rsshub,
 .website-rsshub {
@@ -88,9 +105,9 @@ body {
         white-space: nowrap;
         padding: 0 10px;
         font-size: 13px;
-        color: #FF2800;
+        color: #f5712c;
         background: #fff;
-        border: 1px solid #FF2800;
+        border: 1px solid #f5712c;
         line-height: 30px;
         text-align: center;
         transition: .3s;
@@ -103,7 +120,7 @@ body {
 
         &:hover {
             color: #fff;
-            background: #FF2800;
+            background: #f5712c;
         }
 
         &.rss-copy {
