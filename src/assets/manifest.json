@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "RSSHub Radar",
-    "description": "RSSHub Radar 是 RSSHub 的衍生项目，她可以帮助你快速发现和订阅当前网站自带的 RSS 及支持当前网站的 RSSHub",
+    "description": "RSSHub Radar 是 RSSHub 的衍生项目，她可以帮助你快速发现和订阅当前网站的 RSS 和 RSSHub",
     "version": "1.0.0",
     "homepage_url": "https://docs.rsshub.app",
     "icons": {

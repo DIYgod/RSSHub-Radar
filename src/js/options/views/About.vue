@@ -4,7 +4,7 @@
             <div class="title">关于</div>
             <div class="content">
                 <div class="tip">
-                    <p>RSSHub Radar 是 <a target="_blank" href="https://docs.rsshub.app">RSSHub</a> 的衍生项目，她可以帮助你快速发现和订阅当前网站自带的 RSS 及支持当前网站的 RSSHub，项目<a target="_blank" href="https://github.com/DIYgod/RSSHub-Radar">采用 MIT 许可开源</a>，使用完全免费，但是随着项目规模的增长，也需要有相应的资金支持才能持续项目的维护与开发</p>
+                    <p>RSSHub Radar 是 <a target="_blank" href="https://docs.rsshub.app">RSSHub</a> 的衍生项目，她可以帮助你快速发现和订阅当前网站的 RSS 和 RSSHub，项目<a target="_blank" href="https://github.com/DIYgod/RSSHub-Radar">采用 MIT 许可开源</a>，使用完全免费，但是随着项目规模的增长，也需要有相应的资金支持才能持续项目的维护与开发</p>
                     <p><i class="el-icon-trophy"></i> 赞助 RSSHub Radar 的开发: <a target="_blank" href="https://docs.rsshub.app/support">https://docs.rsshub.app/support</a></p>
                     <p>&nbsp;</p>
                     <p>更新日志: <a target="_blank" href="https://github.com/DIYgod/RSSHub-Radar/releases">https://github.com/DIYgod/RSSHub-Radar/releases</a></p>
