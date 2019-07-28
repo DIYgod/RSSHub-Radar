@@ -256,8 +256,9 @@ export default {
         }],
     },
     'rsshub.app': {
+        _name: 'RSSHub',
         'docs': [{
-            title: 'RSSHub 有新路由啦',
+            title: '有新路由啦',
             description: 'https://docs.rsshub.app/program-update.html#rsshub',
             source: ['', '/*tpath'],
             target: '/rsshub/rss',

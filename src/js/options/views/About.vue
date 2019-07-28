@@ -3,7 +3,10 @@
         <el-main>
             <div class="title">关于</div>
             <div class="content">
-                未完成的功能
+                <div class="tip">
+                    <p>Made with <i style="color:#d43f57">♥</i> by <a target="_blank" href="https://diygod.me">DIYgod</a></p>
+                    <p>Source Code hosted on GitHub: <a target="_blank" href="https://github.com/DIYgod/RSSHub-Radar">https://github.com/DIYgod/RSSHub-Radar</a></p>
+                </div>
             </div>
         </el-main>
     </div>
@@ -18,6 +21,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+a {
+    text-decoration: none;
+    color: #f5712c;
+}
+
 .about {
     width: 100%;
     max-width: 800px;
@@ -31,6 +39,12 @@ export default {
     border-bottom: 1px solid #e6e6e6;
     padding-bottom: 10px;
     color: #f5712c;
+}
+
+.tip {
+    font-size: 14px;
+    margin: 20px 0;
+    color: #555;
 }
 
 .content {

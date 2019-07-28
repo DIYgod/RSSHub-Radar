@@ -21,7 +21,7 @@
                     <i class="el-icon-coordinate"></i>
                     <span slot="title">关于</span>
                 </el-menu-item>
-                <el-footer class="footer">版本 v{{ version }}<br>© 2019 <a href="https://diygod.me">DIYgod</a></el-footer>
+                <el-footer class="footer">版本 v{{ version }}<br>Made with <i style="color:#d43f57">♥</i> by <a target="_blank" href="https://diygod.me">DIYgod</a></el-footer>
             </el-menu>
         </el-aside>
         <el-container>
