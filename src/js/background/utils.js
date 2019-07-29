@@ -114,8 +114,8 @@ function getPageRSSHub (url, tabId, done) {
                         } else {
                             result.push({
                                 title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
-                                url: rule[recog.handler].description,
-                                isDescription: true,
+                                url: rule[recog.handler].docs,
+                                isDocs: true,
                             });
                         }
                         resolve();
@@ -155,8 +155,8 @@ function getWebsiteRSSHub (url) {
             }
             return domainRules.map((rule) => ({
                 title: formatBlank(rules[domain]._name, rule.title),
-                url: rule.description,
-                isDescription: true,
+                url: rule.docs,
+                isDocs: true,
             }));
         } else {
             return [];

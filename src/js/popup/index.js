@@ -17,7 +17,7 @@ function generateList (type, list) {
                     <div class="rss-title">${item.title}</div>
                     <div class="rss-url">${url.replace('https://', '').replace('http://', '')}</div>
                 </a>
-                ${item.isDescription ?
+                ${item.isDocs ?
                 `<a href="${url}" class="rss-action">文档</a>` :
                 `<div class="rss-action rss-copy" data-clipboard-text="${url}">复制</div>
                 ${config.submitto.ttrss && config.submitto.ttrssDomain ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=subscribe&feed_url=${url}" class="rss-action rss-submitto-ttrss">订阅到 TTRSS</a>` : ''}
