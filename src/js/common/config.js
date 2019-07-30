@@ -17,7 +17,7 @@ export function getConfig (success) {
             success(Object.assign({}, defaultConfig, result.config));
         });
     } else {
-        success(defaultConfig);
+        success && success(defaultConfig);
     }
 }
 
@@ -30,7 +30,7 @@ export function saveConfig (config, success) {
         chrome.storage.local.set({
             config,
         }, () => {
-            success();
+            success && success();
         });
     }
 }
