@@ -13,7 +13,7 @@ export const defaultConfig = {
 
 export function getConfig (success) {
     if (chrome.storage) {
-        chrome.storage.local.get('config', (result) => {
+        chrome.storage.sync.get('config', (result) => {
             success(Object.assign({}, defaultConfig, result.config));
         });
     } else {
@@ -27,7 +27,7 @@ export function saveConfig (config, success) {
     }
     config.rsshubDomain = config.rsshubDomain.replace(/\/$/, '');
     if (chrome.storage) {
-        chrome.storage.local.set({
+        chrome.storage.sync.set({
             config,
         }, () => {
             success && success();
