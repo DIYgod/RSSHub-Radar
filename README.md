@@ -16,9 +16,9 @@
 
 RSSHub Radar 是 [RSSHub](https://github.com/DIYgod/RSSHub) 的衍生项目，她是一个可以帮助你快速发现和订阅当前网站 RSS 和 RSSHub 的浏览器扩展
 
-![](https://i.imgur.com/3z6kCEQ.jpg)
+![](https://i.imgur.com/OvGZcOP.jpg)
 
-![](https://i.imgur.com/euEIwkG.jpg)
+![](https://i.imgur.com/UmzLrmx.jpg)
 
 ## 安装
 
