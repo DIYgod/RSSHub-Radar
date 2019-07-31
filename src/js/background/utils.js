@@ -1,8 +1,9 @@
-import rules from '../common/rules';
+import { getRules, getRulesDate, refreshRules } from '../common/rules';
 import parseDomain from 'parse-domain';
 import RouteRecognizer from 'route-recognizer';
 import { getConfig } from '../common/config';
 let config;
+let rules = {};
 
 window.pageRSS = {};
 window.pageRSSHub = {};
@@ -10,11 +11,36 @@ window.websiteRSSHub = {};
 
 getConfig((conf) => {
     config = conf;
+
+    getRules((rul) => {
+        rules = rul;
+    
+        getRulesDate((lastDate) => {
+            if (!lastDate || (+new Date - lastDate > config.refreshTimeout * 1000)) {
+                refreshRules();
+                schedule();
+            } else {
+                schedule(config.refreshTimeout * 1000 - (+new Date - lastDate));
+            }
+        });
+    });
 });
+
+function schedule (time) {
+    setTimeout(() => {
+        refreshRules();
+        schedule();
+    }, time ? time : config.refreshTimeout * 1000);
+}
 
 chrome.storage.onChanged.addListener((result) => {
     if (result.config) {
         config = result.config.newValue;
+    }
+    if (result.rules) {
+        getRules((rul) => {
+            rules = rul;
+        });
     }
 });
 

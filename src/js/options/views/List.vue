@@ -2,8 +2,11 @@
     <div class="list">
         <el-main>
             <div class="title">支持列表</div>
-            <div class="tip">更多规则支持中，快来<a target="_blank" href="https://docs.rsshub.app/joinus/">参与我们</a>吧！</div>
-            <div class="content">
+            <div class="tip">
+                <p>更多规则支持中，快来<a target="_blank" href="https://docs.rsshub.app/joinus/">参与我们</a>吧！</p>
+                <p>{{ time }}前更新</p>
+            </div>
+            <div class="content" v-loading="loading">
                 <el-collapse accordion>
                     <el-collapse-item v-for="(rule, domain) in rules" :key="domain" :title="rule._name + ' - ' + domain">
                         <div v-for="(subrule, subdomain) in rule" v-if="subdomain[0] !== '_'" :key="subdomain">
@@ -19,13 +22,37 @@
 </template>
 
 <script>
-import rules from '../../common/rules';
+import { getRules, getRulesDate } from '../../common/rules';
+import { secondToTime } from '../../common/utils';
 
 export default {
     name: 'List',
     data: () => ({
-        rules,
+        loading: true,
+        rules: {},
+        time: '',
     }),
+    created() {
+        getRulesDate((date) => {
+            let second = (+new Date - +date) / 1000;
+            this.time = secondToTime(second);
+            this.refreshTime();
+        });
+        getRules((rules) => {
+            this.rules = rules;
+            this.loading = false;
+        });
+    },
+    methods: {
+        refreshTime() {
+            getRulesDate((date) => {
+                this.time = secondToTime((+new Date - +date) / 1000);
+                setTimeout(() => {
+                    this.refreshTime();
+                }, 1000);
+            });
+        }
+    }
 }
 </script>
 
@@ -40,7 +67,6 @@ a {
     max-width: 800px;
     margin: 0 auto;
     padding: 40px 10px;
-    overflow: scroll;
 }
 
 .title {

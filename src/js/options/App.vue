@@ -24,7 +24,7 @@
                 <el-footer class="footer">版本 v{{ version }}<br>Made with <i style="color:#d43f57">♥</i> by <a target="_blank" href="https://diygod.me">DIYgod</a></el-footer>
             </el-menu>
         </el-aside>
-        <el-container>
+        <el-container class="sub-container">
             <!-- <el-main><router-view></router-view></el-main> -->
             <router-view></router-view>
         </el-container>
@@ -61,6 +61,10 @@ body {
 
 .container {
     height: 100%;
+}
+
+.sub-container {
+    overflow: scroll;
 }
 
 .menu {

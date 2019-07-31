@@ -8,7 +8,8 @@ export const defaultConfig = {
         ttrssDomain: '',
         feedly: true,
         inoreader: false,
-    }
+    },
+    refreshTimeout: 5 * 60 * 60,
 };
 
 export function getConfig (success) {

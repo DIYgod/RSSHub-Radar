@@ -1,51 +1,57 @@
 <template>
     <div class="setting">
-        <el-main>
-            <div class="title">设置</div>
-            <div class="content" v-loading="loading">
-                <div v-if="!loading">
-                    <div class="subtitle">常规</div>
-                    <div class="setting-item">
-                        <div class="setting-name">自定义 RSSHub 域名</div>
-                        <div class="setting-input">
-                            <el-input @change="saveConfig" v-model="config.rsshubDomain" placeholder="请输入你的 RSSHub 域名，留空使用官方域名"></el-input>
-                        </div>
-                        <div class="setting-name">快捷键</div>
-                        <div class="setting-input">
-                            <el-button size="medium" @click="toHotkey">点此设置</el-button>
-                        </div>
+        <div class="title">设置</div>
+        <div class="content" v-loading="loading">
+            <div v-if="!loading">
+                <div class="subtitle">常规</div>
+                <div class="setting-item">
+                    <div class="setting-name">自定义 RSSHub 域名</div>
+                    <div class="setting-input">
+                        <el-input @change="saveConfig" v-model="config.rsshubDomain" placeholder="请输入你的 RSSHub 域名，留空使用官方域名"></el-input>
                     </div>
-                    <div class="subtitle">通知与提醒</div>
-                    <div class="setting-item">
-                        <div class="setting-name">角标提醒</div>
-                        <div class="setting-input">
-                            <el-checkbox @change="saveConfig" v-model="config.notice.badge">开启</el-checkbox>
-                        </div>
+                    <div class="setting-name">快捷键</div>
+                    <div class="setting-input">
+                        <el-button size="medium" @click="toHotkey">点此设置</el-button>
                     </div>
-                    <div class="subtitle">一键订阅</div>
-                    <div class="setting-item">
-                        <div class="setting-name">Tiny Tiny RSS <a target="_blank" href="https://ttrss.henry.wang/zh/"><i class="el-icon-info"></i></a></div>
-                        <div class="setting-input">
-                            <el-checkbox @change="saveConfig" v-model="config.submitto.ttrss">开启</el-checkbox>
-                            <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.ttrss" v-model="config.submitto.ttrssDomain" placeholder="必填，请输入你的 Tiny Tiny RSS 地址"></el-input>
-                        </div>
-                        <div class="setting-name">Feedly <a target="_blank" href="https://feedly.com/"><i class="el-icon-info"></i></a></div>
-                        <div class="setting-input">
-                            <el-checkbox @change="saveConfig" v-model="config.submitto.feedly">开启</el-checkbox>
-                        </div>
-                        <div class="setting-name">Inoreader <a target="_blank" href="https://www.inoreader.com/"><i class="el-icon-info"></i></a></div>
-                        <div class="setting-input">
-                            <el-checkbox @change="saveConfig" v-model="config.submitto.inoreader">开启</el-checkbox>
-                        </div>
+                </div>
+                <div class="subtitle">规则更新</div>
+                <div class="setting-item">
+                    <div class="setting-input">
+                        <el-button style="width: 98px" size="medium" @click="refreshRu" :disabled="refreshDisabled">{{ refreshDisabled ? '更新中' : '手动更新' }}</el-button><el-progress :text-inside="true" :stroke-width="20" :percentage="percentage"></el-progress><span class="time"> {{ time }}前更新 </span>
+                    </div>
+                </div>
+                <div class="subtitle">一键订阅</div>
+                <div class="setting-item">
+                    <div class="setting-name">Tiny Tiny RSS <a target="_blank" href="https://ttrss.henry.wang/zh/"><i class="el-icon-info"></i></a></div>
+                    <div class="setting-input">
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.ttrss">开启</el-checkbox>
+                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.ttrss" v-model="config.submitto.ttrssDomain" placeholder="必填，请输入你的 Tiny Tiny RSS 地址"></el-input>
+                    </div>
+                    <div class="setting-name">Feedly <a target="_blank" href="https://feedly.com/"><i class="el-icon-info"></i></a></div>
+                    <div class="setting-input">
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.feedly">开启</el-checkbox>
+                    </div>
+                    <div class="setting-name">Inoreader <a target="_blank" href="https://www.inoreader.com/"><i class="el-icon-info"></i></a></div>
+                    <div class="setting-input">
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.inoreader">开启</el-checkbox>
+                    </div>
+                </div>
+                <div class="subtitle">通知与提醒</div>
+                <div class="setting-item">
+                    <div class="setting-name">角标提醒</div>
+                    <div class="setting-input">
+                        <el-checkbox @change="saveConfig" v-model="config.notice.badge">开启</el-checkbox>
                     </div>
                 </div>
             </div>
-        </el-main>
+        </div>
     </div>
 </template>
 
 <script>
+import { getRulesDate, refreshRules } from '../../common/rules';
 import { defaultConfig, getConfig, saveConfig } from '../../common/config';
+import { secondToTime } from '../../common/utils';
 
 export default {
     name: 'Setting',
@@ -53,17 +59,24 @@ export default {
         loading: true,
         defaultConfig,
         config: defaultConfig,
+        time: '',
+        second: 0,
+        refreshDisabled: false,
     }),
+    computed: {
+        percentage: function () {
+            return (this.second / this.config.refreshTimeout * 100).toFixed(2);
+        },
+    },
     created() {
-        this.getConfig();
+        getConfig((config) => {
+            this.config = config;
+            this.loading = false;
+
+            this.refreshTime();
+        });
     },
     methods: {
-        getConfig() {
-            getConfig((config) => {
-                this.config = config;
-                this.loading = false;
-            });
-        },
         saveConfig() {
             saveConfig(this.config, () => {
                 this.$message({
@@ -77,6 +90,22 @@ export default {
                 url: 'chrome://extensions/shortcuts'
             });
         },
+        refreshRu() {
+            this.refreshDisabled = true;
+            refreshRules(() => {
+                this.second = 0;
+                this.refreshDisabled = false;
+            });
+        },
+        refreshTime() {
+            getRulesDate((date) => {
+                this.second = (+new Date - +date) / 1000;
+                this.time = secondToTime(this.second);
+                setTimeout(() => {
+                    this.refreshTime();
+                }, 1000);
+            });
+        }
     }
 }
 </script>
@@ -87,7 +116,6 @@ export default {
     max-width: 800px;
     margin: 0 auto;
     padding: 40px 10px;
-    overflow: scroll;
 }
 
 .title {
@@ -100,6 +128,7 @@ export default {
 
 .content {
     margin-top: 20px;
+    margin-bottom: 30px;
     color: #222;
 }
 
@@ -135,5 +164,15 @@ export default {
 .el-icon-info {
     color: #777;
     margin-left: 2px;
+}
+
+.el-progress {
+    width: 170px;
+    margin: 0 20px;
+}
+
+.time {
+    color: #606266;
+    font-size: 14px;
 }
 </style>
