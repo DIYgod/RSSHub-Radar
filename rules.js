@@ -1,4 +1,4 @@
-const radarRules =  {
+({
     'bilibili.com': {
         _name: 'bilibili',
         www: [{
@@ -274,4 +274,4 @@ const radarRules =  {
             verification: (params) => parseInt(params.id) + '' === params.id,
         }],
     },
-};
+})
