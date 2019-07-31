@@ -15,7 +15,7 @@
                 </el-menu-item>
                 <el-menu-item index="/list">
                     <i class="el-icon-magic-stick"></i>
-                    <span slot="title">支持列表</span>
+                    <span slot="title">规则列表</span>
                 </el-menu-item>
                 <el-menu-item index="/about">
                     <i class="el-icon-coordinate"></i>

@@ -1,7 +1,7 @@
 <template>
     <div class="list">
         <el-main>
-            <div class="title">支持列表</div>
+            <div class="title">规则列表</div>
             <div class="tip">
                 <p>更多规则支持中，快来<a target="_blank" href="https://docs.rsshub.app/joinus/">参与我们</a>吧！</p>
                 <p>{{ time }}前更新</p>

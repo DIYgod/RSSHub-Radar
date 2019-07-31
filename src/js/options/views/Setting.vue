@@ -16,8 +16,9 @@
                 </div>
                 <div class="subtitle">规则更新</div>
                 <div class="setting-item">
+                    <div class="setting-name">我会自动更新，你也可以</div>
                     <div class="setting-input">
-                        <el-button style="width: 98px" size="medium" @click="refreshRu" :disabled="refreshDisabled">{{ refreshDisabled ? '更新中' : '手动更新' }}</el-button><el-progress :text-inside="true" :stroke-width="20" :percentage="percentage"></el-progress><span class="time"> {{ time }}前更新 </span>
+                        <el-button style="width: 98px" size="medium" @click="refreshRu" :disabled="refreshDisabled">{{ refreshDisabled ? '更新中' : '立即更新' }}</el-button><el-progress :text-inside="true" :stroke-width="20" :percentage="percentage"></el-progress><span class="time">{{ time }}前更新，{{ leftTime }}后自动更新</span>
                     </div>
                 </div>
                 <div class="subtitle">一键订阅</div>
@@ -60,6 +61,7 @@ export default {
         defaultConfig,
         config: defaultConfig,
         time: '',
+        leftTime: '',
         second: 0,
         refreshDisabled: false,
     }),
@@ -94,6 +96,8 @@ export default {
             this.refreshDisabled = true;
             refreshRules(() => {
                 this.second = 0;
+                this.time = secondToTime(this.second);
+                this.leftTime = secondToTime(this.config.refreshTimeout - this.second);
                 this.refreshDisabled = false;
             });
         },
@@ -101,6 +105,7 @@ export default {
             getRulesDate((date) => {
                 this.second = (+new Date - +date) / 1000;
                 this.time = secondToTime(this.second);
+                this.leftTime = secondToTime(this.config.refreshTimeout - this.second);
                 setTimeout(() => {
                     this.refreshTime();
                 }, 1000);
