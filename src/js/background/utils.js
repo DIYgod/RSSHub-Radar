@@ -9,28 +9,11 @@ window.pageRSS = {};
 window.pageRSSHub = {};
 window.websiteRSSHub = {};
 
-getConfig((conf) => {
-    config = conf;
-
-    getRules((rul) => {
-        rules = rul;
-    
-        getRulesDate((lastDate) => {
-            if (!lastDate || (+new Date - lastDate > config.refreshTimeout * 1000)) {
-                refreshRules();
-                schedule();
-            } else {
-                schedule(config.refreshTimeout * 1000 - (+new Date - lastDate));
-            }
-        });
+function schedule (time = +new Date + config.refreshTimeout * 1000) {
+    chrome.alarms.create('refreshRules', {
+        when: time,
+        periodInMinutes: config.refreshTimeout / 60,
     });
-});
-
-function schedule (time) {
-    setTimeout(() => {
-        refreshRules();
-        schedule();
-    }, time ? time : config.refreshTimeout * 1000);
 }
 
 chrome.storage.onChanged.addListener((result) => {
@@ -42,6 +25,42 @@ chrome.storage.onChanged.addListener((result) => {
             rules = rul;
         });
     }
+});
+
+chrome.alarms.onAlarm.addListener((alarm) => {
+    if (alarm.name === 'refreshRules') {
+        refreshRules();
+    }
+});
+
+chrome.idle.onStateChanged.addListener(newState => {
+    if (newState === 'active') {
+        chrome.alarms.getAll((items) => {
+            items.forEach((item) => {
+                chrome.alarms.create(item.name, {
+                    when: item.scheduledTime,
+                    periodInMinutes: item.periodInMinutes,
+                });
+            });
+        });
+    }
+});
+
+getConfig((conf) => {
+    config = conf;
+
+    getRules((rul) => {
+        rules = rul;
+    
+        getRulesDate((lastDate) => {
+            if (!lastDate || (+new Date - lastDate > config.refreshTimeout * 1000)) {
+                refreshRules();
+                schedule();
+            } else {
+                schedule(lastDate + config.refreshTimeout * 1000);
+            }
+        });
+    });
 });
 
 chrome.browserAction.setBadgeBackgroundColor({
