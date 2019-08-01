@@ -16,6 +16,17 @@ function schedule (time = +new Date + config.refreshTimeout * 1000) {
     });
 }
 
+function initSchedule () {
+    getRulesDate((lastDate) => {
+        if (!lastDate || (+new Date - lastDate > config.refreshTimeout * 1000)) {
+            refreshRules();
+            schedule();
+        } else {
+            schedule(lastDate + config.refreshTimeout * 1000);
+        }
+    });
+}
+
 chrome.storage.onChanged.addListener((result) => {
     if (result.config) {
         config = result.config.newValue;
@@ -35,14 +46,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 chrome.idle.onStateChanged.addListener(newState => {
     if (newState === 'active') {
-        chrome.alarms.getAll((items) => {
-            items.forEach((item) => {
-                chrome.alarms.create(item.name, {
-                    when: item.scheduledTime,
-                    periodInMinutes: item.periodInMinutes,
-                });
-            });
-        });
+        initSchedule();
     }
 });
 
@@ -51,15 +55,7 @@ getConfig((conf) => {
 
     getRules((rul) => {
         rules = rul;
-    
-        getRulesDate((lastDate) => {
-            if (!lastDate || (+new Date - lastDate > config.refreshTimeout * 1000)) {
-                refreshRules();
-                schedule();
-            } else {
-                schedule(lastDate + config.refreshTimeout * 1000);
-            }
-        });
+        initSchedule();
     });
 });
 
