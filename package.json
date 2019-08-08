@@ -31,7 +31,7 @@
     "css-loader": "3.2.0",
     "cssnano": "4.1.10",
     "eslint-loader": "2.2.1",
-    "file-loader": "4.1.0",
+    "file-loader": "4.2.0",
     "less": "3.9.0",
     "less-loader": "5.0.0",
     "mini-css-extract-plugin": "0.8.0",
