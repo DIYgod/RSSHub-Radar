@@ -1,4 +1,5 @@
 let pageRSS = null;
+const image = document.querySelector('link[rel~="icon"]') && handleUrl(document.querySelector('link[rel~="icon"]').getAttribute('href')) || document.location.origin + '/favicon.ico';
 
 function handleUrl (url) {
     if (url.startsWith('//')) {
@@ -14,6 +15,9 @@ function handleUrl (url) {
 export function getPageRSS () {
     if (!pageRSS) {
         pageRSS = [];
+        const saved = {};
+
+        // links
         let types = [
             'application/rss+xml',
             'application/atom+xml',
@@ -37,9 +41,33 @@ export function getPageRSS () {
                     let feed = {
                         url: handleUrl(feed_url),
                         title: links[i].getAttribute('title') || document.querySelector('title') && document.querySelector('title').innerHTML,
-                        image: document.querySelector('link[rel="icon"]') && handleUrl(document.querySelector('link[rel="icon"]').getAttribute('href')) || document.location.origin + '/favicon.ico',
+                        image,
                     };
                     pageRSS.push(feed);
+                    saved[feed.url] = 1;
+                }
+            }
+        }
+
+        // a
+        let aEles = document.querySelectorAll('a');
+        for (let i = 0; i < aEles.length; i++) {
+            if (aEles[i].hasAttribute('href')) {
+                const href = aEles[i].getAttribute('href');
+
+                if (href.match(/\/(feed|rss)(\.(xml|atom))?$/)
+                    || aEles[i].hasAttribute('title') && aEles[i].getAttribute('title').match(/rss/i)
+                    || aEles[i].hasAttribute('class') && aEles[i].getAttribute('class').match(/rss/i)) {
+                    let feed = {
+                        url: handleUrl(href),
+                        title: aEles[i].innerText || aEles[i].getAttribute('title') || document.querySelector('title') && document.querySelector('title').innerHTML,
+                        image,
+                    };
+                    if (!saved[feed.url]) {
+                        pageRSS.push(feed);
+                        saved[feed.url] = 1;
+                    }
+                    continue;
                 }
             }
         }
