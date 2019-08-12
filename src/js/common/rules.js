@@ -15,7 +15,7 @@ export function refreshRules (success) {
 export function getRules (success) {
     chrome.storage.local.get('rules', (result) => {
         if (result && result.rules) {
-            success(eval(result.rules));
+            success(eval(result.rules), result.rules);
         } else {
             refreshRules(() => {
                 success(rules);
@@ -32,4 +32,11 @@ export function getRulesDate (success) {
             success(null);
         }
     });
+}
+
+export function updateRules (text, success) {
+    chrome.storage.local.set({
+        rules: text,
+    });
+    success && success();
 }

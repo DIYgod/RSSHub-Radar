@@ -16,13 +16,27 @@
                         </div>
                     </el-collapse-item>
                 </el-collapse>
+                <div class="debug">
+                    <div class="tip">
+                        <p>此处用于开发中的规则调试，非战斗人员请迅速撤离</p>
+                        <p>编辑内容随时可能被自动更新的规则覆盖，请保证本地有备份</p>
+                        <p>使用 设置-立即更新 可以立即恢复远程规则</p>
+                    </div>
+                    <el-input
+                        type="textarea"
+                        :rows="100"
+                        placeholder="请输入内容"
+                        v-model="rulesText"
+                        @change="updateRules">
+                    </el-input>
+                </div>
             </div>
         </el-main>
     </div>
 </template>
 
 <script>
-import { getRules, getRulesDate } from '../../common/rules';
+import { getRules, getRulesDate, updateRules } from '../../common/rules';
 import { secondToTime } from '../../common/utils';
 
 export default {
@@ -31,6 +45,7 @@ export default {
         loading: true,
         rules: {},
         time: '',
+        rulesText: '',
     }),
     created() {
         getRulesDate((date) => {
@@ -38,8 +53,9 @@ export default {
             this.time = secondToTime(second);
             this.refreshTime();
         });
-        getRules((rules) => {
+        getRules((rules, text) => {
             this.rules = rules;
+            this.rulesText = text;
             this.loading = false;
         });
     },
@@ -51,7 +67,15 @@ export default {
                     this.refreshTime();
                 }, 1000);
             });
-        }
+        },
+        updateRules() {
+            updateRules(this.rulesText, () => {
+                this.$message({
+                    message: '保存成功',
+                    type: 'success'
+                });
+            });
+        },
     }
 }
 </script>
@@ -86,5 +110,9 @@ a {
 .content {
     margin-top: 20px;
     color: #222;
+}
+
+.debug {
+    margin: 200px 0;
 }
 </style>
