@@ -1,4 +1,4 @@
-import { handleRSS, removeRSS } from './utils';
+import { handleRSS, removeRSS, updateRSS } from './utils';
 import { getConfig, saveConfig } from '../common/config';
 
 chrome.tabs.onActivated.addListener((tab) => {
@@ -20,8 +20,12 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-    if (msg.text === 'setPageRSS' && sender.tab.active) {
-        handleRSS(msg.feeds, sender.tab.id);
+    if (sender.tab && sender.tab.active) {
+        if (msg.text === 'setPageRSS') {
+            handleRSS(msg.feeds, sender.tab.id);
+        } else if (msg.text === 'updatePageRSS') {
+            updateRSS(msg.feeds, sender.tab.id);
+        }
     }
 });
 

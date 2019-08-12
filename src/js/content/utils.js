@@ -1,3 +1,6 @@
+import RSSParser from 'rss-parser';
+let rssParser = new RSSParser();
+
 let pageRSS = null;
 const image = document.querySelector('link[rel~="icon"]') && handleUrl(document.querySelector('link[rel~="icon"]').getAttribute('href')) || document.location.origin + '/favicon.ico';
 
@@ -54,20 +57,30 @@ export function getPageRSS () {
         for (let i = 0; i < aEles.length; i++) {
             if (aEles[i].hasAttribute('href')) {
                 const href = aEles[i].getAttribute('href');
+                const check = /([^a-zA-Z]|^)rss([^a-zA-Z]|$)/i;
 
                 if (href.match(/\/(feed|rss|atom)(\.(xml|rss|atom))?$/)
-                    || aEles[i].hasAttribute('title') && aEles[i].getAttribute('title').toLocaleLowerCase() === 'rss'
-                    || aEles[i].classList.contains('rss')
-                    || aEles[i].classList.contains('RSS')) {
+                    || aEles[i].hasAttribute('title') && aEles[i].getAttribute('title').match(check)
+                    || aEles[i].hasAttribute('class') && aEles[i].getAttribute('class').match(check)
+                    || aEles[i].innerText && aEles[i].innerText.match(check)) {
                     let feed = {
                         url: handleUrl(href),
                         title: aEles[i].innerText || aEles[i].getAttribute('title') || document.querySelector('title') && document.querySelector('title').innerHTML,
                         image,
                     };
                     if (!saved[feed.url]) {
-                        pageRSS.push(feed);
-                        saved[feed.url] = 1;
+                        rssParser.parseURL(feed.url, function (err, result) {
+                            if (!err) {
+                                feed.title = result.title;
+                                pageRSS.push(feed);
+                                chrome.runtime.sendMessage(null, {
+                                    text: 'updatePageRSS',
+                                    feeds: pageRSS,
+                                });
+                            }
+                        });
                     }
+                    saved[feed.url] = 1;
                     continue;
                 }
             }

@@ -232,3 +232,13 @@ export function removeRSS (tabId) {
     delete window.websiteRSSHub[tabId];
     delete window.pageRSSHub[tabId];
 }
+
+export function updateRSS (feeds, tabId) {
+    chrome.tabs.get(tabId, (tab) => {
+        feeds && feeds.forEach((feed) => {
+            feed.image = tab.favIconUrl || feed.image;
+        });
+        window.pageRSS[tabId] = feeds || [];
+        setBadge(tabId);
+    });
+}
