@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack -w --mode=production --progress --display-error-details --colors",
-    "build": "webpack --mode=production --progress --display-error-details --colors"
+    "build": "webpack --mode=production --progress --display-error-details --colors",
+    "release": "npm run build && zip -r release/radar.zip dist"
   },
   "repository": {
     "type": "git",
