@@ -4595,10 +4595,10 @@ parse-asn1@^5.0.0:
     pbkdf2 "^3.0.3"
     safe-buffer "^5.1.1"
 
-parse-domain@2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/parse-domain/-/parse-domain-2.3.1.tgz#fd3381f3245d6bf2c2f207393374527b2a4d5e3d"
-  integrity sha512-k/tkc7tfcoGfaUOCG5DuPNX+dt6UBqRWU9EtR0rA9esi5GpOY0OGEgprfylmYx8pykQbdBTYHLaM/UwFHXuZKA==
+parse-domain@2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/parse-domain/-/parse-domain-2.3.2.tgz#bda75c51bc919d91ea052dd0e37aa85eb7dc3787"
+  integrity sha512-ywE9/YZwJZ8b2viJybvAyu9xO+4qbuLr0Jx73zoL8bHsDdDrFKWKGJKKEuvyNT0ZN1whQGnUAwdQMnsU0dqlPA==
   dependencies:
     chai "^4.2.0"
     got "^8.3.2"

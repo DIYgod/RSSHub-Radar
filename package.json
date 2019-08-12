@@ -50,7 +50,7 @@
   "dependencies": {
     "clipboard": "2.0.4",
     "element-ui": "2.11.1",
-    "parse-domain": "2.3.1",
+    "parse-domain": "2.3.2",
     "route-recognizer": "0.3.4",
     "rss-parser": "3.7.2",
     "vue-router": "3.1.2"
