@@ -2,6 +2,7 @@ import RSSParser from 'rss-parser';
 let rssParser = new RSSParser();
 
 let pageRSS = null;
+const defaultTitle = document.querySelector('title') && document.querySelector('title').innerHTML && document.querySelector('title').innerHTML.replace(/<!\[CDATA\[(.*)]]>/, (match, p1) => p1).trim();
 const image = document.querySelector('link[rel~="icon"]') && handleUrl(document.querySelector('link[rel~="icon"]').getAttribute('href')) || document.location.origin + '/favicon.ico';
 
 function handleUrl (url) {
@@ -43,7 +44,7 @@ export function getPageRSS () {
                 if (feed_url) {
                     let feed = {
                         url: handleUrl(feed_url),
-                        title: links[i].getAttribute('title') || document.querySelector('title') && document.querySelector('title').innerHTML,
+                        title: links[i].getAttribute('title') || defaultTitle,
                         image,
                     };
                     pageRSS.push(feed);
@@ -65,11 +66,11 @@ export function getPageRSS () {
                     || aEles[i].innerText && aEles[i].innerText.match(check)) {
                     let feed = {
                         url: handleUrl(href),
-                        title: aEles[i].innerText || aEles[i].getAttribute('title') || document.querySelector('title') && document.querySelector('title').innerHTML,
+                        title: aEles[i].innerText || aEles[i].getAttribute('title') || defaultTitle,
                         image,
                     };
                     if (!saved[feed.url]) {
-                        rssParser.parseURL(feed.url, function (err, result) {
+                        rssParser.parseURL(feed.url, (err, result) => {
                             if (!err) {
                                 feed.title = result.title;
                                 pageRSS.push(feed);
@@ -85,6 +86,33 @@ export function getPageRSS () {
                 }
             }
         }
+
+        // whole page
+        if (!saved[document.location.href]) {
+            let html;
+            if (document.body.childNodes.length === 1 && document.body.childNodes[0].tagName.toLowerCase()) {
+                html = document.body.childNodes[0].innerText;
+            } else if (document.querySelector('#webkit-xml-viewer-source-xml')) {
+                html = document.querySelector('#webkit-xml-viewer-source-xml').innerHTML;
+            }
+
+            if (html) {
+                rssParser.parseString(html, (err, result) => {
+                    if (!err) {
+                        pageRSS.push({
+                            url: document.location.href,
+                            title: result.title,
+                            image,
+                        });
+                        chrome.runtime.sendMessage(null, {
+                            text: 'updatePageRSS',
+                            feeds: pageRSS,
+                        });
+                    }
+                })
+            }
+        }
+        saved[document.location.href] = 1;
     }
     return pageRSS;
 }
