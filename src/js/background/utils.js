@@ -4,6 +4,8 @@ import RouteRecognizer from 'route-recognizer';
 import { getConfig } from '../common/config';
 let config;
 let rules = {};
+import RSSParser from 'rss-parser';
+let rssParser = new RSSParser();
 
 window.pageRSS = {};
 window.pageRSSHub = {};
@@ -215,13 +217,23 @@ export function handleRSS (feeds, tabId, useCache) {
             feeds && feeds.forEach((feed) => {
                 feed.image = tab.favIconUrl || feed.image;
             });
-            window.pageRSS[tabId] = feeds || [];
+            window.pageRSS[tabId] = feeds.filter((feed) => !feed.uncertain) || [];
     
             window.websiteRSSHub[tabId] = getWebsiteRSSHub(tab.url) || [];
     
             getPageRSSHub(tab.url, tabId, (feeds) => {
                 window.pageRSSHub[tabId] = feeds || [];
                 setBadge(tabId);
+            });
+        });
+
+        feeds.filter((feed) => feed.uncertain).forEach((feed) => {
+            rssParser.parseURL(feed.url, (err, result) => {
+                if (!err) {
+                    feed.title = result.title;
+                    window.pageRSS[tabId].push(feed);
+                    setBadge(tabId);
+                }
             });
         });
     }
@@ -233,12 +245,12 @@ export function removeRSS (tabId) {
     delete window.pageRSSHub[tabId];
 }
 
-export function updateRSS (feeds, tabId) {
-    chrome.tabs.get(tabId, (tab) => {
-        feeds && feeds.forEach((feed) => {
+export function addPageRSS (feed, tabId) {
+    if (feed) {
+        chrome.tabs.get(tabId, (tab) => {
             feed.image = tab.favIconUrl || feed.image;
+            window.pageRSS[tabId].push(feed);
+            setBadge(tabId);
         });
-        window.pageRSS[tabId] = feeds || [];
-        setBadge(tabId);
-    });
+    }
 }

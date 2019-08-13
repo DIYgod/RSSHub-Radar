@@ -55,10 +55,10 @@ export function getPageRSS () {
 
         // a
         let aEles = document.querySelectorAll('a');
+        const check = /([^a-zA-Z]|^)rss([^a-zA-Z]|$)/i;
         for (let i = 0; i < aEles.length; i++) {
             if (aEles[i].hasAttribute('href')) {
                 const href = aEles[i].getAttribute('href');
-                const check = /([^a-zA-Z]|^)rss([^a-zA-Z]|$)/i;
 
                 if (href.match(/\/(feed|rss|atom)(\.(xml|rss|atom))?$/)
                     || aEles[i].hasAttribute('title') && aEles[i].getAttribute('title').match(check)
@@ -68,21 +68,12 @@ export function getPageRSS () {
                         url: handleUrl(href),
                         title: aEles[i].innerText || aEles[i].getAttribute('title') || defaultTitle,
                         image,
+                        uncertain: 1,
                     };
                     if (!saved[feed.url]) {
-                        rssParser.parseURL(feed.url, (err, result) => {
-                            if (!err) {
-                                feed.title = result.title;
-                                pageRSS.push(feed);
-                                chrome.runtime.sendMessage(null, {
-                                    text: 'updatePageRSS',
-                                    feeds: pageRSS,
-                                });
-                            }
-                        });
+                        pageRSS.push(feed);
+                        saved[feed.url] = 1;
                     }
-                    saved[feed.url] = 1;
-                    continue;
                 }
             }
         }
@@ -99,14 +90,13 @@ export function getPageRSS () {
             if (html) {
                 rssParser.parseString(html, (err, result) => {
                     if (!err) {
-                        pageRSS.push({
-                            url: document.location.href,
-                            title: result.title,
-                            image,
-                        });
                         chrome.runtime.sendMessage(null, {
-                            text: 'updatePageRSS',
-                            feeds: pageRSS,
+                            text: 'addPageRSS',
+                            feed: {
+                                url: document.location.href,
+                                title: result.title,
+                                image,
+                            },
                         });
                     }
                 })
