@@ -217,7 +217,7 @@ export function handleRSS (feeds, tabId, useCache) {
             feeds && feeds.forEach((feed) => {
                 feed.image = tab.favIconUrl || feed.image;
             });
-            window.pageRSS[tabId] = feeds.filter((feed) => !feed.uncertain) || [];
+            window.pageRSS[tabId] = feeds && feeds.filter((feed) => !feed.uncertain) || [];
     
             window.websiteRSSHub[tabId] = getWebsiteRSSHub(tab.url) || [];
     
@@ -227,7 +227,7 @@ export function handleRSS (feeds, tabId, useCache) {
             });
         });
 
-        feeds.filter((feed) => feed.uncertain).forEach((feed) => {
+        feeds && feeds.filter((feed) => feed.uncertain).forEach((feed) => {
             rssParser.parseURL(feed.url, (err, result) => {
                 if (!err) {
                     feed.title = result.title;
