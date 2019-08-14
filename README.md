@@ -9,6 +9,7 @@
 [![version](https://img.shields.io/chrome-web-store/v/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
 [![users](https://img.shields.io/chrome-web-store/users/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
 [![rating](https://img.shields.io/chrome-web-store/rating/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
+[![build status](https://img.shields.io/travis/DIYgod/RSSHub-Radar/master.svg?style=flat-square)](https://travis-ci.org/DIYgod/RSSHub-Radar)
 
 ## 介绍
 
