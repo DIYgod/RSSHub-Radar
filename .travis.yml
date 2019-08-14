@@ -5,6 +5,9 @@ node_js: "lts/*"
 install:
   - yarn
 
+before_install:
+  - sudo apt-get install -y zip
+
 script:
   - npm run release
 
