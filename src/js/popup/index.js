@@ -69,6 +69,7 @@ chrome.runtime.getBackgroundPage((background) => {
                     chrome.tabs.create({
                         url: ele.getAttribute('href'),
                     });
+                    window.close();
                 });
             });
         });
