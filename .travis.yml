@@ -6,7 +6,7 @@ install:
   - yarn
 
 before_install:
-  - sudo apt-get install -y zip
+  - mkdir release
 
 script:
   - npm run release
