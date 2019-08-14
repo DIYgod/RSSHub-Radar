@@ -13,7 +13,7 @@
 
 ## 介绍
 
-[Telegram 群](https://t.me/rsshub)
+[Telegram 群](https://t.me/rsshub) | [Telegram 频道](https://t.me/awesomeRSSHub)
 
 RSSHub Radar 是 [RSSHub](https://github.com/DIYgod/RSSHub) 的衍生项目，她是一个可以帮助你快速发现和订阅当前网站 RSS 和 RSSHub 的浏览器扩展
 
