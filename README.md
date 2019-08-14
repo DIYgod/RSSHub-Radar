@@ -45,7 +45,7 @@ npm install
 npm run build
 ```
 
-**安装扩展：**
+**Chrome安装扩展：**
 
 打开 `chrome://extensions/`
 
@@ -54,6 +54,14 @@ npm run build
 点击左上角 `加载已解压的扩展程序`
 
 选择上一步构建出的 `dist` 目录
+
+**Firefox安装扩展：**
+
+打开 `about:debugging`
+
+点击右上角 `加载临时扩展程序`
+
+选择上一步构建出的 `dist` 目录中的 `manifest.json` 文件
 
 ### 补充 RSSHub 规则
 

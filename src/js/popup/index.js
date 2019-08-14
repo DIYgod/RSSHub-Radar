@@ -64,10 +64,12 @@ chrome.runtime.getBackgroundPage((background) => {
             });
     
             document.querySelectorAll('a').forEach((ele) => {
-                ele.addEventListener('click', () => {
+                ele.addEventListener('click', (e) => {
+                    e.preventDefault();
                     chrome.tabs.create({
                         url: ele.getAttribute('href'),
                     });
+                    window.close();
                 });
             });
         });
