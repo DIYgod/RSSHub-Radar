@@ -65,6 +65,10 @@ chrome.browserAction.setBadgeBackgroundColor({
     color: '#FF2800',
 });
 
+chrome.browserAction.setBadgeTextColor && chrome.browserAction.setBadgeTextColor({
+    color: '#fff'
+});
+
 function setBadge (tabId) {
     chrome.browserAction.setBadgeText({
         text: config.notice.badge ? (((window.pageRSS[tabId].length + window.pageRSSHub[tabId].length) || (window.websiteRSSHub[tabId].length ? ' ' : '')) + '') : '',

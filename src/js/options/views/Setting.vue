@@ -9,8 +9,8 @@
                     <div class="setting-input">
                         <el-input @change="saveConfig" v-model="config.rsshubDomain" placeholder="请输入你的 RSSHub 域名，留空使用官方域名"></el-input>
                     </div>
-                    <div class="setting-name">快捷键</div>
-                    <div class="setting-input">
+                    <div class="setting-name" v-if="isChrome">快捷键</div>
+                    <div class="setting-input" v-if="isChrome">
                         <el-button size="medium" @click="toHotkey">点此设置</el-button>
                     </div>
                 </div>
@@ -64,6 +64,7 @@ export default {
         leftTime: '',
         second: 0,
         refreshDisabled: false,
+        isChrome: navigator.userAgent.indexOf('Chrome') !== -1,
     }),
     computed: {
         percentage: function () {
