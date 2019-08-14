@@ -1,0 +1,24 @@
+language: node_js
+
+node_js: "lts/*"
+
+install:
+  - yarn
+
+script:
+  - npm run release
+
+deploy:
+  provider: releases
+  api_key:
+    secure: $secure
+  file: release/radar.zip
+  skip_cleanup: true
+  on:
+    repo: DIYgod/RSSHub-Radar
+    tags: true
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
