@@ -5,7 +5,7 @@ import settingIcon from '../../svg/setting.svg';
 import aboutIcon from '../../svg/about.svg';
 let config;
 
-function generateList (type, list) {
+function generateList(type, list) {
     let result = '';
     if (list && list.length) {
         list.forEach((item) => {
@@ -17,9 +17,7 @@ function generateList (type, list) {
                     <div class="rss-title">${item.title}</div>
                     <div class="rss-url">${url.replace('https://', '').replace('http://', '')}</div>
                 </a>
-                ${item.isDocs ?
-                `<a href="${url}" class="rss-action">文档</a>` :
-                `<div class="rss-action rss-copy" data-clipboard-text="${url}">复制</div>
+                ${item.isDocs ? `<a href="${url}" class="rss-action">文档</a>` : `<div class="rss-action rss-copy" data-clipboard-text="${url}">复制</div>
                 ${config.submitto.ttrss && config.submitto.ttrssDomain ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=subscribe&feed_url=${url}" class="rss-action rss-submitto-ttrss">订阅到 TTRSS</a>` : ''}
                 ${config.submitto.feedly ? `<a href="https://feedly.com/i/subscription/feed/${url}" class="rss-action rss-submitto-feedly">订阅到 Feedly</a>` : ''}
                 ${config.submitto.inoreader ? `<a href="https://www.inoreader.com/?add_feed=${url}" class="rss-action rss-submitto-inoreader">订阅到 Inoreader</a>` : ''}`
@@ -36,41 +34,45 @@ function generateList (type, list) {
 document.querySelector('.icons-setting').innerHTML = settingIcon;
 document.querySelector('.icons-about').innerHTML = aboutIcon;
 
-chrome.runtime.getBackgroundPage((background) => {
-    chrome.tabs.query({
-        active: true,
-        currentWindow: true
-    }, (tabs) => {
-        const tabId = tabs[0].id;
+chrome.tabs.query({
+    active: true,
+    currentWindow: true
+}, (tabs) => {
+    const tabId = tabs[0].id;
 
-        getConfig((conf) => {
-            config = conf;
-            generateList('page-rss', background.pageRSS[tabId]);
-            generateList('page-rsshub', background.pageRSSHub[tabId]);
-            generateList('website-rsshub', background.websiteRSSHub[tabId]);
-    
-            const clipboard = new ClipboardJS('.rss-copy');
-            clipboard.on('success', function(e) {
-                e.trigger.innerHTML = '已复制';
-                setTimeout(() => {
-                    e.trigger.innerHTML = '复制';
-                }, 1000);
+    getConfig((conf) => {
+        config = conf;
+        chrome.runtime.sendMessage(null, {
+            text: 'getAllRSS',
+            tabId: tabId
+        }, (feeds) => {
+            console.log(feeds)
+            generateList('page-rss', feeds.pageRSS);
+            generateList('page-rsshub', feeds.pageRSSHub);
+            generateList('website-rsshub', feeds.websiteRSSHub);
+        });
+
+        const clipboard = new ClipboardJS('.rss-copy');
+        clipboard.on('success', function (e) {
+            e.trigger.innerHTML = '已复制';
+            setTimeout(() => {
+                e.trigger.innerHTML = '复制';
+            }, 1000);
+        });
+
+        document.querySelectorAll('.rss-image').forEach((ele) => {
+            ele.addEventListener('error', function () {
+                this.setAttribute('src', './rsshub.png');
             });
-    
-            document.querySelectorAll('.rss-image').forEach((ele) => {
-                ele.addEventListener('error', function () {
-                    this.setAttribute('src', './rsshub.png');
+        });
+
+        document.querySelectorAll('a').forEach((ele) => {
+            ele.addEventListener('click', (e) => {
+                e.preventDefault();
+                chrome.tabs.create({
+                    url: ele.getAttribute('href'),
                 });
-            });
-    
-            document.querySelectorAll('a').forEach((ele) => {
-                ele.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    chrome.tabs.create({
-                        url: ele.getAttribute('href'),
-                    });
-                    window.close();
-                });
+                window.close();
             });
         });
     });

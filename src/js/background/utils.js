@@ -11,14 +11,14 @@ window.pageRSS = {};
 window.pageRSSHub = {};
 window.websiteRSSHub = {};
 
-function schedule (time = +new Date + config.refreshTimeout * 1000) {
+function schedule(time = +new Date + config.refreshTimeout * 1000) {
     chrome.alarms.create('refreshRules', {
         when: time,
         periodInMinutes: config.refreshTimeout / 60,
     });
 }
 
-function initSchedule () {
+function initSchedule() {
     getRulesDate((lastDate) => {
         if (!lastDate || (+new Date - lastDate > config.refreshTimeout * 1000)) {
             refreshRules();
@@ -69,14 +69,14 @@ chrome.browserAction.setBadgeTextColor && chrome.browserAction.setBadgeTextColor
     color: '#fff'
 });
 
-function setBadge (tabId) {
+function setBadge(tabId) {
     chrome.browserAction.setBadgeText({
         text: config.notice.badge ? (((window.pageRSS[tabId].length + window.pageRSSHub[tabId].length) || (window.websiteRSSHub[tabId].length ? ' ' : '')) + '') : '',
         tabId,
     });
 }
 
-function ruleHandler (rule, params, tabId, url, success, fail) {
+function ruleHandler(rule, params, tabId, url, success, fail) {
     const run = () => {
         let reaultWithParams;
         if (typeof rule.target === 'function') {
@@ -84,13 +84,13 @@ function ruleHandler (rule, params, tabId, url, success, fail) {
         } else if (typeof rule.target === 'string') {
             reaultWithParams = rule.target;
         }
-    
+
         if (reaultWithParams) {
             for (const param in params) {
                 reaultWithParams = reaultWithParams.replace(`/:${param}`, `/${params[param]}`);
             }
         }
-    
+
         return reaultWithParams;
     }
     if (rule.script) {
@@ -114,7 +114,7 @@ function ruleHandler (rule, params, tabId, url, success, fail) {
     }
 }
 
-function getPageRSSHub (url, tabId, done) {
+function getPageRSSHub(url, tabId, done) {
     const parsedDomain = parseDomain(url);
     if (parsedDomain) {
         const subdomain = parsedDomain.subdomain;
@@ -181,7 +181,7 @@ function getPageRSSHub (url, tabId, done) {
     }
 }
 
-function formatBlank (str1, str2) {
+function formatBlank(str1, str2) {
     if (str1 && str2) {
         return str1 + ((str1[str1.length - 1].match(/[a-zA-Z0-9]/) || str2[0].match(/[a-zA-Z0-9]/)) ? ' ' : '') + str2;
     } else {
@@ -189,7 +189,7 @@ function formatBlank (str1, str2) {
     }
 }
 
-function getWebsiteRSSHub (url) {
+function getWebsiteRSSHub(url) {
     const parsedDomain = parseDomain(url);
     if (parsedDomain) {
         const domain = parsedDomain.domain + '.' + parsedDomain.tld;
@@ -213,7 +213,7 @@ function getWebsiteRSSHub (url) {
     }
 }
 
-export function handleRSS (feeds, tabId, useCache) {
+export function handleRSS(feeds, tabId, useCache) {
     if (useCache && window.pageRSS[tabId]) {
         setBadge(tabId);
     } else {
@@ -222,9 +222,9 @@ export function handleRSS (feeds, tabId, useCache) {
                 feed.image = tab.favIconUrl || feed.image;
             });
             window.pageRSS[tabId] = feeds && feeds.filter((feed) => !feed.uncertain) || [];
-    
+
             window.websiteRSSHub[tabId] = getWebsiteRSSHub(tab.url) || [];
-    
+
             getPageRSSHub(tab.url, tabId, (feeds) => {
                 window.pageRSSHub[tabId] = feeds || [];
                 setBadge(tabId);
@@ -243,18 +243,26 @@ export function handleRSS (feeds, tabId, useCache) {
     }
 }
 
-export function removeRSS (tabId) {
+export function removeRSS(tabId) {
     delete window.pageRSS[tabId];
     delete window.websiteRSSHub[tabId];
     delete window.pageRSSHub[tabId];
 }
 
-export function addPageRSS (feed, tabId) {
+export function addPageRSS(feed, tabId) {
     if (feed) {
         chrome.tabs.get(tabId, (tab) => {
             feed.image = tab.favIconUrl || feed.image;
             window.pageRSS[tabId].push(feed);
             setBadge(tabId);
         });
+    }
+}
+
+export function getAllRSS(tabId) {
+    return {
+        pageRSS: window.pageRSS[tabId] || {},
+        websiteRSSHub: window.websiteRSSHub[tabId] || {},
+        pageRSSHub: window.pageRSSHub[tabId] || {},
     }
 }
