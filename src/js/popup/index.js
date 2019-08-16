@@ -46,7 +46,6 @@ chrome.tabs.query({
             text: 'getAllRSS',
             tabId: tabId
         }, (feeds) => {
-            console.log(feeds)
             generateList('page-rss', feeds.pageRSS);
             generateList('page-rsshub', feeds.pageRSSHub);
             generateList('website-rsshub', feeds.websiteRSSHub);
