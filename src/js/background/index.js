@@ -2,20 +2,28 @@ import { handleRSS, removeRSS, addPageRSS, getAllRSS } from './utils';
 import { getConfig, saveConfig } from '../common/config';
 
 chrome.tabs.onActivated.addListener((tab) => {
-    chrome.tabs.sendMessage(tab.tabId, {
-        text: 'getPageRSS',
-    }, (feeds) => {
-        handleRSS(feeds, tab.tabId, true);
-    });
+    chrome.tabs.sendMessage(
+        tab.tabId,
+        {
+            text: 'getPageRSS',
+        },
+        (feeds) => {
+            handleRSS(feeds, tab.tabId, true);
+        }
+    );
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.url && tab.active) {
-        chrome.tabs.sendMessage(tab.id, {
-            text: 'getPageRSS',
-        }, (feeds) => {
-            handleRSS(feeds, tab.id);
-        });
+        chrome.tabs.sendMessage(
+            tab.id,
+            {
+                text: 'getPageRSS',
+            },
+            (feeds) => {
+                handleRSS(feeds, tab.id);
+            }
+        );
     }
 });
 
@@ -50,7 +58,7 @@ getConfig((config) => {
         chrome.notifications.onClicked.addListener((id) => {
             if (id === 'RSSHubRadarUpdate') {
                 chrome.tabs.create({
-                    url: 'https://github.com/DIYgod/RSSHub-Radar/releases'
+                    url: 'https://github.com/DIYgod/RSSHub-Radar/releases',
                 });
                 chrome.notifications.clear('RSSHubRadarUpdate');
             }

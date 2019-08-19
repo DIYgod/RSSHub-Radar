@@ -9,6 +9,7 @@ before_install:
   - mkdir release
 
 script:
+  - npm run format:check
   - npm run release
 
 deploy:
