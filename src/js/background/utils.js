@@ -5,13 +5,13 @@ import { getConfig } from '../common/config';
 let config;
 let rules = {};
 import RSSParser from 'rss-parser';
-let rssParser = new RSSParser();
+const rssParser = new RSSParser();
 
 window.pageRSS = {};
 window.pageRSSHub = {};
 window.websiteRSSHub = {};
 
-function schedule(time = +new Date + config.refreshTimeout * 1000) {
+function schedule(time = +new Date() + config.refreshTimeout * 1000) {
     chrome.alarms.create('refreshRules', {
         when: time,
         periodInMinutes: config.refreshTimeout / 60,
@@ -20,7 +20,7 @@ function schedule(time = +new Date + config.refreshTimeout * 1000) {
 
 function initSchedule() {
     getRulesDate((lastDate) => {
-        if (!lastDate || (+new Date - lastDate > config.refreshTimeout * 1000)) {
+        if (!lastDate || +new Date() - lastDate > config.refreshTimeout * 1000) {
             refreshRules();
             schedule();
         } else {
@@ -46,7 +46,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     }
 });
 
-chrome.idle.onStateChanged.addListener(newState => {
+chrome.idle.onStateChanged.addListener((newState) => {
     if (newState === 'active') {
         initSchedule();
     }
@@ -65,13 +65,14 @@ chrome.browserAction.setBadgeBackgroundColor({
     color: '#FF2800',
 });
 
-chrome.browserAction.setBadgeTextColor && chrome.browserAction.setBadgeTextColor({
-    color: '#fff'
-});
+chrome.browserAction.setBadgeTextColor &&
+    chrome.browserAction.setBadgeTextColor({
+        color: '#fff',
+    });
 
 function setBadge(tabId) {
     chrome.browserAction.setBadgeText({
-        text: config.notice.badge ? (((window.pageRSS[tabId].length + window.pageRSSHub[tabId].length) || (window.websiteRSSHub[tabId].length ? ' ' : '')) + '') : '',
+        text: config.notice.badge ? (window.pageRSS[tabId].length + window.pageRSSHub[tabId].length || (window.websiteRSSHub[tabId].length ? ' ' : '')) + '' : '',
         tabId,
     });
 }
@@ -92,19 +93,23 @@ function ruleHandler(rule, params, tabId, url, success, fail) {
         }
 
         return reaultWithParams;
-    }
+    };
     if (rule.script) {
-        chrome.tabs.sendMessage(tabId, {
-            text: 'executeScript',
-            code: rule.script
-        }, (result) => {
-            params = Object.assign({}, result, params);
-            if (!rule.verification || rule.verification(params)) {
-                success(run());
-            } else {
-                fail();
+        chrome.tabs.sendMessage(
+            tabId,
+            {
+                text: 'executeScript',
+                code: rule.script,
+            },
+            (result) => {
+                params = Object.assign({}, result, params);
+                if (!rule.verification || rule.verification(params)) {
+                    success(run());
+                } else {
+                    fail();
+                }
             }
-        });
+        );
     } else {
         if (!rule.verification || rule.verification(params)) {
             success(run());
@@ -127,10 +132,12 @@ function getPageRSSHub(url, tabId, done) {
                     if (ru.source instanceof Array) {
                         ru.source.forEach((source) => {
                             const router = new RouteRecognizer();
-                            router.add([{
-                                path: source,
-                                handler: index,
-                            }]);
+                            router.add([
+                                {
+                                    path: source,
+                                    handler: index,
+                                },
+                            ]);
                             const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
                             if (result && result[0]) {
                                 recognized.push(result[0]);
@@ -138,10 +145,12 @@ function getPageRSSHub(url, tabId, done) {
                         });
                     } else if (typeof ru.source === 'string') {
                         const router = new RouteRecognizer();
-                        router.add([{
-                            path: ru.source,
-                            handler: index,
-                        }]);
+                        router.add([
+                            {
+                                path: ru.source,
+                                handler: index,
+                            },
+                        ]);
                         const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
                         if (result && result[0]) {
                             recognized.push(result[0]);
@@ -150,27 +159,37 @@ function getPageRSSHub(url, tabId, done) {
                 }
             });
             const result = [];
-            Promise.all(recognized.map((recog) => {
-                return new Promise((resolve) => {
-                    ruleHandler(rule[recog.handler], recog.params, tabId, url, (parsed) => {
-                        if (parsed) {
-                            result.push({
-                                title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
-                                url: '{rsshubDomain}' + parsed,
-                            });
-                        } else {
-                            result.push({
-                                title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
-                                url: rule[recog.handler].docs,
-                                isDocs: true,
-                            });
-                        }
-                        resolve();
-                    }, () => {
-                        resolve();
-                    });
-                });
-            })).then(() => {
+            Promise.all(
+                recognized.map(
+                    (recog) =>
+                        new Promise((resolve) => {
+                            ruleHandler(
+                                rule[recog.handler],
+                                recog.params,
+                                tabId,
+                                url,
+                                (parsed) => {
+                                    if (parsed) {
+                                        result.push({
+                                            title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
+                                            url: '{rsshubDomain}' + parsed,
+                                        });
+                                    } else {
+                                        result.push({
+                                            title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
+                                            url: rule[recog.handler].docs,
+                                            isDocs: true,
+                                        });
+                                    }
+                                    resolve();
+                                },
+                                () => {
+                                    resolve();
+                                }
+                            );
+                        })
+                )
+            ).then(() => {
                 done(result);
             });
         } else {
@@ -183,7 +202,7 @@ function getPageRSSHub(url, tabId, done) {
 
 function formatBlank(str1, str2) {
     if (str1 && str2) {
-        return str1 + ((str1[str1.length - 1].match(/[a-zA-Z0-9]/) || str2[0].match(/[a-zA-Z0-9]/)) ? ' ' : '') + str2;
+        return str1 + (str1[str1.length - 1].match(/[a-zA-Z0-9]/) || str2[0].match(/[a-zA-Z0-9]/) ? ' ' : '') + str2;
     } else {
         return (str1 || '') + (str2 || '');
     }
@@ -218,10 +237,11 @@ export function handleRSS(feeds, tabId, useCache) {
         setBadge(tabId);
     } else {
         chrome.tabs.get(tabId, (tab) => {
-            feeds && feeds.forEach((feed) => {
-                feed.image = tab.favIconUrl || feed.image;
-            });
-            window.pageRSS[tabId] = feeds && feeds.filter((feed) => !feed.uncertain) || [];
+            feeds &&
+                feeds.forEach((feed) => {
+                    feed.image = tab.favIconUrl || feed.image;
+                });
+            window.pageRSS[tabId] = (feeds && feeds.filter((feed) => !feed.uncertain)) || [];
 
             window.websiteRSSHub[tabId] = getWebsiteRSSHub(tab.url) || [];
 
@@ -231,15 +251,18 @@ export function handleRSS(feeds, tabId, useCache) {
             });
         });
 
-        feeds && feeds.filter((feed) => feed.uncertain).forEach((feed) => {
-            rssParser.parseURL(feed.url, (err, result) => {
-                if (!err) {
-                    feed.title = result.title;
-                    window.pageRSS[tabId].push(feed);
-                    setBadge(tabId);
-                }
-            });
-        });
+        feeds &&
+            feeds
+                .filter((feed) => feed.uncertain)
+                .forEach((feed) => {
+                    rssParser.parseURL(feed.url, (err, result) => {
+                        if (!err) {
+                            feed.title = result.title;
+                            window.pageRSS[tabId].push(feed);
+                            setBadge(tabId);
+                        }
+                    });
+                });
     }
 }
 
@@ -264,5 +287,5 @@ export function getAllRSS(tabId) {
         pageRSS: window.pageRSS[tabId] || {},
         websiteRSSHub: window.websiteRSSHub[tabId] || {},
         pageRSSHub: window.pageRSSHub[tabId] || {},
-    }
+    };
 }
