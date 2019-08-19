@@ -37,7 +37,7 @@
         "no-unsafe-negation": 1,
         "array-callback-return": 1,
         "dot-notation": 1,
-        "no-eval": 1,
+        "no-eval": 0,
         "no-extend-native": 1,
         "no-extra-label": 1,
         "semi": 1,
