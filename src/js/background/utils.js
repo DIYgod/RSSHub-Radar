@@ -124,17 +124,38 @@ function getPageRSSHub(url, tabId, done) {
     if (parsedDomain) {
         const subdomain = parsedDomain.subdomain;
         const domain = parsedDomain.domain + '.' + parsedDomain.tld;
-        if (rules[domain] && rules[domain][subdomain || '.']) {
-            const rule = rules[domain][subdomain || '.'];
-            const recognized = [];
-            rule.forEach((ru, index) => {
-                if (ru.source !== undefined) {
-                    if (ru.source instanceof Array) {
-                        ru.source.forEach((source) => {
+        if (rules[domain]) {
+            let rule = rules[domain][subdomain || '.'];
+            if (!rule) {
+                if (subdomain === 'www') {
+                    rule = rules[domain]['.'];
+                } else if (!subdomain) {
+                    rule = rules[domain].www;
+                }
+            }
+            if (rule) {
+                const recognized = [];
+                rule.forEach((ru, index) => {
+                    if (ru.source !== undefined) {
+                        if (ru.source instanceof Array) {
+                            ru.source.forEach((source) => {
+                                const router = new RouteRecognizer();
+                                router.add([
+                                    {
+                                        path: source,
+                                        handler: index,
+                                    },
+                                ]);
+                                const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
+                                if (result && result[0]) {
+                                    recognized.push(result[0]);
+                                }
+                            });
+                        } else if (typeof ru.source === 'string') {
                             const router = new RouteRecognizer();
                             router.add([
                                 {
-                                    path: source,
+                                    path: ru.source,
                                     handler: index,
                                 },
                             ]);
@@ -142,58 +163,44 @@ function getPageRSSHub(url, tabId, done) {
                             if (result && result[0]) {
                                 recognized.push(result[0]);
                             }
-                        });
-                    } else if (typeof ru.source === 'string') {
-                        const router = new RouteRecognizer();
-                        router.add([
-                            {
-                                path: ru.source,
-                                handler: index,
-                            },
-                        ]);
-                        const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
-                        if (result && result[0]) {
-                            recognized.push(result[0]);
                         }
                     }
-                }
-            });
-            const result = [];
-            Promise.all(
-                recognized.map(
-                    (recog) =>
-                        new Promise((resolve) => {
-                            ruleHandler(
-                                rule[recog.handler],
-                                recog.params,
-                                tabId,
-                                url,
-                                (parsed) => {
-                                    if (parsed) {
-                                        result.push({
-                                            title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
-                                            url: '{rsshubDomain}' + parsed,
-                                        });
-                                    } else {
-                                        result.push({
-                                            title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
-                                            url: rule[recog.handler].docs,
-                                            isDocs: true,
-                                        });
+                });
+                const result = [];
+                Promise.all(
+                    recognized.map(
+                        (recog) =>
+                            new Promise((resolve) => {
+                                ruleHandler(
+                                    rule[recog.handler],
+                                    recog.params,
+                                    tabId,
+                                    url,
+                                    (parsed) => {
+                                        if (parsed) {
+                                            result.push({
+                                                title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
+                                                url: '{rsshubDomain}' + parsed,
+                                            });
+                                        } else {
+                                            result.push({
+                                                title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
+                                                url: rule[recog.handler].docs,
+                                                isDocs: true,
+                                            });
+                                        }
+                                        resolve();
+                                    },
+                                    () => {
+                                        resolve();
                                     }
-                                    resolve();
-                                },
-                                () => {
-                                    resolve();
-                                }
-                            );
-                        })
-                )
-            ).then(() => {
-                done(result);
-            });
-        } else {
-            done([]);
+                                );
+                            })
+                    )
+                ).then(() => {
+                    done(result);
+                });
+            }
         }
     } else {
         done([]);
