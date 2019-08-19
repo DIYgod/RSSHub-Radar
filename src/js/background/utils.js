@@ -200,7 +200,11 @@ function getPageRSSHub(url, tabId, done) {
                 ).then(() => {
                     done(result);
                 });
+            } else {
+                done([]);
             }
+        } else {
+            done([]);
         }
     } else {
         done([]);
