@@ -25,7 +25,15 @@ function handleUrl(url) {
 export function getPageRSS() {
     if (!pageRSS) {
         pageRSS = [];
-        const saved = {};
+        const unique = {
+            data: {},
+            save: function(url) {
+                this.data[url.replace(/^(https?:)?\/\//, '')] = 1;
+            },
+            check: function(url) {
+                return this.data[url.replace(/^(https?:)?\/\//, '')];
+            },
+        };
 
         // links
         const types = [
@@ -54,7 +62,7 @@ export function getPageRSS() {
                         image,
                     };
                     pageRSS.push(feed);
-                    saved[feed.url] = 1;
+                    unique.save(feed.url);
                 }
             }
         }
@@ -78,16 +86,16 @@ export function getPageRSS() {
                         image,
                         uncertain: 1,
                     };
-                    if (!saved[feed.url]) {
+                    if (!unique.check(feed.url)) {
                         pageRSS.push(feed);
-                        saved[feed.url] = 1;
+                        unique.save(feed.url);
                     }
                 }
             }
         }
 
         // whole page
-        if (!saved[document.location.href]) {
+        if (!unique.check(document.location.href)) {
             let html;
             if (document.body.childNodes.length === 1 && document.body.childNodes[0].tagName.toLowerCase()) {
                 html = document.body.childNodes[0].innerText;
@@ -110,7 +118,7 @@ export function getPageRSS() {
                 });
             }
         }
-        saved[document.location.href] = 1;
+        unique.save(document.location.href);
     }
     return pageRSS;
 }
