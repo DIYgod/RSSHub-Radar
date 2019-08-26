@@ -37,6 +37,7 @@ export function getPageRSS() {
 
         // links
         const types = [
+            'application/opensearchdescription+xml',
             'application/rss+xml',
             'application/atom+xml',
             'application/rdf+xml',
