@@ -67,6 +67,6 @@
     "parse-domain": "2.3.2",
     "route-recognizer": "0.3.4",
     "rss-parser": "3.7.2",
-    "vue-router": "3.1.2"
+    "vue-router": "3.1.3"
   }
 }
