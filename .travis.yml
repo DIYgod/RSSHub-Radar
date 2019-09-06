@@ -15,7 +15,7 @@ script:
 deploy:
   provider: releases
   api_key:
-    secure: $secure
+    secure: ${secure}
   file: release/radar.zip
   skip_cleanup: true
   on:
