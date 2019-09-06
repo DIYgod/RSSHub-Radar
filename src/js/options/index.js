@@ -5,7 +5,7 @@ import App from './App.vue';
 import Setting from './views/Setting.vue';
 import List from './views/List.vue';
 import About from './views/About.vue';
-import { Container, Menu, MenuItem, Aside, Header, Main, Footer, Input, Checkbox, Message, Loading, Collapse, CollapseItem, Button, Progress } from 'element-ui';
+import { Container, Menu, MenuItem, Aside, Header, Main, Footer, Input, Checkbox, Message, Loading, Collapse, CollapseItem, Button, Progress, Tooltip } from 'element-ui';
 
 Vue.use(VueRouter);
 Vue.use(Container);
@@ -22,6 +22,7 @@ Vue.use(Collapse);
 Vue.use(CollapseItem);
 Vue.use(Button);
 Vue.use(Progress);
+Vue.use(Tooltip);
 
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$message = Message;

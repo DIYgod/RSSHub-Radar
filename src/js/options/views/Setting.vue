@@ -36,6 +36,10 @@
                     <div class="setting-input">
                         <el-checkbox @change="saveConfig" v-model="config.submitto.inoreader">开启</el-checkbox>
                     </div>
+                    <div class="setting-name">本地阅读器 <el-tooltip class="item" effect="dark" content="需要阅读器支持，如 Reeder 等" placement="top"><i class="el-icon-info"></i></el-tooltip></div>
+                    <div class="setting-input">
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.local">开启</el-checkbox>
+                    </div>
                 </div>
                 <div class="subtitle">通知与提醒</div>
                 <div class="setting-item">
