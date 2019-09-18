@@ -40,7 +40,7 @@
     "eslint": "6.4.0",
     "eslint-config-prettier": "6.3.0",
     "eslint-loader": "3.0.0",
-    "eslint-plugin-prettier": "3.1.0",
+    "eslint-plugin-prettier": "3.1.1",
     "file-loader": "4.2.0",
     "less": "3.10.3",
     "less-loader": "5.0.0",
