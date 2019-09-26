@@ -26,6 +26,7 @@ function generateList(type, list) {
                         ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=subscribe&feed_url=${url}" class="rss-action rss-submitto-ttrss">订阅到 TTRSS</a>`
                         : ''
                 }
+                ${config.submitto.miniflux && config.submitto.minifluxDomain ? `<a href="${config.submitto.minifluxDomain.replace(/\/$/, '')}/bookmarklet?uri=${url}" class="rss-action rss-submitto-miniflux">订阅到 Miniflux</a>` : ''}
                 ${config.submitto.feedly ? `<a href="https://feedly.com/i/subscription/feed/${url}" class="rss-action rss-submitto-feedly">订阅到 Feedly</a>` : ''}
                 ${config.submitto.inoreader ? `<a href="https://www.inoreader.com/?add_feed=${url}" class="rss-action rss-submitto-inoreader">订阅到 Inoreader</a>` : ''}
                 ${config.submitto.local ? `<a href="feed://${url}" class="rss-action rss-submitto-local">订阅到本地阅读器</a>` : ''}`
