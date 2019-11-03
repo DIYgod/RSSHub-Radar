@@ -5862,10 +5862,10 @@ parse-asn1@^5.0.0:
     pbkdf2 "^3.0.3"
     safe-buffer "^5.1.1"
 
-parse-domain@2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/parse-domain/-/parse-domain-2.3.3.tgz#08166f99584c41b4a873ce7d72875ad59be464fe"
-  integrity sha512-KwU9l8gy68LVVo4QoC0NBAVv6LQMOqiRa0lE+gxph+7y1p8mTbAYPcmEnZEExzKA2+dMWVC0h9PWLNwlUZcHQw==
+parse-domain@2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/parse-domain/-/parse-domain-2.3.4.tgz#acf46caab0f1b5412b95cdc01a74ba793db15a0d"
+  integrity sha512-LlFJJVTry4DD3Xa76CsVNP6MIu3JZ8GXd5HEEp38KSDGBCVsnccagAJ5YLy7uEEabvwtauQEQPcvXWgUGkJbMA==
   dependencies:
     got "^8.3.2"
     jest "^24.9.0"
