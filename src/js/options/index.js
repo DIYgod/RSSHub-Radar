@@ -28,7 +28,12 @@ Vue.prototype.$loading = Loading.service;
 Vue.prototype.$message = Message;
 Vue.config.productionTip = false;
 
-const routes = [{ path: '/', redirect: '/setting' }, { path: '/setting', component: Setting }, { path: '/list', component: List }, { path: '/about', component: About }];
+const routes = [
+    { path: '/', redirect: '/setting' },
+    { path: '/setting', component: Setting },
+    { path: '/list', component: List },
+    { path: '/about', component: About },
+];
 const router = new VueRouter({
     routes,
 });
