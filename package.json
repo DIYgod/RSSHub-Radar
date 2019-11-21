@@ -53,7 +53,7 @@
     "sass-loader": "8.0.0",
     "svg-inline-loader": "0.8.0",
     "template-string-optimize-loader": "3.0.0",
-    "url-loader": "2.2.0",
+    "url-loader": "2.3.0",
     "vue": "2.6.10",
     "vue-loader": "15.7.2",
     "vue-template-compiler": "2.6.10",
