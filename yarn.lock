@@ -3141,10 +3141,10 @@ file-entry-cache@^5.0.1:
   dependencies:
     flat-cache "^2.0.1"
 
-file-loader@5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-5.0.1.tgz#8d830dc04fb226ec798d6e38a43522b48b0ad528"
-  integrity sha512-zj352SxrfyicIRCt0AwGQUexxrTKg6/BOgAmokUsy2RPQkvpZTwkiMyOqSZqBmieG6ApexxBsIU3xt4OMeWOaw==
+file-loader@5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-5.0.2.tgz#7f3d8b4ac85a5e8df61338cfec95d7405f971caa"
+  integrity sha512-QMiQ+WBkGLejKe81HU8SZ9PovsU/5uaLo0JdTCEXOYv7i7jfAjHZi1tcwp9tSASJPOmmHZtbdCervFmXMH/Dcg==
   dependencies:
     loader-utils "^1.2.3"
     schema-utils "^2.5.0"
