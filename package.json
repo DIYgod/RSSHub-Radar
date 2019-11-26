@@ -63,7 +63,7 @@
   },
   "dependencies": {
     "clipboard": "2.0.4",
-    "element-ui": "2.12.0",
+    "element-ui": "2.13.0",
     "parse-domain": "2.3.4",
     "route-recognizer": "0.3.4",
     "rss-parser": "3.7.3",
