@@ -39,7 +39,7 @@
     "cssnano": "4.1.10",
     "eslint": "6.7.2",
     "eslint-config-prettier": "6.7.0",
-    "eslint-loader": "3.0.2",
+    "eslint-loader": "3.0.3",
     "eslint-plugin-prettier": "3.1.1",
     "file-loader": "5.0.2",
     "less": "3.10.3",
