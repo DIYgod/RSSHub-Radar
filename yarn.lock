@@ -8075,10 +8075,10 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.3.tgz#2756f46cb3258054c5f4723de8ae7e87302a1ccf"
   integrity sha512-KmvZVtmM26BQOMK1rwUZsrqxEGeKiYSZGA7SNWE6uExx8UX/cj9hq2MRV/wWC3Cq6AoeDGk57rL9YMFRel/q+g==
 
-vue-loader@15.8.1:
-  version "15.8.1"
-  resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-15.8.1.tgz#4d27c5a8799462731af3986205a1fe1c01dca7eb"
-  integrity sha512-3e5Jvwrk2v9d1lASR9sZQvhxDgNTHfiTQkOL7YpN0B8Wtv1bMKrS0YvGWlStQjYmKeuiHJt7Z71RmeU7ovbc5A==
+vue-loader@15.8.3:
+  version "15.8.3"
+  resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-15.8.3.tgz#857cb9e30eb5fc25e66db48dce7e4f768602a23c"
+  integrity sha512-yFksTFbhp+lxlm92DrKdpVIWMpranXnTEuGSc0oW+Gk43M9LWaAmBTnfj5+FCdve715mTHvo78IdaXf5TbiTJg==
   dependencies:
     "@vue/component-compiler-utils" "^3.1.0"
     hash-sum "^1.0.2"
