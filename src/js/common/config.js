@@ -8,6 +8,8 @@ export const defaultConfig = {
         ttrssDomain: '',
         miniflux: false,
         minifluxDomain: '',
+        freshrss: false,
+        freshrssDomain: '',
         feedly: true,
         inoreader: false,
         local: false,
