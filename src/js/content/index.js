@@ -5,6 +5,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         sendResponse(getPageRSS());
     } else if (msg.text === 'executeScript') {
         sendResponse(runCode(msg.code));
+    } else if (msg.text === 'getHTML') {
+        sendResponse(document.documentElement.innerHTML);
     }
 });
 

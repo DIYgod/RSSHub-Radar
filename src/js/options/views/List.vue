@@ -37,7 +37,7 @@
 
 <script>
 import { getRules, getRulesDate, updateRules } from '../../common/rules';
-import { secondToTime } from '../../common/utils';
+import { secondToTime, commandSandbox } from '../../common/utils';
 
 export default {
     name: 'List',
@@ -53,10 +53,14 @@ export default {
             this.time = secondToTime(second);
             this.refreshTime();
         });
-        getRules((rules, text) => {
-            this.rules = rules;
-            this.rulesText = text;
-            this.loading = false;
+        getRules((rules) => {
+            this.rulesText = rules;
+            commandSandbox('getList', {
+                rules,
+            }, (rules) => {
+                this.rules = rules;
+                this.loading = false;
+            });
         });
     },
     methods: {

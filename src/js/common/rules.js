@@ -13,10 +13,10 @@ export function refreshRules(success) {
 export function getRules(success) {
     chrome.storage.local.get('rules', (result) => {
         if (result && result.rules) {
-            success(eval(result.rules), result.rules);
+            success(result.rules);
         } else {
             refreshRules(() => {
-                success(rules);
+                getRules(success);
             });
         }
     });

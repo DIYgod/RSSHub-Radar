@@ -25,6 +25,7 @@ module.exports = {
         'content': './src/js/content/index.js',
         'background': './src/js/background/index.js',
         'options': './src/js/options/index.js',
+        'sandbox': './src/js/sandbox/index.js',
     },
 
     output: {

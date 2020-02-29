@@ -1,6 +1,5 @@
 import { getRules, getRulesDate, refreshRules } from '../common/rules';
-import parseDomain from 'parse-domain';
-import RouteRecognizer from 'route-recognizer';
+import { commandSandbox } from '../common/utils';
 import { getConfig } from '../common/config';
 let config;
 let rules = {};
@@ -72,175 +71,40 @@ chrome.browserAction.setBadgeTextColor &&
 
 function setBadge(tabId) {
     chrome.browserAction.setBadgeText({
-        text: config.notice.badge ? (window.pageRSS[tabId].length + window.pageRSSHub[tabId].length || (window.websiteRSSHub[tabId].length ? ' ' : '')) + '' : '',
+        text: config.notice.badge ? (window.pageRSS[tabId].length + (window.pageRSSHub[tabId] ? window.pageRSSHub[tabId].length : 0) || (window.websiteRSSHub[tabId] && window.websiteRSSHub[tabId].length ? ' ' : '')) + '' : '',
         tabId,
     });
 }
 
-function ruleHandler(rule, params, tabId, url, success, fail) {
-    const run = () => {
-        let reaultWithParams;
-        if (typeof rule.target === 'function') {
-            reaultWithParams = rule.target(params, url);
-        } else if (typeof rule.target === 'string') {
-            reaultWithParams = rule.target;
-        }
-
-        if (reaultWithParams) {
-            for (const param in params) {
-                reaultWithParams = reaultWithParams.replace(`/:${param}`, `/${params[param]}`);
-            }
-        }
-
-        return reaultWithParams;
-    };
-    if (rule.script) {
-        chrome.tabs.sendMessage(
-            tabId,
-            {
-                text: 'executeScript',
-                code: rule.script,
-            },
-            (result) => {
-                params = Object.assign({}, result, params);
-                if (!rule.verification || rule.verification(params)) {
-                    success(run());
-                } else {
-                    fail();
-                }
-            }
-        );
-    } else {
-        if (!rule.verification || rule.verification(params)) {
-            success(run());
-        } else {
-            fail();
-        }
-    }
-}
-
 function getPageRSSHub(url, tabId, done) {
-    const parsedDomain = parseDomain(url);
-    if (parsedDomain) {
-        const subdomain = parsedDomain.subdomain;
-        const domain = parsedDomain.domain + '.' + parsedDomain.tld;
-        if (rules[domain]) {
-            let rule = rules[domain][subdomain || '.'];
-            if (!rule) {
-                if (subdomain === 'www') {
-                    rule = rules[domain]['.'];
-                } else if (!subdomain) {
-                    rule = rules[domain].www;
-                }
-            }
-            if (rule) {
-                const recognized = [];
-                rule.forEach((ru, index) => {
-                    if (ru.source !== undefined) {
-                        if (ru.source instanceof Array) {
-                            ru.source.forEach((source) => {
-                                const router = new RouteRecognizer();
-                                router.add([
-                                    {
-                                        path: source,
-                                        handler: index,
-                                    },
-                                ]);
-                                const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
-                                if (result && result[0]) {
-                                    recognized.push(result[0]);
-                                }
-                            });
-                        } else if (typeof ru.source === 'string') {
-                            const router = new RouteRecognizer();
-                            router.add([
-                                {
-                                    path: ru.source,
-                                    handler: index,
-                                },
-                            ]);
-                            const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
-                            if (result && result[0]) {
-                                recognized.push(result[0]);
-                            }
-                        }
-                    }
-                });
-                const result = [];
-                Promise.all(
-                    recognized.map(
-                        (recog) =>
-                            new Promise((resolve) => {
-                                ruleHandler(
-                                    rule[recog.handler],
-                                    recog.params,
-                                    tabId,
-                                    url,
-                                    (parsed) => {
-                                        if (parsed) {
-                                            result.push({
-                                                title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
-                                                url: '{rsshubDomain}' + parsed,
-                                            });
-                                        } else {
-                                            result.push({
-                                                title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
-                                                url: rule[recog.handler].docs,
-                                                isDocs: true,
-                                            });
-                                        }
-                                        resolve();
-                                    },
-                                    () => {
-                                        resolve();
-                                    }
-                                );
-                            })
-                    )
-                ).then(() => {
-                    done(result);
-                });
-            } else {
-                done([]);
-            }
-        } else {
-            done([]);
+    chrome.tabs.sendMessage(
+        tabId,
+        {
+            text: 'getHTML',
+        },
+        (html) => {
+            commandSandbox(
+                'getPageRSSHub',
+                {
+                    url,
+                    html,
+                    rules,
+                },
+                done
+            );
         }
-    } else {
-        done([]);
-    }
+    );
 }
 
-function formatBlank(str1, str2) {
-    if (str1 && str2) {
-        return str1 + (str1[str1.length - 1].match(/[a-zA-Z0-9]/) || str2[0].match(/[a-zA-Z0-9]/) ? ' ' : '') + str2;
-    } else {
-        return (str1 || '') + (str2 || '');
-    }
-}
-
-function getWebsiteRSSHub(url) {
-    const parsedDomain = parseDomain(url);
-    if (parsedDomain) {
-        const domain = parsedDomain.domain + '.' + parsedDomain.tld;
-        if (rules[domain]) {
-            const domainRules = [];
-            for (const subdomainRules in rules[domain]) {
-                if (subdomainRules[0] !== '_') {
-                    domainRules.push(...rules[domain][subdomainRules]);
-                }
-            }
-            return domainRules.map((rule) => ({
-                title: formatBlank(rules[domain]._name, rule.title),
-                url: rule.docs,
-                isDocs: true,
-            }));
-        } else {
-            return [];
-        }
-    } else {
-        return [];
-    }
+function getWebsiteRSSHub(url, done) {
+    commandSandbox(
+        'getWebsiteRSSHub',
+        {
+            url,
+            rules,
+        },
+        done
+    );
 }
 
 export function handleRSS(feeds, tabId, useCache) {
@@ -254,7 +118,10 @@ export function handleRSS(feeds, tabId, useCache) {
                 });
             window.pageRSS[tabId] = (feeds && feeds.filter((feed) => !feed.uncertain)) || [];
 
-            window.websiteRSSHub[tabId] = getWebsiteRSSHub(tab.url) || [];
+            getWebsiteRSSHub(tab.url, (feeds) => {
+                window.websiteRSSHub[tabId] = feeds || [];
+                setBadge(tabId);
+            });
 
             getPageRSSHub(tab.url, tabId, (feeds) => {
                 window.pageRSSHub[tabId] = feeds || [];
