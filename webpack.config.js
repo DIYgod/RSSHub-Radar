@@ -16,10 +16,6 @@ module.exports = {
         maxEntrypointSize: 1000000,
     },
 
-    optimization: {
-        minimize: false,
-    },
-
     entry: {
         'popup': './src/js/popup/index.js',
         'content': './src/js/content/index.js',
