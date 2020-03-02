@@ -20,7 +20,7 @@ function generateList(type, list) {
                 ${
                     item.isDocs
                         ? `<a href="${url}" class="rss-action">文档</a>`
-                        : `<div class="rss-action rss-copy" data-clipboard-text="${url}">复制</div>
+                        : `<div class="rss-action rss-copy" data-clipboard-text="${encodeURI(url)}">复制</div>
                 ${
                     config.submitto.ttrss && config.submitto.ttrssDomain
                         ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=subscribe&feed_url=${encodeURI(encodeURI(url))}" class="rss-action rss-submitto-ttrss">订阅到 TTRSS</a>`
