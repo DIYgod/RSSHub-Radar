@@ -23,7 +23,7 @@ function generateList(type, list) {
                         : `<div class="rss-action rss-copy" data-clipboard-text="${url}">复制</div>
                 ${
                     config.submitto.ttrss && config.submitto.ttrssDomain
-                        ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=subscribe&feed_url=${url}" class="rss-action rss-submitto-ttrss">订阅到 TTRSS</a>`
+                        ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=subscribe&feed_url=${encodeURI(encodeURI(url))}" class="rss-action rss-submitto-ttrss">订阅到 TTRSS</a>`
                         : ''
                 }
                 ${config.submitto.miniflux && config.submitto.minifluxDomain ? `<a href="${config.submitto.minifluxDomain.replace(/\/$/, '')}/bookmarklet?uri=${url}" class="rss-action rss-submitto-miniflux">订阅到 Miniflux</a>` : ''}
