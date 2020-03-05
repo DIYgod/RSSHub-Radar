@@ -1976,10 +1976,10 @@ cli-width@^2.0.0:
   resolved "https://registry.npm.taobao.org/cli-width/download/cli-width-2.2.0.tgz#ff19ede8a9a5e579324147b0c11f0fbcbabed639"
   integrity sha1-/xnt6Kml5XkyQUewwR8PvLq+1jk=
 
-clipboard@2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/clipboard/-/clipboard-2.0.5.tgz#4a016d56c1daa1474a0ec4f42d524744b9dc2744"
-  integrity sha512-3IlokN96rXErcpaVpAXgsE2o+/85DEHr/Gs0pLQOonwtrjZpZLEfy9S4ZyZj+JhVMvZT8szWfKPYQSZCAKDfQg==
+clipboard@2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/clipboard/-/clipboard-2.0.6.tgz#52921296eec0fdf77ead1749421b21c968647376"
+  integrity sha512-g5zbiixBRk/wyKakSwCKd7vQXDjFnAMGHoEyBogG/bw9kTD9GvdAvaoRR1ALcEzt3pVKxZR0pViekPMIS0QyGg==
   dependencies:
     good-listener "^1.2.2"
     select "^1.1.2"
