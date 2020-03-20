@@ -32,7 +32,7 @@
     "@babel/core": "7.8.7",
     "@babel/preset-env": "7.8.7",
     "autoprefixer": "9.7.4",
-    "babel-loader": "8.0.6",
+    "babel-loader": "8.1.0",
     "babel-plugin-component": "1.1.1",
     "copy-webpack-plugin": "5.1.1",
     "css-loader": "3.4.2",
