@@ -70,7 +70,7 @@ chrome.tabs.query(
                     generateList('website-rsshub', feeds.websiteRSSHub);
 
                     const clipboard = new ClipboardJS('.rss-copy');
-                    clipboard.on('success', function(e) {
+                    clipboard.on('success', function (e) {
                         e.trigger.innerHTML = '已复制';
                         setTimeout(() => {
                             e.trigger.innerHTML = '复制';
@@ -78,7 +78,7 @@ chrome.tabs.query(
                     });
 
                     document.querySelectorAll('.rss-image').forEach((ele) => {
-                        ele.addEventListener('error', function() {
+                        ele.addEventListener('error', function () {
                             this.setAttribute('src', './rsshub.png');
                         });
                     });

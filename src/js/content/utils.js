@@ -27,10 +27,10 @@ export function getPageRSS() {
         pageRSS = [];
         const unique = {
             data: {},
-            save: function(url) {
+            save: function (url) {
                 this.data[url.replace(/^(https?:)?\/\//, '')] = 1;
             },
-            check: function(url) {
+            check: function (url) {
                 return this.data[url.replace(/^(https?:)?\/\//, '')];
             },
         };

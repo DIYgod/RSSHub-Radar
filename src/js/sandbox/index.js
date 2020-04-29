@@ -1,6 +1,6 @@
 import { getPageRSSHub, getWebsiteRSSHub, getList } from './utils';
 
-window.addEventListener('message', function(event) {
+window.addEventListener('message', function (event) {
     const command = event.data.command;
     switch (command) {
         case 'getPageRSSHub':
