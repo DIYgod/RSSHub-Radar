@@ -1,4 +1,4 @@
-import parseDomain from 'parse-domain';
+import psl from 'psl';
 import RouteRecognizer from 'route-recognizer';
 
 function ruleHandler(rule, params, url, html, success, fail) {
@@ -48,10 +48,10 @@ export function getPageRSSHub(data) {
     const { url, html } = data;
     const rules = eval(data.rules);
 
-    const parsedDomain = parseDomain(url);
-    if (parsedDomain) {
+    const parsedDomain = psl.parse(new URL(url).hostname);
+    if (parsedDomain && parsedDomain.domain) {
         const subdomain = parsedDomain.subdomain;
-        const domain = parsedDomain.domain + '.' + parsedDomain.tld;
+        const domain = parsedDomain.domain;
         if (rules[domain]) {
             let rule = rules[domain][subdomain || '.'];
             if (!rule) {
@@ -142,9 +142,9 @@ export function getPageRSSHub(data) {
 export function getWebsiteRSSHub(data) {
     const { url } = data;
     const rules = eval(data.rules);
-    const parsedDomain = parseDomain(url);
-    if (parsedDomain) {
-        const domain = parsedDomain.domain + '.' + parsedDomain.tld;
+    const parsedDomain = psl.parse(new URL(url).hostname);
+    if (parsedDomain && parsedDomain.domain) {
+        const domain = parsedDomain.domain;
         if (rules[domain]) {
             const domainRules = [];
             for (const subdomainRules in rules[domain]) {

@@ -64,7 +64,7 @@
   "dependencies": {
     "clipboard": "2.0.6",
     "element-ui": "2.13.1",
-    "parse-domain": "2.3.4",
+    "psl": "1.8.0",
     "route-recognizer": "0.3.4",
     "rss-parser": "3.7.6",
     "vue-router": "3.1.6"
