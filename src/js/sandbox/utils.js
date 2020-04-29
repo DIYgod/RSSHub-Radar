@@ -4,7 +4,6 @@ import RouteRecognizer from 'route-recognizer';
 function ruleHandler(rule, params, url, html, success, fail) {
     const run = () => {
         let reaultWithParams;
-        console.log('rule', rule, document);
         if (typeof rule.target === 'function') {
             const parser = new DOMParser();
             const document = parser.parseFromString(html, 'text/html');
@@ -14,7 +13,6 @@ function ruleHandler(rule, params, url, html, success, fail) {
                 console.warn(error);
                 reaultWithParams = '';
             }
-            console.log(reaultWithParams);
         } else if (typeof rule.target === 'string') {
             reaultWithParams = rule.target;
         }
@@ -28,7 +26,6 @@ function ruleHandler(rule, params, url, html, success, fail) {
         return reaultWithParams;
     };
     const reaultWithParams = run();
-    console.log(reaultWithParams, !rule.verification || rule.verification(params));
     if (reaultWithParams && (!rule.verification || rule.verification(params))) {
         success(reaultWithParams);
     } else {
@@ -105,7 +102,6 @@ export function getPageRSSHub(data) {
                                     url,
                                     html,
                                     (parsed) => {
-                                        console.log('parsed', parsed);
                                         if (parsed) {
                                             result.push({
                                                 title: formatBlank(rules[domain]._name ? '当前' : '', rule[recog.handler].title),
