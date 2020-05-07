@@ -12,6 +12,7 @@ export const defaultConfig = {
         freshrssDomain: '',
         feedly: true,
         inoreader: false,
+        feedbin: false,
         local: false,
     },
     refreshTimeout: 5 * 60 * 60,
