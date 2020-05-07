@@ -29,6 +29,7 @@ RSSHub Radar 是 [RSSHub](https://github.com/DIYgod/RSSHub) 的衍生项目，�
 ## 安装
 
 <a href="https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png" width="48" /></a>
+<a href="https://microsoftedge.microsoft.com/addons/detail/gangkeiaobmjcjokiofpkfpcobpbmnln"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_128x128.png" width="48" /></a>
 <a href="https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_128x128.png" width="48" /></a>
 
 ## 参与我们
