@@ -28,9 +28,33 @@ RSSHub Radar 是 [RSSHub](https://github.com/DIYgod/RSSHub) 的衍生项目，�
 
 ## 安装
 
+### 商店安装
+
 <a href="https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png" width="48" /></a>
 <a href="https://microsoftedge.microsoft.com/addons/detail/gangkeiaobmjcjokiofpkfpcobpbmnln"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_128x128.png" width="48" /></a>
 <a href="https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_128x128.png" width="48" /></a>
+
+### 手动安装
+
+首先在 [release](https://github.com/DIYgod/RSSHub-Radar/releases) 页下载相应版本的 `radar.zip` 并解压
+
+**Chrome安装扩展：**
+
+打开 `chrome://extensions/`
+
+打开右上角 `开发者模式`
+
+点击左上角 `加载已解压的扩展程序`
+
+选择解压出的 `dist` 目录
+
+**Firefox安装扩展：**
+
+打开 `about:debugging`
+
+点击右上角 `加载临时扩展程序`
+
+选择解压出的 `dist` 目录中的 `manifest.json` 文件
 
 ## 参与我们
 
@@ -50,23 +74,7 @@ npm install
 npm run build
 ```
 
-**Chrome安装扩展：**
-
-打开 `chrome://extensions/`
-
-打开右上角 `开发者模式`
-
-点击左上角 `加载已解压的扩展程序`
-
-选择上一步构建出的 `dist` 目录
-
-**Firefox安装扩展：**
-
-打开 `about:debugging`
-
-点击右上角 `加载临时扩展程序`
-
-选择上一步构建出的 `dist` 目录中的 `manifest.json` 文件
+得到 dist 目录，安装方式参考 [手动安装](#手动安装)
 
 ### 补充 RSSHub 规则
 
