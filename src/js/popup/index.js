@@ -34,6 +34,7 @@ function generateList(type, list) {
                 }
                 ${config.submitto.feedly ? `<a href="https://feedly.com/i/subscription/feed/${url}" class="rss-action rss-submitto-feedly">订阅到 Feedly</a>` : ''}
                 ${config.submitto.inoreader ? `<a href="https://www.inoreader.com/?add_feed=${url}" class="rss-action rss-submitto-inoreader">订阅到 Inoreader</a>` : ''}
+                ${config.submitto.theoldreader ? `<a href="https://theoldreader.com/feeds/subscribe?url=${url}" class="rss-action rss-submitto-theoldreader">订阅到 The Old Reader</a>` : ''}
                 ${config.submitto.local ? `<a href="feed://${url}" class="rss-action rss-submitto-local">订阅到本地阅读器</a>` : ''}`
                 }
             </li>
