@@ -9,6 +9,14 @@
                     <div class="setting-input">
                         <el-input @change="saveConfig" v-model="config.rsshubDomain" placeholder="请输入你的 RSSHub 域名，留空使用官方域名"></el-input>
                     </div>
+                    <template v-if="config.rsshubDomain !== defaultConfig.rsshubDomain">
+                    <div class="setting-name">访问密钥<a target="_blank" href="https://docs.rsshub.app/install/#fang-wen-kong-zhi-pei-zhi"><el-tooltip class="item" effect="dark" content="只有实例启用了访问密钥，才需要配置，如果你不清楚情况，请保持关闭" placement="top"><i class="el-icon-info"></i></el-tooltip></a></div>
+                    <div class="setting-input">
+                        <el-checkbox @change="saveConfig" v-model="config.rsshubAccessControl.enabled">开启</el-checkbox>
+                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.rsshubAccessControl.enabled" v-model="config.rsshubAccessControl.accessKey" placeholder="必填，请输入正确的访问密钥"></el-input>
+                        <el-checkbox @change="saveConfig" style="margin-left: 20px;" v-if="config.rsshubAccessControl.enabled" v-model="config.rsshubAccessControl.useCode">生成访问码</el-checkbox>
+                    </div>
+                    </template>
                     <div class="setting-name" v-if="isChrome">快捷键</div>
                     <div class="setting-input" v-if="isChrome">
                         <el-button size="medium" @click="toHotkey">点此设置</el-button>

@@ -3,13 +3,20 @@ import ClipboardJS from 'clipboard';
 import { getConfig } from '../common/config';
 import settingIcon from '../../svg/setting.svg';
 import aboutIcon from '../../svg/about.svg';
+import { md5 } from '../common/utils.js';
 let config;
 
 function generateList(type, list) {
     let result = '';
     if (list && list.length) {
         list.forEach((item) => {
-            const url = item.url.replace('{rsshubDomain}', config.rsshubDomain);
+            const replaced_url = item.url.replace('{rsshubDomain}', config.rsshubDomain);
+            const url =
+                type !== 'page-rsshub' || !config.rsshubAccessControl.enabled
+                    ? replaced_url
+                    : config.rsshubAccessControl.useCode
+                    ? `${replaced_url}?code=${md5(item.path + config.rsshubAccessControl.accessKey)}`
+                    : `${replaced_url}?key=${config.rsshubAccessControl.accessKey}`;
             result += `
             <li class="rss-item">
                 <img class="rss-image" src="${item.image || './rsshub.png'}">
