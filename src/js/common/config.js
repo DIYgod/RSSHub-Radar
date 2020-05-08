@@ -13,6 +13,7 @@ export const defaultConfig = {
         feedly: true,
         inoreader: false,
         feedbin: false,
+        theoldreader: false,
         local: false,
     },
     refreshTimeout: 5 * 60 * 60,
