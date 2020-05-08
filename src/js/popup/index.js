@@ -11,12 +11,13 @@ function generateList(type, list) {
     if (list && list.length) {
         list.forEach((item) => {
             const replaced_url = item.url.replace('{rsshubDomain}', config.rsshubDomain);
-            const url =
+            const url = encodeURI(
                 type !== 'page-rsshub' || !config.rsshubAccessControl.enabled
                     ? replaced_url
                     : config.rsshubAccessControl.useCode
                     ? `${replaced_url}?code=${md5(item.path + config.rsshubAccessControl.accessKey)}`
-                    : `${replaced_url}?key=${config.rsshubAccessControl.accessKey}`;
+                    : `${replaced_url}?key=${config.rsshubAccessControl.accessKey}`
+            );
             result += `
             <li class="rss-item">
                 <img class="rss-image" src="${item.image || './rsshub.png'}">
@@ -27,22 +28,26 @@ function generateList(type, list) {
                 ${
                     item.isDocs
                         ? `<a href="${url}" class="rss-action">文档</a>`
-                        : `<div class="rss-action rss-copy" data-clipboard-text="${encodeURI(url)}">复制</div>
+                        : `<div class="rss-action rss-copy" data-clipboard-text="${url}">复制</div>
                 ${
                     config.submitto.ttrss && config.submitto.ttrssDomain
-                        ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=subscribe&feed_url=${encodeURI(encodeURI(url))}" class="rss-action rss-submitto-ttrss">订阅到 TTRSS</a>`
+                        ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=subscribe&feed_url=${encodeURI(url)}" class="rss-action rss-submitto-ttrss">订阅到 TTRSS</a>`
                         : ''
                 }
-                ${config.submitto.miniflux && config.submitto.minifluxDomain ? `<a href="${config.submitto.minifluxDomain.replace(/\/$/, '')}/bookmarklet?uri=${url}" class="rss-action rss-submitto-miniflux">订阅到 Miniflux</a>` : ''}
+                ${
+                    config.submitto.miniflux && config.submitto.minifluxDomain
+                        ? `<a href="${config.submitto.minifluxDomain.replace(/\/$/, '')}/bookmarklet?uri=${encodeURI(url)}" class="rss-action rss-submitto-miniflux">订阅到 Miniflux</a>`
+                        : ''
+                }
                 ${
                     config.submitto.freshrss && config.submitto.freshrssDomain
-                        ? `<a href="${config.submitto.freshrssDomain.replace(/\/$/, '')}/i/?c=feed&a=add&url_rss=${url}" class="rss-action rss-submitto-freshrss">订阅到 FreshRSS</a>`
+                        ? `<a href="${config.submitto.freshrssDomain.replace(/\/$/, '')}/i/?c=feed&a=add&url_rss=${encodeURI(url)}" class="rss-action rss-submitto-freshrss">订阅到 FreshRSS</a>`
                         : ''
                 }
-                ${config.submitto.feedly ? `<a href="https://feedly.com/i/subscription/feed/${url}" class="rss-action rss-submitto-feedly">订阅到 Feedly</a>` : ''}
-                ${config.submitto.inoreader ? `<a href="https://www.inoreader.com/?add_feed=${url}" class="rss-action rss-submitto-inoreader">订阅到 Inoreader</a>` : ''}
-                ${config.submitto.feedbin ? `<a href="https://feedbin.com/?subscribe=${url}" class="rss-action rss-submitto-feedbin">订阅到 Feedbin</a>` : ''}
-                ${config.submitto.theoldreader ? `<a href="https://theoldreader.com/feeds/subscribe?url=${url}" class="rss-action rss-submitto-theoldreader">订阅到 The Old Reader</a>` : ''}
+                ${config.submitto.feedly ? `<a href="https://feedly.com/i/subscription/feed/${encodeURI(url)}" class="rss-action rss-submitto-feedly">订阅到 Feedly</a>` : ''}
+                ${config.submitto.inoreader ? `<a href="https://www.inoreader.com/?add_feed=${encodeURI(url)}" class="rss-action rss-submitto-inoreader">订阅到 Inoreader</a>` : ''}
+                ${config.submitto.feedbin ? `<a href="https://feedbin.com/?subscribe=${encodeURI(url)}" class="rss-action rss-submitto-feedbin">订阅到 Feedbin</a>` : ''}
+                ${config.submitto.theoldreader ? `<a href="https://theoldreader.com/feeds/subscribe?url=${encodeURI(url)}" class="rss-action rss-submitto-theoldreader">订阅到 The Old Reader</a>` : ''}
                 ${config.submitto.local ? `<a href="feed://${url}" class="rss-action rss-submitto-local">订阅到本地阅读器</a>` : ''}`
                 }
             </li>
