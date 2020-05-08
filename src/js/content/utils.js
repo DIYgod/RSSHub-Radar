@@ -61,8 +61,10 @@ export function getPageRSS() {
                         title: links[i].getAttribute('title') || defaultTitle,
                         image,
                     };
-                    pageRSS.push(feed);
-                    unique.save(feed.url);
+                    if (!unique.check(feed.url)) {
+                        pageRSS.push(feed);
+                        unique.save(feed.url);
+                    }
                 }
             }
         }
