@@ -46,6 +46,10 @@
                     <div class="setting-input">
                         <el-checkbox @change="saveConfig" v-model="config.submitto.inoreader">开启</el-checkbox>
                     </div>
+                    <div class="setting-name">Feedbin <a target="_blank" href="https://feedbin.com/"><i class="el-icon-info"></i></a></div>
+                    <div class="setting-input">
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.feedbin">开启</el-checkbox>
+                    </div>
                     <div class="setting-name">The Old Reader <a target="_blank" href="https://theoldreader.com/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
                         <el-checkbox @change="saveConfig" v-model="config.submitto.theoldreader">开启</el-checkbox>

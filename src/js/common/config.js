@@ -12,6 +12,7 @@ export const defaultConfig = {
         freshrssDomain: '',
         feedly: true,
         inoreader: false,
+        feedbin: false,
         theoldreader: false,
         local: false,
     },
