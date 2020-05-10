@@ -62,6 +62,10 @@
                     <div class="setting-input">
                         <el-checkbox @change="saveConfig" v-model="config.submitto.theoldreader">开启</el-checkbox>
                     </div>
+                    <div class="setting-name">Feeds.Pub <a target="_blank" href="https://feeds.pub/"><i class="el-icon-info"></i></a></div>
+                    <div class="setting-input">
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.feedspub">开启</el-checkbox>
+                    </div>
                     <div class="setting-name">本地阅读器 <el-tooltip class="item" effect="dark" content="需要阅读器支持，如 Reeder 等" placement="top"><i class="el-icon-info"></i></el-tooltip></div>
                     <div class="setting-input">
                         <el-checkbox @change="saveConfig" v-model="config.submitto.local">开启</el-checkbox>
