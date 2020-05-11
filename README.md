@@ -12,9 +12,9 @@
 [![users](https://img.shields.io/chrome-web-store/users/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
 [![rating](https://img.shields.io/chrome-web-store/rating/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
 
-[![Mozilla Add-on](https://img.shields.io/amo/v/rsshub-radar?style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
+<!-- [![Mozilla Add-on](https://img.shields.io/amo/v/rsshub-radar?style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
 [![Mozilla Add-on](https://img.shields.io/amo/users/rsshub-radar?color=%2344cc11&style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
-[![Mozilla Add-on](https://img.shields.io/amo/rating/rsshub-radar?style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
+[![Mozilla Add-on](https://img.shields.io/amo/rating/rsshub-radar?style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/) -->
 
 ## 介绍
 
@@ -27,9 +27,9 @@ RSSHub Radar 是 [RSSHub](https://github.com/DIYgod/RSSHub) 的衍生项目，�
 - 快速发现当前网站支持的 RSSHub
 - 支持一键订阅 RSS 到 Tiny Tiny RSS、Miniflux、FreshRSS、Feedly、Inoreader、Feedbin、The Old Reader、Feeds.Pub、本地阅读器
 
-![](https://i.imgur.com/A4aboT6.png)
+![](https://i.imgur.com/K1cC5Ck.png)
 
-![](https://i.imgur.com/NmpqKxR.png)
+![](https://i.imgur.com/JbLseIa.png)
 
 ## 安装
 
