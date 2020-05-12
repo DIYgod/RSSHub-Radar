@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">RSSHub Radar</h1>
 
-> RSSHub Radar 是 [RSSHub](https://github.com/DIYgod/RSSHub) 的衍生项目，她是一个可以帮助你快速发现和订阅当前网站 RSS 和 RSSHub 的浏览器扩展
+> RSSHub Radar 是 [RSSHub](https://github.com/DIYgod/RSSHub) 的衍生项目，她是一个可以帮助你快速发现和订阅当前网站 RSS 和 RSSHub 的浏览器扩展   
 > 万物皆可 RSS
 
 [![build status](https://img.shields.io/travis/DIYgod/RSSHub-Radar/master.svg?style=flat-square)](https://travis-ci.org/DIYgod/RSSHub-Radar)
@@ -12,9 +12,9 @@
 [![users](https://img.shields.io/chrome-web-store/users/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
 [![rating](https://img.shields.io/chrome-web-store/rating/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
 
-<!-- [![Mozilla Add-on](https://img.shields.io/amo/v/rsshub-radar?style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
-[![Mozilla Add-on](https://img.shields.io/amo/users/rsshub-radar?color=%2344cc11&style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
-[![Mozilla Add-on](https://img.shields.io/amo/rating/rsshub-radar?style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/) -->
+<!-- [![Mozilla Add-on](https://img.shields.io/amo/v/rsshub-radar?style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar-en/)
+[![Mozilla Add-on](https://img.shields.io/amo/users/rsshub-radar?color=%2344cc11&style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar-en/)
+[![Mozilla Add-on](https://img.shields.io/amo/rating/rsshub-radar?style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar-en/) -->
 
 ## 介绍
 
@@ -37,7 +37,7 @@ RSSHub Radar 是 [RSSHub](https://github.com/DIYgod/RSSHub) 的衍生项目，�
 
 <a href="https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png" width="48" /></a>
 <a href="https://microsoftedge.microsoft.com/addons/detail/gangkeiaobmjcjokiofpkfpcobpbmnln"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_128x128.png" width="48" /></a>
-<a href="https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_128x128.png" width="48" /></a>
+<a href="https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar-en/"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_128x128.png" width="48" /></a>
 
 ### 手动安装
 
