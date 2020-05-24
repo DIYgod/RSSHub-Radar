@@ -99,7 +99,7 @@ export function getPageRSS() {
         // whole page
         if (!unique.check(document.location.href)) {
             let html;
-            if (document.body.childNodes.length === 1 && document.body.childNodes[0].tagName.toLowerCase()) {
+            if (document.body && document.body.childNodes && document.body.childNodes.length === 1 && document.body.childNodes[0].tagName && document.body.childNodes[0].tagName.toLowerCase()) {
                 html = document.body.childNodes[0].innerText;
             } else if (document.querySelector('#webkit-xml-viewer-source-xml')) {
                 html = document.querySelector('#webkit-xml-viewer-source-xml').innerHTML;
