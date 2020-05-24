@@ -1,5 +1,9 @@
 import { getPageRSSHub, getWebsiteRSSHub, getList } from './utils';
 
+window.getPageRSSHub = getPageRSSHub;
+window.getWebsiteRSSHub = getWebsiteRSSHub;
+window.getList = getList;
+
 window.addEventListener('message', function (event) {
     const command = event.data.command;
     switch (command) {

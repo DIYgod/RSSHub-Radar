@@ -41,9 +41,13 @@ function formatBlank(str1, str2) {
     }
 }
 
+function parseRules(rules) {
+    return typeof rules === 'string' ? window['lave'.split('').reverse().join('')](rules) : rules;
+}
+
 export function getPageRSSHub(data) {
     const { url, html } = data;
-    const rules = window['lave'.split('').reverse().join('')](data.rules);
+    const rules = parseRules(data.rules);
 
     const parsedDomain = psl.parse(new URL(url).hostname);
     if (parsedDomain && parsedDomain.domain) {
@@ -62,7 +66,7 @@ export function getPageRSSHub(data) {
                 const recognized = [];
                 rule.forEach((ru, index) => {
                     if (ru.source !== undefined) {
-                        if (ru.source instanceof Array) {
+                        if (Object.prototype.toString.call(ru.source) === '[object Array]') {
                             ru.source.forEach((source) => {
                                 const router = new RouteRecognizer();
                                 router.add([
@@ -138,7 +142,7 @@ export function getPageRSSHub(data) {
 
 export function getWebsiteRSSHub(data) {
     const { url } = data;
-    const rules = window['lave'.split('').reverse().join('')](data.rules);
+    const rules = parseRules(data.rules);
     const parsedDomain = psl.parse(new URL(url).hostname);
     if (parsedDomain && parsedDomain.domain) {
         const domain = parsedDomain.domain;
@@ -163,7 +167,7 @@ export function getWebsiteRSSHub(data) {
 }
 
 export function getList(data) {
-    const rules = window['lave'.split('').reverse().join('')](data.rules);
+    const rules = parseRules(data.rules);
     for (const rule in rules) {
         for (const subrule in rules[rule]) {
             if (subrule[0] !== '_') {

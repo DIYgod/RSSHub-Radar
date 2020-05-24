@@ -12,6 +12,14 @@ window.addEventListener('message', (event) => {
     });
 });
 export function commandSandbox(command, data, callback) {
+    if (data.rules && typeof data.rules === 'object') {
+        try {
+            callback(iframe.contentWindow[command](data));
+            return;
+        } catch (e) {
+            // nothing
+        }
+    }
     iframe.contentWindow.postMessage(
         {
             command: command,

@@ -54,13 +54,19 @@ export default {
             this.refreshTime();
         });
         getRules((rules) => {
-            this.rulesText = rules;
-            commandSandbox('getList', {
-                rules,
-            }, (rules) => {
+            if (typeof rules === 'string') {
+                this.rulesText = rules;
+                commandSandbox('getList', {
+                    rules,
+                }, (rules) => {
+                    this.rules = rules;
+                    this.loading = false;
+                });
+            } else {
+                this.rulesText = JSON.stringify(rules, null, 4);
                 this.rules = rules;
                 this.loading = false;
-            });
+            }
         });
     },
     methods: {

@@ -23,6 +23,7 @@ export const defaultConfig = {
         local: false,
     },
     refreshTimeout: 5 * 60 * 60,
+    enableRemoteRules: !navigator.userAgent.match(/firefox/i),
 };
 
 export function getConfig(success) {
