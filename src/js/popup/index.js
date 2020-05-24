@@ -3,7 +3,7 @@ import ClipboardJS from 'clipboard';
 import { getConfig } from '../common/config';
 import settingIcon from '../../svg/setting.svg';
 import aboutIcon from '../../svg/about.svg';
-import { md5 } from '../common/utils.js';
+import MD5 from 'md5.js';
 let config;
 
 function generateList(type, list) {
@@ -15,7 +15,7 @@ function generateList(type, list) {
                 type !== 'page-rsshub' || !config.rsshubAccessControl.enabled
                     ? replaced_url
                     : config.rsshubAccessControl.useCode
-                    ? `${replaced_url}?code=${md5(item.path + config.rsshubAccessControl.accessKey)}`
+                    ? `${replaced_url}?code=${new MD5().update(item.path + config.rsshubAccessControl.accessKey).digest('hex')}`
                     : `${replaced_url}?key=${config.rsshubAccessControl.accessKey}`
             );
             result += `
