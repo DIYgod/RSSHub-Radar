@@ -43,7 +43,7 @@ function formatBlank(str1, str2) {
 
 export function getPageRSSHub(data) {
     const { url, html } = data;
-    const rules = eval(data.rules);
+    const rules = window['lave'.split('').reverse().join('')](data.rules);
 
     const parsedDomain = psl.parse(new URL(url).hostname);
     if (parsedDomain && parsedDomain.domain) {
@@ -138,7 +138,7 @@ export function getPageRSSHub(data) {
 
 export function getWebsiteRSSHub(data) {
     const { url } = data;
-    const rules = eval(data.rules);
+    const rules = window['lave'.split('').reverse().join('')](data.rules);
     const parsedDomain = psl.parse(new URL(url).hostname);
     if (parsedDomain && parsedDomain.domain) {
         const domain = parsedDomain.domain;
@@ -163,7 +163,7 @@ export function getWebsiteRSSHub(data) {
 }
 
 export function getList(data) {
-    const rules = eval(data.rules);
+    const rules = window['lave'.split('').reverse().join('')](data.rules);
     for (const rule in rules) {
         for (const subrule in rules[rule]) {
             if (subrule[0] !== '_') {
