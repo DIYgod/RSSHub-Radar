@@ -12,9 +12,9 @@
 [![users](https://img.shields.io/chrome-web-store/users/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
 [![rating](https://img.shields.io/chrome-web-store/rating/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
 
-<!-- [![Mozilla Add-on](https://img.shields.io/amo/v/rsshub-radar?style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
+[![Mozilla Add-on](https://img.shields.io/amo/v/rsshub-radar?style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
 [![Mozilla Add-on](https://img.shields.io/amo/users/rsshub-radar?color=%2344cc11&style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
-[![Mozilla Add-on](https://img.shields.io/amo/rating/rsshub-radar?style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/) -->
+[![Mozilla Add-on](https://img.shields.io/amo/rating/rsshub-radar?style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
 
 ## 介绍
 
