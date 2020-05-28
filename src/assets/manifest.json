@@ -32,7 +32,6 @@
         "pages": ["sandbox.html"]
     },
     "permissions": [
-        "activeTab",
         "tabs",
         "storage",
         "notifications",
