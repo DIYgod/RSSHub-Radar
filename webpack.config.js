@@ -160,13 +160,14 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: '[name].css'
         }),
-        new CopyPlugin([
-            {
-                from: 'src/assets',
-                to: '',
-                copyUnmodified: true,
-            },
-        ]),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: 'src/assets',
+                    to: '',
+                },
+            ],
+        }),
         new VueLoaderPlugin(),
         new webpack.DefinePlugin({
             VERSION: JSON.stringify(require('./src/assets/manifest.json').version)
