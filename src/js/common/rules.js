@@ -3,7 +3,7 @@ import defaultRules from './radar-rules';
 
 export function refreshRules(success) {
     if (defaultConfig.enableRemoteRules) {
-        fetch('https://raw.githubusercontent.com/DIYgod/RSSHub/master/assets/radar-rules.js').then((response) => {
+        const done = (response) => {
             response.text().then((text) => {
                 chrome.storage.local.set({
                     rules: text,
@@ -11,7 +11,16 @@ export function refreshRules(success) {
                 });
                 success && success();
             });
-        });
+        };
+        fetch('https://raw.githubusercontent.com/DIYgod/RSSHub/master/assets/radar-rules.js')
+            .then((response) => {
+                done(response);
+            })
+            .catch(() => {
+                fetch('https://cdn.jsdelivr.net/gh/DIYgod/RSSHub@master/assets/radar-rules.js').then((response) => {
+                    done(response);
+                });
+            });
     } else {
         success && success();
     }
