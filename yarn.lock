@@ -5849,10 +5849,10 @@ route-recognizer@0.3.4:
   resolved "https://registry.yarnpkg.com/route-recognizer/-/route-recognizer-0.3.4.tgz#39ab1ffbce1c59e6d2bdca416f0932611e4f3ca3"
   integrity sha512-2+MhsfPhvauN1O8KaXpXAOfR/fwe8dnUXVM+xw7yt40lJRfPVQxV6yryZm0cgRvAj5fMF/mdRZbL2ptwbs5i2g==
 
-rss-parser@3.8.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/rss-parser/-/rss-parser-3.8.0.tgz#6ab883c5cfb69202e25c76fe2b17e3e9179a39f6"
-  integrity sha512-EvjM0r3IymXnk+SCUawLhdH36D2WQCwpEfIyvu4hpPswYuMSk/jlCLOcg24OvXwVdcJcEocAlTZVjGNjOOSJXg==
+rss-parser@3.8.1:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/rss-parser/-/rss-parser-3.8.1.tgz#80292915310dfd4356ddb8a629658f57a2ebf681"
+  integrity sha512-3jdWYMiUA67XsuiXGkw88xaYXy1GVif8LUZrEu+R5/u4rYnnA0TN7kb6a217cZuJe8o2OJo8IJKMsc6SlxL0sA==
   dependencies:
     entities "^1.1.1"
     xml2js "^0.4.19"
