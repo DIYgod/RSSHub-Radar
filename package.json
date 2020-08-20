@@ -54,9 +54,9 @@
     "svg-inline-loader": "0.8.2",
     "template-string-optimize-loader": "3.0.0",
     "url-loader": "4.1.0",
-    "vue": "2.6.11",
+    "vue": "2.6.12",
     "vue-loader": "15.9.3",
-    "vue-template-compiler": "2.6.11",
+    "vue-template-compiler": "2.6.12",
     "webpack": "4.44.1",
     "webpack-cli": "3.3.12",
     "yorkie": "2.0.0"
