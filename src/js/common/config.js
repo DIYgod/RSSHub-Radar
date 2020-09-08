@@ -20,6 +20,7 @@ export const defaultConfig = {
         feedbin: false,
         theoldreader: false,
         feedspub: false,
+        bazqux: false,
         local: false,
     },
     refreshTimeout: 5 * 60 * 60,
