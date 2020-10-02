@@ -34,7 +34,7 @@
     "autoprefixer": "9.8.6",
     "babel-loader": "8.1.0",
     "babel-plugin-component": "1.1.1",
-    "copy-webpack-plugin": "6.1.1",
+    "copy-webpack-plugin": "6.2.0",
     "css-loader": "4.3.0",
     "cssnano": "4.1.10",
     "eslint": "7.10.0",
