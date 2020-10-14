@@ -49,7 +49,7 @@
     "postcss-loader": "3.0.0",
     "prettier": "2.1.2",
     "prettier-check": "2.0.0",
-    "pretty-quick": "3.0.2",
+    "pretty-quick": "3.1.0",
     "sass-loader": "10.0.3",
     "svg-inline-loader": "0.8.2",
     "template-string-optimize-loader": "3.0.0",
