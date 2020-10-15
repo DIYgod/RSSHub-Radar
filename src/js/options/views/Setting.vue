@@ -41,12 +41,12 @@
                     <div class="setting-input">
                         <el-checkbox @change="saveConfig" v-model="config.submitto.miniflux">开启</el-checkbox>
                         <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.miniflux" v-model="config.submitto.minifluxDomain" placeholder="必填，请输入你的 Miniflux 地址"></el-input>
-                    </div>                    
+                    </div>
                     <div class="setting-name">FreshRSS <a target="_blank" href="https://freshrss.org"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
                         <el-checkbox @change="saveConfig" v-model="config.submitto.freshrss">开启</el-checkbox>
                         <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.freshrss" v-model="config.submitto.freshrssDomain" placeholder="必填，请输入你的 FreshRSS 地址"></el-input>
-                    </div>                    
+                    </div>
                     <div class="setting-name">Feedly <a target="_blank" href="https://feedly.com/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
                         <el-checkbox @change="saveConfig" v-model="config.submitto.feedly">开启</el-checkbox>
@@ -66,6 +66,10 @@
                     <div class="setting-name">Feeds.Pub <a target="_blank" href="https://feeds.pub/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
                         <el-checkbox @change="saveConfig" v-model="config.submitto.feedspub">开启</el-checkbox>
+                    </div>
+                    <div class="setting-name">BazQux Reader <a target="_blank" href="https://bazqux.com/"><i class="el-icon-info"></i></a></div>
+                    <div class="setting-input">
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.bazqux">开启</el-checkbox>
                     </div>
                     <div class="setting-name">本地阅读器 <el-tooltip class="item" effect="dark" content="需要阅读器支持，如 Reeder 等" placement="top"><i class="el-icon-info"></i></el-tooltip></div>
                     <div class="setting-input">

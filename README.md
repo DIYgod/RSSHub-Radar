@@ -25,7 +25,7 @@ RSSHub Radar 是 [RSSHub](https://github.com/DIYgod/RSSHub) 的衍生项目，�
 - 快速发现和订阅当前页面自带的 RSS
 - 快速发现和订阅当前页面支持的 RSSHub
 - 快速发现当前网站支持的 RSSHub
-- 支持一键订阅 RSS 到 Tiny Tiny RSS、Miniflux、FreshRSS、Feedly、Inoreader、Feedbin、The Old Reader、Feeds.Pub、本地阅读器
+- 支持一键订阅 RSS 到 Tiny Tiny RSS、Miniflux、FreshRSS、Feedly、Inoreader、Feedbin、The Old Reader、Feeds.Pub、BazQux Reader、本地阅读器
 
 ![](https://i.imgur.com/K1cC5Ck.png)
 
