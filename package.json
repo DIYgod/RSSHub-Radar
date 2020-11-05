@@ -68,6 +68,6 @@
     "psl": "1.8.0",
     "route-recognizer": "0.3.4",
     "rss-parser": "3.9.0",
-    "vue-router": "3.4.8"
+    "vue-router": "3.4.9"
   }
 }
