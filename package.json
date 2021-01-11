@@ -57,7 +57,7 @@
     "vue": "2.6.12",
     "vue-loader": "15.9.6",
     "vue-template-compiler": "2.6.12",
-    "webpack": "4.45.0",
+    "webpack": "4.46.0",
     "webpack-cli": "3.3.12",
     "yorkie": "2.0.0"
   },
