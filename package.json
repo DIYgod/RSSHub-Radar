@@ -44,7 +44,7 @@
     "file-loader": "6.2.0",
     "less": "4.1.0",
     "less-loader": "7.2.1",
-    "mini-css-extract-plugin": "1.3.3",
+    "mini-css-extract-plugin": "1.3.4",
     "node-sass": "5.0.0",
     "postcss-loader": "3.0.0",
     "prettier": "2.2.1",
