@@ -67,7 +67,7 @@
     "md5.js": "^1.3.5",
     "psl": "1.8.0",
     "route-recognizer": "0.3.4",
-    "rss-parser": "3.10.0",
+    "rss-parser": "3.11.0",
     "vue-router": "3.5.1"
   }
 }
