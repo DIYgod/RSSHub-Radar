@@ -44,6 +44,11 @@ function generateList(type, list) {
                         ? `<a href="${config.submitto.freshrssDomain.replace(/\/$/, '')}/i/?c=feed&a=add&url_rss=${encodeURI(url)}" class="rss-action rss-submitto-freshrss">订阅到 FreshRSS</a>`
                         : ''
                 }
+                ${
+                    config.submitto.nextcloudnews && config.submitto.nextcloudnewsDomain
+                        ? `<a href="${config.submitto.nextcloudnewsDomain.replace(/\/$/, '')}/?subscribe_to=${encodeURI(url)}" class="rss-action rss-submitto-nextcloudnews">订阅到 Nextcloud News</a>`
+                        : ''
+                }
                 ${config.submitto.feedly ? `<a href="https://feedly.com/i/subscription/feed/${encodeURI(url)}" class="rss-action rss-submitto-feedly">订阅到 Feedly</a>` : ''}
                 ${config.submitto.inoreader ? `<a href="https://www.inoreader.com/?add_feed=${encodeURI(url)}" class="rss-action rss-submitto-inoreader">订阅到 Inoreader</a>` : ''}
                 ${config.submitto.feedbin ? `<a href="https://feedbin.com/?subscribe=${encodeURI(url)}" class="rss-action rss-submitto-feedbin">订阅到 Feedbin</a>` : ''}

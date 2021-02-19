@@ -47,6 +47,11 @@
                         <el-checkbox @change="saveConfig" v-model="config.submitto.freshrss">开启</el-checkbox>
                         <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.freshrss" v-model="config.submitto.freshrssDomain" placeholder="必填，请输入你的 FreshRSS 地址"></el-input>
                     </div>
+                    <div class="setting-name">Nextcloud News <a target="_blank" href="https://apps.nextcloud.com/apps/news"><i class="el-icon-info"></i></a></div>
+                    <div class="setting-input">
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.nextcloudnews">开启</el-checkbox>
+                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.nextcloudnews" v-model="config.submitto.nextcloudnewsDomain" placeholder="必填，请输入你的 Nextcloud News 地址"></el-input>
+                    </div>
                     <div class="setting-name">Feedly <a target="_blank" href="https://feedly.com/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
                         <el-checkbox @change="saveConfig" v-model="config.submitto.feedly">开启</el-checkbox>
