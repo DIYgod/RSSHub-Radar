@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/DIYgod/RSSHub-Radar#readme",
   "devDependencies": {
-    "@babel/core": "7.13.1",
+    "@babel/core": "7.13.8",
     "@babel/preset-env": "7.13.8",
     "autoprefixer": "9.8.6",
     "babel-loader": "8.2.2",
