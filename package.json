@@ -37,7 +37,7 @@
     "copy-webpack-plugin": "6.4.1",
     "css-loader": "5.2.1",
     "cssnano": "4.1.11",
-    "eslint": "7.23.0",
+    "eslint": "7.24.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-loader": "4.0.2",
     "eslint-plugin-prettier": "3.3.1",
