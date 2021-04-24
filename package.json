@@ -38,7 +38,7 @@
     "css-loader": "5.2.4",
     "cssnano": "4.1.11",
     "eslint": "7.25.0",
-    "eslint-config-prettier": "8.2.0",
+    "eslint-config-prettier": "8.3.0",
     "eslint-loader": "4.0.2",
     "eslint-plugin-prettier": "3.4.0",
     "file-loader": "6.2.0",
