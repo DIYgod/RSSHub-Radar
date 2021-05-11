@@ -55,7 +55,7 @@
     "template-string-optimize-loader": "3.0.0",
     "url-loader": "4.1.1",
     "vue": "2.6.12",
-    "vue-loader": "15.9.6",
+    "vue-loader": "15.9.7",
     "vue-template-compiler": "2.6.12",
     "webpack": "4.46.0",
     "webpack-cli": "3.3.12",
