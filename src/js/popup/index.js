@@ -31,7 +31,7 @@ function generateList(type, list) {
                         : `<div class="rss-action rss-copy" data-clipboard-text="${url}">复制</div>
                 ${
                     config.submitto.ttrss && config.submitto.ttrssDomain
-                        ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=subscribe&feed_url=${encodeURI(url)}" class="rss-action rss-submitto-ttrss">订阅到 TTRSS</a>`
+                        ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=bookmarklets--subscribe&feed_url=${encodeURI(url)}" class="rss-action rss-submitto-ttrss">订阅到 TTRSS</a>`
                         : ''
                 }
                 ${
