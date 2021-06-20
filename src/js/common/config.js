@@ -27,6 +27,10 @@ export const defaultConfig = {
     },
     refreshTimeout: 5 * 60 * 60,
     enableRemoteRules: !navigator.userAgent.match(/firefox/i),
+    customrule: {
+        enable: false,
+        url: 'https://cdn.jsdelivr.net/gh/DIYgod/RSSHub@master/assets/radar-rules.js',
+    },
 };
 
 export function getConfig(success) {
