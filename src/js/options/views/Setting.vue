@@ -24,6 +24,11 @@
                 </div>
                 <div class="subtitle">规则更新</div>
                 <div class="setting-item">
+                    <div class="setting-name">自定义规则</div>
+                    <div class="setting-input">
+                        <el-checkbox @change="saveConfig" v-model="config.customrule.enable">开启</el-checkbox>
+                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.customrule.enable" v-model="config.customrule.url" placeholder="必填，请输入你的自定义规则地址"></el-input>
+                    </div>
                     <div class="setting-name" v-if="config.enableRemoteRules">我会自动更新，你也可以</div>
                     <div class="setting-input" v-if="config.enableRemoteRules">
                         <el-button style="width: 98px" size="medium" @click="refreshRu" :disabled="refreshDisabled">{{ refreshDisabled ? '更新中' : '立即更新' }}</el-button><el-progress :text-inside="true" :stroke-width="20" :percentage="percentage"></el-progress><span class="time">{{ time }}前更新，{{ leftTime }}后自动更新</span>

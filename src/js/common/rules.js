@@ -1,7 +1,7 @@
-import { defaultConfig } from './config';
+import { defaultConfig, getConfig } from './config';
 import defaultRules from './radar-rules';
 
-export function refreshRules(success) {
+function _refreshRules(config, success) {
     if (defaultConfig.enableRemoteRules) {
         const done = (response) => {
             response.text().then((text) => {
@@ -12,18 +12,30 @@ export function refreshRules(success) {
                 success && success();
             });
         };
-        fetch('https://raw.githubusercontent.com/DIYgod/RSSHub/master/assets/radar-rules.js')
-            .then((response) => {
+        if (config.customrule.enable) {
+            fetch(config.customrule.url).then((response) => {
                 done(response);
-            })
-            .catch(() => {
-                fetch('https://cdn.jsdelivr.net/gh/DIYgod/RSSHub@master/assets/radar-rules.js').then((response) => {
-                    done(response);
-                });
             });
+        } else {
+            fetch('https://raw.githubusercontent.com/DIYgod/RSSHub/master/assets/radar-rules.js')
+                .then((response) => {
+                    done(response);
+                })
+                .catch(() => {
+                    fetch('https://cdn.jsdelivr.net/gh/DIYgod/RSSHub@master/assets/radar-rules.js').then((response) => {
+                        done(response);
+                    });
+                });
+        }
     } else {
         success && success();
     }
+}
+
+export function refreshRules(success) {
+    getConfig((config) => {
+        _refreshRules(config, success);
+    });
 }
 
 export function getRules(success) {
