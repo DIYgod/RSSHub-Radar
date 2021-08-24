@@ -3,7 +3,7 @@
         <el-main>
             <div class="title">规则列表</div>
             <div class="tip">
-                <p>更多规则支持中，快来<a target="_blank" href="https://docs.rsshub.app/joinus/">参与我们</a>吧！</p>
+                <p>更多规则支持中，快来<a target="_blank" href="https://docs.rsshub.app/joinus/quick-start.html#ti-jiao-xin-de-rsshub-radar-gui-ze">参与我们</a>吧！</p>
                 <p>{{ time }}前更新</p>
             </div>
             <div class="content" v-loading="loading">

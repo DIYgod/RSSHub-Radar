@@ -83,11 +83,11 @@ npm run build
 
 ### 补充 RSSHub 规则
 
-[见文档](https://docs.rsshub.app/joinus/#%E6%8F%90%E4%BA%A4%E6%96%B0%E7%9A%84-rsshub-radar-%E8%A7%84%E5%88%99)
+[见文档](https://docs.rsshub.app/joinus/quick-start.html#ti-jiao-xin-de-rsshub-radar-gui-ze)
 
 ## 相关项目
 
--   [RSSHub](https://github.com/DIYgod/RSSHub)
+- [RSSHub](https://github.com/DIYgod/RSSHub)
 
 ## Author
 
