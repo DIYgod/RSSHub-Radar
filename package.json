@@ -23,6 +23,9 @@
     "pre-commit": "npm run format:staged"
   },
   "author": "DIYgod",
+  "engines": {
+    "node": "10"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/DIYgod/RSSHub-Radar/issues"
