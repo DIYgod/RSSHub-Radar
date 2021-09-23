@@ -17,7 +17,7 @@ export function refreshRules(success) {
                 done(response);
             })
             .catch(() => {
-                fetch('https://cdn.jsdelivr.net/gh/DIYgod/RSSHub@gh-pages/assets/build/radar-rules.js').then((response) => {
+                fetch('https://cdn.jsdelivr.net/gh/DIYgod/RSSHub@gh-pages/build/radar-rules.js').then((response) => {
                     done(response);
                 });
             });
