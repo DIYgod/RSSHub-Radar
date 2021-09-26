@@ -33,6 +33,14 @@ module.exports = {
     resolve: {
         modules: ['node_modules'],
         extensions: ['.js', '.less'],
+        fallback: {
+            'stream': require.resolve('stream-browserify'),
+            'buffer': require.resolve('buffer/'),
+            'http': require.resolve('stream-http'),
+            "url": require.resolve("url/"),
+            "https": require.resolve("https-browserify"),
+            "timers": require.resolve("timers-browserify"),
+        }
     },
 
     module: {
@@ -85,9 +93,14 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         options: {
-                            config: {
-                                path: path.join(__dirname, 'postcss.config.js')
-                            }
+                            postcssOptions: {
+                                plugins: [
+                                    require('autoprefixer'),
+                                    require('cssnano')({
+                                        preset: 'default',
+                                    }),
+                                ],
+                            },
                         }
                     },
                 ],
@@ -111,9 +124,14 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         options: {
-                            config: {
-                                path: path.join(__dirname, 'postcss.config.js')
-                            }
+                            postcssOptions: {
+                                plugins: [
+                                    require('autoprefixer'),
+                                    require('cssnano')({
+                                        preset: 'default',
+                                    }),
+                                ],
+                            },
                         }
                     },
                     'less-loader'
@@ -138,9 +156,14 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         options: {
-                            config: {
-                                path: path.join(__dirname, 'postcss.config.js')
-                            }
+                            postcssOptions: {
+                                plugins: [
+                                    require('autoprefixer'),
+                                    require('cssnano')({
+                                        preset: 'default',
+                                    }),
+                                ],
+                            },
                         }
                     },
                     'sass-loader'
@@ -188,12 +211,4 @@ module.exports = {
             VERSION: JSON.stringify(require('./src/assets/manifest.json').version)
         }),
     ],
-
-    node: {
-        dgram: 'empty',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty',
-    },
-
 };
