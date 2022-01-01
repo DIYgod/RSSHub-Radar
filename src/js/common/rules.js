@@ -1,5 +1,5 @@
 import { defaultConfig } from './config';
-import defaultRules from './radar-rules';
+import { defaultRules } from './radar-rules';
 
 export function refreshRules(success) {
     if (defaultConfig.enableRemoteRules) {
