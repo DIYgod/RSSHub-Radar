@@ -45,11 +45,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     }
 });
 
-chrome.idle.onStateChanged.addListener((newState) => {
-    if (newState === 'active') {
-        initSchedule();
-    }
-});
+if ('idle' in chrome) {
+    chrome.idle.onStateChanged.addListener((newState) => {
+        if (newState === 'active') {
+            initSchedule();
+        }
+    });
+}
 
 getConfig((conf) => {
     config = conf;
