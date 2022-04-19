@@ -3,31 +3,52 @@ import RouteRecognizer from 'route-recognizer';
 
 function ruleHandler(rule, params, url, html, success, fail) {
     const run = () => {
-        let reaultWithParams;
+        let resultWithParams;
         if (typeof rule.target === 'function') {
             const parser = new DOMParser();
             const document = parser.parseFromString(html, 'text/html');
             try {
-                reaultWithParams = rule.target(params, url, document);
+                resultWithParams = rule.target(params, url, document);
             } catch (error) {
                 console.warn(error);
-                reaultWithParams = '';
+                resultWithParams = '';
             }
         } else if (typeof rule.target === 'string') {
-            reaultWithParams = rule.target;
+            resultWithParams = rule.target;
         }
 
-        if (reaultWithParams) {
-            for (const param in params) {
-                reaultWithParams = reaultWithParams.replace(`/:${param}`, `/${params[param]}`);
+        if (resultWithParams) {
+            const requiredParams = resultWithParams.match(/\/:\w+\??(?=\/|$)/g).map((param) => ({
+                name: param.slice(2).replace(/\?$/, ''),
+                optional: param.endsWith('?'),
+            }));
+            for (const param of requiredParams) {
+                if (params[param.name]) {
+                    // successfully matched
+                    const regex = new RegExp(`/:${param.name}\\??(?=/|$)`);
+                    resultWithParams = resultWithParams.replace(regex, `/${params[param.name]}`);
+                } else if (param.optional) {
+                    // missing optional parameter, drop all following parameters, otherwise the route will be invalid
+                    const regex = new RegExp(`/:${param.name}\\?(/.*)?$`);
+                    resultWithParams = resultWithParams.replace(regex, '');
+                    break;
+                } else {
+                    // missing necessary parameter, fail
+                    resultWithParams = '';
+                    break;
+                }
             }
+            // bypassing double-check since `:` maybe a part of parameter value
+            // if (resultWithParams && resultWithParams.includes(':')) {
+            //     // double-check
+            //     resultWithParams = '';
+            // }
         }
-
-        return reaultWithParams;
+        return resultWithParams;
     };
-    const reaultWithParams = run();
-    if (reaultWithParams && (!rule.verification || rule.verification(params))) {
-        success(reaultWithParams);
+    const resultWithParams = run();
+    if (resultWithParams && (!rule.verification || rule.verification(params))) {
+        success(resultWithParams);
     } else {
         fail();
     }
@@ -65,35 +86,41 @@ export function getPageRSSHub(data) {
             if (rule) {
                 const recognized = [];
                 rule.forEach((ru, index) => {
-                    if (ru.source !== undefined) {
-                        if (Object.prototype.toString.call(ru.source) === '[object Array]') {
-                            ru.source.forEach((source) => {
-                                const router = new RouteRecognizer();
-                                router.add([
-                                    {
-                                        path: source,
-                                        handler: index,
-                                    },
-                                ]);
-                                const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
-                                if (result && result[0]) {
-                                    recognized.push(result[0]);
-                                }
-                            });
-                        } else if (typeof ru.source === 'string') {
-                            const router = new RouteRecognizer();
-                            router.add([
-                                {
-                                    path: ru.source,
-                                    handler: index,
-                                },
-                            ]);
-                            const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
-                            if (result && result[0]) {
-                                recognized.push(result[0]);
+                    const oriSources = Object.prototype.toString.call(ru.source) === '[object Array]' ? ru.source : typeof ru.source === 'string' ? [ru.source] : [];
+                    let sources = [];
+                    // route-recognizer do not support optional segments or partial matching
+                    // thus, we need to manually handle it
+                    // allowing partial matching is necessary, since many rule authors did not mark optional segments
+                    oriSources.forEach((source) => {
+                        // trimming `?` is necessary, since route-recognizer considers it as a part of segment
+                        source = source.replace(/(\/:\w+)\?(?=\/|$)/g, '$1');
+                        sources.push(source);
+                        let tailMatch;
+                        do {
+                            tailMatch = source.match(/\/:\w+$/);
+                            if (tailMatch) {
+                                const tail = tailMatch[0];
+                                source = source.slice(0, source.length - tail.length);
+                                sources.push(source);
                             }
+                        } while (tailMatch);
+                    });
+                    // deduplicate (some rule authors may already have done similar job)
+                    sources = sources.filter((item, index) => sources.indexOf(item) === index);
+                    // match!
+                    sources.forEach((source) => {
+                        const router = new RouteRecognizer();
+                        router.add([
+                            {
+                                path: source,
+                                handler: index,
+                            },
+                        ]);
+                        const result = router.recognize(new URL(url).pathname.replace(/\/$/, ''));
+                        if (result && result[0]) {
+                            recognized.push(result[0]);
                         }
-                    }
+                    });
                 });
                 const result = [];
                 Promise.all(
