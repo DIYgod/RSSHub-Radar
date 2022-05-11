@@ -4,6 +4,12 @@ export function secondToTime(second) {
     return `${hour ? hour + '小时' : ''}${min}分钟`;
 }
 
+export function secondToHoursMinutes(second) {
+    const hours = Math.floor(second / 3600);
+    const minutes = Math.floor((second - hours * 3600) / 60);
+    return { hours, minutes };
+}
+
 const iframe = document.querySelector('#sandbox');
 const returnResults = [];
 window.addEventListener('message', (event) => {

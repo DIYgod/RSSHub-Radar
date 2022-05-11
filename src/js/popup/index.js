@@ -1,9 +1,11 @@
 import '../../css/popup.less';
 import ClipboardJS from 'clipboard';
 import { getConfig } from '../common/config';
+import i18n from '../common/i18n';
 import settingIcon from '../../svg/setting.svg';
 import aboutIcon from '../../svg/about.svg';
 import MD5 from 'md5.js';
+
 let config;
 
 function generateList(type, list) {
@@ -68,6 +70,14 @@ function generateList(type, list) {
 
 document.querySelector('.icons-setting').innerHTML = settingIcon;
 document.querySelector('.icons-about').innerHTML = aboutIcon;
+
+const translatableNodes = document.querySelectorAll('[data-i18n]');
+console.log(translatableNodes);
+[...translatableNodes].forEach((element) => {
+    console.log(element.innerHTML);
+    console.log(i18n.t(element.innerHTML));
+    element.innerHTML = i18n.t(element.innerHTML);
+});
 
 chrome.tabs.query(
     {

@@ -11,17 +11,17 @@
                     height="80px">RSSHub Radar</el-header>
                 <el-menu-item index="/setting">
                     <i class="el-icon-setting"></i>
-                    <span slot="title">设置</span>
+                    <span slot="title">{{ $i18n.t('settings') }}</span>
                 </el-menu-item>
                 <el-menu-item index="/list">
                     <i class="el-icon-magic-stick"></i>
-                    <span slot="title">规则列表</span>
+                    <span slot="title">{{ $i18n.t('list of rules') }}</span>
                 </el-menu-item>
                 <el-menu-item index="/about">
                     <i class="el-icon-coordinate"></i>
-                    <span slot="title">关于</span>
+                    <span slot="title">{{ $i18n.t('about') }}</span>
                 </el-menu-item>
-                <el-footer class="footer">版本 v{{ version }}<br>Made with <i style="color:#d43f57">♥</i> by <a target="_blank" href="https://diygod.me">DIYgod</a></el-footer>
+                <el-footer class="footer">{{ $i18n.t('version')}} v{{ version }}<br>Made with <i style="color:#d43f57">♥</i> by <a target="_blank" href="https://diygod.me">DIYgod</a></el-footer>
             </el-menu>
         </el-aside>
         <el-container class="sub-container">

@@ -1,91 +1,91 @@
 <template>
     <div class="setting">
-        <div class="title">设置</div>
+        <div class="title">{{ $i18n.t('settings') }}</div>
         <div class="content" v-loading="loading">
             <div v-if="!loading">
-                <div class="subtitle">常规</div>
+                <div class="subtitle">{{ $i18n.t('general') }}</div>
                 <div class="setting-item">
-                    <div class="setting-name">自定义 RSSHub 域名</div>
+                    <div class="setting-name">{{ $i18n.t('custom rsshub domain') }}</div>
                     <div class="setting-input">
-                        <el-input @change="saveConfig" v-model="config.rsshubDomain" placeholder="请输入你的 RSSHub 域名，留空使用官方域名"></el-input>
+                        <el-input @change="saveConfig" v-model="config.rsshubDomain" :placeholder="$i18n.t('enter rsshub domain')"></el-input>
                     </div>
                     <template v-if="config.rsshubDomain !== defaultConfig.rsshubDomain">
-                    <div class="setting-name">访问密钥<a target="_blank" href="https://docs.rsshub.app/install/#fang-wen-kong-zhi-pei-zhi"><el-tooltip class="item" effect="dark" content="只有实例启用了访问密钥，才需要配置，如果你不清楚情况，请保持关闭" placement="top"><i class="el-icon-info"></i></el-tooltip></a></div>
+                    <div class="setting-name">{{ $i18n.t('access key') }}<a target="_blank" href="https://docs.rsshub.app/install/#fang-wen-kong-zhi-pei-zhi"><el-tooltip class="item" effect="dark" :content="$i18n.t('configuration required if access keys enabled')" placement="top"><i class="el-icon-info"></i></el-tooltip></a></div>
                     <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.rsshubAccessControl.enabled">开启</el-checkbox>
-                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.rsshubAccessControl.enabled" v-model="config.rsshubAccessControl.accessKey" placeholder="必填，请输入正确的访问密钥"></el-input>
-                        <el-checkbox @change="saveConfig" style="margin-left: 20px;" v-if="config.rsshubAccessControl.enabled" v-model="config.rsshubAccessControl.useCode">生成访问码</el-checkbox>
+                        <el-checkbox @change="saveConfig" v-model="config.rsshubAccessControl.enabled">{{ $i18n.t('enable') }}</el-checkbox>
+                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.rsshubAccessControl.enabled" v-model="config.rsshubAccessControl.accessKey" :placeholder="$i18n.t('required access key')"></el-input>
+                        <el-checkbox @change="saveConfig" style="margin-left: 20px;" v-if="config.rsshubAccessControl.enabled" v-model="config.rsshubAccessControl.useCode">{{ $i18n.t('generate access code') }}</el-checkbox>
                     </div>
                     </template>
-                    <div class="setting-name" v-if="isChrome">快捷键</div>
+                    <div class="setting-name" v-if="isChrome">{{ $i18n.t('hot key') }}</div>
                     <div class="setting-input" v-if="isChrome">
-                        <el-button size="medium" @click="toHotkey">点此设置</el-button>
+                        <el-button size="medium" @click="toHotkey">{{ $i18n.t('click to set') }}</el-button>
                     </div>
                 </div>
-                <div class="subtitle">规则更新</div>
+                <div class="subtitle">{{ $i18n.t('rules update') }}</div>
                 <div class="setting-item">
                     <div class="setting-name" v-if="config.enableRemoteRules">我会自动更新，你也可以</div>
                     <div class="setting-input" v-if="config.enableRemoteRules">
                         <el-button style="width: 98px" size="medium" @click="refreshRu" :disabled="refreshDisabled">{{ refreshDisabled ? '更新中' : '立即更新' }}</el-button><el-progress :text-inside="true" :stroke-width="20" :percentage="percentage"></el-progress><span class="time">{{ time }}前更新，{{ leftTime }}后自动更新</span>
                     </div>
-                    <div class="setting-name" v-if="!config.enableRemoteRules">远程更新被禁用</div>
+                    <div class="setting-name" v-if="!config.enableRemoteRules">{{ $i18n.t('enable remote rules') }}</div>
                 </div>
-                <div class="subtitle">一键订阅</div>
+                <div class="subtitle">{{ $i18n.t('one-click subscription') }}</div>
                 <div class="setting-item">
                     <div class="setting-name">Tiny Tiny RSS <a target="_blank" href="https://ttrss.henry.wang/zh/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.ttrss">开启</el-checkbox>
-                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.ttrss" v-model="config.submitto.ttrssDomain" placeholder="必填，请输入你的 Tiny Tiny RSS 地址"></el-input>
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.ttrss">{{ $i18n.t('enable') }}</el-checkbox>
+                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.ttrss" v-model="config.submitto.ttrssDomain" :placeholder="$i18n.t('required address', {service: 'Tiny Tiny RSS'})"></el-input>
                     </div>
                     <div class="setting-name">Miniflux <a target="_blank" href="https://miniflux.app"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.miniflux">开启</el-checkbox>
-                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.miniflux" v-model="config.submitto.minifluxDomain" placeholder="必填，请输入你的 Miniflux 地址"></el-input>
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.miniflux">{{ $i18n.t('enable') }}</el-checkbox>
+                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.miniflux" v-model="config.submitto.minifluxDomain" :placeholder="$i18n.t('required address', {service: 'Miniflux'})"></el-input>
                     </div>
                     <div class="setting-name">FreshRSS <a target="_blank" href="https://freshrss.org"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.freshrss">开启</el-checkbox>
-                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.freshrss" v-model="config.submitto.freshrssDomain" placeholder="必填，请输入你的 FreshRSS 地址"></el-input>
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.freshrss">{{ $i18n.t('enable') }}</el-checkbox>
+                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.freshrss" v-model="config.submitto.freshrssDomain" :placeholder="$i18n.t('required address', {service: 'FreshRSS'})"></el-input>
                     </div>
                     <div class="setting-name">Nextcloud News <a target="_blank" href="https://apps.nextcloud.com/apps/news"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.nextcloudnews">开启</el-checkbox>
-                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.nextcloudnews" v-model="config.submitto.nextcloudnewsDomain" placeholder="必填，请输入你的 Nextcloud News 地址"></el-input>
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.nextcloudnews">{{ $i18n.t('enable') }}</el-checkbox>
+                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.nextcloudnews" v-model="config.submitto.nextcloudnewsDomain" :placeholder="$i18n.t('required address', {service: 'Nextcloud'})"></el-input>
                     </div>
                     <div class="setting-name">Feedly <a target="_blank" href="https://feedly.com/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.feedly">开启</el-checkbox>
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.feedly">{{ $i18n.t('enable') }}</el-checkbox>
                     </div>
                     <div class="setting-name">Inoreader <a target="_blank" href="https://www.inoreader.com/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.inoreader">开启</el-checkbox>
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.inoreader">{{ $i18n.t('enable') }}</el-checkbox>
                     </div>
                     <div class="setting-name">Feedbin <a target="_blank" href="https://feedbin.com/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.feedbin">开启</el-checkbox>
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.feedbin">{{ $i18n.t('enable') }}</el-checkbox>
                     </div>
                     <div class="setting-name">The Old Reader <a target="_blank" href="https://theoldreader.com/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.theoldreader">开启</el-checkbox>
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.theoldreader">{{ $i18n.t('enable') }}</el-checkbox>
                     </div>
                     <div class="setting-name">Feeds.Pub <a target="_blank" href="https://feeds.pub/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.feedspub">开启</el-checkbox>
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.feedspub">{{ $i18n.t('enable') }}</el-checkbox>
                     </div>
                     <div class="setting-name">BazQux Reader <a target="_blank" href="https://bazqux.com/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.bazqux">开启</el-checkbox>
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.bazqux">{{ $i18n.t('enable') }}</el-checkbox>
                     </div>
-                    <div class="setting-name">本地阅读器 <el-tooltip class="item" effect="dark" content="需要阅读器支持，如 Reeder 等" placement="top"><i class="el-icon-info"></i></el-tooltip></div>
+                    <div class="setting-name">{{ $i18n.t('local reader') }} <el-tooltip class="item" effect="dark" :content="$i18n.t('requires reader support')" placement="top"><i class="el-icon-info"></i></el-tooltip></div>
                     <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.submitto.local">开启</el-checkbox>
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.local">{{ $i18n.t('enable') }}</el-checkbox>
                     </div>
                 </div>
-                <div class="subtitle">通知与提醒</div>
+                <div class="subtitle">{{ $i18n.t('notifications and reminders') }}</div>
                 <div class="setting-item">
-                    <div class="setting-name">角标提醒</div>
+                    <div class="setting-name">{{ $i18n.t('show corner badge') }}</div>
                     <div class="setting-input">
-                        <el-checkbox @change="saveConfig" v-model="config.notice.badge">开启</el-checkbox>
+                        <el-checkbox @change="saveConfig" v-model="config.notice.badge">{{ $i18n.t('enable') }}</el-checkbox>
                     </div>
                 </div>
             </div>
@@ -127,7 +127,7 @@ export default {
         saveConfig() {
             saveConfig(this.config, () => {
                 this.$message({
-                    message: '保存成功',
+                    message: this.$i18n.t('successfully saved'),
                     type: 'success'
                 });
             });

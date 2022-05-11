@@ -1,10 +1,10 @@
 <template>
     <div class="list">
         <el-main>
-            <div class="title">规则列表</div>
+            <div class="title">{{ $i18n.t('rules') }}</div>
             <div class="tip">
-                <p>更多规则支持中，快来<a target="_blank" href="https://docs.rsshub.app/joinus/">参与我们</a>吧！</p>
-                <p>{{ time }}前更新</p>
+                <p v-html="$i18n.t('for more rules join us')"></p>
+                <p>{{ $i18n.t('updated time ago', {hours: hours, minutes: minutes})}}</p>
             </div>
             <div class="content" v-loading="loading">
                 <el-collapse accordion>
@@ -37,20 +37,23 @@
 
 <script>
 import { getRules, getRulesDate, updateRules } from '../../common/rules';
-import { secondToTime, commandSandbox } from '../../common/utils';
+import { secondToHoursMinutes, commandSandbox } from '../../common/utils';
 
 export default {
     name: 'List',
     data: () => ({
         loading: true,
         rules: {},
-        time: '',
+        hours: '',
+        minutes: '',
         rulesText: '',
     }),
     created() {
         getRulesDate((date) => {
             let second = (+new Date - +date) / 1000;
-            this.time = secondToTime(second);
+            const {hours, minutes} = secondToHoursMinutes(second)
+            this.hours = hours;
+            this.minutes = minutes;
             this.refreshTime();
         });
         getRules((rules) => {
@@ -72,7 +75,9 @@ export default {
     methods: {
         refreshTime() {
             getRulesDate((date) => {
-                this.time = secondToTime((+new Date - +date) / 1000);
+                const {hours, minutes} = secondToHoursMinutes((+new Date - +date) / 1000)
+                this.hours = hours;
+                this.minutes = minutes;
                 setTimeout(() => {
                     this.refreshTime();
                 }, 1000);
@@ -81,7 +86,7 @@ export default {
         updateRules() {
             updateRules(this.rulesText, () => {
                 this.$message({
-                    message: '保存成功',
+                    message: this.$i18n.t('successfully saved'),
                     type: 'success'
                 });
             });
