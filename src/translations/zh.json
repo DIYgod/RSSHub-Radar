@@ -30,5 +30,12 @@
   "show corner badge": "角标提醒",
   "successfully saved": "保存成功",
   "updated time ago": "%{hours}小时 %{minutes}分钟 前更新",
-  "version": "版本"
+  "version": "版本",
+
+  "rsshub radar info": "RSSHub Radar 是 <a target=\"_blank\" href=\"https://docs.rsshub.app\">RSSHub</a> 的衍生项目，她可以帮助你快速发现和订阅当前网站的 RSS 和 RSSHub，项目<a target=\"_blank\" href=\"https://github.com/DIYgod/RSSHub-Radar\">采用 MIT 许可开源</a>，使用完全免费，但是随着项目规模的增长，也需要有相应的资金支持才能持续项目的维护与开发",
+  "sponsored development": "赞助 RSSHub Radar 的开发: <a target=\"_blank\" href=\"https://docs.rsshub.app/support/\">https://docs.rsshub.app/support/</a>",
+  "update log": "更新日志",
+  "question feedback": "问题反馈",
+  "rsshub documentation": "RSSHub 文档: <a target=\"_blank\" href=\"https://docs.rsshub.app\">https://docs.rsshub.app</a>",
+  "everything is possible with rss": "万物皆可 RSS"
 }
