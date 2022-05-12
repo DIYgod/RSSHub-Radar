@@ -29,35 +29,35 @@ function generateList(type, list) {
                 </a>
                 ${
                     item.isDocs
-                        ? `<a href="${url}" class="rss-action">文档</a>`
-                        : `<div class="rss-action rss-copy" data-clipboard-text="${url}">复制</div>
+                        ? `<a href="${url}" class="rss-action">${i18n.t('documentation')}</a>`
+                        : `<div class="rss-action rss-copy" data-clipboard-text="${url}">${i18n.t('copy')}</div>
                 ${
                     config.submitto.ttrss && config.submitto.ttrssDomain
-                        ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=bookmarklets--subscribe&feed_url=${encodeURI(url)}" class="rss-action rss-submitto-ttrss">订阅到 TTRSS</a>`
+                        ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=bookmarklets--subscribe&feed_url=${encodeURI(url)}" class="rss-action rss-submitto-ttrss">${i18n.t('subscribe to')} TTRSS</a>`
                         : ''
                 }
                 ${
                     config.submitto.miniflux && config.submitto.minifluxDomain
-                        ? `<a href="${config.submitto.minifluxDomain.replace(/\/$/, '')}/bookmarklet?uri=${encodeURI(url)}" class="rss-action rss-submitto-miniflux">订阅到 Miniflux</a>`
+                        ? `<a href="${config.submitto.minifluxDomain.replace(/\/$/, '')}/bookmarklet?uri=${encodeURI(url)}" class="rss-action rss-submitto-miniflux">${i18n.t('subscribe to')} Miniflux</a>`
                         : ''
                 }
                 ${
                     config.submitto.freshrss && config.submitto.freshrssDomain
-                        ? `<a href="${config.submitto.freshrssDomain.replace(/\/$/, '')}/i/?c=feed&a=add&url_rss=${encodeURI(url)}" class="rss-action rss-submitto-freshrss">订阅到 FreshRSS</a>`
+                        ? `<a href="${config.submitto.freshrssDomain.replace(/\/$/, '')}/i/?c=feed&a=add&url_rss=${encodeURI(url)}" class="rss-action rss-submitto-freshrss">${i18n.t('subscribe to')} FreshRSS</a>`
                         : ''
                 }
                 ${
                     config.submitto.nextcloudnews && config.submitto.nextcloudnewsDomain
-                        ? `<a href="${config.submitto.nextcloudnewsDomain.replace(/\/$/, '')}/?subscribe_to=${encodeURI(url)}" class="rss-action rss-submitto-nextcloudnews">订阅到 Nextcloud News</a>`
+                        ? `<a href="${config.submitto.nextcloudnewsDomain.replace(/\/$/, '')}/?subscribe_to=${encodeURI(url)}" class="rss-action rss-submitto-nextcloudnews">${i18n.t('subscribe to')} Nextcloud News</a>`
                         : ''
                 }
-                ${config.submitto.feedly ? `<a href="https://feedly.com/i/subscription/feed/${encodeURI(url)}" class="rss-action rss-submitto-feedly">订阅到 Feedly</a>` : ''}
-                ${config.submitto.inoreader ? `<a href="https://www.inoreader.com/?add_feed=${encodeURI(url)}" class="rss-action rss-submitto-inoreader">订阅到 Inoreader</a>` : ''}
-                ${config.submitto.feedbin ? `<a href="https://feedbin.com/?subscribe=${encodeURI(url)}" class="rss-action rss-submitto-feedbin">订阅到 Feedbin</a>` : ''}
-                ${config.submitto.theoldreader ? `<a href="https://theoldreader.com/feeds/subscribe?url=${encodeURI(url)}" class="rss-action rss-submitto-theoldreader">订阅到 The Old Reader</a>` : ''}
-                ${config.submitto.feedspub ? `<a href="https://feeds.pub/feed/${encodeURIComponent(url)}" class="rss-action rss-submitto-feedspub">订阅到 Feeds.Pub</a>` : ''}
-                ${config.submitto.bazqux ? `<a href="https://bazqux.com/add?url=${encodeURIComponent(url)}" class="rss-action rss-submitto-bazqux">订阅到 BazQux Reader</a>` : ''}
-                ${config.submitto.local ? `<a href="feed://${url}" class="rss-action rss-submitto-local">订阅到本地阅读器</a>` : ''}`
+                ${config.submitto.feedly ? `<a href="https://feedly.com/i/subscription/feed/${encodeURI(url)}" class="rss-action rss-submitto-feedly">${i18n.t('subscribe to')} Feedly</a>` : ''}
+                ${config.submitto.inoreader ? `<a href="https://www.inoreader.com/?add_feed=${encodeURI(url)}" class="rss-action rss-submitto-inoreader">${i18n.t('subscribe to')} Inoreader</a>` : ''}
+                ${config.submitto.feedbin ? `<a href="https://feedbin.com/?subscribe=${encodeURI(url)}" class="rss-action rss-submitto-feedbin">${i18n.t('subscribe to')} Feedbin</a>` : ''}
+                ${config.submitto.theoldreader ? `<a href="https://theoldreader.com/feeds/subscribe?url=${encodeURI(url)}" class="rss-action rss-submitto-theoldreader">${i18n.t('subscribe to')} The Old Reader</a>` : ''}
+                ${config.submitto.feedspub ? `<a href="https://feeds.pub/feed/${encodeURIComponent(url)}" class="rss-action rss-submitto-feedspub">${i18n.t('subscribe to')} Feeds.Pub</a>` : ''}
+                ${config.submitto.bazqux ? `<a href="https://bazqux.com/add?url=${encodeURIComponent(url)}" class="rss-action rss-submitto-bazqux">${i18n.t('subscribe to')} BazQux Reader</a>` : ''}
+                ${config.submitto.local ? `<a href="feed://${url}" class="rss-action rss-submitto-local">${i18n.t('subscribe to local reader')}</a>` : ''}`
                 }
             </li>
             `;
@@ -72,10 +72,7 @@ document.querySelector('.icons-setting').innerHTML = settingIcon;
 document.querySelector('.icons-about').innerHTML = aboutIcon;
 
 const translatableNodes = document.querySelectorAll('[data-i18n]');
-console.log(translatableNodes);
 [...translatableNodes].forEach((element) => {
-    console.log(element.innerHTML);
-    console.log(i18n.t(element.innerHTML));
     element.innerHTML = i18n.t(element.innerHTML);
 });
 
@@ -102,9 +99,9 @@ chrome.tabs.query(
 
                     const clipboard = new ClipboardJS('.rss-copy');
                     clipboard.on('success', function (e) {
-                        e.trigger.innerHTML = '已复制';
+                        e.trigger.innerHTML = i18n.t('copied');
                         setTimeout(() => {
-                            e.trigger.innerHTML = '复制';
+                            e.trigger.innerHTML = i18n.t('copy');
                         }, 1000);
                     });
 
