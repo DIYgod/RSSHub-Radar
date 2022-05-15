@@ -24,11 +24,11 @@
                 </div>
                 <div class="subtitle">规则更新</div>
                 <div class="setting-item">
-                    <div class="setting-name" v-if="config.enableRemoteRules">我会自动更新，你也可以</div>
-                    <div class="setting-input" v-if="config.enableRemoteRules">
+                    <div class="setting-name" v-if="defaultConfig.enableRemoteRules">我会自动更新，你也可以</div>
+                    <div class="setting-input" v-if="defaultConfig.enableRemoteRules">
                         <el-button style="width: 98px" size="medium" @click="refreshRu" :disabled="refreshDisabled">{{ refreshDisabled ? '更新中' : '立即更新' }}</el-button><el-progress :text-inside="true" :stroke-width="20" :percentage="percentage"></el-progress><span class="time">{{ time }}前更新，{{ leftTime }}后自动更新</span>
                     </div>
-                    <div class="setting-name" v-if="!config.enableRemoteRules">远程更新被禁用</div>
+                    <div class="setting-name" v-if="!defaultConfig.enableRemoteRules">远程更新被禁用</div>
                 </div>
                 <div class="subtitle">一键订阅</div>
                 <div class="setting-item">
