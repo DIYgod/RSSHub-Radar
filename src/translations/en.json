@@ -13,7 +13,7 @@
   "enable": "Enable",
   "enable remote rules": "Enable remote rules",
   "enter rsshub domain": "Please enter your RSSHub domain name, leave it blank to use the official domain name",
-  "for more rules join us": "For more rules support, <a target=\"_blank\" href=\"https://docs.rsshub.app/joinus/\">join us</a>！",
+  "for more rules join us": "For more rules support, <a target=\"_blank\" href=\"https://docs.rsshub.app/en/joinus/quick-start.html\">join us</a>！",
   "general": "General",
   "generate access code": "Generate access code",
   "hot key": "Hot key",
