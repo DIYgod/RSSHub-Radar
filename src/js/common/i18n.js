@@ -10,7 +10,7 @@ const i18n = new I18n({
     zh,
 });
 i18n.enableFallback = true;
-i18n.defaultLocale = 'zh';
+i18n.defaultLocale = 'en';
 i18n.locale = navigator.language;
 
 export default i18n;
