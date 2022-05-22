@@ -1,18 +1,18 @@
 <template>
     <div class="about">
         <el-main>
-            <div class="title">关于</div>
+            <div class="title">{{$i18n.t('about')}}</div>
             <div class="content">
                 <div class="tip">
-                    <p>RSSHub Radar 是 <a target="_blank" href="https://docs.rsshub.app">RSSHub</a> 的衍生项目，她可以帮助你快速发现和订阅当前网站的 RSS 和 RSSHub，项目<a target="_blank" href="https://github.com/DIYgod/RSSHub-Radar">采用 MIT 许可开源</a>，使用完全免费，但是随着项目规模的增长，也需要有相应的资金支持才能持续项目的维护与开发</p>
-                    <p><i class="el-icon-trophy"></i> 赞助 RSSHub Radar 的开发: <a target="_blank" href="https://docs.rsshub.app/support/">https://docs.rsshub.app/support/</a></p>
+                    <p v-html="$i18n.t('rsshub radar info')"></p>
+                    <p><i class="el-icon-trophy"></i> <span v-html="$i18n.t('sponsored development')"></span></p>
                     <p>&nbsp;</p>
-                    <p>更新日志: <a target="_blank" href="https://github.com/DIYgod/RSSHub-Radar/releases">https://github.com/DIYgod/RSSHub-Radar/releases</a></p>
-                    <p>问题反馈: <a target="_blank" href="https://github.com/DIYgod/RSSHub-radar/issues">https://github.com/DIYgod/RSSHub-radar/issues</a></p>
+                    <p>{{$i18n.t('update log')}}: <a target="_blank" href="https://github.com/DIYgod/RSSHub-Radar/releases">https://github.com/DIYgod/RSSHub-Radar/releases</a></p>
+                    <p>{{$i18n.t('question feedback')}}: <a target="_blank" href="https://github.com/DIYgod/RSSHub-radar/issues">https://github.com/DIYgod/RSSHub-radar/issues</a></p>
                     <p>GitHub: <a target="_blank" href="https://github.com/DIYgod/RSSHub-Radar">https://github.com/DIYgod/RSSHub-Radar</a></p>
-                    <p>RSSHub 文档: <a target="_blank" href="https://docs.rsshub.app">https://docs.rsshub.app</a></p>
+                    <p v-html="$i18n.t('rsshub documentation')"></p>
                     <p>&nbsp;</p>
-                    <p><b>万物皆可 RSS</b></p>
+                    <p><b>{{$i18n.t('everything is possible with rss')}}</b></p>
                     <p><b>Made with <i style="color:#d43f57">♥</i> by <a target="_blank" href="https://diygod.me">DIYgod</a></b></p>
                 </div>
             </div>
