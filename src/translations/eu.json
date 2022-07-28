@@ -24,6 +24,7 @@
   "notifications and reminders": "Jakinarazpenak",
   "required access key": "Nahitaezkoa, mesedez sartu sarrera-gako zuzena",
   "required address": "Nahitaezkoa. Mesedez sartu zure %{service} helbidea",
+  "required extension base URI": "Nahitaezkoa. Sartu %{service} luzapenaren URLa instalatu ondoren",
   "requires reader support": "Reeder edo horrelakoren baten moduko irakurgailua behar du",
   "rss not found": "Ez da RSSrik aurkitu",
   "rsshub radar options": "RSSHub Radar Aukerak",
