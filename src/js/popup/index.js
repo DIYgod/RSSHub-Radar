@@ -92,8 +92,8 @@ chrome.tabs.query(
     },
     (tabs) => {
         const tabId = tabs[0].id;
-        title = tabs[0].title;
-        favicon = tabs[0].favIconUrl;
+        title = tabs[0].title || '';
+        favicon = tabs[0].favIconUrl || '/favicon.ico';
         getConfig((conf) => {
             config = conf;
             chrome.runtime.sendMessage(
