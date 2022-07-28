@@ -7,6 +7,8 @@ import aboutIcon from '../../svg/about.svg';
 import MD5 from 'md5.js';
 
 let config;
+let favicon;
+let title;
 
 function generateList(type, list) {
     let result = '';
@@ -31,6 +33,13 @@ function generateList(type, list) {
                     item.isDocs
                         ? `<a href="${url}" class="rss-action">${i18n.t('documentation')}</a>`
                         : `<div class="rss-action rss-copy" data-clipboard-text="${url}">${i18n.t('copy')}</div>
+                ${
+                    config.submitto.checkchan && config.submitto.checkchanBase
+                        ? `<a href="${config.submitto.checkchanBase.replace(/\/$/, '')}/index.html#/check/add?title=${encodeURI(title)}&url=${encodeURI(url)}&type=rss&icon=${encodeURI(
+                              favicon
+                          )}" class="rss-action rss-submitto-checkchan">${i18n.t('subscribe to')} CheckChan</a>`
+                        : ''
+                }
                 ${
                     config.submitto.ttrss && config.submitto.ttrssDomain
                         ? `<a href="${config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=bookmarklets--subscribe&feed_url=${encodeURI(url)}" class="rss-action rss-submitto-ttrss">${i18n.t('subscribe to')} TTRSS</a>`
@@ -83,7 +92,8 @@ chrome.tabs.query(
     },
     (tabs) => {
         const tabId = tabs[0].id;
-
+        title = tabs[0].title;
+        favicon = tabs[0].favIconUrl;
         getConfig((conf) => {
             config = conf;
             chrome.runtime.sendMessage(
