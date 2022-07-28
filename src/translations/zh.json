@@ -23,6 +23,7 @@
   "notifications and reminders": "通知与提醒",
   "one-click subscription": "一键订阅",
   "required address": "必填，请输入你的 %{service} 地址",
+  "required extension base URI": "必填，请输入你安装完成后的%{service}插件地址",
   "required access key": "必填，请输入正确的访问密钥",
   "requires reader support": "需要阅读器支持，如 Reeder 等",
   "rss not found": "当前页面没有检测到 RSS",

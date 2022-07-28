@@ -24,6 +24,7 @@
   "one-click subscription": "Subscripción mediante un click",
   "required access key": "Obligatorio, por favor introduct la clave de acceso correcta",
   "required address": "Obligatorio. Por favor introduce tu dirección %{service}",
+  "required extension base URI": "Obligatorio. Ingrese la URL de la extensión %{service} después de la instalación",
   "requires reader support": "Necesita tener un visor como Reeder o algo del estilo instalado ",
   "rss not found": "No se han encontrado RSS's",
   "rsshub radar options": "RSSHub Radar Configuración",
