@@ -18,10 +18,15 @@ function ruleHandler(rule, params, url, html, success, fail) {
         }
 
         if (resultWithParams) {
-            const requiredParams = resultWithParams.match(/\/:\w+\??(?=\/|$)/g).map((param) => ({
+            // if no :param in resultWithParams, requiredParams will be null
+            // in that case, just skip the following steps and return resultWithParams
+            const requiredParams = resultWithParams.match(/\/:\w+\??(?=\/|$)/g)?.map((param) => ({
                 name: param.slice(2).replace(/\?$/, ''),
                 optional: param.endsWith('?'),
             }));
+            if (!requiredParams) {
+                return resultWithParams;
+            }
             for (const param of requiredParams) {
                 if (params[param.name]) {
                     // successfully matched
