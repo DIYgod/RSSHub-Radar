@@ -121,7 +121,7 @@ Get the dist directory, the installation method refers to [manual installation](
 
 [See documentation见文档](https://docs.rsshub.app/joinus/quick-start.html#ti-jiao-xin-de-rsshub-gui-ze-tian-jia-jiao-ben-wen-dang)
 
-## Related Items相关项目
+## Related相关项目
 
 -   [RSSHub](https://github.com/DIYgod/RSSHub)
 
