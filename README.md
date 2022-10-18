@@ -21,7 +21,7 @@
 
 ## Introduction 介绍
 
-[Telegram 群](https://t.me/rsshub) | [Telegram 频道](https://t.me/awesomeRSSHub)
+[Telegram group群](https://t.me/rsshub) | [Telegram channel频道](https://t.me/awesomeRSSHub)
 
 RSSHub Radar is a spin-off project of [RSSHub](https://github.com/DIYgod/RSSHub), a browser extension that helps you quickly discover and subscribe to current website RSS and RSSHub
 
