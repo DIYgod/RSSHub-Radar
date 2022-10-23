@@ -32,6 +32,11 @@
                 </div>
                 <div class="subtitle">{{ $i18n.t('one-click subscription') }}</div>
                 <div class="setting-item">
+                    <div class="setting-name">Check酱<a target="_blank" href="https://ckc.ftqq.com"><i class="el-icon-info"></i></a></div>
+                    <div class="setting-input">
+                        <el-checkbox @change="saveConfig" v-model="config.submitto.checkchan">{{ $i18n.t('enable') }}</el-checkbox>
+                        <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.checkchan" v-model="config.submitto.checkchanBase" :placeholder="$i18n.t('required extension base URI', {service: 'CheckChan'})"></el-input>
+                    </div>
                     <div class="setting-name">Tiny Tiny RSS <a target="_blank" href="https://ttrss.henry.wang/zh/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
                         <el-checkbox @change="saveConfig" v-model="config.submitto.ttrss">{{ $i18n.t('enable') }}</el-checkbox>

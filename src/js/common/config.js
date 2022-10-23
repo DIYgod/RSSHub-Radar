@@ -11,6 +11,8 @@ export const defaultConfig = {
     submitto: {
         ttrss: false,
         ttrssDomain: '',
+        checkchan: false,
+        checkchanBase: '',
         miniflux: false,
         minifluxDomain: '',
         freshrss: false,

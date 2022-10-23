@@ -24,6 +24,7 @@
   "notifications and reminders": "Notifications and reminders",
   "required access key": "Required, please enter the correct access key",
   "required address": "Required. Please enter you %{service} address",
+  "required extension base URI": "Required. Please enter the %{service} extension URL after installation",
   "requires reader support": "Requires reader support, such as Reeder, etc.",
   "rss not found": "No RSS found",
   "rsshub radar options": "RSSHub Radar Options",
