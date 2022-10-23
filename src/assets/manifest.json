@@ -36,7 +36,6 @@
         "storage",
         "notifications",
         "alarms",
-        "idle",
-        "unlimitedStorage"
+        "idle"
     ]
 }
