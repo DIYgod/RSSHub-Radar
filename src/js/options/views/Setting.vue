@@ -24,9 +24,9 @@
                 </div>
                 <div class="subtitle">{{ $i18n.t('rules update') }}</div>
                 <div class="setting-item">
-                    <div class="setting-name" v-if="defaultConfig.enableRemoteRules">我会自动更新，你也可以</div>
+                    <div class="setting-name" v-if="defaultConfig.enableRemoteRules">{{ $i18n.t('i will update automatically and you can') }}</div>
                     <div class="setting-input" v-if="defaultConfig.enableRemoteRules">
-                        <el-button style="width: 98px" size="medium" @click="refreshRu" :disabled="refreshDisabled">{{ refreshDisabled ? '更新中' : '立即更新' }}</el-button><el-progress :text-inside="true" :stroke-width="20" :percentage="percentage"></el-progress><span class="time">{{ time }}前更新，{{ leftTime }}后自动更新</span>
+                        <el-button style="" size="medium" @click="refreshRu" :disabled="refreshDisabled">{{ refreshDisabled ? $i18n.t('updating') : $i18n.t('update now') }}</el-button><el-progress :text-inside="true" :stroke-width="20" :percentage="percentage"></el-progress><span class="time">{{ time }} {{ $i18n.t('before update') }}, {{ leftTime }} {{ $i18n.t('after automatic update') }}</span>
                     </div>
                     <div class="setting-name" v-if="!defaultConfig.enableRemoteRules">{{ $i18n.t('enable remote rules') }}</div>
                 </div>
