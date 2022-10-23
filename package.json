@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack -w --mode=production --progress",
     "build": "webpack --mode=production --progress",
-    "release": "npm run build && zip -r release/radar.zip dist",
+    "release": "npm run build && mkdir release && zip -r release/radar.zip dist",
     "format": "eslint \"**/*.js\" --fix && prettier \"**/*.{js,scss,less}\" --write",
     "format:staged": "eslint \"**/*.js\" --fix && pretty-quick --staged --verbose --pattern \"**/*.{js,scss,less}\"",
     "format:check": "eslint \"**/*.js\" && prettier-check \"**/*.{js,scss,less}\""
