@@ -69,8 +69,8 @@ RSSHub Radar 是 [RSSHub](https://github.com/DIYgod/RSSHub) 的衍生项目，�
 **安装依赖并构建项目：**
 
 ```
-yarn
-yarn build
+pnpm i
+pnpm build
 ```
 
 或者使用 npm
