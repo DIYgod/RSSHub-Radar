@@ -63,7 +63,8 @@ function generateList(type, list) {
                 ${config.submitto.feedly ? `<a href="https://feedly.com/i/subscription/feed/${encodeURI(url)}" class="rss-action rss-submitto-feedly">${i18n.t('subscribe to')} Feedly</a>` : ''}
                 ${config.submitto.inoreader ? `<a href="https://www.inoreader.com/?add_feed=${encodeURI(url)}" class="rss-action rss-submitto-inoreader">${i18n.t('subscribe to')} Inoreader</a>` : ''}
                 ${config.submitto.feedbin && config.submitto.feedbinDomain
-                    ? `<a href="${config.submitto.feedbinDomain.replace(/\/$/, '')}/?subscribe=${encodeURI(url)}" class="rss-action rss-submitto-feedbin">${i18n.t('subscribe to')} Feedbin</a>` : ''
+                    ? `<a href="${config.submitto.feedbinDomain.replace(/\/$/, '')}/?subscribe=${encodeURI(url)}" class="rss-action rss-submitto-feedbin">${i18n.t('subscribe to')} Feedbin</a>`
+                     : ''
                 }
                 ${config.submitto.theoldreader ? `<a href="https://theoldreader.com/feeds/subscribe?url=${encodeURI(url)}" class="rss-action rss-submitto-theoldreader">${i18n.t('subscribe to')} The Old Reader</a>` : ''}
                 ${config.submitto.feedspub ? `<a href="https://feeds.pub/feed/${encodeURIComponent(url)}" class="rss-action rss-submitto-feedspub">${i18n.t('subscribe to')} Feeds.Pub</a>` : ''}
