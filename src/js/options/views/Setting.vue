@@ -68,6 +68,7 @@
                     <div class="setting-name">Feedbin <a target="_blank" href="https://feedbin.com/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
                         <el-checkbox @change="saveConfig" v-model="config.submitto.feedbin">{{ $i18n.t('enable') }}</el-checkbox>
+			<el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.feedbin" v-model="config.submitto.feedbinDomain" :placeholder="$i18n.t('required address', {service: 'Feedbin'})"></el-input>
                     </div>
                     <div class="setting-name">The Old Reader <a target="_blank" href="https://theoldreader.com/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
