@@ -63,7 +63,7 @@ getConfig((conf) => {
 });
 
 chrome.browserAction.setBadgeBackgroundColor({
-    color: '#FF2800',
+    color: '#F62800',
 });
 
 chrome.browserAction.setBadgeTextColor &&
