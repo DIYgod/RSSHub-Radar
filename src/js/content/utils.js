@@ -12,14 +12,7 @@ const defaultTitle =
 const image = (document.querySelector('link[rel~="icon"]') && handleUrl(document.querySelector('link[rel~="icon"]').getAttribute('href'))) || document.location.origin + '/favicon.ico';
 
 function handleUrl(url) {
-    if (url.startsWith('//')) {
-        url = document.location.protocol + url;
-    } else if (url.startsWith('/')) {
-        url = document.location.origin + url;
-    } else if (!/^(http|https):\/\//i.test(url)) {
-        url = document.location.href + '/' + url.replace(/^\//g, '');
-    }
-    return url;
+    return new URL(url, document.location.href).toString();
 }
 
 export function getPageRSS() {
