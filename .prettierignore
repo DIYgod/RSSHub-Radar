@@ -5,3 +5,4 @@ package-lock.json
 dist
 release
 *.config.js
+src/js/common/radar-rules.js
