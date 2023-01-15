@@ -182,13 +182,6 @@ module.exports = {
                 test: /\.svg$/,
                 loader: 'svg-inline-loader'
             },
-            {
-                test: /\.(ttf|woff)$/,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]',
-                },
-            },
         ]
     },
 
