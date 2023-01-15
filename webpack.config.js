@@ -8,8 +8,6 @@ module.exports = {
 
     mode: 'production',
 
-    bail: true,
-
     devtool: false,
 
     performance: {
