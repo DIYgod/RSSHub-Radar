@@ -26,6 +26,7 @@ export const defaultConfig = {
         feedspub: false,
         bazqux: false,
         local: false,
+        feedbinDomain: 'https://feedbin.com',
     },
     refreshTimeout: 5 * 60 * 60,
     // typical UA:
