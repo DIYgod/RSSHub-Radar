@@ -75,7 +75,12 @@ export function getPageRSSHub(data) {
     const { url, html } = data;
     const rules = parseRules(data.rules);
 
-    const parsedDomain = psl.parse(new URL(url).hostname);
+    let parsedDomain;
+    try {
+        parsedDomain = psl.parse(new URL(url).hostname);
+    } catch (error) {
+        return [];
+    }
     if (parsedDomain && parsedDomain.domain) {
         const subdomain = parsedDomain.subdomain;
         const domain = parsedDomain.domain;
@@ -175,7 +180,12 @@ export function getPageRSSHub(data) {
 export function getWebsiteRSSHub(data) {
     const { url } = data;
     const rules = parseRules(data.rules);
-    const parsedDomain = psl.parse(new URL(url).hostname);
+    let parsedDomain;
+    try {
+        parsedDomain = psl.parse(new URL(url).hostname);
+    } catch (error) {
+        return [];
+    }
     if (parsedDomain && parsedDomain.domain) {
         const domain = parsedDomain.domain;
         if (rules[domain]) {
