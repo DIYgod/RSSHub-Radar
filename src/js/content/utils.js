@@ -49,6 +49,7 @@ export function getPageRSS() {
             'text/rss',
             'text/atom',
             'text/rdf',
+            'application/feed+json',
         ];
         const links = document.querySelectorAll('link[type]');
         for (let i = 0; i < links.length; i++) {
