@@ -64,6 +64,7 @@
                     <div class="setting-name">Inoreader <a target="_blank" href="https://www.inoreader.com/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">
                         <el-checkbox @change="saveConfig" v-model="config.submitto.inoreader">{{ $i18n.t('enable') }}</el-checkbox>
+			            <el-input @change="saveConfig" style="margin-left: 20px;" v-if="config.submitto.inoreader" v-model="config.submitto.inoreaderDomain" :placeholder="$i18n.t('required address', {service: 'Inoreader'})"></el-input>
                     </div>
                     <div class="setting-name">Feedbin <a target="_blank" href="https://feedbin.com/"><i class="el-icon-info"></i></a></div>
                     <div class="setting-input">

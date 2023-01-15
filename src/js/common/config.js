@@ -21,12 +21,13 @@ export const defaultConfig = {
         nextcloudnewsDomain: '',
         feedly: true,
         inoreader: false,
+        inoreaderDomain: 'https://www.inoreader.com',
         feedbin: false,
+        feedbinDomain: 'https://feedbin.com',
         theoldreader: false,
         feedspub: false,
         bazqux: false,
         local: false,
-        feedbinDomain: 'https://feedbin.com',
     },
     refreshTimeout: 5 * 60 * 60,
     // typical UA:
@@ -41,7 +42,16 @@ export const defaultConfig = {
 export function getConfig(success) {
     if (chrome.storage) {
         chrome.storage.sync.get('config', (result) => {
-            success(Object.assign({}, defaultConfig, result.config));
+            const config = Object.assign({}, defaultConfig, result.config);
+
+            if (!config.submitto.feedbinDomain) {
+                config.submitto.feedbinDomain = defaultConfig.submitto.feedbinDomain;
+            }
+            if (!config.submitto.inoreaderDomain) {
+                config.submitto.inoreaderDomain = defaultConfig.submitto.inoreaderDomain;
+            }
+
+            success(config);
         });
     } else {
         success && success(defaultConfig);
