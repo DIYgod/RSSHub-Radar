@@ -17,17 +17,22 @@
                     </el-collapse-item>
                 </el-collapse>
                 <div class="debug">
-                    <div class="tip">
-                        <p>此处用于开发中的规则调试，非战斗人员请迅速撤离</p>
-                        <p>编辑内容随时可能被自动更新的规则覆盖，请保证本地有备份</p>
-                        <p>使用 设置-立即更新 可以立即恢复远程规则</p>
+                    <div class="tip" v-if="defaultConfig.enableRemoteRules">
+                        <p>This area is used for debugging rules in development</p>
+                        <p>Edited content may be overwritten by automatically updated rules at any time, please ensure that there is a local backup</p>
+                        <p>Use Settings - Update Now to immediately restore remote rules</p>
+                    </div>
+                    <div class="tip" v-if="!defaultConfig.enableRemoteRules">
+                        <p>This area is used for debugging rules in development</p>
+                        <p>Remote updates and debug function is not available due to browser limitations</p>
                     </div>
                     <el-input
                         type="textarea"
                         :rows="100"
-                        placeholder="请输入内容"
                         v-model="rulesText"
-                        @change="updateRules">
+                        @change="updateRules"
+                        :disabled="!defaultConfig.enableRemoteRules"
+                    >
                     </el-input>
                 </div>
             </div>
@@ -38,6 +43,7 @@
 <script>
 import { getRules, getRulesDate, updateRules } from '../../common/rules';
 import { secondToHoursMinutes, commandSandbox } from '../../common/utils';
+import { defaultConfig } from '../../common/config';
 
 export default {
     name: 'List',
@@ -47,6 +53,7 @@ export default {
         hours: '',
         minutes: '',
         rulesText: '',
+        defaultConfig,
     }),
     created() {
         getRulesDate((date) => {

@@ -1,4 +1,4 @@
-({ "2047.name":{ _name:"2047",
+export const defaultRules = ({ "2047.name":{ _name:"2047",
     ".":[ { title:"分类",
         docs:"https://docs.rsshub.app/bbs.html#2047-fen-lei",
         source:[ "/" ],
@@ -11482,4 +11482,4 @@
     ".":[ { title:"应用更新",
         docs:"https://docs.rsshub.app/program-update.html#macwk",
         source:"/soft/:name",
-        target:"/macwk/soft/:name" } ] } })
+        target:"/macwk/soft/:name" } ] } });
