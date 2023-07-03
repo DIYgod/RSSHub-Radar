@@ -71,7 +71,7 @@ export function getPageRSS() {
                 const href = aEles[i].getAttribute('href');
 
                 if (
-                    href.match(/\/(feed|rss|atom)(\.(xml|rss|atom))?$/) ||
+                    href.match(/\/(feed|rss|atom)(\.(xml|rss|atom))?\/?$/) ||
                     (aEles[i].hasAttribute('title') && aEles[i].getAttribute('title').match(check)) ||
                     (aEles[i].hasAttribute('class') && aEles[i].getAttribute('class').match(check)) ||
                     (aEles[i].innerText && aEles[i].innerText.match(check))
