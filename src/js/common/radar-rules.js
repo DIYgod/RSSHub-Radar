@@ -5293,6 +5293,20 @@ export const defaultRules = ({ "2047.name":{ _name:"2047",
           "/" ],
         target:"/jiemian/list/:id" } ] },
   "okjike.com":{ _name:"即刻",
+                web: [{
+                    title: "用户动态",
+                    docs:"https://docs.rsshub.app/social-media.html#ji-ke",
+        source:"/u/:uid",
+        target:"/jike/user/:uid"
+                }, {
+                   title:"圈子",
+        docs:"https://docs.rsshub.app/social-media.html#ji-ke",
+        source:"/topic/:id",
+        target:"/jike/topic/:id" 
+                }, { title:"圈子 - 纯文字",
+        docs:"https://docs.rsshub.app/social-media.html#ji-ke",
+        source:"/topic/:id",
+        target:"/jike/topic/text/:id" }],
     m:[ { title:"用户动态",
         docs:"https://docs.rsshub.app/social-media.html#ji-ke",
         source:"/users/:uid",
