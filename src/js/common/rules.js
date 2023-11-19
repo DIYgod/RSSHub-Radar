@@ -10,12 +10,12 @@ export function refreshRules(success) {
             success && success();
         });
     };
-    fetch(`https://rsshub.js.org/build/radar-rules.${defaultConfig.enableRemoteRules ? 'js' : 'json'}`)
+    fetch(`https://rsshub.js.org/build/radar-rules.${defaultConfig.enableFullRemoteRules ? 'js' : 'json'}`)
         .then((response) => {
             done(response);
         })
         .catch(() => {
-            fetch(`https://cdn.jsdelivr.net/gh/DIYgod/RSSHub@gh-pages/build/radar-rules.${defaultConfig.enableRemoteRules ? 'js' : 'json'}`).then((response) => {
+            fetch(`https://cdn.jsdelivr.net/gh/DIYgod/RSSHub@gh-pages/build/radar-rules.${defaultConfig.enableFullRemoteRules ? 'js' : 'json'}`).then((response) => {
                 done(response);
             });
         });

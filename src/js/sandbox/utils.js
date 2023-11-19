@@ -73,7 +73,7 @@ function formatBlank(str1, str2) {
 function parseRules(rules) {
     let incomeRules = rules;
     if (typeof rules === 'string') {
-        if (defaultConfig.enableRemoteRules) {
+        if (defaultConfig.enableFullRemoteRules) {
             incomeRules = window['lave'.split('').reverse().join('')](rules);
         } else {
             incomeRules = JSON.parse(rules);

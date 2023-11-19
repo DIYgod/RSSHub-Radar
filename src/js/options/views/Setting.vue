@@ -28,7 +28,7 @@
                     <div class="setting-input">
                         <el-button style="" size="medium" @click="refreshRu" :disabled="refreshDisabled">{{ refreshDisabled ? $i18n.t('updating') : $i18n.t('update now') }}</el-button><el-progress :text-inside="true" :stroke-width="20" :percentage="percentage"></el-progress><span class="time">{{ time }} {{ $i18n.t('before update') }}, {{ leftTime }} {{ $i18n.t('after automatic update') }}</span>
                     </div>
-                    <div class="setting-name" v-if="!defaultConfig.enableRemoteRules">{{ $i18n.t('full remote updates are disabled due to browser limitations') }}</div>
+                    <div class="setting-name" v-if="!defaultConfig.enableFullRemoteRules">{{ $i18n.t('full remote updates are disabled due to browser limitations') }}</div>
                 </div>
                 <div class="subtitle">{{ $i18n.t('one-click subscription') }}</div>
                 <div class="setting-item">

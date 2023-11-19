@@ -17,12 +17,12 @@
                     </el-collapse-item>
                 </el-collapse>
                 <div class="debug">
-                    <div class="tip" v-if="defaultConfig.enableRemoteRules">
+                    <div class="tip" v-if="defaultConfig.enableFullRemoteRules">
                         <p>This area is used for debugging rules in development</p>
                         <p>Edited content may be overwritten by automatically updated rules at any time, please ensure that there is a local backup</p>
                         <p>Use Settings - Update Now to immediately restore remote rules</p>
                     </div>
-                    <div class="tip" v-if="!defaultConfig.enableRemoteRules">
+                    <div class="tip" v-if="!defaultConfig.enableFullRemoteRules">
                         <p>This area is used for debugging rules in development</p>
                         <p>Remote updates and debug function is not available due to browser limitations</p>
                     </div>
@@ -31,7 +31,7 @@
                         :rows="100"
                         v-model="rulesText"
                         @change="updateRules"
-                        :disabled="!defaultConfig.enableRemoteRules"
+                        :disabled="!defaultConfig.enableFullRemoteRules"
                     >
                     </el-input>
                 </div>
