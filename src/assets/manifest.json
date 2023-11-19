@@ -7,7 +7,7 @@
     },
     "name": "RSSHub Radar",
     "description": "RSSHub Radar is a spin-off of RSSHub that helps you quickly discover and subscribe to RSS and RSSHub for your current site.",
-    "version": "1.10.1",
+    "version": "1.10.2",
     "homepage_url": "https://docs.rsshub.app",
     "icons": {
         "16": "icon16.png",
