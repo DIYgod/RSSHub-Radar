@@ -11,7 +11,7 @@
     "current site RSSHub": "RSSHub para o site atual",
     "documentation": "Informação",
     "enable": "Habilitar",
-    "remote updates are disabled due to browser limitations": "As actualizações remotas são desactivadas devido a limitações do navegador",
+    "full remote updates are disabled due to browser limitations": "As actualizações remotas são desactivadas devido a limitações do navegador",
     "enter rsshub domain": "Por favor insira o seu nome de domínio RSSHub, deixe em branco para usar o nome de domínio oficial",
     "for more rules join us": "Para suporte a mais regras, <a target=\"_blank\" href=\"https://docs.rsshub.app/en/joinus/quick-start.html\">junte-se a nós</a>！",
     "general": "Geral",

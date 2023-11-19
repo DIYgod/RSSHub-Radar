@@ -16,7 +16,7 @@
   "update now": "Update Now",
   "before update": "before update",
   "after automatic update": "after automatic update",
-  "remote updates are disabled due to browser limitations": "Remote updates are disabled due to browser limitations",
+  "full remote updates are disabled due to browser limitations": "Full remote updates are disabled due to browser limitations",
   "enter rsshub domain": "Please enter your RSSHub domain name, leave it blank to use the official domain name",
   "for more rules join us": "For more rules support, <a target=\"_blank\" href=\"https://docs.rsshub.app/en/joinus/quick-start.html\">join us</a>！",
   "general": "General",

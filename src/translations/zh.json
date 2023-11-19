@@ -16,7 +16,7 @@
   "update now": "立即更新",
   "before update": "前更新",
   "after automatic update": "后自动更新",
-  "remote updates are disabled due to browser limitations": "由于浏览器限制，远程更新被禁用",
+  "full remote updates are disabled due to browser limitations": "由于浏览器限制，完整的远程更新被禁用",
   "enter rsshub domain": "请输入你的 RSSHub 域名，留空使用官方域名",
   "for more rules join us": "更多规则支持中，快来<a target=\"_blank\" href=\"https://docs.rsshub.app/joinus/quick-start.html\">参与我们</a>吧！",
   "general": "常规",
