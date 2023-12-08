@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@iconify-json/mingcute':
+    specifier: ^1.1.13
+    version: 1.1.13
   '@plasmohq/messaging':
     specifier: ^0.6.1
     version: 0.6.1(react@18.2.0)
@@ -22,6 +25,9 @@ devDependencies:
   '@ianvs/prettier-plugin-sort-imports':
     specifier: 4.1.1
     version: 4.1.1(prettier@3.0.3)
+  '@iconify/tailwind':
+    specifier: ^0.1.4
+    version: 0.1.4
   '@types/chrome':
     specifier: 0.0.251
     version: 0.0.251
@@ -465,6 +471,21 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@iconify-json/mingcute@1.1.13:
+    resolution: {integrity: sha512-RMXKbxBPeMMH3J3YHaqKvMg/XDPYKRcBhQnmGL2SoHzarA/2KSFS94Hq9N2/wyuqTxEB7IaOghUk3L73DmJK9g==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
+
+  /@iconify/tailwind@0.1.4:
+    resolution: {integrity: sha512-U7RzcU2fkwOfMDsGQ3mtpLIaApSnqb+vgcJJknPPbg8/NF5s7tI1o5otEMfcpnLGk4PbYB8bxmKTz7IJVUlU2Q==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify/types@2.0.0:
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
 
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}

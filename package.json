@@ -2,7 +2,7 @@
   "name": "rsshub-radar",
   "displayName": "RSSHub Radar",
   "version": "2.0.0",
-  "description": "Browser extension that simplifies finding and subscribing RSS and RSSHub",
+  "description": "__MSG_extensionDescription__",
   "author": "DIYgod <i@diygod.me>",
   "scripts": {
     "dev": "plasmo dev",
@@ -10,6 +10,7 @@
     "package": "plasmo package"
   },
   "dependencies": {
+    "@iconify-json/mingcute": "^1.1.13",
     "@plasmohq/messaging": "^0.6.1",
     "plasmo": "0.84.0",
     "react": "18.2.0",
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "4.1.1",
+    "@iconify/tailwind": "^0.1.4",
     "@types/chrome": "0.0.251",
     "@types/node": "20.9.0",
     "@types/react": "18.2.37",
@@ -28,6 +30,7 @@
     "typescript": "5.2.2"
   },
   "manifest": {
+    "default_locale": "en",
     "host_permissions": [
       "https://*/*"
     ],

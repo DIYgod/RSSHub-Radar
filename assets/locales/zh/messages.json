@@ -1,0 +1,152 @@
+{
+  "extensionDescription": {
+    "message": "轻松查找和订阅 RSS 和 RSSHub。"
+  },
+  "about": {
+    "message": "关于"
+  },
+  "accessKey": {
+    "message": "访问密钥"
+  },
+  "clickToSet": {
+    "message": "点此设置"
+  },
+  "configurationRequiredIfAccessKeysEnabled": {
+    "message": "只有实例启用了访问密钥，才需要配置，如果你不清楚情况，请保持关闭"
+  },
+  "copied": {
+    "message": "已复制"
+  },
+  "copy": {
+    "message": "复制"
+  },
+  "currentPageRSS": {
+    "message": "当前页面上的 RSS"
+  },
+  "currentPageRSSHub": {
+    "message": "适用于当前页面的 RSSHub"
+  },
+  "customRSSHubDomain": {
+    "message": "自定义 RSSHub 域名"
+  },
+  "currentSiteRSSHub": {
+    "message": "适用于当前网站的 RSSHub"
+  },
+  "documentation": {
+    "message": "文档"
+  },
+  "enable": {
+    "message": "开启"
+  },
+  "iWillUpdateAutomaticallyAndYouCan": {
+    "message": "我会自动更新，你也可以"
+  },
+  "updating": {
+    "message": "更新中"
+  },
+  "updateNow": {
+    "message": "立即更新"
+  },
+  "beforeUpdate": {
+    "message": "前更新"
+  },
+  "afterAutomaticUpdate": {
+    "message": "后自动更新"
+  },
+  "fullRemoteUpdatesAreDisabledDueToBrowserLimitations": {
+    "message": "由于浏览器限制，完整的远程更新被禁用"
+  },
+  "enterRSSHubDomain": {
+    "message": "请输入你的 RSSHub 域名，留空使用官方域名"
+  },
+  "forMoreRulesJoinUs": {
+    "message": "更多规则支持中，快来<a target=\"_blank\" href=\"https://docs.rsshub.app/joinus/quick-start.html\">参与我们</a>吧！"
+  },
+  "general": {
+    "message": "常规"
+  },
+  "generateAccessCode": {
+    "message": "生成访问码"
+  },
+  "hotKey": {
+    "message": "快捷键"
+  },
+  "joinRSSHub": {
+    "message": "参与到 <a href=\"https://docs.rsshub.app/zh/\">RSSHub</a> 让万物皆可 RSS 吧！"
+  },
+  "listOfRules": {
+    "message": "规则列表"
+  },
+  "localReader": {
+    "message": "本地阅读器"
+  },
+  "notificationsAndReminders": {
+    "message": "通知与提醒"
+  },
+  "oneclickSubscription": {
+    "message": "一键订阅"
+  },
+  "requiredAddress": {
+    "message": "必填，请输入你的 %{service} 地址"
+  },
+  "requiredExtensionBaseURI": {
+    "message": "必填，请输入你安装完成后的%{service}插件地址"
+  },
+  "requiredAccessKey": {
+    "message": "必填，请输入正确的访问密钥"
+  },
+  "requiresReaderSupport": {
+    "message": "需要阅读器支持，如 Reeder 等"
+  },
+  "RSSNotFound": {
+    "message": "当前页面没有检测到 RSS"
+  },
+  "RSSHubRadarOptions": {
+    "message": "RSSHub Radar 选项"
+  },
+  "rules": {
+    "message": "规则列表"
+  },
+  "rulesUpdate": {
+    "message": "规则更新"
+  },
+  "settings": {
+    "message": "设置"
+  },
+  "showCornerBadge": {
+    "message": "角标提醒"
+  },
+  "subscribeTo": {
+    "message": "订阅到"
+  },
+  "subscribeToLocalReader": {
+    "message": "订阅到本地阅读器"
+  },
+  "successfullySaved": {
+    "message": "保存成功"
+  },
+  "updatedTimeAgo": {
+    "message": "%{hours}小时 %{minutes}分钟 前更新"
+  },
+  "version": {
+    "message": "版本"
+  },
+  "RSSHubRadarInfo": {
+    "message": "RSSHub Radar 是 <a target=\"_blank\" href=\"https://docs.rsshub.app\">RSSHub</a> 的衍生项目，她可以帮助你快速发现和订阅当前网站的 RSS 和 RSSHub，项目<a target=\"_blank\" href=\"https://github.com/DIYgod/RSSHub-Radar\">采用 MIT 许可开源</a>，使用完全免费，但是随着项目规模的增长，也需要有相应的资金支持才能持续项目的维护与开发"
+  },
+  "sponsoredDevelopment": {
+    "message": "赞助 RSSHub Radar 的开发: <a target=\"_blank\" href=\"https://docs.rsshub.app/support/\">https://docs.rsshub.app/support/</a>"
+  },
+  "updateLog": {
+    "message": "更新日志"
+  },
+  "questionFeedback": {
+    "message": "问题反馈"
+  },
+  "RSSHubDocumentation": {
+    "message": "RSSHub 文档: <a target=\"_blank\" href=\"https://docs.rsshub.app\">https://docs.rsshub.app</a>"
+  },
+  "everythingIsPossibleWithRSS": {
+    "message": "万物皆可 RSS"
+  }
+}

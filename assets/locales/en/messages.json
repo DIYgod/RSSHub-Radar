@@ -1,0 +1,152 @@
+{
+  "extensionDescription": {
+    "message": "Easily find and subscribe to RSS and RSSHub."
+  },
+  "accessKey": {
+    "message": "Access key"
+  },
+  "about": {
+    "message": "About"
+  },
+  "clickToSet": {
+    "message": "Click to set"
+  },
+  "configurationRequiredIfAccessKeysEnabled": {
+    "message": "Configuration is only required if the instance has access keys enabled, keep it off if you don't know the situation"
+  },
+  "copied": {
+    "message": "Copied"
+  },
+  "copy": {
+    "message": "Copy"
+  },
+  "currentPageRSS": {
+    "message": "RSS on the current site"
+  },
+  "currentPageRSSHub": {
+    "message": "RSSHub for the current page"
+  },
+  "customRSSHubDomain": {
+    "message": "Custom RSSHub domain name"
+  },
+  "currentSiteRSSHub": {
+    "message": "RSSHub for the current site"
+  },
+  "documentation": {
+    "message": "Info"
+  },
+  "enable": {
+    "message": "Enable"
+  },
+  "iWillUpdateAutomaticallyAndYouCan": {
+    "message": "I will update automatically, and you can"
+  },
+  "updating": {
+    "message": "Updating"
+  },
+  "updateNow": {
+    "message": "Update Now"
+  },
+  "beforeUpdate": {
+    "message": "before update"
+  },
+  "afterAutomaticUpdate": {
+    "message": "after automatic update"
+  },
+  "fullRemoteUpdatesAreDisabledDueToBrowserLimitations": {
+    "message": "Full remote updates are disabled due to browser limitations"
+  },
+  "enterRSSHubDomain": {
+    "message": "Please enter your RSSHub domain name, leave it blank to use the official domain name"
+  },
+  "forMoreRulesJoinUs": {
+    "message": "For more rules support, <a target=\"_blank\" href=\"https://docs.rsshub.app/en/joinus/quick-start.html\">join us</a>！"
+  },
+  "general": {
+    "message": "General"
+  },
+  "generateAccessCode": {
+    "message": "Generate access code"
+  },
+  "hotKey": {
+    "message": "Hot key"
+  },
+  "joinRSSHub": {
+    "message": "Join <a href=\"https://docs.rsshub.app\" target=\"_blank\">RSSHub</a> to make everything RSSible!"
+  },
+  "listOfRules": {
+    "message": "List of rules"
+  },
+  "localReader": {
+    "message": "Local reader"
+  },
+  "oneclickSubscription": {
+    "message": "One-click subscription"
+  },
+  "notificationsAndReminders": {
+    "message": "Notifications and reminders"
+  },
+  "requiredAccessKey": {
+    "message": "Required, please enter the correct access key"
+  },
+  "requiredAddress": {
+    "message": "Required. Please enter you %{service} address"
+  },
+  "requiredExtensionBaseURI": {
+    "message": "Required. Please enter the %{service} extension URL after installation"
+  },
+  "requiresReaderSupport": {
+    "message": "Requires reader support, such as Reeder, etc."
+  },
+  "RSSNotFound": {
+    "message": "No RSS found"
+  },
+  "RSSHubRadarOptions": {
+    "message": "RSSHub Radar Options"
+  },
+  "rules": {
+    "message": "Rules"
+  },
+  "rulesUpdate": {
+    "message": "Rules update"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "showCornerBadge": {
+    "message": "Show corner badge"
+  },
+  "subscribeTo": {
+    "message": "Subscribe to"
+  },
+  "subscribeToLocalReader": {
+    "message": "Subscribe to local reader"
+  },
+  "successfullySaved": {
+    "message": "Successfully saved"
+  },
+  "updatedTimeAgo": {
+    "message": "%{hours}h %{minutes}m since last update"
+  },
+  "version": {
+    "message": "Version"
+  },
+  "RSSHubRadarInfo": {
+    "message": "RSSHub Radar is a spin-off of <a target=\"_blank\" href=\"https://docs.rsshub.app/en/\">RSSHub</a> that helps you quickly discover and subscribe to RSS and RSSHub for your current site, and the project is <a target=\"_blank\" href=\"https://github.com/DIYgod/RSSHub-Radar\">open source</a> under the MIT license and is completely free to use, but as the project grows in size, it also needs to be funded to sustain its maintenance and development"
+  },
+  "sponsoredDevelopment": {
+    "message": "Sponsored development of RSSHub Radar: <a target=\"_blank\" href=\"https://docs.rsshub.app/en/support/\">https://docs.rsshub.app/en/support/</a>"
+  },
+  "updateLog": {
+    "message": "Update log"
+  },
+  "questionFeedback": {
+    "message": "Question Feedback"
+  },
+  "RSSHubDocumentation": {
+    "message": "RSSHub Documentation: <a target=\"_blank\" href=\"https://docs.rsshub.app/en/\">https://docs.rsshub.app/en/</a>"
+  },
+  "everythingIsPossibleWithRSS": {
+    "message": "Everything is possible with RSS"
+  }
+}
