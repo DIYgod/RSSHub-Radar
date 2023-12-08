@@ -1,83 +1,38 @@
 {
   "name": "rsshub-radar",
-  "version": "0.0.1",
-  "description": "Browser extension to detect available RSS and RSSHub for current page",
+  "displayName": "RSSHub Radar",
+  "version": "2.0.0",
+  "description": "Browser extension that simplifies finding and subscribing RSS and RSSHub",
+  "author": "DIYgod <i@diygod.me>",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack -w --mode=production --progress",
-    "build": "webpack --mode=production --progress",
-    "release": "npm run build && mkdir release && zip -r release/radar.zip dist",
-    "format": "eslint \"**/*.js\" --fix && prettier \"**/*.{js,scss,less}\" --write",
-    "format:staged": "eslint \"**/*.js\" --fix && pretty-quick --staged --verbose --pattern \"**/*.{js,scss,less}\"",
-    "format:check": "eslint \"**/*.js\" && prettier-check \"**/*.{js,scss,less}\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DIYgod/RSSHub-Radar.git"
-  },
-  "keywords": [
-    "rsshub",
-    "rss"
-  ],
-  "gitHooks": {
-    "pre-commit": "npm run format:staged"
-  },
-  "author": "DIYgod",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/DIYgod/RSSHub-Radar/issues"
-  },
-  "homepage": "https://github.com/DIYgod/RSSHub-Radar#readme",
-  "devDependencies": {
-    "@babel/core": "7.23.3",
-    "@babel/preset-env": "7.23.3",
-    "autoprefixer": "10.4.16",
-    "babel-loader": "9.1.3",
-    "babel-plugin-component": "1.1.1",
-    "copy-webpack-plugin": "11.0.0",
-    "css-loader": "6.8.1",
-    "cssnano": "5.1.14",
-    "eslint": "8.54.0",
-    "eslint-config-prettier": "9.0.0",
-    "eslint-loader": "4.0.2",
-    "eslint-plugin-prettier": "5.0.1",
-    "file-loader": "6.2.0",
-    "less": "4.2.0",
-    "less-loader": "11.1.3",
-    "mini-css-extract-plugin": "2.7.6",
-    "postcss-loader": "7.3.3",
-    "prettier": "2.8.3",
-    "prettier-check": "2.0.0",
-    "pretty-quick": "3.1.3",
-    "sass": "^1.69.5",
-    "sass-loader": "13.3.2",
-    "svg-inline-loader": "0.8.2",
-    "template-string-optimize-loader": "3.0.0",
-    "url-loader": "4.1.1",
-    "vue-loader": "15.10.1",
-    "vue-style-loader": "^4.1.3",
-    "vue-template-compiler": "2.7.15",
-    "webpack": "5.89.0",
-    "webpack-cli": "5.1.4",
-    "yorkie": "2.0.0"
+    "dev": "plasmo dev",
+    "build": "plasmo build",
+    "package": "plasmo package"
   },
   "dependencies": {
-    "buffer": "^6.0.3",
-    "clipboard": "2.0.11",
-    "element-ui": "2.15.14",
-    "https-browserify": "^1.0.0",
-    "i18n-js": "^4.3.2",
-    "lodash": "^4.17.21",
-    "md5.js": "^1.3.5",
-    "process": "^0.11.10",
-    "psl": "1.9.0",
-    "route-recognizer": "0.3.4",
-    "rss-parser": "3.13.0",
-    "stream-browserify": "^3.0.0",
-    "stream-http": "^3.2.0",
-    "timers-browserify": "^2.0.12",
-    "url": "^0.11.3",
-    "vue": "2",
-    "vue-router": "3.6.5"
+    "@plasmohq/messaging": "^0.6.1",
+    "plasmo": "0.84.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "4.1.1",
+    "@types/chrome": "0.0.251",
+    "@types/node": "20.9.0",
+    "@types/react": "18.2.37",
+    "@types/react-dom": "18.2.15",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "prettier": "3.0.3",
+    "tailwindcss": "^3.3.6",
+    "typescript": "5.2.2"
+  },
+  "manifest": {
+    "host_permissions": [
+      "https://*/*"
+    ],
+    "permissions": [
+      "tabs"
+    ]
   }
 }

@@ -1,5 +1,0 @@
-.github/
-.vscode/
-dist
-release
-*.config.js
