@@ -6,7 +6,7 @@ function IndexPopup() {
 
   return (
     <div className="min-w-[350px] p-5">
-      <a className="absolute right-4" href="/options.html">
+      <a className="absolute right-4" href="/options.html" target="_blank">
         <i className="icon-[mingcute--settings-3-fill] w-5 h-5 text-slate-600 hover:text-black transition-colors"></i>
       </a>
       <div className="space-y-4">
