@@ -19,8 +19,10 @@ const getRSS = async (tabId, url) => {
     target: "offscreen",
     data: {
       name: "requestRSS",
-      html,
-      url,
+      body: {
+        html,
+        url,
+      }
     }
   })
 }
