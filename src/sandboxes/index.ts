@@ -1,6 +1,6 @@
-import type { Rules } from "~types"
-import { getPageRSS } from "./rss"
-import { getPageRSSHub, getWebsiteRSSHub } from "./rsshub"
+import type { Rules } from "~/utils/types"
+import { getPageRSS } from "~/utils/rss"
+import { getPageRSSHub, getWebsiteRSSHub } from "~/utils/rsshub"
 
 export { }
 

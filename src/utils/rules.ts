@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { defaultRules } from './radar-rules';
-import { defaultConfig } from '../common/config';
+import { defaultConfig } from './config';
 
 export function parseRules(rules) {
     let incomeRules = rules;

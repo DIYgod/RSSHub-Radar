@@ -1,5 +1,5 @@
 import { sendToContentScript } from "@plasmohq/messaging"
-import { setupOffscreenDocument } from "./offscreen"
+import { setupOffscreenDocument } from "~/utils/offscreen"
 
 export {}
 console.log("HELLO WORLD FROM BGSCRIPTS")

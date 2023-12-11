@@ -2,7 +2,7 @@ import psl from 'psl';
 import RouteRecognizer from 'route-recognizer';
 import _ from 'lodash';
 import { parseRules } from './rules';
-import { type Rule, type Rules } from '../types';
+import { type Rule, type Rules } from './types';
 
 function ruleHandler(rule: Rule, params, url, html, success, fail) {
     const run = () => {
