@@ -11,3 +11,11 @@ export type Rules = {
     [subdomain: string]: Rule[] | string;
   };
 };
+
+export type RSSData = {
+  url: string;
+  title: string;
+  image?: string;
+  path?: string;
+  isDocs?: boolean;
+}

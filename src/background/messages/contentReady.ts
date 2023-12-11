@@ -1,10 +1,10 @@
 import type { PlasmoMessaging } from "@plasmohq/messaging"
-import { setRSS } from "~/background"
+import { getRSS } from "~/background"
  
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
-  console.log("response RSS", req)
-  
-  setRSS(req.body.tabId, req.body.rss)
+  console.log("content ready", req)
+
+  getRSS(req.sender.tab.id, req.sender.tab.url)
 }
 
 export default handler

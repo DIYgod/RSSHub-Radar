@@ -1,4 +1,5 @@
 import RSSParser from "rss-parser"
+import type { RSSData } from "./types"
 
 const rssParser = new RSSParser()
 const parser = new DOMParser()
@@ -28,7 +29,7 @@ export async function getPageRSS(data: {
     return new URL(url, location.href).toString()
   }
 
-  let pageRSS = []
+  let pageRSS: RSSData[] = []
   const unique = {
     data: {},
     save: function (url) {

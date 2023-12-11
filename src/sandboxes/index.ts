@@ -12,6 +12,7 @@ window.addEventListener("message", async (event: MessageEvent<{
     html: string
     url: string
     rules: Rules
+    tabId: number
   }
 }>) => {
   if (event.data?.name === "requestRSS") {
@@ -33,6 +34,7 @@ window.addEventListener("message", async (event: MessageEvent<{
       name: "responseRSS",
       body: {
         url: event.data.body.url,
+        tabId: event.data.body.tabId,
         rss: {
           pageRSS,
           pageRSSHub,

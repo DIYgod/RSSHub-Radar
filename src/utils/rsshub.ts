@@ -2,7 +2,7 @@ import psl from 'psl';
 import RouteRecognizer from 'route-recognizer';
 import _ from 'lodash';
 import { parseRules } from './rules';
-import { type Rule, type Rules } from './types';
+import type { Rule, Rules, RSSData } from './types';
 
 function ruleHandler(rule: Rule, params, url, html, success, fail) {
     const run = () => {
@@ -135,7 +135,7 @@ export function getPageRSSHub(data: {
                         }
                     });
                 });
-                const result = [];
+                const result: RSSData[] = [];
                 Promise.all(
                     recognized.map(
                         (recog) =>
@@ -205,7 +205,7 @@ export function getWebsiteRSSHub(data: {
                 title: formatBlank(rules[domain]._name, rule.title),
                 url: rule.docs,
                 isDocs: true,
-            }));
+            }) as RSSData);
         } else {
             return [];
         }

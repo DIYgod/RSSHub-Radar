@@ -1,30 +1,76 @@
 import { sendToContentScript } from "@plasmohq/messaging"
 import { setupOffscreenDocument } from "~/utils/offscreen"
+import type { RSSData } from "~/utils/types";
 
 export {}
 console.log("HELLO WORLD FROM BGSCRIPTS")
 
-const getRSS = async (tabId, url) => {
+const savedRSS: {
+  [tabId: number]: {
+    pageRSS: RSSData[],
+    pageRSSHub: RSSData[],
+    websiteRSSHub: RSSData[],
+  }
+} = {}
+
+chrome.action.setBadgeBackgroundColor({
+  color: '#F62800',
+});
+
+chrome.action.setBadgeTextColor({
+    color: '#fff',
+});
+
+export const getRSS = async (tabId, url) => {
   console.debug("Get RSS", tabId, url)
-  await setupOffscreenDocument("tabs/offscreen.html")
 
-  console.debug("Send to content script requestHTML")
-  const html = await sendToContentScript({
-    name: "requestHTML"
-  })
+  if (savedRSS[tabId]) {
+    console.debug("Already have RSS", savedRSS[tabId])
+    setRSS(tabId, savedRSS[tabId])
+    return
+  } else {
+    await setupOffscreenDocument("tabs/offscreen.html")
 
-  console.debug("Get html", html)
-  console.debug("Send to offscreen")
-  chrome.runtime.sendMessage({
-    target: "offscreen",
-    data: {
-      name: "requestRSS",
-      body: {
-        html,
-        url,
+    console.debug("Send to content script requestHTML")
+    const html = await sendToContentScript({
+      name: "requestHTML"
+    })
+  
+    console.debug("Get html", html)
+    console.debug("Send to offscreen")
+    chrome.runtime.sendMessage({
+      target: "offscreen",
+      data: {
+        name: "requestRSS",
+        body: {
+          tabId,
+          html,
+          url,
+        }
       }
-    }
-  })
+    })
+  }
+}
+
+export const setRSS = (tabId, data: {
+  pageRSS: RSSData[],
+  pageRSSHub: RSSData[],
+  websiteRSSHub: RSSData[],
+}) => {
+  console.debug("Set RSS", tabId, data)
+
+  savedRSS[tabId] = data
+
+  let text = ''
+  if (data.pageRSS.length || data.pageRSSHub.length) {
+    text = (data.pageRSS.length + data.pageRSSHub.length) + ''
+  } else if (data.websiteRSSHub.length) {
+    text = ' '
+  }
+  chrome.action.setBadgeText({
+    text,
+    tabId,
+  });
 }
 
 chrome.tabs.onActivated.addListener((tab) => {
@@ -42,6 +88,10 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   }
 })
 
+chrome.tabs.onRemoved.addListener((tabId) => {
+  delete savedRSS[tabId]
+});
+
 // chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 //     if (sender.tab && sender.tab.active) {
 //         if (msg.text === 'setPageRSS') {
@@ -53,10 +103,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 //     if (msg.text === 'getAllRSS') {
 //         sendResponse(getAllRSS(msg.tabId));
 //     }
-// });
-
-// chrome.tabs.onRemoved.addListener((tabId) => {
-//     removeRSS(tabId);
 // });
 
 // getConfig((config) => {
