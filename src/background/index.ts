@@ -1,6 +1,6 @@
 import { sendToContentScript } from "@plasmohq/messaging"
-import { setupOffscreenDocument } from "~/utils/offscreen"
-import type { RSSData } from "~/utils/types";
+import { setupOffscreenDocument } from "~/lib/offscreen"
+import type { RSSData } from "~/lib/types";
 
 export {}
 console.log("HELLO WORLD FROM BGSCRIPTS")

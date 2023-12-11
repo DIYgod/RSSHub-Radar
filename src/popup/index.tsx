@@ -1,5 +1,5 @@
 import { useState } from "react"
-import "~/utils/style.css"
+import "~/lib/style.css"
 import { sendToBackground } from "@plasmohq/messaging"
 import RSSList from "./RSSList"
 
@@ -19,7 +19,6 @@ function IndexPopup() {
       websiteRSSHub: [],
     }, res))
   })
-  console.log("data", data)
 
   return (
     <div className="min-w-[350px] p-5">

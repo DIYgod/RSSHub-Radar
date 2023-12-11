@@ -1,5 +1,5 @@
 import RSSItem from './RSSItem'
-import type { RSSData } from '~/utils/types'
+import type { RSSData } from '~/lib/types'
 
 function RSSList({
   title,

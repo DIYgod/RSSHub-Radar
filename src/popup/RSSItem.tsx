@@ -1,8 +1,8 @@
 import { useState } from "react"
 
-import { defaultConfig, getConfig } from "~/utils/config"
-import type { RSSData } from "~/utils/types"
-import { Button } from "~/utils/components/Button"
+import { defaultConfig, getConfig } from "~/lib/config"
+import type { RSSData } from "~/lib/types"
+import { Button } from "~/lib/components/Button"
 
 function RSSItem({ item }: { item: RSSData }) {
   const [config, setConfig] = useState(defaultConfig)
