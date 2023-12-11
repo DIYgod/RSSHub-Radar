@@ -29,7 +29,7 @@ window.addEventListener("message", async (event: MessageEvent<{
       url: event.data.body.url,
       rules: event.data.body.rules,
     })
-    console.log("RSS", pageRSS, pageRSSHub, websiteRSSHub)
+    console.debug("RSS", pageRSS, pageRSSHub, websiteRSSHub)
     event.source.postMessage({
       name: "responseRSS",
       body: {

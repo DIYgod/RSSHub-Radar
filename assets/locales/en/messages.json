@@ -32,8 +32,8 @@
   "currentSiteRSSHub": {
     "message": "RSSHub for the current site"
   },
-  "documentation": {
-    "message": "Info"
+  "document": {
+    "message": "Document"
   },
   "enable": {
     "message": "Enable"

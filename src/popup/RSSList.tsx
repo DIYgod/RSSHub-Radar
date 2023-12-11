@@ -16,7 +16,7 @@ function RSSList({
         <h2 className="text-base font-bold">{chrome.i18n.getMessage(title)}</h2>
       <ul>
         {list.map((item) => (
-          <RSSItem key={item.url} item={item} />
+          <RSSItem key={item.url + item.title} item={item} />
         ))}
       </ul>
     </div>
