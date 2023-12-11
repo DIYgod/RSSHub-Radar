@@ -52,6 +52,10 @@ export const getRSS = async (tabId, url) => {
   }
 }
 
+export const getCachedRSS = (tabId) => {
+  return savedRSS[tabId]
+}
+
 export const setRSS = (tabId, data: {
   pageRSS: RSSData[],
   pageRSSHub: RSSData[],
@@ -84,6 +88,7 @@ chrome.tabs.onActivated.addListener((tab) => {
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.url && tab.active) {
+    delete savedRSS[tabId];
     getRSS(tabId, changeInfo.url);
   }
 })
