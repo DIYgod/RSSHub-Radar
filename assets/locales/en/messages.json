@@ -3,7 +3,7 @@
     "message": "Easily find and subscribe to RSS and RSSHub."
   },
   "accessKey": {
-    "message": "Access key"
+    "message": "Access key for the current RSSHub instance"
   },
   "about": {
     "message": "About"
@@ -27,7 +27,7 @@
     "message": "RSSHub for the current page"
   },
   "customRSSHubDomain": {
-    "message": "Custom RSSHub domain name"
+    "message": "RSSHub instance"
   },
   "currentSiteRSSHub": {
     "message": "RSSHub for the current site"
@@ -69,7 +69,7 @@
     "message": "Generate access code"
   },
   "hotKey": {
-    "message": "Hot key"
+    "message": "Hotkey"
   },
   "joinRSSHub": {
     "message": "Join <a href=\"https://docs.rsshub.app\" target=\"_blank\">RSSHub</a> to make everything RSSible!"
@@ -84,7 +84,7 @@
     "message": "One-click subscription"
   },
   "notificationsAndReminders": {
-    "message": "Notifications and reminders"
+    "message": "Badge reminder"
   },
   "requiredAccessKey": {
     "message": "Required, please enter the correct access key"
@@ -112,6 +112,12 @@
   },
   "settings": {
     "message": "Settings"
+  },
+  "RSSHubRelatedSettings": {
+    "message": "RSSHub Related Settings"
+  },
+  "quickSubscription": {
+    "message": "Quick Subscriptions"
   },
   "showCornerBadge": {
     "message": "Show corner badge"

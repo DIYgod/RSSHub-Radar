@@ -47,7 +47,7 @@ export async function getConfig() {
     return Object.assign({}, defaultConfig, await storage.get("config"));
 }
 
-export function saveConfig(config: typeof defaultConfig) {
+export function setConfig(config: typeof defaultConfig) {
     if (!config.rsshubDomain) {
         config.rsshubDomain = defaultConfig.rsshubDomain;
     }

@@ -17,7 +17,7 @@ function Siderbar() {
   }]
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-[calc(100vh-80px)] sticky top-10">
       <div>
         <div className="px-4 flex items-center space-x-2 text-orange-500 text-xl font-bold mb-8">
           <img className="w-10 h-10" src={RSSHubIcon} /><span>RSSHub Radar</span>

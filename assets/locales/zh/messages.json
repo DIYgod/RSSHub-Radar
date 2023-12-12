@@ -6,7 +6,7 @@
     "message": "关于"
   },
   "accessKey": {
-    "message": "访问密钥"
+    "message": "当前 RSSHub 实例的访问密钥"
   },
   "clickToSet": {
     "message": "点此设置"
@@ -27,7 +27,7 @@
     "message": "适用于当前页面的 RSSHub"
   },
   "customRSSHubDomain": {
-    "message": "自定义 RSSHub 域名"
+    "message": "RSSHub 实例"
   },
   "currentSiteRSSHub": {
     "message": "适用于当前网站的 RSSHub"
@@ -81,7 +81,7 @@
     "message": "本地阅读器"
   },
   "notificationsAndReminders": {
-    "message": "通知与提醒"
+    "message": "角标提醒"
   },
   "oneclickSubscription": {
     "message": "一键订阅"
@@ -112,6 +112,12 @@
   },
   "settings": {
     "message": "设置"
+  },
+  "RSSHubRelatedSettings": {
+    "message": "RSSHub 相关设置"
+  },
+  "quickSubscription": {
+    "message": "快速订阅"
   },
   "showCornerBadge": {
     "message": "角标提醒"
