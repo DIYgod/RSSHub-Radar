@@ -1,13 +1,23 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { Button } from "~/lib/components/Button"
 import { defaultConfig, getConfig } from "~/lib/config"
 import type { RSSData } from "~/lib/types"
 import RSSHubIcon from "data-base64:~/assets/icon.png"
+import { useCopyToClipboard } from 'usehooks-ts'
 
 function RSSItem({ item }: { item: RSSData }) {
   const [config, setConfig] = useState(defaultConfig)
   getConfig().then(setConfig)
+  const [_, copy] = useCopyToClipboard()
+  const [copied, setCopied] = useState(false)
+  useEffect(() => {
+    if (copied) {
+      setTimeout(() => {
+        setCopied(false)
+      }, 1000)
+    }
+  }, [copied])
 
   return (
     <li className="flex mb-4 items-center space-x-2 w-max min-w-full">
@@ -29,8 +39,11 @@ function RSSItem({ item }: { item: RSSData }) {
         </Button>
       )}
       {!item.isDocs && (
-        <Button variant="rss" size="sm" data-clipboard-text={item.url}>
-          {chrome.i18n.getMessage("copy")}
+        <Button variant="rss" size="sm" className="w-[60px]" onClick={() => {
+          copy(item.url)
+          setCopied(true)
+        }}>
+          {chrome.i18n.getMessage(copied ? "copied" : "copy")}
         </Button>
       )}
       {!item.isDocs && config.submitto.checkchan && config.submitto.checkchanBase ? (

@@ -25,7 +25,8 @@
     "route-recognizer": "^0.3.4",
     "rss-parser": "^3.13.0",
     "tailwind-merge": "^2.1.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "usehooks-ts": "^2.9.1"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "4.1.1",
