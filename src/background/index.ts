@@ -33,7 +33,8 @@ export const getRSS = async (tabId, url) => {
 
     console.debug("Send to content script requestHTML")
     const html = await sendToContentScript({
-      name: "requestHTML"
+      name: "requestHTML",
+      tabId,
     })
   
     console.debug("Get html", html)
