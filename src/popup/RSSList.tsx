@@ -2,10 +2,10 @@ import RSSItem from './RSSItem'
 import type { RSSData } from '~/lib/types'
 
 function RSSList({
-  title,
+  type,
   list,
 }: {
-  title: string
+  type: string
   list: RSSData[]
 }) {
   if (list.length === 0) {
@@ -13,10 +13,10 @@ function RSSList({
   }
   return (
     <div className="space-y-4">
-        <h2 className="text-base font-bold">{chrome.i18n.getMessage(title)}</h2>
+        <h2 className="text-base font-bold">{chrome.i18n.getMessage(type)}</h2>
       <ul>
         {list.map((item) => (
-          <RSSItem key={item.url + item.title} item={item} />
+          <RSSItem key={item.url + item.title} item={item} type={type} />
         ))}
       </ul>
     </div>

@@ -5,8 +5,15 @@ import { defaultConfig, getConfig } from "~/lib/config"
 import type { RSSData } from "~/lib/types"
 import RSSHubIcon from "data-base64:~/assets/icon.png"
 import { useCopyToClipboard } from 'usehooks-ts'
+import MD5 from 'md5.js';
 
-function RSSItem({ item }: { item: RSSData }) {
+function RSSItem({
+  item,
+  type,
+}: {
+  item: RSSData
+  type: string
+}) {
   const [config, setConfig] = useState(defaultConfig)
   getConfig().then(setConfig)
   const [_, copy] = useCopyToClipboard()
@@ -19,28 +26,38 @@ function RSSItem({ item }: { item: RSSData }) {
     }
   }, [copied])
 
+  let url = item.url.replace('{rsshubDomain}', config.rsshubDomain);
+  if (type === 'currentPageRSS' && config.rsshubAccessControl.enabled) {
+    if (config.rsshubAccessControl.useCode) {
+      url = `${url}?code=${new MD5().update(item.path + config.rsshubAccessControl.accessKey).digest('hex')}`
+    } else {
+      url = `${url}?key=${config.rsshubAccessControl.accessKey}`
+    }
+  }
+  url = encodeURI(url);
+
   return (
     <li className="flex mb-4 items-center space-x-2 w-max min-w-full">
       <img className="w-8 h-8" src={item.image || RSSHubIcon} />
       <a
         target="_blank"
-        href={item.url}
+        href={url}
         className="w-48 cursor-pointer flex flex-col justify-between text-black flex-1">
         <span className="text-[13px] truncate">{item.title}</span>
         <span className="text-xs truncate text-zinc-400">
-          {item.url.replace("https://", "").replace("http://", "")}
+          {url.replace("https://", "").replace("http://", "")}
         </span>
       </a>
       {item.isDocs && (
         <Button variant="rss" size="sm">
-          <a target="_blank" href={item.url}>
+          <a target="_blank" href={url}>
             {chrome.i18n.getMessage("document")}
           </a>
         </Button>
       )}
       {!item.isDocs && (
         <Button variant="rss" size="sm" className="w-[60px]" onClick={() => {
-          copy(item.url)
+          copy(url)
           setCopied(true)
         }}>
           {chrome.i18n.getMessage(copied ? "copied" : "copy")}
@@ -55,7 +72,7 @@ function RSSItem({ item }: { item: RSSData }) {
               ""
             )}/index.html#/check/add?title=${encodeURI(
               item.title
-            )}&url=${encodeURI(item.url)}&type=rss&icon=${encodeURI(
+            )}&url=${encodeURI(url)}&type=rss&icon=${encodeURI(
               item.image
             )}`}
           >
@@ -70,7 +87,7 @@ function RSSItem({ item }: { item: RSSData }) {
           <a
             target="_blank"
             href={`{config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=bookmarklets--subscribe&feed_url=${encodeURI(
-              item.url
+              url
             )}`}
           >
             {chrome.i18n.getMessage("subscribe to")} TTRSS
@@ -86,7 +103,7 @@ function RSSItem({ item }: { item: RSSData }) {
             href={`${config.submitto.minifluxDomain.replace(
               /\/$/,
               ""
-            )}/bookmarklet?uri=${encodeURI(item.url)}`}
+            )}/bookmarklet?uri=${encodeURI(url)}`}
           >
             {chrome.i18n.getMessage("subscribe to")} Miniflux
           </a>
@@ -101,7 +118,7 @@ function RSSItem({ item }: { item: RSSData }) {
             href={`${config.submitto.freshrssDomain.replace(
               /\/$/,
               ""
-            )}/i/?c=feed&a=add&url_rss=${encodeURI(item.url)}`}
+            )}/i/?c=feed&a=add&url_rss=${encodeURI(url)}`}
           >
             {chrome.i18n.getMessage("subscribe to")} FreshRSS
           </a>
@@ -116,7 +133,7 @@ function RSSItem({ item }: { item: RSSData }) {
             href={`${config.submitto.nextcloudnewsDomain.replace(
               /\/$/,
               ""
-            )}/?subscribe_to=${encodeURI(item.url)}`}
+            )}/?subscribe_to=${encodeURI(url)}`}
           >
             {chrome.i18n.getMessage("subscribe to")} Nextcloud News
           </a>
@@ -129,7 +146,7 @@ function RSSItem({ item }: { item: RSSData }) {
           <a
             target="_blank"
             href={`https://feedly.com/i/subscription/feed/${encodeURI(
-              item.url
+              url
             )}`}
             className="rss-action rss-submitto-feedly">
             {chrome.i18n.getMessage("subscribe to")} Feedly
@@ -145,7 +162,7 @@ function RSSItem({ item }: { item: RSSData }) {
             href={`${config.submitto.inoreaderDomain.replace(
               /\/$/,
               ""
-            )}/?add_feed=${encodeURI(item.url)}`}
+            )}/?add_feed=${encodeURI(url)}`}
           >
             {chrome.i18n.getMessage("subscribe to")} Inoreader
           </a>
@@ -160,7 +177,7 @@ function RSSItem({ item }: { item: RSSData }) {
             href={`${config.submitto.feedbinDomain.replace(
               /\/$/,
               ""
-            )}/?subscribe=${encodeURI(item.url)}`}
+            )}/?subscribe=${encodeURI(url)}`}
           >
             {chrome.i18n.getMessage("subscribe to")} Feedbin
           </a>
@@ -173,7 +190,7 @@ function RSSItem({ item }: { item: RSSData }) {
           <a
             target="_blank"
             href={`https://theoldreader.com/feeds/subscribe?url=${encodeURI(
-              item.url
+              url
             )}`}
           >
             {chrome.i18n.getMessage("subscribe to")} The Old Reader
@@ -186,7 +203,7 @@ function RSSItem({ item }: { item: RSSData }) {
         <Button variant="rss" size="sm" className="border-[#61af4b] text-[#61af4b] hover:bg-[#61af4b]">
           <a
             target="_blank"
-            href={`https://feeds.pub/feed/${encodeURIComponent(item.url)}`}
+            href={`https://feeds.pub/feed/${encodeURIComponent(url)}`}
           >
             {chrome.i18n.getMessage("subscribe to")} Feeds.Pub
           </a>
@@ -198,7 +215,7 @@ function RSSItem({ item }: { item: RSSData }) {
         <Button variant="rss" size="sm" className="border-[#00af00] text-[#00af00] hover:bg-[#00af00]">
           <a
             target="_blank"
-            href={`https://bazqux.com/add?url=${encodeURIComponent(item.url)}`}
+            href={`https://bazqux.com/add?url=${encodeURIComponent(url)}`}
           >
             {chrome.i18n.getMessage("subscribe to")} BazQux Reader
           </a>
@@ -210,7 +227,7 @@ function RSSItem({ item }: { item: RSSData }) {
         <Button variant="rss" size="sm">
           <a
             target="_blank"
-            href={`feed://${item.url}`}
+            href={`feed://${url}`}
             className="rss-action rss-submitto-local">
             {chrome.i18n.getMessage("subscribe to local reader")}
           </a>

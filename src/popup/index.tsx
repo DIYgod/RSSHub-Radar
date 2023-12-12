@@ -33,9 +33,9 @@ function IndexPopup() {
           }}></p>
         </div>
       )}
-      <RSSList title="currentPageRSS" list={data.pageRSS} />
-      <RSSList title="currentPageRSSHub" list={data.pageRSSHub} />
-      <RSSList title="currentSiteRSSHub" list={data.websiteRSSHub} />
+      <RSSList type="currentPageRSS" list={data.pageRSS} />
+      <RSSList type="currentPageRSSHub" list={data.pageRSSHub} />
+      <RSSList type="currentSiteRSSHub" list={data.websiteRSSHub} />
     </div>
   )
 }
