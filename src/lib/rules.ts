@@ -4,11 +4,13 @@ import { defaultConfig } from './config';
 
 export function parseRules(rules) {
     let incomeRules = rules;
-    if (typeof rules === 'string') {
-        if (defaultConfig.enableFullRemoteRules) {
-            incomeRules = window['lave'.split('').reverse().join('')](rules);
-        } else {
-            incomeRules = JSON.parse(rules);
+    if (incomeRules) {
+        if (typeof rules === 'string') {
+            if (defaultConfig.enableFullRemoteRules) {
+                incomeRules = window['lave'.split('').reverse().join('')](rules);
+            } else {
+                incomeRules = JSON.parse(rules);
+            }
         }
     }
     return _.mergeWith(defaultRules, incomeRules, (objValue, srcValue) => {

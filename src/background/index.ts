@@ -1,6 +1,7 @@
 import { sendToContentScript } from "@plasmohq/messaging"
 import { setupOffscreenDocument } from "~/lib/offscreen"
 import type { RSSData } from "~/lib/types";
+import { Storage } from "@plasmohq/storage"
 
 export {}
 console.log("HELLO WORLD FROM BGSCRIPTS")
@@ -20,6 +21,10 @@ chrome.action.setBadgeBackgroundColor({
 chrome.action.setBadgeTextColor({
     color: '#fff',
 });
+
+const storage = new Storage({
+  area: "local"
+})
 
 export const getRSS = async (tabId, url) => {
   console.debug("Get RSS", tabId, url)
@@ -47,6 +52,7 @@ export const getRSS = async (tabId, url) => {
           tabId,
           html,
           url,
+          rules: await storage.get("rules"),
         }
       }
     })

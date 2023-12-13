@@ -1,12 +1,7 @@
 import { useRef } from "react";
 import { sendToBackground } from "@plasmohq/messaging"
-import { Storage } from "@plasmohq/storage"
 
 console.log("HELLO WORLD FROM OFFSCREEN")
-
-const storage = new Storage({
-    area: "local"
-})
 
 window.addEventListener('message', (event) => {
   if (event.data?.name === "responseRSS") {
@@ -20,14 +15,7 @@ function OffscreenPage() {
 
   chrome.runtime.onMessage.addListener(async (msg) => {
     console.debug("Received message from background", msg);
-    const rules = await storage.get("rules");
-    iframeRef.current?.contentWindow?.postMessage({
-      name: msg.data.name,
-      body: {
-        ...msg.data.body,
-        rules,
-      },
-    }, "*");
+    iframeRef.current?.contentWindow?.postMessage(msg.data, "*");
   })
 
   return (

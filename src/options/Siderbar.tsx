@@ -11,6 +11,10 @@ function Siderbar() {
     icon: "icon-[mingcute--settings-3-line]",
     text: "general",
   }, {
+    path: "/rules",
+    icon: "icon-[mingcute--list-check-2-line]",
+    text: "rules",
+  }, {
     path: "/about",
     icon: "icon-[mingcute--emoji-2-line]",
     text: "about",
