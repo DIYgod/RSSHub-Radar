@@ -26,7 +26,7 @@ function IndexPopup() {
       <a className="absolute right-4 h-6 flex items-center" href="/options.html" target="_blank">
         <i className="icon-[mingcute--settings-3-line] w-5 h-5 text-slate-600 hover:text-black transition-colors"></i>
       </a>
-      {!data.pageRSS && !data.pageRSSHub && !data.websiteRSSHub && (
+      {!data.pageRSS.length && !data.pageRSSHub.length && !data.websiteRSSHub.length && (
         <div className="space-y-4">
           <h2 className="text-base font-bold">( ´･･)ﾉ(._.`) <span>{chrome.i18n.getMessage("RSSNotFound")}</span></h2>
           <p dangerouslySetInnerHTML={{
