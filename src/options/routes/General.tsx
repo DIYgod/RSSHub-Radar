@@ -1,7 +1,7 @@
 import { Input } from "~/lib/components/Input"
 import { Label } from "~/lib/components/Label"
 import { Button } from "~/lib/components/Button"
-import { defaultConfig, getConfig, setConfig } from "~/lib/config"
+import { defaultConfig, setConfig } from "~/lib/config"
 import {
   Card,
   CardContent,
@@ -34,7 +34,7 @@ function General() {
               })} />
             </div>
             <div className="grid w-full items-center gap-2">
-              <Label>{chrome.i18n.getMessage("hotKey")}</Label>
+              <Label>{chrome.i18n.getMessage("popupWindowHotKey")}</Label>
               <Button variant="secondary" onClick={() => {
                 chrome.tabs.create({
                   url: 'chrome://extensions/shortcuts'
@@ -61,13 +61,18 @@ function General() {
                   <i className="icon-[mingcute--question-line]"></i>
                 </a>
               </Label>
-              <Input type="password" id="accessKey" value={config.rsshubAccessControl.accessKey} onChange={(e) => setConfig({
-                rsshubAccessControl: {
-                  enabled: !!e.target.value,
-                  accessKey: e.target.value,
-                  useCode: true,
-                }
-              })} />
+              <Input
+                type="password"
+                id="accessKey"
+                value={config.rsshubAccessControl.accessKey} onChange={(e) => setConfig({
+                  rsshubAccessControl: {
+                    enabled: !!e.target.value,
+                    accessKey: e.target.value,
+                    useCode: true,
+                  }
+                })}
+                placeholder={chrome.i18n.getMessage("configurationRequiredIfAccessKeysEnabled")}
+              />
             </div>
           </CardContent>
         </Card>
