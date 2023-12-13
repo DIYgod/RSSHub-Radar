@@ -2,6 +2,7 @@ import { sendToContentScript } from "@plasmohq/messaging"
 import { setupOffscreenDocument } from "~/lib/offscreen"
 import type { RSSData } from "~/lib/types";
 import { Storage } from "@plasmohq/storage"
+import AsyncLock from "async-lock"
 
 export {}
 console.log("HELLO WORLD FROM BGSCRIPTS")
@@ -28,6 +29,7 @@ const storage = new Storage({
 
 export const getRules = () => storage.get("rules")
 
+const lock = new AsyncLock();
 export const getRSS = async (tabId, url) => {
   console.debug("Get RSS", tabId, url)
 
@@ -36,27 +38,29 @@ export const getRSS = async (tabId, url) => {
     setRSS(tabId, savedRSS[tabId])
     return
   } else {
-    await setupOffscreenDocument("tabs/offscreen.html")
-
-    console.debug("Send to content script requestHTML")
-    const html = await sendToContentScript({
-      name: "requestHTML",
-      tabId,
-    })
+    await lock.acquire(tabId, async () => {
+      await setupOffscreenDocument("tabs/offscreen.html")
   
-    console.debug("Get html", html)
-    console.debug("Send to offscreen")
-    chrome.runtime.sendMessage({
-      target: "offscreen",
-      data: {
-        name: "requestRSS",
-        body: {
-          tabId,
-          html,
-          url,
-          rules: await getRules(),
+      console.debug("Send to content script requestHTML")
+      const html = await sendToContentScript({
+        name: "requestHTML",
+        tabId,
+      })
+
+      console.debug("Get html", html)
+      console.debug("Send to offscreen")
+      chrome.runtime.sendMessage({
+        target: "offscreen",
+        data: {
+          name: "requestRSS",
+          body: {
+            tabId,
+            html,
+            url,
+            rules: await getRules(),
+          }
         }
-      }
+      })
     })
   }
 }
@@ -96,9 +100,15 @@ chrome.tabs.onActivated.addListener((tab) => {
 })
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.url && tab.active) {
-    delete savedRSS[tabId];
-    getRSS(tabId, changeInfo.url);
+  if (tab.active) {
+    if (changeInfo.url) {
+      delete savedRSS[tabId];
+      getRSS(tabId, changeInfo.url);
+    } else if (changeInfo.status === "loading") {
+      delete savedRSS[tabId];
+    } else if (changeInfo.status === "complete") {
+      getRSS(tabId, changeInfo.url);
+    }
   }
 })
 
