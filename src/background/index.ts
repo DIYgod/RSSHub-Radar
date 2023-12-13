@@ -26,6 +26,8 @@ const storage = new Storage({
   area: "local"
 })
 
+export const getRules = () => storage.get("rules")
+
 export const getRSS = async (tabId, url) => {
   console.debug("Get RSS", tabId, url)
 
@@ -52,7 +54,7 @@ export const getRSS = async (tabId, url) => {
           tabId,
           html,
           url,
-          rules: await storage.get("rules"),
+          rules: await getRules(),
         }
       }
     })

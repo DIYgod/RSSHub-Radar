@@ -1,12 +1,13 @@
 import _ from 'lodash';
 import { defaultRules } from './radar-rules';
 import { defaultConfig } from './config';
+import type { Rules } from './types';
 
-export function parseRules(rules) {
+export function parseRules(rules: string, forceJSON?: boolean) {
     let incomeRules = rules;
     if (incomeRules) {
         if (typeof rules === 'string') {
-            if (defaultConfig.enableFullRemoteRules) {
+            if (defaultConfig.enableFullRemoteRules && !forceJSON) {
                 incomeRules = window['lave'.split('').reverse().join('')](rules);
             } else {
                 incomeRules = JSON.parse(rules);
@@ -19,23 +20,5 @@ export function parseRules(rules) {
         } else if (_.isFunction(objValue)) {
             return objValue;
         }
-    });
-}
-
-export function getList(data) {
-    const rules = parseRules(data.rules);
-    for (const rule in rules) {
-        for (const subrule in rules[rule]) {
-            if (subrule[0] !== '_') {
-                rules[rule][subrule].forEach((item) => {
-                    delete item.source;
-                    delete item.target;
-                    delete item.script;
-                    delete item.verification;
-                    delete item.test;
-                });
-            }
-        }
-    }
-    return rules;
+    }) as Rules;
 }

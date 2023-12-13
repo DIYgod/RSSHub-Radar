@@ -73,4 +73,8 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .content a {
+    @apply underline text-orange-500;
+  }
 }

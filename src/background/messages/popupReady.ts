@@ -1,7 +1,7 @@
 import type { PlasmoMessaging } from "@plasmohq/messaging"
 import { getCachedRSS } from "~/background"
  
-const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
+const handler: PlasmoMessaging.MessageHandler = (req, res) => {
   console.debug("popup ready", req)
 
   chrome.tabs.query({

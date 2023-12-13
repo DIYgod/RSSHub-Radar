@@ -54,7 +54,7 @@
     "message": "Full remote updates are disabled due to browser limitations"
   },
   "forMoreRulesJoinUs": {
-    "message": "For more rules support, <a target=\"_blank\" href=\"https://docs.rsshub.app/en/joinus/quick-start.html\">join us</a>！"
+    "message": "For more rules support, <a target=\"_blank\" href=\"https://docs.rsshub.app/joinus/quick-start.html\">join us</a>！"
   },
   "general": {
     "message": "General"
@@ -78,7 +78,7 @@
     "message": "No RSS found"
   },
   "rules": {
-    "message": "Rules"
+    "message": "Radar Rules"
   },
   "rulesUpdate": {
     "message": "Rules update"
@@ -118,5 +118,8 @@
   },
   "fillInstanceDomain": {
     "message": "Please fill in your instance domain"
+  },
+  "totalNumberOfRules": {
+    "message": "Total number of rules"
   }
 }

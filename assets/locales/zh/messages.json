@@ -54,7 +54,7 @@
     "message": "由于浏览器限制，完整的远程更新被禁用"
   },
   "forMoreRulesJoinUs": {
-    "message": "更多规则支持中，快来<a target=\"_blank\" href=\"https://docs.rsshub.app/joinus/quick-start.html\">参与我们</a>吧！"
+    "message": "更多规则支持中，快来<a target=\"_blank\" href=\"https://docs.rsshub.app/zh/joinus/quick-start.html\">参与我们</a>吧！"
   },
   "general": {
     "message": "常规"
@@ -78,7 +78,7 @@
     "message": "没有检测到 RSS"
   },
   "rules": {
-    "message": "规则列表"
+    "message": "Radar 规则"
   },
   "rulesUpdate": {
     "message": "规则更新"
@@ -118,5 +118,8 @@
   },
   "fillInstanceDomain": {
     "message": "请填写你的实例域名"
+  },
+  "totalNumberOfRules": {
+    "message": "规则总数"
   }
 }
