@@ -1,9 +1,20 @@
 import { addDynamicIconSelectors } from "@iconify/tailwind"
+import { quickSubscriptions } from "./src/lib/quick-subscriptions"
+
+const safelist = []
+quickSubscriptions.forEach((subscription) => {
+  if (subscription.themeColor) {
+    safelist.push(`border-[${subscription.themeColor}]`)
+    safelist.push(`text-[${subscription.themeColor}]`)
+    safelist.push(`hover:bg-[${subscription.themeColor}]`)
+  }
+})
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
   content: ["./**/*.tsx"],
+  safelist,
   theme: {
     container: {
       center: true,

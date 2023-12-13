@@ -67,11 +67,11 @@ function General() {
             {quickSubscriptions.map((quickSubscription) => (
               <div className="flex items-center space-x-2 h-10">
                 <Switch id={quickSubscription.key} />
-                <Label className="w-28" htmlFor={quickSubscription.key}>{quickSubscription.name}</Label>
-                {quickSubscription.domainKey ? (
-                  <Input className="flex-1" id={quickSubscription.domainKey} value={config.submitto[quickSubscription.domainKey]}/>
+                <Label className="w-28" htmlFor={quickSubscription.key}>{chrome.i18n.getMessage(quickSubscription.name) || quickSubscription.name}</Label>
+                {"subscribeDomainKey" in quickSubscription ? (
+                  <Input className="flex-1" id={quickSubscription.subscribeDomainKey} value={config.submitto[quickSubscription.subscribeDomainKey]}/>
                 ) : (
-                  <Input className="flex-1" disabled id={quickSubscription.domainKey} value={config.submitto[quickSubscription.domainKey]}/>
+                  <Input className="flex-1" disabled value={quickSubscription.subscribeDomain}/>
                 )}
               </div>
             ))}

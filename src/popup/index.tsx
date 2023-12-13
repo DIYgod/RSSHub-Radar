@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "~/lib/style.css"
 import { sendToBackground } from "@plasmohq/messaging"
 import RSSList from "./RSSList"
@@ -9,16 +9,17 @@ function IndexPopup() {
     pageRSSHub: [],
     websiteRSSHub: [],
   })
-  sendToBackground({
-    name: "popupReady",
-  }).then((res) => {
-    console.log(res)
-    setData(Object.assign({
-      pageRSS: [],
-      pageRSSHub: [],
-      websiteRSSHub: [],
-    }, res))
-  })
+  useEffect(() => {
+    sendToBackground({
+      name: "popupReady",
+    }).then((res) => {
+      setData(Object.assign({
+        pageRSS: [],
+        pageRSSHub: [],
+        websiteRSSHub: [],
+      }, res))
+    })
+  }, [])
 
   return (
     <div className="min-w-[350px] p-5">

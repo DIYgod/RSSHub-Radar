@@ -3,7 +3,7 @@
     "message": "Easily find and subscribe to RSS and RSSHub."
   },
   "accessKey": {
-    "message": "Access key for the current RSSHub instance"
+    "message": "Access key"
   },
   "about": {
     "message": "About"
@@ -111,10 +111,10 @@
     "message": "Rules update"
   },
   "settings": {
-    "message": "Settings"
+    "message": "Extension Settings"
   },
   "RSSHubRelatedSettings": {
-    "message": "RSSHub Related Settings"
+    "message": "RSSHub Settings"
   },
   "quickSubscription": {
     "message": "Quick Subscriptions"

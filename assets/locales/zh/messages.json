@@ -6,7 +6,7 @@
     "message": "关于"
   },
   "accessKey": {
-    "message": "当前 RSSHub 实例的访问密钥"
+    "message": "访问密钥"
   },
   "clickToSet": {
     "message": "点此设置"
@@ -111,10 +111,10 @@
     "message": "规则更新"
   },
   "settings": {
-    "message": "设置"
+    "message": "扩展设置"
   },
   "RSSHubRelatedSettings": {
-    "message": "RSSHub 相关设置"
+    "message": "RSSHub 设置"
   },
   "quickSubscription": {
     "message": "快速订阅"

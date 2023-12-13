@@ -6,6 +6,7 @@ import type { RSSData } from "~/lib/types"
 import RSSHubIcon from "data-base64:~/assets/icon.png"
 import { useCopyToClipboard } from 'usehooks-ts'
 import MD5 from 'md5.js';
+import { quickSubscriptions } from "~/lib/quick-subscriptions"
 
 function RSSItem({
   item,
@@ -35,6 +36,7 @@ function RSSItem({
     }
   }
   url = encodeURI(url);
+  const encodedUrl = encodeURIComponent(url);
 
   return (
     <li className="flex mb-4 items-center space-x-2 w-max min-w-full">
@@ -63,178 +65,37 @@ function RSSItem({
           {chrome.i18n.getMessage(copied ? "copied" : "copy")}
         </Button>
       )}
-      {!item.isDocs && config.submitto.checkchan && config.submitto.checkchanBase ? (
-        <Button variant="rss" size="sm" className="border-[#f28f34] text-[#f28f34] hover:bg-[#f28f34]">
-          <a
-            target="_blank"
-            href={`${config.submitto.checkchanBase.replace(
-              /\/$/,
-              ""
-            )}/index.html#/check/add?title=${encodeURI(
-              item.title
-            )}&url=${encodeURI(url)}&type=rss&icon=${encodeURI(
-              item.image
-            )}`}
-          >
-            {chrome.i18n.getMessage("subscribe to")} CheckChan
-          </a>
-        </Button>
-      ) : (
-        ""
-      )}
-      {!item.isDocs && config.submitto.ttrss && config.submitto.ttrssDomain ? (
-        <Button variant="rss" size="sm" className="border-[#f28f34] text-[#f28f34] hover:bg-[#f28f34]">
-          <a
-            target="_blank"
-            href={`{config.submitto.ttrssDomain.replace(/\/$/, '')}/public.php?op=bookmarklets--subscribe&feed_url=${encodeURI(
-              url
-            )}`}
-          >
-            {chrome.i18n.getMessage("subscribe to")} TTRSS
-          </a>
-        </Button>
-      ) : (
-        ""
-      )}
-      {!item.isDocs && config.submitto.miniflux && config.submitto.minifluxDomain ? (
-        <Button variant="rss" size="sm" className="border-[#33995b] text-[#33995b] hover:bg-[#33995b]">
-          <a
-            target="_blank"
-            href={`${config.submitto.minifluxDomain.replace(
-              /\/$/,
-              ""
-            )}/bookmarklet?uri=${encodeURI(url)}`}
-          >
-            {chrome.i18n.getMessage("subscribe to")} Miniflux
-          </a>
-        </Button>
-      ) : (
-        ""
-      )}
-      {!item.isDocs && config.submitto.freshrss && config.submitto.freshrssDomain ? (
-        <Button variant="rss" size="sm" className="border-[#0062db] text-[#0062db] hover:bg-[#0062db]">
-          <a
-            target="_blank"
-            href={`${config.submitto.freshrssDomain.replace(
-              /\/$/,
-              ""
-            )}/i/?c=feed&a=add&url_rss=${encodeURI(url)}`}
-          >
-            {chrome.i18n.getMessage("subscribe to")} FreshRSS
-          </a>
-        </Button>
-      ) : (
-        ""
-      )}
-      {!item.isDocs && config.submitto.nextcloudnews && config.submitto.nextcloudnewsDomain ? (
-        <Button variant="rss" size="sm" className="border-[#0082c9] text-[#0082c9] hover:bg-[#0082c9]">
-          <a
-            target="_blank"
-            href={`${config.submitto.nextcloudnewsDomain.replace(
-              /\/$/,
-              ""
-            )}/?subscribe_to=${encodeURI(url)}`}
-          >
-            {chrome.i18n.getMessage("subscribe to")} Nextcloud News
-          </a>
-        </Button>
-      ) : (
-        ""
-      )}
-      {!item.isDocs && config.submitto.feedly ? (
-        <Button variant="rss" size="sm" className="border-[#2bb24c] text-[#2bb24c] hover:bg-[#2bb24c]">
-          <a
-            target="_blank"
-            href={`https://feedly.com/i/subscription/feed/${encodeURI(
-              url
-            )}`}
-            className="rss-action rss-submitto-feedly">
-            {chrome.i18n.getMessage("subscribe to")} Feedly
-          </a>
-        </Button>
-      ) : (
-        ""
-      )}
-      {!item.isDocs && config.submitto.inoreader && config.submitto.inoreaderDomain ? (
-        <Button variant="rss" size="sm" className="border-[#0099eb] text-[#0099eb] hover:bg-[#0099eb]">
-          <a
-            target="_blank"
-            href={`${config.submitto.inoreaderDomain.replace(
-              /\/$/,
-              ""
-            )}/?add_feed=${encodeURI(url)}`}
-          >
-            {chrome.i18n.getMessage("subscribe to")} Inoreader
-          </a>
-        </Button>
-      ) : (
-        ""
-      )}
-      {!item.isDocs && config.submitto.feedbin && config.submitto.feedbinDomain ? (
-        <Button variant="rss" size="sm" className="border-[#0867e2] text-[#0867e2] hover:bg-[#0867e2]">
-          <a
-            target="_blank"
-            href={`${config.submitto.feedbinDomain.replace(
-              /\/$/,
-              ""
-            )}/?subscribe=${encodeURI(url)}`}
-          >
-            {chrome.i18n.getMessage("subscribe to")} Feedbin
-          </a>
-        </Button>
-      ) : (
-        ""
-      )}
-      {!item.isDocs && config.submitto.theoldreader ? (
-        <Button variant="rss" size="sm" className="border-[#ff2300] text-[#ff2300] hover:bg-[#ff2300]">
-          <a
-            target="_blank"
-            href={`https://theoldreader.com/feeds/subscribe?url=${encodeURI(
-              url
-            )}`}
-          >
-            {chrome.i18n.getMessage("subscribe to")} The Old Reader
-          </a>
-        </Button>
-      ) : (
-        ""
-      )}
-      {!item.isDocs && config.submitto.feedspub ? (
-        <Button variant="rss" size="sm" className="border-[#61af4b] text-[#61af4b] hover:bg-[#61af4b]">
-          <a
-            target="_blank"
-            href={`https://feeds.pub/feed/${encodeURIComponent(url)}`}
-          >
-            {chrome.i18n.getMessage("subscribe to")} Feeds.Pub
-          </a>
-        </Button>
-      ) : (
-        ""
-      )}
-      {!item.isDocs && config.submitto.bazqux ? (
-        <Button variant="rss" size="sm" className="border-[#00af00] text-[#00af00] hover:bg-[#00af00]">
-          <a
-            target="_blank"
-            href={`https://bazqux.com/add?url=${encodeURIComponent(url)}`}
-          >
-            {chrome.i18n.getMessage("subscribe to")} BazQux Reader
-          </a>
-        </Button>
-      ) : (
-        ""
-      )}
-      {!item.isDocs && config.submitto.local ? (
-        <Button variant="rss" size="sm">
-          <a
-            target="_blank"
-            href={`feed://${url}`}
-            className="rss-action rss-submitto-local">
-            {chrome.i18n.getMessage("subscribe to local reader")}
-          </a>
-        </Button>
-      ) : (
-        ""
-      )}
+      {quickSubscriptions.map((quickSubscription) => {
+        if (item.isDocs
+          || !config.submitto[quickSubscription.key]
+          || ("subscribeDomainKey" in quickSubscription && !config.submitto[quickSubscription.subscribeDomainKey])
+        ) {
+          return null;
+        }
+        let subscriptionDomain
+        if ("subscribeDomainKey" in quickSubscription) {
+          subscriptionDomain = config.submitto[quickSubscription.subscribeDomainKey]
+        } else {
+          subscriptionDomain = quickSubscription.subscribeDomain
+        }
+        subscriptionDomain = subscriptionDomain.replace(/\/$/, "")
+
+        return (
+          <Button variant="rss" size="sm" className={`border-[${quickSubscription.themeColor}] text-[${quickSubscription.themeColor}] hover:bg-[${quickSubscription.themeColor}]`}>
+            <a
+              target="_blank"
+              href={`${subscriptionDomain}${quickSubscription.getSubscribePath({
+                url,
+                encodedUrl,
+                title: item.title,
+                image: item.image,
+              })}`}
+            >
+              {chrome.i18n.getMessage("subscribeTo")} {chrome.i18n.getMessage(quickSubscription.name) || quickSubscription.name}
+            </a>
+          </Button>
+        )
+      })}
     </li>
   )
 }
