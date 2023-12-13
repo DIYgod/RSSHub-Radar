@@ -154,5 +154,8 @@
   },
   "everythingIsPossibleWithRSS": {
     "message": "Everything is possible with RSS"
+  },
+  "fillInstanceDomain": {
+    "message": "Please fill in the instance domain"
   }
 }

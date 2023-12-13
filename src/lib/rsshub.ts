@@ -1,6 +1,5 @@
 import psl from 'psl';
 import RouteRecognizer from 'route-recognizer';
-import _ from 'lodash';
 import { parseRules } from './rules';
 import type { Rule, Rules, RSSData } from './types';
 

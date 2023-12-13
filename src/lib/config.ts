@@ -1,4 +1,5 @@
 import { Storage } from "@plasmohq/storage"
+import _ from 'lodash';
 
 const storage = new Storage()
 
@@ -7,7 +8,7 @@ export const defaultConfig = {
     rsshubAccessControl: {
         enabled: false,
         accessKey: '',
-        useCode: false,
+        useCode: true,
     },
     notice: {
         badge: true,
@@ -31,7 +32,7 @@ export const defaultConfig = {
         theoldreader: false,
         feedspub: false,
         bazqux: false,
-        local: false,
+        local: true,
     },
     refreshTimeout: 5 * 60 * 60,
     // typical UA:
@@ -44,10 +45,11 @@ export const defaultConfig = {
 };
 
 export async function getConfig() {
-    return Object.assign({}, defaultConfig, await storage.get("config"));
+    return _.merge({}, defaultConfig, await storage.get("config"));
 }
 
-export function setConfig(config: typeof defaultConfig) {
+export async function setConfig(config: Partial<typeof defaultConfig>) {
+    config = _.merge({}, await getConfig(), config);
     if (!config.rsshubDomain) {
         config.rsshubDomain = defaultConfig.rsshubDomain;
     }

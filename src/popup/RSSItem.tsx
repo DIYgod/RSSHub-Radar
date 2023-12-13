@@ -91,7 +91,7 @@ function RSSItem({
                 image: item.image,
               })}`}
             >
-              {chrome.i18n.getMessage("subscribeTo")} {chrome.i18n.getMessage(quickSubscription.name) || quickSubscription.name}
+              {chrome.i18n.getMessage(quickSubscription.name) || quickSubscription.name}
             </a>
           </Button>
         )

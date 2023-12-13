@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Input } from "~/lib/components/Input"
 import { Label } from "~/lib/components/Label"
 import { Button } from "~/lib/components/Button"
@@ -11,10 +10,11 @@ import {
 } from "~/lib/components/Card"
 import { Switch } from "~/lib/components/Switch"
 import { quickSubscriptions } from "~/lib/quick-subscriptions"
+import { useStorage } from "@plasmohq/storage/hook"
+import _ from 'lodash';
 
 function General() {
-  const [config, setConfig] = useState(defaultConfig)
-  getConfig().then(setConfig)
+  const [config] = useStorage("config", (v) => _.merge({}, defaultConfig, v))
 
   return (
     <div>
@@ -27,7 +27,11 @@ function General() {
           <CardContent className="space-y-4">
             <div className="grid w-full items-center gap-2">
               <Label htmlFor="notificationsAndReminders">{chrome.i18n.getMessage("notificationsAndReminders")}</Label>
-              <Switch id="notificationsAndReminders" />
+              <Switch id="notificationsAndReminders" checked={config.notice.badge} onCheckedChange={(value) => setConfig({
+                notice: {
+                  badge: value
+                }
+              })} />
             </div>
             <div className="grid w-full items-center gap-2">
               <Label>{chrome.i18n.getMessage("hotKey")}</Label>
@@ -46,7 +50,9 @@ function General() {
           <CardContent className="space-y-4">
             <div className="grid w-full items-center gap-2">
               <Label htmlFor="customRSSHubDomain">{chrome.i18n.getMessage("customRSSHubDomain")}</Label>
-              <Input id="customRSSHubDomain" value={config.rsshubDomain}/>
+              <Input id="customRSSHubDomain" value={config.rsshubDomain} onChange={(e) => setConfig({
+                rsshubDomain: e.target.value
+              })} />
             </div>
             <div className="grid w-full items-center gap-2">
               <Label htmlFor="accessKey" className="flex items-center">
@@ -55,7 +61,13 @@ function General() {
                   <i className="icon-[mingcute--question-line]"></i>
                 </a>
               </Label>
-              <Input type="password" id="accessKey" value={config.rsshubAccessControl.accessKey}/>
+              <Input type="password" id="accessKey" value={config.rsshubAccessControl.accessKey} onChange={(e) => setConfig({
+                rsshubAccessControl: {
+                  enabled: !!e.target.value,
+                  accessKey: e.target.value,
+                  useCode: true,
+                }
+              })} />
             </div>
           </CardContent>
         </Card>
@@ -66,12 +78,28 @@ function General() {
           <CardContent className="space-y-4">
             {quickSubscriptions.map((quickSubscription) => (
               <div className="flex items-center space-x-2 h-10">
-                <Switch id={quickSubscription.key} />
+                <Switch id={quickSubscription.key} checked={config.submitto[quickSubscription.key]} onCheckedChange={(value) => setConfig({
+                  submitto: {
+                    [quickSubscription.key]: value
+                  }
+                } as any)} />
                 <Label className="w-28" htmlFor={quickSubscription.key}>{chrome.i18n.getMessage(quickSubscription.name) || quickSubscription.name}</Label>
-                {"subscribeDomainKey" in quickSubscription ? (
-                  <Input className="flex-1" id={quickSubscription.subscribeDomainKey} value={config.submitto[quickSubscription.subscribeDomainKey]}/>
-                ) : (
-                  <Input className="flex-1" disabled value={quickSubscription.subscribeDomain}/>
+                {config.submitto[quickSubscription.key] && (
+                  "subscribeDomainKey" in quickSubscription ? (
+                    <Input
+                      className="flex-1"
+                      id={quickSubscription.subscribeDomainKey}
+                      value={config.submitto[quickSubscription.subscribeDomainKey]}
+                      onChange={(e) => setConfig({
+                        submitto: {
+                          [quickSubscription.subscribeDomainKey]: e.target.value
+                        }
+                      } as any)}
+                      placeholder={chrome.i18n.getMessage("fillInstanceDomain")}
+                    />
+                  ) : (
+                    <Input className="flex-1" disabled value={quickSubscription.subscribeDomain}/>
+                  )
                 )}
               </div>
             ))}

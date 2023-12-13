@@ -154,5 +154,8 @@
   },
   "everythingIsPossibleWithRSS": {
     "message": "万物皆可 RSS"
+  },
+  "fillInstanceDomain": {
+    "message": "请填写实例域名"
   }
 }

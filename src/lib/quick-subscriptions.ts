@@ -2,7 +2,7 @@ export const quickSubscriptions: ({
   name: string
   projectUrl?: string
   key: string
-  themeColor?: string
+  themeColor: string
   getSubscribePath: (data: {
     url: string
     encodedUrl: string
@@ -94,5 +94,6 @@ export const quickSubscriptions: ({
   name: "localReader",
   key: "local",
   subscribeDomain: "feed://",
+  themeColor: "#f28f34",
   getSubscribePath: (data) => data.url
 }]
