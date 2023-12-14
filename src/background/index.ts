@@ -21,7 +21,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     } else if (changeInfo.status === "loading") {
       deleteCachedRSS(tabId)
     } else if (changeInfo.status === "complete") {
-      getRSS(tabId, changeInfo.url);
+      getRSS(tabId, tab.url);
     }
   }
 })

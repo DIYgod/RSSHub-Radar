@@ -23,10 +23,6 @@ window.addEventListener("message", async (event: MessageEvent<{
 }>) => {
   switch (event.data?.name) {
     case "requestRSS": {
-      const pageRSS = await getPageRSS({
-        html: event.data.body.html,
-        url: event.data.body.url,
-      })
       const pageRSSHub = getPageRSSHub({
         html: event.data.body.html,
         url: event.data.body.url,
@@ -36,7 +32,22 @@ window.addEventListener("message", async (event: MessageEvent<{
         url: event.data.body.url,
         rules: event.data.body.rules,
       })
-      console.debug("RSS", pageRSS, pageRSSHub, websiteRSSHub)
+      event.source.postMessage({
+        name: "responseRSS",
+        body: {
+          url: event.data.body.url,
+          tabId: event.data.body.tabId,
+          rss: {
+            pageRSS: [],
+            pageRSSHub,
+            websiteRSSHub,
+          }
+        },
+      }, event.origin as any)
+      const pageRSS = await getPageRSS({
+        html: event.data.body.html,
+        url: event.data.body.url,
+      })
       event.source.postMessage({
         name: "responseRSS",
         body: {
