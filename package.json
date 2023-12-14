@@ -59,8 +59,7 @@
       "offscreen",
       "storage",
       "notifications",
-      "alarms",
-      "idle"
+      "alarms"
     ],
     "browser_specific_settings": {
       "gecko": {

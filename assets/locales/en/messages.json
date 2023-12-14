@@ -127,5 +127,14 @@
   },
   "updateTip": {
     "message": "Automatically update every two hours, you can also manually update."
+  },
+  "extensionInstallTip": {
+    "message": "🎉 RSSHub Radar installed"
+  },
+  "extensionUpdateTip": {
+    "message": "🎉 RSSHub Radar updated"
+  },
+  "clickToViewChangeLog": {
+    "message": "click to view the change log."
   }
 }

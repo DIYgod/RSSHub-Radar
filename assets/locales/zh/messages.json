@@ -127,5 +127,14 @@
   },
   "updateTip": {
     "message": "每两小时自动更新一次，你也可以手动更新"
+  },
+  "extensionInstallTip": {
+    "message": "🎉 RSSHub Radar 已安装"
+  },
+  "extensionUpdateTip": {
+    "message": "🎉 RSSHub Radar 已更新"
+  },
+  "clickToViewChangeLog": {
+    "message": "点击查看更新日志。"
   }
 }
