@@ -3,6 +3,7 @@ import { setupOffscreenDocument } from "~/lib/offscreen"
 import type { RSSData } from "~/lib/types";
 import { Storage } from "@plasmohq/storage"
 import AsyncLock from "async-lock"
+import { getRemoteRules } from "~/lib/rules"
 
 export {}
 console.log("HELLO WORLD FROM BGSCRIPTS")
@@ -27,7 +28,24 @@ const storage = new Storage({
   area: "local"
 })
 
-export const getRules = () => storage.get("rules")
+export const refreshRules = async () => {
+  const rules = await getRemoteRules()
+  await storage.set("rules", rules)
+  chrome.runtime.sendMessage({
+    target: "offscreen",
+    data: {
+      name: "requestDisplayedRules",
+      body: {
+        rules,
+      }
+    }
+  })
+  return rules
+}
+
+export const getDisplayedRules = () => storage.get("displayedRules")
+
+export const setDisplayedRules = (displayedRules) => storage.set("displayedRules", displayedRules)
 
 const lock = new AsyncLock();
 export const getRSS = async (tabId, url) => {
@@ -57,7 +75,7 @@ export const getRSS = async (tabId, url) => {
             tabId,
             html,
             url,
-            rules: await getRules(),
+            rules: await storage.get("rules"),
           }
         }
       })

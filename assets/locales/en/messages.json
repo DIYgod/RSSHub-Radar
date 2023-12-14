@@ -12,7 +12,7 @@
     "message": "Click to set"
   },
   "configurationRequiredIfAccessKeysEnabled": {
-    "message": "Configuration is required only if the instance has enabled access keys"
+    "message": "Configuration is required only if the instance has enabled access key"
   },
   "copied": {
     "message": "Copied"

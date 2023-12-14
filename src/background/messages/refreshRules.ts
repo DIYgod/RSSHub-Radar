@@ -1,10 +1,10 @@
 import type { PlasmoMessaging } from "@plasmohq/messaging"
-import { getRules } from "~/background"
+import { refreshRules } from "~/background"
  
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
-  console.debug("request rules", req)
+  console.debug("refresh rules", req)
 
-  res.send(await getRules())
+  res.send(await refreshRules())
 }
 
 export default handler

@@ -1,7 +1,7 @@
 import psl from 'psl';
 import RouteRecognizer from 'route-recognizer';
 import { parseRules } from './rules';
-import type { Rule, Rules, RSSData } from './types';
+import type { Rule, RSSData } from './types';
 
 function ruleHandler(rule: Rule, params, url, html, success, fail) {
     const run = () => {
@@ -72,7 +72,7 @@ function formatBlank(str1, str2) {
 export function getPageRSSHub(data: {
     url: string;
     html: string;
-    rules: Rules;
+    rules: string;
 }) {
     const { url, html } = data;
     const rules = parseRules(data.rules);
@@ -87,12 +87,12 @@ export function getPageRSSHub(data: {
         const subdomain = parsedDomain.subdomain;
         const domain = parsedDomain.domain;
         if (rules[domain]) {
-            let rule = rules[domain][subdomain || '.'];
+            let rule = rules[domain][subdomain || '.'] as Rule[];
             if (!rule) {
                 if (subdomain === 'www') {
-                    rule = rules[domain]['.'];
+                    rule = rules[domain]['.'] as Rule[];
                 } else if (!subdomain) {
-                    rule = rules[domain].www;
+                    rule = rules[domain].www as Rule[];
                 }
             }
             if (rule) {
@@ -181,7 +181,7 @@ export function getPageRSSHub(data: {
 
 export function getWebsiteRSSHub(data: {
     url: string;
-    rules: Rules;
+    rules: string;
 }) {
     const { url } = data;
     const rules = parseRules(data.rules);

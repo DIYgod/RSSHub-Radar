@@ -12,9 +12,27 @@ import { Switch } from "~/lib/components/Switch"
 import { quickSubscriptions } from "~/lib/quick-subscriptions"
 import { useStorage } from "@plasmohq/storage/hook"
 import _ from 'lodash';
+import { useEffect, useState } from "react"
+import { parseRules, getRulesCount } from "~/lib/rules"
+import type { Rules as IRules } from "~/lib/types"
+import { sendToBackground } from "@plasmohq/messaging"
+import { Loader2 } from "lucide-react"
 
 function General() {
   const [config] = useStorage("config", (v) => _.merge({}, defaultConfig, v))
+  const [rules, setRules] = useState<IRules>({})
+  useEffect(() => {
+    sendToBackground({
+      name: "requestDisplayedRules"
+    }).then((res) => setRules(parseRules(res, true)))
+  }, [])
+
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    setCount(getRulesCount(rules))
+  }, [rules])
+
+  const [rulesUpdating, setRulesUpdating] = useState(false)
 
   return (
     <div>
@@ -73,6 +91,23 @@ function General() {
                 })}
                 placeholder={chrome.i18n.getMessage("configurationRequiredIfAccessKeysEnabled")}
               />
+            </div>
+            <div className="grid w-full items-center gap-2">
+              <Label>{chrome.i18n.getMessage("rules")}</Label>
+              <p className="text-zinc-500 text-sm">{chrome.i18n.getMessage("totalNumberOfRules")}: {count}</p>
+              <Button
+                variant="secondary"
+                disabled={rulesUpdating}
+                onClick={() => {
+                  setRulesUpdating(true)
+                  sendToBackground({
+                    name: "refreshRules"
+                  }).then((res) => setRulesUpdating(false))
+                }}
+              >
+                {rulesUpdating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {chrome.i18n.getMessage("updateNow")}
+              </Button>
             </div>
           </CardContent>
         </Card>

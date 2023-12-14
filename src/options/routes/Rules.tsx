@@ -10,29 +10,20 @@ import {
   AccordionTrigger
 } from "~/lib/components/Accordion"
 import { Card, CardContent } from "~/lib/components/Card"
-import { parseRules } from "~/lib/rules"
+import { parseRules, getRulesCount } from "~/lib/rules"
 import type { Rules as IRules } from "~/lib/types"
 
 function Rules() {
   const [rules, setRules] = useState<IRules>({})
   useEffect(() => {
     sendToBackground({
-      name: "requestRules"
+      name: "requestDisplayedRules"
     }).then((res) => setRules(parseRules(res, true)))
   }, [])
 
   const [count, setCount] = useState(0)
   useEffect(() => {
-    let index = 0;
-    Object.keys(rules).map((key) => {
-      const rule = rules[key]
-      Object.keys(rule).map((item) => {
-        if (Array.isArray(rule[item])) {
-          index += rule[item].length
-        }
-      })
-    })
-    setCount(index)
+    setCount(getRulesCount(rules))
   }, [rules])
 
   return (

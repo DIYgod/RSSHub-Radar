@@ -4,7 +4,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 console.log("HELLO WORLD FROM OFFSCREEN")
 
 window.addEventListener('message', (event) => {
-  if (event.data?.name === "responseRSS") {
+  if (event.data?.name.startsWith("response")) {
     chrome.runtime.sendMessage(event.data)
     sendToBackground(event.data)
   }

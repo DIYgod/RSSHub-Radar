@@ -9,6 +9,7 @@ export function parseRules(rules: string, forceJSON?: boolean) {
         if (typeof rules === 'string') {
             if (defaultConfig.enableFullRemoteRules && !forceJSON) {
                 incomeRules = window['lave'.split('').reverse().join('')](rules);
+                console.warn('lave');
             } else {
                 incomeRules = JSON.parse(rules);
             }
@@ -21,4 +22,28 @@ export function parseRules(rules: string, forceJSON?: boolean) {
             return objValue;
         }
     }) as Rules;
+}
+
+export function getRulesCount(rules: Rules) {
+    let index = 0;
+    Object.keys(rules).map((key) => {
+      const rule = rules[key]
+      Object.keys(rule).map((item) => {
+        if (Array.isArray(rule[item])) {
+          index += rule[item].length
+        }
+      })
+    })
+    return index
+}
+
+export function getRemoteRules() {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await fetch("https://rsshub.js.org/build/radar-rules.js")
+            resolve(res.text())
+        } catch (error) {
+            reject(error)
+        }
+    });
 }
