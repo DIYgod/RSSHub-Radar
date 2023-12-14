@@ -1,4 +1,5 @@
 import { getRSS, deleteCachedRSS } from "./rss"
+import { initSchedule } from "./rules"
 
 export {}
 console.log("HELLO WORLD FROM BGSCRIPTS")
@@ -28,6 +29,8 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 chrome.tabs.onRemoved.addListener((tabId) => {
   deleteCachedRSS(tabId)
 });
+
+initSchedule();
 
 // chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 //     if (sender.tab && sender.tab.active) {

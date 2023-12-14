@@ -61,6 +61,11 @@
       "notifications",
       "alarms",
       "idle"
-    ]
+    ],
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "i@diygod.me"
+      }
+    }
   }
 }

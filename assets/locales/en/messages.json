@@ -124,5 +124,8 @@
   },
   "updateSuccessful": {
     "message": "Update successful"
+  },
+  "updateTip": {
+    "message": "Automatically update every two hours, you can also manually update."
   }
 }

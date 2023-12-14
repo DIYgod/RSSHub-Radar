@@ -11,7 +11,11 @@ export function parseRules(rules: string, forceJSON?: boolean) {
                 incomeRules = window['lave'.split('').reverse().join('')](rules);
                 console.warn('lave');
             } else {
-                incomeRules = JSON.parse(rules);
+                try {
+                    incomeRules = JSON.parse(rules);
+                } catch (error) {
+                    console.error(error);
+                }
             }
         }
     }

@@ -124,5 +124,8 @@
   },
   "updateSuccessful": {
     "message": "更新成功"
+  },
+  "updateTip": {
+    "message": "每两小时自动更新一次，你也可以手动更新"
   }
 }

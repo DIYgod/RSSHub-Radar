@@ -96,6 +96,7 @@ function General() {
             <div className="grid w-full items-center gap-2">
               <Label>{chrome.i18n.getMessage("rules")}</Label>
               <p className="text-zinc-500 text-sm">{chrome.i18n.getMessage("totalNumberOfRules")}: {count}</p>
+              <p className="text-zinc-500 text-sm">{chrome.i18n.getMessage("updateTip")}</p>
               <Button
                 variant="secondary"
                 disabled={rulesUpdating}
