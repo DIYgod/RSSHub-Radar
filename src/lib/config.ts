@@ -1,5 +1,6 @@
 import { Storage } from "@plasmohq/storage"
 import _ from 'lodash';
+import toast from "react-hot-toast"
 
 const storage = new Storage()
 
@@ -57,5 +58,7 @@ export async function setConfig(config: Partial<typeof defaultConfig>) {
     if (config.rsshubDomain === defaultConfig.rsshubDomain) {
         config.rsshubAccessControl.enabled = defaultConfig.rsshubAccessControl.enabled;
     }
-    return storage.set("config", config)
+    await storage.set("config", config)
+    toast.success("Saved")
+    return config;
 }

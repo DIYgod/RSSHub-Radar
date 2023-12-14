@@ -121,5 +121,8 @@
   },
   "totalNumberOfRules": {
     "message": "规则总数"
+  },
+  "updateSuccessful": {
+    "message": "更新成功"
   }
 }

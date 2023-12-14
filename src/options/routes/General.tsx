@@ -17,6 +17,7 @@ import { parseRules, getRulesCount } from "~/lib/rules"
 import type { Rules as IRules } from "~/lib/types"
 import { sendToBackground } from "@plasmohq/messaging"
 import { Loader2 } from "lucide-react"
+import toast from "react-hot-toast"
 
 function General() {
   const [config] = useStorage("config", (v) => _.merge({}, defaultConfig, v))
@@ -102,7 +103,10 @@ function General() {
                   setRulesUpdating(true)
                   sendToBackground({
                     name: "refreshRules"
-                  }).then((res) => setRulesUpdating(false))
+                  }).then((res) => {
+                    setRulesUpdating(false)
+                    toast.success(chrome.i18n.getMessage("updateSuccessful"))
+                  })
                 }}
               >
                 {rulesUpdating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

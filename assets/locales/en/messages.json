@@ -121,5 +121,8 @@
   },
   "totalNumberOfRules": {
     "message": "Total number of rules"
+  },
+  "updateSuccessful": {
+    "message": "Update successful"
   }
 }
