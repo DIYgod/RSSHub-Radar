@@ -3,7 +3,8 @@
 </p>
 <h1 align="center">RSSHub Radar</h1>
 
-> RSSHub Radar for [RSSHub](https://github.com/DIYgod/RSSHub), a browser extension that helps you quickly discover and subscribe to RSS and RSSHub feeds from the current website.
+> Browser extension that simplifies finding and subscribing RSS and RSSHub.
+>
 > Everything is RSSible
 
 [![version](https://img.shields.io/chrome-web-store/v/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
@@ -23,16 +24,16 @@
 
 [Telegram group](https://t.me/rsshub) | [Telegram channel](https://t.me/awesomeRSSHub)
 
-RSSHub Radar is a spin-off project of [RSSHub](https://github.com/DIYgod/RSSHub), a browser extension that helps you quickly discover and subscribe to current website RSS and RSSHub
+RSSHub Radar is a spin-off project of [RSSHub](https://github.com/DIYgod/RSSHub), a browser extension that simplifies finding and subscribing RSS and RSSHub.
 
-- Quickly discover and subscribe to the RSS from the current page
-- Quickly discover and subscribe to RSSHub sources supported by the current page
-- Quickly discover the RSSHub supported by the current website
-- Supports one-click subscription RSS to Tiny Tiny RSS, Miniflux, FreshRSS, Nextcloud News, Feedly, Inoreader, Feedbin, The Old Reader, Feeds.Pub, BazQux Reader, Local Reader
+- Discover and subscribe to the RSS feeds associated with the current page effortlessly.
+- Explore and subscribe to the RSSHub supported by the current page promptly.
+- Easily identify the RSSHubs supported by the current website quickly.
+- Supports one-click RSS subscription for various platforms including Tiny Tiny RSS, Miniflux, FreshRSS, Feedly, Inoreader, Feedbin, The Old Reader, Feeds.Pub, Local Reader...
 
-![](https://i.imgur.com/K1cC5Ck.png)
-
-![](https://i.imgur.com/JbLseIa.png)
+![image](https://github.com/DIYgod/RSSHub-Radar/assets/8266075/3474727c-fa8c-4949-bd86-afc3a471a020)
+![image](https://github.com/DIYgod/RSSHub-Radar/assets/8266075/42103b61-cb13-489a-b00b-c8c786a4cc30)
+![image](https://github.com/DIYgod/RSSHub-Radar/assets/8266075/72d7a96f-90bf-46d8-804c-0809ab71a3cf)
 
 ## Install
 
@@ -45,7 +46,7 @@ RSSHub Radar is a spin-off project of [RSSHub](https://github.com/DIYgod/RSSHub)
 
 ### Manual installation
 
-First download the corresponding version of `radar.zip` from the [releases](https://github.com/DIYgod/RSSHub-Radar/releases) page and unzip it
+First download the corresponding version of `chrome-mv3-prod.zip` from the [releases](https://github.com/DIYgod/RSSHub-Radar/releases) page and unzip it
 
 **Chrome install extension:**
 
@@ -65,37 +66,33 @@ Click `Load Temporary Extension` in the upper right corner
 
 Select the `manifest.json` file in the unzipped `dist` directory
 
-## JOIN US
+## Join us
 
-### Install the development version
+### Start the Development Server
 
-**Install dependencies and build the project:**
+Also refer to: https://docs.plasmo.com/framework/workflows/dev
 
 ```
 pnpm i
-pnpm build
+pnpm dev
 ```
 
 or use npm
 
 ```
 npm install
-npm run build
+npm run dev
 ```
 
-Get the dist directory, the installation method refers to [manual installation](#manual installation)
+Get the `build/chrome-mv3-dev` directory, the installation method refers to [manual installation](#manual installation)
 
-### RSSHub Documentation
+### Submit New RSSHub Radar Rules
 
-[See documentation](https://docs.rsshub.app/joinus/quick-start.html#ti-jiao-xin-de-rsshub-gui-ze-tian-jia-jiao-ben-wen-dang)
-
-## Related
-
--   [RSSHub](https://github.com/DIYgod/RSSHub)
+[See documentation](https://docs.rsshub.app/joinus/new-radar)
 
 ## Author
 
 **RSSHub Radar** © [DIYgod](https://github.com/DIYgod), Released under the [MIT](./LICENSE) License.<br>
 Authored and maintained by DIYgod with help from contributors ([list](https://github.com/DIYgod/RSSHub-radar/contributors)).
 
-> Blog [@DIYgod](https://diygod.me) · GitHub [@DIYgod](https://github.com/DIYgod) · Twitter [@DIYgod](https://twitter.com/DIYgod) · Telegram Channel [@awesomeDIYgod](https://t.me/awesomeDIYgod)
+> Blog [@DIYgod](https://diygod.cc) · GitHub [@DIYgod](https://github.com/DIYgod) · Twitter [@DIYgod](https://twitter.com/DIYgod) · Telegram Channel [@awesomeDIYgod](https://t.me/awesomeDIYgod)
