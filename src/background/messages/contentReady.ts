@@ -1,5 +1,5 @@
 import type { PlasmoMessaging } from "@plasmohq/messaging"
-import { getRSS } from "~/background"
+import { getRSS } from "~/background/rss"
  
 const handler: PlasmoMessaging.MessageHandler = (req) => {
   console.debug("content ready", req)
