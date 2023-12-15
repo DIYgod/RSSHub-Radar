@@ -85,9 +85,7 @@ function General() {
                 id="accessKey"
                 value={config.rsshubAccessControl.accessKey} onChange={(e) => setConfig({
                   rsshubAccessControl: {
-                    enabled: !!e.target.value,
                     accessKey: e.target.value,
-                    useCode: true,
                   }
                 })}
                 placeholder={chrome.i18n.getMessage("configurationRequiredIfAccessKeysEnabled")}

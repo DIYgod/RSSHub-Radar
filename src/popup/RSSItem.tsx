@@ -28,12 +28,8 @@ function RSSItem({
   }, [copied])
 
   let url = item.url.replace('{rsshubDomain}', config.rsshubDomain);
-  if (type === 'currentPageRSS' && config.rsshubAccessControl.enabled) {
-    if (config.rsshubAccessControl.useCode) {
-      url = `${url}?code=${new MD5().update(item.path + config.rsshubAccessControl.accessKey).digest('hex')}`
-    } else {
-      url = `${url}?key=${config.rsshubAccessControl.accessKey}`
-    }
+  if (type === 'currentPageRSSHub' && config.rsshubAccessControl.accessKey) {
+    url = `${url}?code=${new MD5().update(item.path + config.rsshubAccessControl.accessKey).digest('hex')}`
   }
   url = encodeURI(url);
   const encodedUrl = encodeURIComponent(url);

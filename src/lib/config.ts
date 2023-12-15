@@ -7,9 +7,7 @@ const storage = new Storage()
 export const defaultConfig = {
     rsshubDomain: 'https://rsshub.app',
     rsshubAccessControl: {
-        enabled: false,
         accessKey: '',
-        useCode: true,
     },
     notice: {
         badge: true,
@@ -55,9 +53,6 @@ export async function setConfig(config: Partial<typeof defaultConfig>) {
         config.rsshubDomain = defaultConfig.rsshubDomain;
     }
     config.rsshubDomain = config.rsshubDomain.replace(/\/$/, '');
-    if (config.rsshubDomain === defaultConfig.rsshubDomain) {
-        config.rsshubAccessControl.enabled = defaultConfig.rsshubAccessControl.enabled;
-    }
     await storage.set("config", config)
     toast.success("Saved")
     return config;
