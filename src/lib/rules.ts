@@ -42,7 +42,7 @@ export function getRulesCount(rules: Rules) {
 }
 
 export function getRemoteRules() {
-    return new Promise(async (resolve, reject) => {
+    return new Promise<string>(async (resolve, reject) => {
         const config = await getConfig()
         try {
             const res = await fetch(config.remoteRulesUrl)

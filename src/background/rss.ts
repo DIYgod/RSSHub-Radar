@@ -4,6 +4,7 @@ import type { RSSData } from "~/lib/types";
 import { Storage } from "@plasmohq/storage"
 import AsyncLock from "async-lock"
 import { setBadge } from "./badge"
+import { getRSS as sandboxGetRSS } from "~/sandboxes"
 
 const storage = new Storage({
   area: "local"
@@ -27,8 +28,6 @@ export const getRSS = async (tabId, url) => {
     return
   } else {
     await lock.acquire(tabId, async () => {
-      await setupOffscreenDocument("tabs/offscreen.html")
-  
       console.debug("Send to content script requestHTML")
       const html = await sendToContentScript({
         name: "requestHTML",
@@ -36,19 +35,30 @@ export const getRSS = async (tabId, url) => {
       })
 
       console.debug("Get html", html)
-      console.debug("Send to offscreen")
-      chrome.runtime.sendMessage({
-        target: "offscreen",
-        data: {
-          name: "requestRSS",
-          body: {
-            tabId,
-            html,
-            url,
-            rules: await storage.get("rules"),
+
+      if (chrome.offscreen) {
+        await setupOffscreenDocument("tabs/offscreen.html")
+        console.debug("Send to offscreen")
+        chrome.runtime.sendMessage({
+          target: "offscreen",
+          data: {
+            name: "requestRSS",
+            body: {
+              tabId,
+              html,
+              url,
+              rules: await storage.get("rules"),
+            }
           }
-        }
-      })
+        })
+      } else {
+        sandboxGetRSS({
+          html,
+          url,
+          rules: await storage.get("rules"),
+          callback: (rss) => setRSS(tabId, rss)
+        })
+      }
     })
   }
 }

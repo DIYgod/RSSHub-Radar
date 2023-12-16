@@ -45,12 +45,20 @@ export const defaultConfig = {
 };
 
 export async function getConfig() {
-    return _.merge({}, defaultConfig, await storage.get("config")) as typeof defaultConfig;
+    let storagedConfig = {}
+    try {
+        storagedConfig = await storage.get("config");
+    } catch (error) {}
+    return _.merge({}, defaultConfig, storagedConfig) as typeof defaultConfig;
 }
 
 let toastId: string | undefined;
 export async function setConfig(config: Partial<typeof defaultConfig>) {
-    config = _.merge({}, await storage.get("config"), config);
+    let storagedConfig = {}
+    try {
+        storagedConfig = await storage.get("config");
+    } catch (error) {}
+    config = _.merge({}, storagedConfig, config);
     await storage.set("config", config)
     toastId = toast.success("Saved", {
         id: toastId,

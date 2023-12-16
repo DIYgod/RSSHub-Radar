@@ -1,6 +1,7 @@
 import { Storage } from "@plasmohq/storage"
 import { getRemoteRules } from "~/lib/rules"
 import { getConfig } from "~/lib/config"
+import { getDisplayedRules as sandboxGetDisplayedRules } from "~/sandboxes"
 
 const storage = new Storage({
   area: "local"
@@ -9,15 +10,20 @@ const storage = new Storage({
 export const refreshRules = async () => {
   const rules = await getRemoteRules()
   await storage.set("rules", rules)
-  chrome.runtime.sendMessage({
-    target: "offscreen",
-    data: {
-      name: "requestDisplayedRules",
-      body: {
-        rules,
+  if (chrome.offscreen) {
+    chrome.runtime.sendMessage({
+      target: "offscreen",
+      data: {
+        name: "requestDisplayedRules",
+        body: {
+          rules,
+        }
       }
-    }
-  })
+    })
+  } else {
+    const displayedRules = sandboxGetDisplayedRules(rules)
+    setDisplayedRules(displayedRules)
+  }
   return rules
 }
 
