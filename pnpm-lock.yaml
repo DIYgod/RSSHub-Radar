@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@iconify-json/mingcute':
-    specifier: ^1.1.13
-    version: 1.1.13
+    specifier: ^1.1.14
+    version: 1.1.14
   '@plasmohq/messaging':
     specifier: ^0.6.1
     version: 0.6.1(react@18.2.0)
@@ -644,8 +644,8 @@ packages:
       - supports-color
     dev: true
 
-  /@iconify-json/mingcute@1.1.13:
-    resolution: {integrity: sha512-RMXKbxBPeMMH3J3YHaqKvMg/XDPYKRcBhQnmGL2SoHzarA/2KSFS94Hq9N2/wyuqTxEB7IaOghUk3L73DmJK9g==}
+  /@iconify-json/mingcute@1.1.14:
+    resolution: {integrity: sha512-oWeGJzNBHPLFLdjqYFg80GL12F7vp+qCpSqt34G9CzP/20eduYLZyB1gB8GW2beTl335lssJo28QT/ObyJ3YpQ==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false
