@@ -141,20 +141,19 @@ export async function getPageRSS(data: {
     }
 
     if (html) {
-      rssParser.parseString(html, (err, result) => {
-        if (!err) {
-          chrome.runtime.sendMessage(null, {
-            text: "addPageRSS",
-            feed: {
-              url: location.href,
-              title: result.title,
-              image
-            }
-          })
-        }
-      })
+      let feed
+      try {
+        feed = await rssParser.parseString(html)
+      } catch (error) {}
+      if (feed) {
+        pageRSS.push({
+          url: location.href,
+          title: feed.title,
+          image
+        });
+        unique.save(location.href)
+      }
     }
   }
-  unique.save(location.href)
   return pageRSS
 }
