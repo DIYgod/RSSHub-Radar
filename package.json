@@ -41,7 +41,7 @@
     "@types/chrome": "^0.0.254",
     "@types/node": "20.9.0",
     "@types/react": "18.2.37",
-    "@types/react-dom": "18.2.15",
+    "@types/react-dom": "18.2.18",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.32",
     "prettier": "3.0.3",
