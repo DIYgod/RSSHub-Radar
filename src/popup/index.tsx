@@ -24,7 +24,7 @@ function IndexPopup() {
   return (
     <div className="min-w-[350px] p-5">
       <a className="absolute right-4 h-6 flex items-center" href="/options.html" target="_blank">
-        <i className="icon-[mingcute--settings-3-line] w-5 h-5 text-slate-600 hover:text-black transition-colors"></i>
+        <i className="i-mingcute-settings-3-line w-5 h-5 text-slate-600 hover:text-black transition-colors"></i>
       </a>
       {!data.pageRSS.length && !data.pageRSSHub.length && !data.websiteRSSHub.length && (
         <div className="space-y-4">

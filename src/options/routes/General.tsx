@@ -78,7 +78,7 @@ function General() {
               <Label htmlFor="accessKey" className="flex items-center">
                 <span>{chrome.i18n.getMessage("accessKey")}</span>
                 <a className="h-[14px] ml-1" target="_blank" href="https://docs.rsshub.app/install/config#access-keycode">
-                  <i className="icon-[mingcute--question-line]"></i>
+                  <i className="i-mingcute-question-line"></i>
                 </a>
               </Label>
               <Input

@@ -8,15 +8,15 @@ function Siderbar() {
   const location = useLocation();
   const links = [{
     path: "/",
-    icon: "icon-[mingcute--settings-3-line]",
+    icon: "i-mingcute-settings-3-line",
     text: "general",
   }, {
     path: "/rules",
-    icon: "icon-[mingcute--list-check-2-line]",
+    icon: "i-mingcute-list-check-2-line",
     text: "rules",
   }, {
     path: "/about",
-    icon: "icon-[mingcute--emoji-2-line]",
+    icon: "i-mingcute-emoji-2-line",
     text: "about",
   }]
 

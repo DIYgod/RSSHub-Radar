@@ -1,5 +1,5 @@
-import { addDynamicIconSelectors } from "@iconify/tailwind"
 import { quickSubscriptions } from "./src/lib/quick-subscriptions"
+import { iconsPlugin } from "@egoist/tailwindcss-icons"
 
 const safelist = []
 quickSubscriptions.forEach((subscription) => {
@@ -95,7 +95,7 @@ module.exports = {
     },
   },
   plugins: [
-    addDynamicIconSelectors(),
+    iconsPlugin(),
     require("tailwindcss-animate")
   ],
 }
