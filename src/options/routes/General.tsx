@@ -20,7 +20,8 @@ import { Loader2 } from "lucide-react"
 import toast from "react-hot-toast"
 
 function General() {
-  const [config] = useStorage("config", (v) => _.merge({}, defaultConfig, v))
+  let [config] = useStorage("config")
+  config = _.merge({}, defaultConfig, config)
   const [rules, setRules] = useState<IRules>({})
   useEffect(() => {
     sendToBackground({
@@ -92,7 +93,13 @@ function General() {
               />
             </div>
             <div className="grid w-full items-center gap-2">
-              <Label>{chrome.i18n.getMessage("rules")}</Label>
+              <Label htmlFor="remoteRulesUrl">{chrome.i18n.getMessage("remoteRulesUrl")}</Label>
+              <Input id="remoteRulesUrl" value={config.remoteRulesUrl} onChange={(e) => setConfig({
+                remoteRulesUrl: e.target.value
+              })} />
+            </div>
+            <div className="grid w-full items-center gap-2">
+              <Label>{chrome.i18n.getMessage("manuallyUpdate")}</Label>
               <p className="text-zinc-500 text-sm">{chrome.i18n.getMessage("totalNumberOfRules")}: {count}</p>
               <p className="text-zinc-500 text-sm">{chrome.i18n.getMessage("updateTip")}</p>
               <Button

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { defaultRules } from './radar-rules';
-import { defaultConfig } from './config';
+import { defaultConfig, getConfig } from './config';
 import type { Rules } from './types';
 
 export function parseRules(rules: string, forceJSON?: boolean) {
@@ -43,8 +43,9 @@ export function getRulesCount(rules: Rules) {
 
 export function getRemoteRules() {
     return new Promise(async (resolve, reject) => {
+        const config = await getConfig()
         try {
-            const res = await fetch("https://rsshub.js.org/build/radar-rules.js")
+            const res = await fetch(config.remoteRulesUrl)
             resolve(res.text())
         } catch (error) {
             reject(error)

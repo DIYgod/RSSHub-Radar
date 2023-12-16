@@ -27,7 +27,7 @@ function RSSItem({
     }
   }, [copied])
 
-  let url = item.url.replace('{rsshubDomain}', config.rsshubDomain);
+  let url = item.url.replace('{rsshubDomain}', config.rsshubDomain.replace(/\/$/, ''));
   if (type === 'currentPageRSSHub' && config.rsshubAccessControl.accessKey) {
     url = `${url}?code=${new MD5().update(item.path + config.rsshubAccessControl.accessKey).digest('hex')}`
   }

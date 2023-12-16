@@ -41,19 +41,19 @@ export const defaultConfig = {
     //   Safari: Mozilla/5.0 (Macintosh; Intel Mac OS X 12_3_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.3 Safari/605.1.15
     //   Edge: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36 Edg/99.0.1150.36
     enableFullRemoteRules: !(navigator.userAgent.match(/firefox/i) || (navigator.userAgent.match(/safari/i) && !navigator.userAgent.match(/chrome/i))),
+    remoteRulesUrl: 'https://rsshub.js.org/build/radar-rules.js',
 };
 
 export async function getConfig() {
     return _.merge({}, defaultConfig, await storage.get("config")) as typeof defaultConfig;
 }
 
+let toastId: string | undefined;
 export async function setConfig(config: Partial<typeof defaultConfig>) {
-    config = _.merge({}, await getConfig(), config);
-    if (!config.rsshubDomain) {
-        config.rsshubDomain = defaultConfig.rsshubDomain;
-    }
-    config.rsshubDomain = config.rsshubDomain.replace(/\/$/, '');
+    config = _.merge({}, await storage.get("config"), config);
     await storage.set("config", config)
-    toast.success("Saved")
+    toastId = toast.success("Saved", {
+        id: toastId,
+    })
     return config;
 }

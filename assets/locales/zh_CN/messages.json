@@ -80,6 +80,9 @@
   "rules": {
     "message": "Radar 规则"
   },
+  "manuallyUpdate": {
+    "message": "手动更新 Radar 规则"
+  },
   "rulesUpdate": {
     "message": "规则更新"
   },
@@ -136,5 +139,8 @@
   },
   "clickToViewChangeLog": {
     "message": "点击查看更新日志。"
+  },
+  "remoteRulesUrl": {
+    "message": "远程 Radar Rules 地址"
   }
 }

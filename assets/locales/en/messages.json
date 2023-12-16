@@ -80,6 +80,9 @@
   "rules": {
     "message": "Radar Rules"
   },
+  "manuallyUpdate": {
+    "message": "Manually update radar rules"
+  },
   "rulesUpdate": {
     "message": "Rules update"
   },
@@ -136,5 +139,8 @@
   },
   "clickToViewChangeLog": {
     "message": "click to view the change log."
+  },
+  "remoteRulesUrl": {
+    "message": "Remote radar rules URL"
   }
 }
