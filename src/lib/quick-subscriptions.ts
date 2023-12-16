@@ -95,5 +95,5 @@ export const quickSubscriptions: ({
   key: "local",
   subscribeDomain: "feed://",
   themeColor: "#f28f34",
-  getSubscribePath: (data) => data.url
+  getSubscribePath: (data) => data.url.replace(/^https?:\/\//, "")
 }]

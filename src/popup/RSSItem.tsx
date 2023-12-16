@@ -74,7 +74,7 @@ function RSSItem({
         } else {
           subscriptionDomain = quickSubscription.subscribeDomain
         }
-        subscriptionDomain = subscriptionDomain.replace(/\/$/, "")
+        subscriptionDomain = subscriptionDomain.replace(/(?<!\/)\/$/, "")
 
         return (
           <Button variant="rss" size="sm" className={`border-[${quickSubscription.themeColor}] text-[${quickSubscription.themeColor}] hover:bg-[${quickSubscription.themeColor}]`}>
