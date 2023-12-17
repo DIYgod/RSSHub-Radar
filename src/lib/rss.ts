@@ -26,17 +26,17 @@ export async function getPageRSS(data: {
       location.origin + "/favicon.ico"
 
   function handleUrl(url) {
-    return new URL(url, location.href).toString()
+    return new URL(url.replace(/^(feed:\/\/)/, "https://"), location.href).toString()
   }
 
   let pageRSS: RSSData[] = []
   const unique = {
     data: {},
     save: function (url) {
-      this.data[url.replace(/^(https?:)?\/\//, "")] = 1
+      this.data[url.replace(/^(https?:\/\/|feed:\/\/)/, "")] = 1
     },
     check: function (url) {
-      return this.data[url.replace(/^(https?:)?\/\//, "")]
+      return this.data[url.replace(/^(https?:\/\/|feed:\/\/)/, "")]
     }
   }
 
