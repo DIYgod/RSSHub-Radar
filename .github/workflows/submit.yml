@@ -23,12 +23,17 @@ jobs:
         with:
           node-version: 16.x
           cache: "pnpm"
-      - name: Build the extension
-        run: pnpm build
-      - name: Package the extension into a zip artifact
-        run: pnpm package
-      - name: Browser Platform Publish
+      - name: Package the extension for Chrome
+        run: pnpm build --zip
+      - name: Chrome Platform Publish
         uses: PlasmoHQ/bpp@v3
         with:
           keys: ${{ secrets.SUBMIT_KEYS }}
           artifact: build/chrome-mv3-prod.zip
+      - name: Package the extension for Firefox
+        run: pnpm build:firefox --zip
+      - name: Firefox Platform Publish
+        uses: PlasmoHQ/bpp@v3
+        with:
+          keys: ${{ secrets.SUBMIT_KEYS_FIREFOX }}
+          artifact: build/firefox-mv3-prod.zip
