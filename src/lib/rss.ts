@@ -26,21 +26,21 @@ export async function getPageRSS(data: {
       location.origin + "/favicon.ico"
 
   function handleUrl(url) {
-    return new URL(url.replace(/^(feed:\/\/)/, "https://"), location.href).toString()
+    return new URL(url.replace(/^(feed:\/\/)/, "https://").replace(/^(feed:)/, ""), location.href).toString()
   }
 
   let pageRSS: RSSData[] = []
   const unique = {
     data: {},
     save: function (url) {
-      this.data[url.replace(/^(https?:\/\/|feed:\/\/)/, "")] = 1
+      this.data[url.replace(/^(https?:\/\/|feed:\/\/|feed:)/, "")] = 1
     },
     check: function (url) {
-      return this.data[url.replace(/^(https?:\/\/|feed:\/\/)/, "")]
+      return this.data[url.replace(/^(https?:\/\/|feed:\/\/|feed:)/, "")]
     }
   }
 
-  // links
+  // head links
   const types = [
     "application/rss+xml",
     "application/atom+xml",
@@ -78,7 +78,21 @@ export async function getPageRSS(data: {
     }
   }
 
-  // a
+  // prefixed with `feed:`
+  const feedEles = document.querySelectorAll("a[href^='feed:']")
+  feedEles.forEach((ele) => {
+    const feed = {
+      url: handleUrl(ele.getAttribute("href")),
+      title: ele.getAttribute("title") || defaultTitle,
+      image
+    }
+    if (!unique.check(feed.url)) {
+      pageRSS.push(feed)
+      unique.save(feed.url)
+    }
+  })
+
+  // normal a
   const aEles = document.querySelectorAll("a")
   const check = /([^a-zA-Z]|^)rss([^a-zA-Z]|$)/i
   const uncertain = [];
@@ -108,6 +122,7 @@ export async function getPageRSS(data: {
       }
     }
   }
+  console.log("uncertain", uncertain)
   await Promise.all(uncertain.map((feed) => {
     return new Promise<void>(async (resolve) => {
       try {
