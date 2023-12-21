@@ -23,7 +23,7 @@ jobs:
           version: latest
           run_install: true
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v4.0.0
+        uses: actions/setup-node@v4.0.1
         with:
           node-version: 16.x
           cache: "pnpm"
