@@ -40,6 +40,43 @@ export async function getPageRSS(data: {
     }
   }
 
+  // self rss feed
+  let html
+  if (
+    // Detect RSS without correct Content-Type setting
+    // @ts-ignore
+    document.body.childNodes?.[0]?.tagName?.toLowerCase() === 'pre'
+  ) {
+    // @ts-ignore
+    html = document.body.childNodes[0].innerText
+  } else if (document.querySelector("#webkit-xml-viewer-source-xml")) {
+    html = document.querySelector("#webkit-xml-viewer-source-xml").innerHTML
+  }
+
+  if (html) {
+    let feed
+    try {
+      feed = await rssParser.parseString(html)
+      console.log("feed", feed)
+    } catch (error) {}
+    if (feed) {
+      pageRSS.push({
+        url: location.href,
+        title: feed.title,
+        image
+      });
+    } else {
+      pageRSS.push({
+        url: location.href,
+        title: "",
+        image
+      });
+    }
+
+    // skip the following check if this page is an RSS feed
+    return pageRSS
+  }
+
   // head links
   const types = [
     "application/rss+xml",
@@ -137,38 +174,5 @@ export async function getPageRSS(data: {
     })
   }))
 
-  // whole page
-  if (!unique.check(location.href)) {
-    let html
-    if (
-      document.body &&
-      document.body.childNodes &&
-      document.body.childNodes.length === 1 &&
-      // @ts-ignore
-      document.body.childNodes[0].tagName &&
-      // @ts-ignore
-      document.body.childNodes[0].tagName.toLowerCase()
-    ) {
-      // @ts-ignore
-      html = document.body.childNodes[0].innerText
-    } else if (document.querySelector("#webkit-xml-viewer-source-xml")) {
-      html = document.querySelector("#webkit-xml-viewer-source-xml").innerHTML
-    }
-
-    if (html) {
-      let feed
-      try {
-        feed = await rssParser.parseString(html)
-      } catch (error) {}
-      if (feed) {
-        pageRSS.push({
-          url: location.href,
-          title: feed.title,
-          image
-        });
-        unique.save(location.href)
-      }
-    }
-  }
   return pageRSS
 }

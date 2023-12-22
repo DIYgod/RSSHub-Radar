@@ -5,9 +5,9 @@
   "description": "__MSG_extensionDescription__",
   "author": "DIYgod",
   "scripts": {
-    "dev": "plasmo dev",
+    "dev": "plasmo dev --no-cs-reload",
     "build": "plasmo build",
-    "dev:firefox": "plasmo dev --target=firefox-mv3",
+    "dev:firefox": "plasmo dev --target=firefox-mv3 --no-cs-reload",
     "build:firefox": "plasmo build --target=firefox-mv3",
     "package": "plasmo package"
   },
