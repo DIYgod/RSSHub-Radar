@@ -1,7 +1,5 @@
-import RSSParser from "rss-parser"
 import type { RSSData } from "./types"
-
-const rssParser = new RSSParser()
+import { parseRSS } from "./utils"
 
 export async function getPageRSS(data: {
   html: string
@@ -54,27 +52,17 @@ export async function getPageRSS(data: {
   }
 
   if (html) {
-    let feed
-    try {
-      feed = await rssParser.parseString(html)
-      console.log("feed", feed)
-    } catch (error) {}
-    if (feed) {
+    const result = parseRSS(html)
+    if (result) {
       pageRSS.push({
         url: location.href,
-        title: feed.title,
+        title: result.title,
         image
       });
-    } else {
-      pageRSS.push({
-        url: location.href,
-        title: "",
-        image
-      });
-    }
 
-    // skip the following check if this page is an RSS feed
-    return pageRSS
+      // skip the following check if this page is an RSS feed
+      return pageRSS
+    }
   }
 
   // head links
@@ -165,10 +153,14 @@ export async function getPageRSS(data: {
         const content = await (await fetch(feed.url, {
           mode: "no-cors",
         })).text()
-        const result = await rssParser.parseString(content)
-        feed.title = result.title;
-        pageRSS.push(feed);
-        unique.save(feed.url)
+        const result = parseRSS(content)
+        if (result) {
+          if (result.title) {
+            feed.title = result.title;
+          }
+          pageRSS.push(feed);
+          unique.save(feed.url)
+        }
         resolve()
       } catch (error) {
         resolve()
