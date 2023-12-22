@@ -159,11 +159,13 @@ export async function getPageRSS(data: {
       }
     }
   }
-  console.log("uncertain", uncertain)
   await Promise.all(uncertain.map((feed) => {
     return new Promise<void>(async (resolve) => {
       try {
-        const result = await rssParser.parseURL(feed.url)
+        const content = await (await fetch(feed.url, {
+          mode: "no-cors",
+        })).text()
+        const result = await rssParser.parseString(content)
         feed.title = result.title;
         pageRSS.push(feed);
         unique.save(feed.url)
