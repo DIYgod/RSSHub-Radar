@@ -33,9 +33,11 @@
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.21.1",
     "route-recognizer": "^0.3.4",
+    "rss-parser": "3.13.0",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
-    "usehooks-ts": "^2.9.1"
+    "usehooks-ts": "^2.9.1",
+    "xss": "1.0.14"
   },
   "devDependencies": {
     "@egoist/tailwindcss-icons": "^1.7.1",

@@ -11,9 +11,11 @@ import { quickSubscriptions } from "~/lib/quick-subscriptions"
 function RSSItem({
   item,
   type,
+  hidePreview,
 }: {
   item: RSSData
   type: string
+  hidePreview?: boolean
 }) {
   const [config, setConfig] = useState(defaultConfig)
   getConfig().then(setConfig)
@@ -59,6 +61,16 @@ function RSSItem({
           setCopied(true)
         }}>
           {chrome.i18n.getMessage(copied ? "copied" : "copy")}
+        </Button>
+      )}
+      {!item.isDocs && !hidePreview && (
+        <Button variant="rss" size="sm" className="border-[#0ea5e9] text-[#0ea5e9] hover:bg-[#0ea5e9]">
+          <a
+            target="_blank"
+            href={`/tabs/preview.html?url=${encodedUrl}`}
+          >
+            {chrome.i18n.getMessage("preview")}
+          </a>
         </Button>
       )}
       {quickSubscriptions.map((quickSubscription) => {

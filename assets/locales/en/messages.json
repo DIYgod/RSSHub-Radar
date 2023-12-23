@@ -142,5 +142,8 @@
   },
   "remoteRulesUrl": {
     "message": "Remote radar rules URL"
+  },
+  "preview": {
+    "message": "Preview"
   }
 }

@@ -142,5 +142,8 @@
   },
   "remoteRulesUrl": {
     "message": "远程 Radar Rules 地址"
+  },
+  "preview": {
+    "message": "预览"
   }
 }
