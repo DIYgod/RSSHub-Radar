@@ -2,6 +2,7 @@ import { Storage } from "@plasmohq/storage"
 import { getRemoteRules } from "~/lib/rules"
 import { getConfig } from "~/lib/config"
 import { getDisplayedRules as sandboxGetDisplayedRules } from "~/sandboxes"
+import { setupOffscreenDocument } from "~/lib/offscreen"
 
 const storage = new Storage({
   area: "local"
@@ -11,6 +12,7 @@ export const refreshRules = async () => {
   const rules = await getRemoteRules()
   await storage.set("rules", rules)
   if (chrome.offscreen) {
+    await setupOffscreenDocument("tabs/offscreen.html")
     chrome.runtime.sendMessage({
       target: "offscreen",
       data: {

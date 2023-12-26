@@ -43,7 +43,7 @@ export const getRSS = async ({
   })
 }
 
-export const getDisplayedRules = async (rules: string) => {
+export const getDisplayedRules = (rules: string) => {
   const displayedRules = parseRules(rules)
   removeFunctionFields(displayedRules)
   console.debug("requestDisplayedRules", displayedRules)
