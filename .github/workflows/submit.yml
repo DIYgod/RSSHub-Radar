@@ -25,15 +25,13 @@ jobs:
           cache: "pnpm"
       - name: Package the extension for Chrome
         run: pnpm build --zip
-      - name: Chrome Platform Publish
+      - name: Package the extension for Firefox
+        run: pnpm build:firefox --zip
+      - name: Browser Platform Publish
         uses: PlasmoHQ/bpp@v3
         with:
           keys: ${{ secrets.SUBMIT_KEYS }}
-          artifact: build/chrome-mv3-prod.zip
-      - name: Package the extension for Firefox
-        run: pnpm build:firefox --zip
-      - name: Firefox Platform Publish
-        uses: PlasmoHQ/bpp@v3
-        with:
-          keys: ${{ secrets.SUBMIT_KEYS_FIREFOX }}
-          artifact: build/firefox-mv3-prod.zip
+          chrome-file: build/chrome-mv3-prod.zip
+          edge-file: build/chrome-mv3-prod.zip
+          firefox-file: build/firefox-mv3-prod.zip
+          notes: "RSSHub Radar is an open source project, you can find the source code at https://github.com/DIYgod/RSSHub-Radar"
