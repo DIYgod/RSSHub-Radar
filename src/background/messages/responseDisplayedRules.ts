@@ -1,7 +1,7 @@
 import type { PlasmoMessaging } from "@plasmohq/messaging"
 import { setDisplayedRules } from "~/background/rules"
  
-const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
+const handler: PlasmoMessaging.MessageHandler = (req, res) => {
   console.debug("response displayed rules", req)
   
   setDisplayedRules(req.body.displayedRules)

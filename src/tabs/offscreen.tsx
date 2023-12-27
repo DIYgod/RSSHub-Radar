@@ -13,7 +13,7 @@ window.addEventListener('message', (event) => {
 function OffscreenPage() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  chrome.runtime.onMessage.addListener(async (msg) => {
+  chrome.runtime.onMessage.addListener((msg) => {
     console.debug("Received message from background", msg);
     iframeRef.current?.contentWindow?.postMessage(msg.data, "*");
   })

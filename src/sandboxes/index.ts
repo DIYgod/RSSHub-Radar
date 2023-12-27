@@ -51,7 +51,7 @@ export const getDisplayedRules = (rules: string) => {
 }
 
 if (typeof window !== "undefined") {
-  window.addEventListener("message", async (event: MessageEvent<{
+  window.addEventListener("message", (event: MessageEvent<{
     name: "requestRSS"
     body: {
       html: string
