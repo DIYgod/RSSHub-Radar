@@ -1,7 +1,7 @@
 {
   "name": "rsshub-radar",
   "displayName": "RSSHub Radar",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "__MSG_extensionDescription__",
   "author": "DIYgod",
   "scripts": {
