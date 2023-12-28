@@ -40,7 +40,6 @@ function PreviewPage() {
       setError(e)
     })
   }, [])
-  console.log("error", error)
 
   return (
     <div className="max-w-screen-lg mx-auto py-16 text-base space-y-8">

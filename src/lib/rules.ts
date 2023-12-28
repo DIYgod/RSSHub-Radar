@@ -9,12 +9,10 @@ export function parseRules(rules: string, forceJSON?: boolean) {
         if (typeof rules === 'string') {
             if (defaultConfig.enableFullRemoteRules && !forceJSON) {
                 incomeRules = window['lave'.split('').reverse().join('')](rules);
-                console.warn('lave');
             } else {
                 try {
                     incomeRules = JSON.parse(rules);
                 } catch (error) {
-                    console.error(error);
                 }
             }
         }

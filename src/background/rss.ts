@@ -20,25 +20,18 @@ const savedRSS: {
 
 const lock = new AsyncLock();
 export const getRSS = async (tabId, url) => {
-  console.debug("Get RSS", tabId, url)
-
   if (savedRSS[tabId]) {
-    console.debug("Already have RSS", savedRSS[tabId])
     setRSS(tabId, savedRSS[tabId])
     return
   } else {
     await lock.acquire(tabId, async () => {
-      console.debug("Send to content script requestHTML")
       const html = await sendToContentScript({
         name: "requestHTML",
         tabId,
       })
 
-      console.debug("Get html", html)
-
       if (chrome.offscreen) {
         await setupOffscreenDocument("tabs/offscreen.html")
-        console.debug("Send to offscreen")
         chrome.runtime.sendMessage({
           target: "offscreen",
           data: {
@@ -72,8 +65,6 @@ export const setRSS = (tabId, data: {
   pageRSSHub: RSSData[],
   websiteRSSHub: RSSData[],
 }) => {
-  console.debug("Set RSS", tabId, data)
-
   savedRSS[tabId] = data
 
   let text = ''

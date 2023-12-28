@@ -1,8 +1,6 @@
 import { useRef } from "react";
 import { sendToBackground } from "@plasmohq/messaging"
 
-console.log("HELLO WORLD FROM OFFSCREEN")
-
 window.addEventListener('message', (event) => {
   if (event.data?.name.startsWith("response")) {
     chrome.runtime.sendMessage(event.data)
@@ -14,7 +12,6 @@ function OffscreenPage() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   chrome.runtime.onMessage.addListener((msg) => {
-    console.debug("Received message from background", msg);
     iframeRef.current?.contentWindow?.postMessage(msg.data, "*");
   })
 

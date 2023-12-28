@@ -5,8 +5,6 @@ import { removeFunctionFields } from "~/lib/utils"
 
 export { }
 
-console.log("HELLO WORLD FROM SANDBOXES")
-
 export const getRSS = async ({
   html,
   url,
@@ -46,7 +44,6 @@ export const getRSS = async ({
 export const getDisplayedRules = (rules: string) => {
   const displayedRules = parseRules(rules)
   removeFunctionFields(displayedRules)
-  console.debug("requestDisplayedRules", displayedRules)
   return displayedRules
 }
 

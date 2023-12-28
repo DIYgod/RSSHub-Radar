@@ -3,10 +3,8 @@ import { initSchedule } from "./rules"
 import { initUpdateNotifications } from "./update-notifications"
 
 export {}
-console.log("HELLO WORLD FROM BGSCRIPTS")
 
 chrome.tabs.onActivated.addListener((tab) => {
-  console.debug("Tab activated", tab)
   chrome.tabs.get(tab.tabId, (info) => {
     if (info.url) {
       getRSS(tab.tabId, info.url);

@@ -12,7 +12,6 @@ function ruleHandler(rule: Rule, params, url, html, success, fail) {
             try {
                 resultWithParams = rule.target(params, url, document);
             } catch (error) {
-                console.warn(error);
                 resultWithParams = '';
             }
         } else if (typeof rule.target === 'string') {
