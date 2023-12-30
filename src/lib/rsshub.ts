@@ -1,4 +1,4 @@
-import psl from 'psl';
+import { parse } from 'tldts';
 import RouteRecognizer from 'route-recognizer';
 import { parseRules } from './rules';
 import type { Rule, RSSData } from './types';
@@ -78,7 +78,7 @@ export function getPageRSSHub(data: {
 
     let parsedDomain;
     try {
-        parsedDomain = psl.parse(new URL(url).hostname);
+        parsedDomain = parse(new URL(url).hostname);
     } catch (error) {
         return [];
     }
@@ -186,7 +186,7 @@ export function getWebsiteRSSHub(data: {
     const rules = parseRules(data.rules);
     let parsedDomain;
     try {
-        parsedDomain = psl.parse(new URL(url).hostname);
+        parsedDomain = parse(new URL(url).hostname);
     } catch (error) {
         return [];
     }
