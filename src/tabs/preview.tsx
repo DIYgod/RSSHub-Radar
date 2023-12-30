@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "~/lib/components/Card"
 import RSSItem from "~/popup/RSSItem";
+import { fetchRSSContent } from "~/lib/utils"
 
 const parser = new Parser();
 
@@ -24,21 +25,16 @@ function PreviewPage() {
   const [error, setError] = useState<Event>();
 
   useEffect(() => {
-    fetch(url, {
-      mode: "no-cors",
-    }).then(res => {
-      res.text().then(text => {
-        parser.parseString(text).then(result => {
-          setParsed(result);
-        }).catch((e) => {
-          setError(e)
-        })
-      }).catch((e) => {
-        setError(e)
-      })
-    }).catch((e) => {
-      setError(e)
-    })
+    const run = async () => {
+      try {
+        let content = await fetchRSSContent(url)
+        const result = await parser.parseString(content)
+        setParsed(result)
+      } catch (error) {
+        setError(error)
+      }
+    };
+    run();
   }, [])
 
   return (

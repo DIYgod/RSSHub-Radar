@@ -26,3 +26,13 @@ export function parseRSS(content: string) {
     return null
   }
 }
+
+export async function fetchRSSContent(url: string) {
+  let content
+  try {
+    content = await (await fetch(url)).text()
+  } catch (error) {
+    // TODO
+  }
+  return content
+}

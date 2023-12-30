@@ -1,5 +1,5 @@
 import type { RSSData } from "./types"
-import { parseRSS } from "./utils"
+import { fetchRSSContent, parseRSS } from "./utils"
 
 export async function getPageRSS(data: {
   html: string
@@ -150,9 +150,7 @@ export async function getPageRSS(data: {
   await Promise.all(uncertain.map((feed) => {
     return new Promise<void>(async (resolve) => {
       try {
-        const content = await (await fetch(feed.url, {
-          mode: "no-cors",
-        })).text()
+        const content = await fetchRSSContent(feed.url)
         const result = parseRSS(content)
         if (result) {
           if (result.title) {
