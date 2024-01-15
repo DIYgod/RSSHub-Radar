@@ -113,8 +113,8 @@ devDependencies:
     specifier: 3.1.1
     version: 3.1.1
   shadcn-ui:
-    specifier: ^0.5.0
-    version: 0.5.0(typescript@5.3.3)
+    specifier: ^0.7.0
+    version: 0.7.0(typescript@5.3.3)
   tailwindcss:
     specifier: ^3.4.0
     version: 3.4.0
@@ -6171,8 +6171,8 @@ packages:
       gopd: 1.0.1
       has-property-descriptors: 1.0.1
 
-  /shadcn-ui@0.5.0(typescript@5.3.3):
-    resolution: {integrity: sha512-mlQmeEPtQJU5VRNjUeTLAH97yHhwcH1IRSVFJN2aKlBA1yOcip9ELTRYAH7Bj8OEiJhHT1OSpn5zlHEWxzhakg==}
+  /shadcn-ui@0.7.0(typescript@5.3.3):
+    resolution: {integrity: sha512-8nYTsYDOHrM5rWmMG37ZNRsTX96Xr3F1g/sk4dSvqoYdJwKYPUEnEBFK7yJmJgvg2v7xmzeAFQTEYH+ywe22oA==}
     hasBin: true
     dependencies:
       '@antfu/ni': 0.21.12
