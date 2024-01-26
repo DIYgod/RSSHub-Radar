@@ -92,8 +92,8 @@ devDependencies:
     specifier: 4.1.1
     version: 4.1.1(prettier@3.1.1)
   '@types/chrome':
-    specifier: ^0.0.254
-    version: 0.0.254
+    specifier: ^0.0.259
+    version: 0.0.259
   '@types/node':
     specifier: 20.10.5
     version: 20.10.5
@@ -3171,8 +3171,8 @@ packages:
       path-browserify: 1.0.1
     dev: true
 
-  /@types/chrome@0.0.254:
-    resolution: {integrity: sha512-svkOGKwA+6ZZuk9xtrYun8MYpNY/9hD17rgZ19v3KunhsK1ZOKaMESw12/1AXLh1u3UPA8jQIRi2370DXv9wgw==}
+  /@types/chrome@0.0.259:
+    resolution: {integrity: sha512-WP1HsLqKgoUwR/4dYiTfmOSUG5B05+xrPLbqboO15nuaUC+aBYxwB9ixVyLPYY9D+vocJK9rzH5g1lpqVrJqhg==}
     dependencies:
       '@types/filesystem': 0.0.35
       '@types/har-format': 1.2.15
