@@ -29,6 +29,7 @@ export const defaultConfig = {
         feedbin: false,
         feedbinDomain: 'https://feedbin.com',
         theoldreader: false,
+        qireaderDomain: 'https://www.qireader.com',
         feedspub: false,
         bazqux: false,
         local: true,
