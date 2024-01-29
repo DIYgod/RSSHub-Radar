@@ -84,6 +84,13 @@ export const quickSubscriptions: ({
   themeColor: "#00af00",
   getSubscribePath: (data) => `/add?url=${data.encodedUrl}`
 }, {
+  name: "Qi Reader",
+  projectUrl: "https://www.qireader.com/",
+  key: "qireader",
+  subscribeDomainKey: "qireaderDomain",
+  themeColor: "#e79317",
+  getSubscribePath: (data) => `/discover?search=${data.encodedUrl}`
+}, {
   name: "CheckChan",
   projectUrl: "https://ckc.ftqq.com",
   key: "checkchan",
