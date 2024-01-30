@@ -44,7 +44,7 @@
     "@ianvs/prettier-plugin-sort-imports": "4.1.1",
     "@types/chrome": "^0.0.254",
     "@types/node": "20.10.5",
-    "@types/react": "18.2.46",
+    "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.32",
