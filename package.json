@@ -12,7 +12,7 @@
     "package": "plasmo package"
   },
   "dependencies": {
-    "@iconify-json/mingcute": "^1.1.14",
+    "@iconify-json/mingcute": "^1.1.15",
     "@plasmohq/messaging": "^0.6.1",
     "@plasmohq/storage": "^1.9.1",
     "@radix-ui/react-accordion": "^1.1.2",
