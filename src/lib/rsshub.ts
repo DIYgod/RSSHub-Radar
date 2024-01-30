@@ -146,13 +146,13 @@ export function getPageRSSHub(data: {
                                     (parsed) => {
                                         if (parsed) {
                                             result.push({
-                                                title: formatBlank(rules[domain]._name ? chrome.i18n.getMessage('current') : '', rule[recog.handler].title),
+                                                title: formatBlank(rules[domain]._name ? 'Current' : '', rule[recog.handler].title),
                                                 url: '{rsshubDomain}' + parsed,
                                                 path: parsed,
                                             });
                                         } else {
                                             result.push({
-                                                title: formatBlank(rules[domain]._name ? chrome.i18n.getMessage('current') : '', rule[recog.handler].title),
+                                                title: formatBlank(rules[domain]._name ? 'Current' : '', rule[recog.handler].title),
                                                 url: rule[recog.handler].docs,
                                                 isDocs: true,
                                             });

@@ -33,6 +33,9 @@ function RSSItem({
   if (type === 'currentPageRSSHub' && config.rsshubAccessControl.accessKey) {
     url = `${url}?code=${new MD5().update(item.path + config.rsshubAccessControl.accessKey).digest('hex')}`
   }
+  if (type === 'currentPageRSSHub') {
+    item.title = item.title.replace(/^Current/, chrome.i18n.getMessage('current'));
+  }
   url = encodeURI(url);
   const encodedUrl = encodeURIComponent(url);
 
