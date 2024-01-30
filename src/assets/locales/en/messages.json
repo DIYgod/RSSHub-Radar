@@ -145,5 +145,8 @@
   },
   "preview": {
     "message": "Preview"
+  },
+  "current": {
+    "message": "Current"
   }
 }

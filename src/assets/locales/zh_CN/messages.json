@@ -145,5 +145,8 @@
   },
   "preview": {
     "message": "预览"
+  },
+  "current": {
+    "message": "当前"
   }
 }
