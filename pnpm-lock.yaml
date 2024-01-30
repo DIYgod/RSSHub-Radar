@@ -12,8 +12,8 @@ dependencies:
     specifier: ^0.6.1
     version: 0.6.1(react@18.2.0)
   '@plasmohq/storage':
-    specifier: ^1.9.0
-    version: 1.9.0(react@18.2.0)
+    specifier: ^1.9.1
+    version: 1.9.1(react@18.2.0)
   '@radix-ui/react-accordion':
     specifier: ^1.1.2
     version: 1.1.2(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
@@ -2415,8 +2415,8 @@ packages:
       - whiskers
     dev: false
 
-  /@plasmohq/storage@1.9.0(react@18.2.0):
-    resolution: {integrity: sha512-mntoJ0EVh7JfYyMKWKnt6yqVlJnwavEkwdXssSOxS1CEeyNX2GPkXQfChvlGhuEJplqcRhLaym6rEc690Ao0fg==}
+  /@plasmohq/storage@1.9.1(react@18.2.0):
+    resolution: {integrity: sha512-65UXCZEWUA0aHhho2Mu5igrP/zdxkvPsT5N3rIypOYh0prn6Xk5HD0dt7q0mo8hb16QUUWDUL7OUPH4IDeDsIg==}
     peerDependencies:
       react: ^16.8.6 || ^17 || ^18
     peerDependenciesMeta:
