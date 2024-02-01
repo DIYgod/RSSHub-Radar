@@ -31,11 +31,13 @@ jobs:
         run: pnpm build --zip
       - name: Package the extension for Firefox
         run: pnpm build:firefox --zip
+      - name: Package the extension for Safari
+        run: pnpm build:safari:zip
       - name: Upload file
         uses: xresloader/upload-to-github-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: "build/chrome-mv3-prod.zip;build/firefox-mv3-prod.zip"
+          file: "build/chrome-mv3-prod.zip;build/firefox-mv3-prod.zip;build/safari-mv3-prod.zip"
           tags: true
           draft: false
