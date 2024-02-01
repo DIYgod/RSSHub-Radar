@@ -11,6 +11,8 @@
     "build:firefox": "plasmo build --target=firefox-mv3",
     "build:safari": "plasmo build --target=safari-mv3",
     "safari-convert": "xcrun safari-web-extension-converter build/safari-mv3-prod --project-location build --bundle-identifier app.rsshub.RSSHub-Radar",
+    "safari-zip": "zip -r build/safari-mv3-prod.zip \"build/RSSHub Radar\"",
+    "build:safari:zip": "npm run build:safari && npm run safari-convert && npm run safari-zip",
     "package": "plasmo package"
   },
   "dependencies": {
