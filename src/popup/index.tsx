@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import "~/lib/style.css"
 import { sendToBackground } from "@plasmohq/messaging"
 import RSSList from "./RSSList"
+import report from "~/lib/report"
 
 function IndexPopup() {
   const [data, setData] = useState({
@@ -19,6 +20,15 @@ function IndexPopup() {
         websiteRSSHub: [],
       }, res))
     })
+
+    chrome.tabs.query({
+      active: true,
+    }, ([tab]) => {
+      report({
+        url: tab.url,
+        name: "open-popup"
+      })  
+    });
   }, [])
 
   return (
