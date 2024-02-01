@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     name: Build assets
     steps:
       - uses: actions/checkout@v4
@@ -29,3 +29,5 @@ jobs:
         run: pnpm build --zip
       - name: Package the extension for Firefox
         run: pnpm build:firefox --zip
+      - name: Package the extension for Safari
+        run: pnpm build:safari && pnpm safari-convert

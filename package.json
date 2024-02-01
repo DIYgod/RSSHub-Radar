@@ -10,7 +10,7 @@
     "dev:firefox": "plasmo dev --target=firefox-mv3 --no-cs-reload",
     "build:firefox": "plasmo build --target=firefox-mv3",
     "build:safari": "plasmo build --target=safari-mv3",
-    "safari-convert": "xcrun safari-web-extension-converter build/safari-mv3-prod --project-location build --bundle-identifier rsshub.RSSHub-Radar",
+    "safari-convert": "xcrun safari-web-extension-converter build/safari-mv3-prod --project-location build --bundle-identifier app.rsshub.RSSHub-Radar",
     "package": "plasmo package"
   },
   "dependencies": {
