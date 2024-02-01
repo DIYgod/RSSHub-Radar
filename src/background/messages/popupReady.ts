@@ -8,6 +8,7 @@ const handler: PlasmoMessaging.MessageHandler = (req, res) => {
   }, ([tab]) => {
     res.send(getCachedRSS(tab.id))
   });
+  return true
 }
 
 export default handler
