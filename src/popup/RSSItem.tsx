@@ -117,6 +117,7 @@ function RSSItem({
                 name: `popup-subscribe-${quickSubscription.key}`
               })
             }}
+            key={quickSubscription.key}
           >
             <a
               target="_blank"
