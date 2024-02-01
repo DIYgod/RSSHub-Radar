@@ -5,7 +5,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: production
     steps:
       - uses: actions/checkout@v4
       - name: Cache pnpm modules
@@ -19,10 +18,10 @@ jobs:
         with:
           version: latest
           run_install: true
-      - name: Use Node.js 16.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v4.0.1
         with:
-          node-version: 16.x
+          node-version: 20.x
           cache: "pnpm"
       - name: Package the extension for Chrome
         run: pnpm build --zip
