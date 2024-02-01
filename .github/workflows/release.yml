@@ -5,11 +5,14 @@ on:
     tags:
       - "*"
 
+env:
+  PLASMO_PUBLIC_UMAMI_ID: ${{ vars.PLASMO_PUBLIC_UMAMI_ID }}
+  PLASMO_PUBLIC_UMAMI_URL: ${{ vars.PLASMO_PUBLIC_UMAMI_URL }}
+
 jobs:
   build:
     runs-on: macos-latest
     name: Build assets
-    environment: production
     steps:
       - uses: actions/checkout@v4
       - name: Cache pnpm modules
