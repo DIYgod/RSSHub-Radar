@@ -78,8 +78,8 @@ dependencies:
     specifier: ^6.1.4
     version: 6.1.4
   usehooks-ts:
-    specifier: ^2.10.0
-    version: 2.10.0(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^2.11.0
+    version: 2.11.0(react@18.2.0)
   xss:
     specifier: 1.0.14
     version: 1.0.14
@@ -6936,15 +6936,17 @@ packages:
       escalade: 3.1.1
       picocolors: 1.0.0
 
-  /usehooks-ts@2.10.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-hN22L5pqcsM1LwL6Q3p1QfxI9K+wuP4lrBXyCQ4Vi5Zo94YhphqRh2l7G7uhqPzLunAObLUAoSKzo64lisNyWQ==}
+  /usehooks-ts@2.11.0(react@18.2.0):
+    resolution: {integrity: sha512-JRRTyS7QXR4Qv9laNQE3BOMWsvPlrOolu1nfIGXQLCOGJhbim/STBFopKOoi0ktK6PDFAEx+Xa0Yn0PKIQVgzQ==}
     engines: {node: '>=16.15.0'}
     peerDependencies:
-      react: ^16.8.0  || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0  || ^17.0.0 || ^18.0.0
+      lodash.debounce: ^4
+      react: ^16.8.0  || ^17 || ^18
+    peerDependenciesMeta:
+      lodash.debounce:
+        optional: true
     dependencies:
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /util-deprecate@1.0.2:
