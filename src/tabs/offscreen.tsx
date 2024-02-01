@@ -1,23 +1,24 @@
-import { useRef } from "react";
+import { useRef } from "react"
+
 import { sendToBackground } from "@plasmohq/messaging"
 
-window.addEventListener('message', (event) => {
+window.addEventListener("message", (event) => {
   if (event.data?.name.startsWith("response")) {
     chrome.runtime.sendMessage(event.data)
     sendToBackground(event.data)
   }
-});
+})
 
 function OffscreenPage() {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null)
 
   chrome.runtime.onMessage.addListener((msg) => {
-    iframeRef.current?.contentWindow?.postMessage(msg.data, "*");
+    iframeRef.current?.contentWindow?.postMessage(msg.data, "*")
   })
 
   return (
     <iframe id="sandbox" src="/sandboxes/index.html" ref={iframeRef}></iframe>
-  );
+  )
 }
 
-export default OffscreenPage;
+export default OffscreenPage

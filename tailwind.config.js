@@ -1,5 +1,6 @@
-import { quickSubscriptions } from "./src/lib/quick-subscriptions"
 import { iconsPlugin } from "@egoist/tailwindcss-icons"
+
+import { quickSubscriptions } from "./src/lib/quick-subscriptions"
 
 const safelist = []
 quickSubscriptions.forEach((subscription) => {
@@ -94,8 +95,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    iconsPlugin(),
-    require("tailwindcss-animate")
-  ],
+  plugins: [iconsPlugin(), require("tailwindcss-animate")],
 }

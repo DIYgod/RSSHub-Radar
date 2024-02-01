@@ -1,4 +1,5 @@
 import { sendToBackground } from "@plasmohq/messaging"
+
 import { fetchRSSContent, parseRSS } from "~/lib/utils"
 
 sendToBackground({
@@ -32,4 +33,4 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 })
 
-export { }
+export {}

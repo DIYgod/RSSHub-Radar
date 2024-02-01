@@ -1,10 +1,7 @@
 import type { RSSData } from "./types"
 import { fetchRSSContent, parseRSS } from "./utils"
 
-export async function getPageRSS(data: {
-  html: string
-  url: string
-}) {
+export async function getPageRSS(data: { html: string; url: string }) {
   const parser = new DOMParser()
   const document = parser.parseFromString(data.html, "text/html")
   const location = new URL(data.url)
@@ -19,12 +16,15 @@ export async function getPageRSS(data: {
   const image =
     (document.querySelector('link[rel~="icon"]') &&
       handleUrl(
-        document.querySelector('link[rel~="icon"]').getAttribute("href")
+        document.querySelector('link[rel~="icon"]').getAttribute("href"),
       )) ||
-      location.origin + "/favicon.ico"
+    location.origin + "/favicon.ico"
 
   function handleUrl(url) {
-    return new URL(url.replace(/^(feed:\/\/)/, "https://").replace(/^(feed:)/, ""), location.href).toString()
+    return new URL(
+      url.replace(/^(feed:\/\/)/, "https://").replace(/^(feed:)/, ""),
+      location.href,
+    ).toString()
   }
 
   let pageRSS: RSSData[] = []
@@ -35,7 +35,7 @@ export async function getPageRSS(data: {
     },
     check: function (url) {
       return this.data[url.replace(/^(https?:\/\/|feed:\/\/|feed:)/, "")]
-    }
+    },
   }
 
   // self rss feed
@@ -43,7 +43,7 @@ export async function getPageRSS(data: {
   if (
     // Detect RSS without correct Content-Type setting
     // @ts-ignore
-    document.body.childNodes?.[0]?.tagName?.toLowerCase() === 'pre'
+    document.body.childNodes?.[0]?.tagName?.toLowerCase() === "pre"
   ) {
     // @ts-ignore
     html = document.body.childNodes[0].innerText
@@ -57,8 +57,8 @@ export async function getPageRSS(data: {
       pageRSS.push({
         url: location.href,
         title: result.title,
-        image
-      });
+        image,
+      })
 
       // skip the following check if this page is an RSS feed
       return pageRSS
@@ -79,7 +79,7 @@ export async function getPageRSS(data: {
     "text/rss",
     "text/atom",
     "text/rdf",
-    "application/feed+json"
+    "application/feed+json",
   ]
   const links = document.querySelectorAll("link[type]")
   for (let i = 0; i < links.length; i++) {
@@ -93,7 +93,7 @@ export async function getPageRSS(data: {
         const feed = {
           url: handleUrl(feed_url),
           title: links[i].getAttribute("title") || defaultTitle,
-          image
+          image,
         }
         if (!unique.check(feed.url)) {
           pageRSS.push(feed)
@@ -109,7 +109,7 @@ export async function getPageRSS(data: {
     const feed = {
       url: handleUrl(ele.getAttribute("href")),
       title: ele.getAttribute("title") || defaultTitle,
-      image
+      image,
     }
     if (!unique.check(feed.url)) {
       pageRSS.push(feed)
@@ -120,7 +120,7 @@ export async function getPageRSS(data: {
   // normal a
   const aEles = document.querySelectorAll("a")
   const check = /([^a-zA-Z]|^)rss([^a-zA-Z]|$)/i
-  const uncertain = [];
+  const uncertain = []
   for (let i = 0; i < aEles.length; i++) {
     if (aEles[i].hasAttribute("href")) {
       const href = aEles[i].getAttribute("href")
@@ -147,32 +147,34 @@ export async function getPageRSS(data: {
       }
     }
   }
-  await Promise.all(uncertain.map((feed) => {
-    return new Promise<void>(async (resolve) => {
-      try {
-        const content = await fetchRSSContent(feed.url)
-        const result = parseRSS(content)
-        if (result) {
-          if (result.title) {
-            feed.title = result.title;
+  await Promise.all(
+    uncertain.map((feed) => {
+      return new Promise<void>(async (resolve) => {
+        try {
+          const content = await fetchRSSContent(feed.url)
+          const result = parseRSS(content)
+          if (result) {
+            if (result.title) {
+              feed.title = result.title
+            }
+            pageRSS.push(feed)
+          } else {
+            pageRSS.push({
+              ...feed,
+              uncertain: true,
+            })
           }
-          pageRSS.push(feed);
-        } else {
+        } catch (error) {
           pageRSS.push({
             ...feed,
-            uncertain: true
-          });
+            uncertain: true,
+          })
         }
-      } catch (error) {
-        pageRSS.push({
-          ...feed,
-          uncertain: true
-        });
-      }
-      unique.save(feed.url)
-      resolve()
-    })
-  }))
+        unique.save(feed.url)
+        resolve()
+      })
+    }),
+  )
 
   return pageRSS
 }

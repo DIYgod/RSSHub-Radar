@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom"
 
 import { About } from "./About"
-import { Rules } from "./Rules"
 import { General } from "./General"
+import { Rules } from "./Rules"
 
 export const Routing = () => (
   <Routes>

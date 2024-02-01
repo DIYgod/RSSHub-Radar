@@ -5,7 +5,10 @@ function report({
   url?: string
   name?: string
 }) {
-  if (process.env.PLASMO_PUBLIC_UMAMI_ID && process.env.PLASMO_PUBLIC_UMAMI_URL) {
+  if (
+    process.env.PLASMO_PUBLIC_UMAMI_ID &&
+    process.env.PLASMO_PUBLIC_UMAMI_URL
+  ) {
     let hostname = ""
     try {
       hostname = new URL(url).hostname
@@ -18,9 +21,9 @@ function report({
         referrer: hostname,
         url: hostname,
         website: process.env.PLASMO_PUBLIC_UMAMI_ID,
-        name: name
+        name: name,
       },
-      type: "event"
+      type: "event",
     }
 
     fetch(`${process.env.PLASMO_PUBLIC_UMAMI_URL}/api/send`, {
@@ -29,7 +32,7 @@ function report({
         "content-type": "application/json",
       },
       body: JSON.stringify(umamiData),
-      keepalive: true
+      keepalive: true,
     })
   }
 }

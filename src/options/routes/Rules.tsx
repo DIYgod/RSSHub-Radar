@@ -7,21 +7,21 @@ import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger
+  AccordionTrigger,
 } from "~/lib/components/Accordion"
 import { Card, CardContent } from "~/lib/components/Card"
-import { parseRules, getRulesCount } from "~/lib/rules"
-import type { Rules as IRules } from "~/lib/types"
 import report from "~/lib/report"
+import { getRulesCount, parseRules } from "~/lib/rules"
+import type { Rules as IRules } from "~/lib/types"
 
 function Rules() {
   const [rules, setRules] = useState<IRules>({})
   useEffect(() => {
     sendToBackground({
-      name: "requestDisplayedRules"
+      name: "requestDisplayedRules",
     }).then((res) => setRules(parseRules(res, true)))
     report({
-      name: "options-rules"
+      name: "options-rules",
     })
   }, [])
 
@@ -36,10 +36,14 @@ function Rules() {
         {chrome.i18n.getMessage("rules")}
       </h1>
       <div className="content mb-6 space-y-2">
-        <p>{chrome.i18n.getMessage("totalNumberOfRules")}: {count}</p>
-        <p dangerouslySetInnerHTML={{
-          __html: chrome.i18n.getMessage("forMoreRulesJoinUs")
-        }}></p>
+        <p>
+          {chrome.i18n.getMessage("totalNumberOfRules")}: {count}
+        </p>
+        <p
+          dangerouslySetInnerHTML={{
+            __html: chrome.i18n.getMessage("forMoreRulesJoinUs"),
+          }}
+        ></p>
       </div>
       <div className="space-y-4">
         <Card>
@@ -73,7 +77,7 @@ function Rules() {
                                       </div>
                                     </div>
                                   )
-                                }
+                                },
                               )
                             } else {
                               return null

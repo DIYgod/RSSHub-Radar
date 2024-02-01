@@ -13,7 +13,8 @@
     "safari-convert": "xcrun safari-web-extension-converter build/safari-mv3-prod --project-location build --bundle-identifier app.rsshub.RSSHub-Radar",
     "safari-zip": "zip -r build/safari-mv3-prod.zip \"build/RSSHub Radar\"",
     "build:safari:zip": "npm run build:safari && npm run safari-convert && npm run safari-zip",
-    "package": "plasmo package"
+    "package": "plasmo package",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@iconify-json/mingcute": "^1.1.15",
@@ -51,11 +52,17 @@
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
     "autoprefixer": "^10.4.17",
+    "husky": "9.0.9",
+    "lint-staged": "15.2.1",
     "postcss": "^8.4.33",
     "prettier": "3.2.4",
+    "prettier-package-json": "2.8.0",
     "shadcn-ui": "^0.8.0",
     "tailwindcss": "^3.4.1",
     "typescript": "5.3.3"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   },
   "manifest": {
     "default_locale": "en",

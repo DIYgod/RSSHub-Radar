@@ -4,14 +4,14 @@ import { sendToContentScript } from "@plasmohq/messaging"
 import { Storage } from "@plasmohq/storage"
 
 import { setupOffscreenDocument } from "~/lib/offscreen"
+import report from "~/lib/report"
 import type { RSSData } from "~/lib/types"
 import { getRSS as sandboxGetRSS } from "~/sandboxes"
-import report from "~/lib/report"
 
 import { setBadge } from "./badge"
 
 const storage = new Storage({
-  area: "local"
+  area: "local",
 })
 
 const savedRSS: {
@@ -35,7 +35,7 @@ export const getRSS = async (tabId, url) => {
     })
     const html = await sendToContentScript({
       name: "requestHTML",
-      tabId
+      tabId,
     })
 
     if (chrome.offscreen) {
@@ -48,9 +48,9 @@ export const getRSS = async (tabId, url) => {
             tabId,
             html,
             url,
-            rules: await storage.get("rules")
-          }
-        }
+            rules: await storage.get("rules"),
+          },
+        },
       })
 
       await new Promise((resolve) => setTimeout(resolve, 100))
@@ -59,7 +59,7 @@ export const getRSS = async (tabId, url) => {
         html,
         url,
         rules: await storage.get("rules"),
-        callback: (rss) => setRSS(tabId, rss)
+        callback: (rss) => setRSS(tabId, rss),
       })
     }
   })
@@ -75,7 +75,7 @@ function applyRSS(
     pageRSS: RSSData[]
     pageRSSHub: RSSData[]
     websiteRSSHub: RSSData[]
-  }
+  },
 ) {
   savedRSS[tabId] = data
 
@@ -97,14 +97,14 @@ export const setRSS = async (
     pageRSS: RSSData[]
     pageRSSHub: RSSData[]
     websiteRSSHub: RSSData[]
-  }
+  },
 ) => {
   applyRSS(tabId, data)
 
   const res = await sendToContentScript({
     name: "parseRSS",
     tabId,
-    body: data.pageRSS.filter((rss) => rss.uncertain).map((rss) => rss.url)
+    body: data.pageRSS.filter((rss) => rss.uncertain).map((rss) => rss.url),
   })
   data.pageRSS = data.pageRSS.filter((rss) => {
     if (rss.uncertain) {
