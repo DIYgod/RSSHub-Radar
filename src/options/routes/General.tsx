@@ -127,7 +127,7 @@ function General() {
           </CardHeader>
           <CardContent className="space-y-4">
             {quickSubscriptions.map((quickSubscription) => (
-              <div className="flex items-center space-x-2 h-10">
+              <div className="flex items-center space-x-2 h-10" key={quickSubscription.key}>
                 <Switch id={quickSubscription.key} checked={config.submitto[quickSubscription.key]} onCheckedChange={(value) => setConfig({
                   submitto: {
                     [quickSubscription.key]: value
