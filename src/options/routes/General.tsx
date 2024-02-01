@@ -18,6 +18,7 @@ import type { Rules as IRules } from "~/lib/types"
 import { sendToBackground } from "@plasmohq/messaging"
 import { Loader2 } from "lucide-react"
 import toast from "react-hot-toast"
+import report from "~/lib/report"
 
 function General() {
   let [config] = useStorage("config")
@@ -27,6 +28,9 @@ function General() {
     sendToBackground({
       name: "requestDisplayedRules"
     }).then((res) => setRules(parseRules(res, true)))
+    report({
+      name: "options-general"
+    })
   }, [])
 
   const [count, setCount] = useState(0)

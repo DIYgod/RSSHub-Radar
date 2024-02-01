@@ -1,9 +1,17 @@
+import { useEffect } from "react"
 import {
   Card,
   CardContent,
 } from "~/lib/components/Card"
+import report from "~/lib/report"
 
 function About() {
+  useEffect(() => {
+    report({
+      name: "options-about"
+    })
+  }, [])
+
   return (
     <div>
       <h1 className="text-3xl font-medium leading-10 mb-6 text-orange-500 border-b pb-4">{chrome.i18n.getMessage("about")}</h1>

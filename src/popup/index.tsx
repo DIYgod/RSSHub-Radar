@@ -26,8 +26,8 @@ function IndexPopup() {
     }, ([tab]) => {
       report({
         url: tab.url,
-        name: "open-popup"
-      })  
+        name: "popup"
+      })
     });
   }, [])
 

@@ -12,6 +12,7 @@ import {
 import { Card, CardContent } from "~/lib/components/Card"
 import { parseRules, getRulesCount } from "~/lib/rules"
 import type { Rules as IRules } from "~/lib/types"
+import report from "~/lib/report"
 
 function Rules() {
   const [rules, setRules] = useState<IRules>({})
@@ -19,6 +20,9 @@ function Rules() {
     sendToBackground({
       name: "requestDisplayedRules"
     }).then((res) => setRules(parseRules(res, true)))
+    report({
+      name: "options-rules"
+    })
   }, [])
 
   const [count, setCount] = useState(0)

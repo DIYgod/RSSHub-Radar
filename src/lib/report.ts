@@ -1,6 +1,9 @@
 function report({
-  url,
+  url = "https://radar.rsshub",
   name,
+}: {
+  url?: string
+  name?: string
 }) {
   if (process.env.PLASMO_PUBLIC_UMAMI_ID && process.env.PLASMO_PUBLIC_UMAMI_URL) {
     let hostname = ""
@@ -25,7 +28,8 @@ function report({
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(umamiData)
+      body: JSON.stringify(umamiData),
+      keepalive: true
     })
   }
 }

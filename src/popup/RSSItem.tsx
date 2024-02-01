@@ -7,6 +7,7 @@ import RSSHubIcon from "data-base64:~/assets/icon.png"
 import { useCopyToClipboard } from 'usehooks-ts'
 import MD5 from 'md5.js';
 import { quickSubscriptions } from "~/lib/quick-subscriptions"
+import report from "~/lib/report"
 
 function RSSItem({
   item,
@@ -52,7 +53,15 @@ function RSSItem({
         </span>
       </a>
       {item.isDocs && (
-        <Button variant="rss" size="sm">
+        <Button
+          variant="rss"
+          size="sm"
+          onClickCapture={() => {
+            report({
+              name: "popup-docs"
+            })
+          }}
+        >
           <a target="_blank" href={url}>
             {chrome.i18n.getMessage("document")}
           </a>
@@ -62,12 +71,19 @@ function RSSItem({
         <Button variant="rss" size="sm" className="w-[60px]" onClick={() => {
           copy(url)
           setCopied(true)
+          report({
+            name: "popup-copy"
+          })
         }}>
           {chrome.i18n.getMessage(copied ? "copied" : "copy")}
         </Button>
       )}
       {!item.isDocs && !hidePreview && (
-        <Button variant="rss" size="sm" className="border-[#0ea5e9] text-[#0ea5e9] hover:bg-[#0ea5e9]">
+        <Button
+          variant="rss"
+          size="sm"
+          className="border-[#0ea5e9] text-[#0ea5e9] hover:bg-[#0ea5e9]"
+        >
           <a
             target="_blank"
             href={`/tabs/preview.html?url=${encodedUrl}`}
@@ -92,7 +108,16 @@ function RSSItem({
         subscriptionDomain = subscriptionDomain.replace(/(?<!\/)\/$/, "")
 
         return (
-          <Button variant="rss" size="sm" className={`border-[${quickSubscription.themeColor}] text-[${quickSubscription.themeColor}] hover:bg-[${quickSubscription.themeColor}]`}>
+          <Button
+            variant="rss"
+            size="sm"
+            className={`border-[${quickSubscription.themeColor}] text-[${quickSubscription.themeColor}] hover:bg-[${quickSubscription.themeColor}]`}
+            onClickCapture={() => {
+              report({
+                name: `popup-subscribe-${quickSubscription.key}`
+              })
+            }}
+          >
             <a
               target="_blank"
               href={`${subscriptionDomain}${quickSubscription.getSubscribePath({
