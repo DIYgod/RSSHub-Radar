@@ -42,7 +42,7 @@
     "xss": "1.0.14"
   },
   "devDependencies": {
-    "@egoist/tailwindcss-icons": "^1.7.2",
+    "@egoist/tailwindcss-icons": "^1.7.4",
     "@ianvs/prettier-plugin-sort-imports": "4.1.1",
     "@types/chrome": "^0.0.259",
     "@types/node": "20.11.10",
