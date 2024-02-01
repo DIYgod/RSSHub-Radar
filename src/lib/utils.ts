@@ -16,7 +16,7 @@ export function removeFunctionFields(obj) {
   }
 }
 export function parseRSS(content: string) {
-  if (content.includes("<rss ")) {
+  if (content.includes("<rss ") || content.includes("<feed ")) {
     const titleContent = content.match(/<title>(.*)<\/title>/)?.[1]
     const title = titleContent ? he.decode(titleContent)?.replace(/<!\[CDATA\[(.*)]]>/, (match, p1) => p1)?.trim() : ""
     return {

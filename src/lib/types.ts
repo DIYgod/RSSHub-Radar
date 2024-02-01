@@ -18,4 +18,5 @@ export type RSSData = {
   image?: string;
   path?: string;
   isDocs?: boolean;
+  uncertain?: boolean;
 }

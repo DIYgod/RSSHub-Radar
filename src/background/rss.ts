@@ -60,20 +60,52 @@ export const getCachedRSS = (tabId) => {
   return savedRSS[tabId]
 }
 
-export const setRSS = (tabId, data: {
+function applyRSS(tabId, data: {
   pageRSS: RSSData[],
   pageRSSHub: RSSData[],
   websiteRSSHub: RSSData[],
-}) => {
+}) {
   savedRSS[tabId] = data
 
   let text = ''
   if (data.pageRSS.length || data.pageRSSHub.length) {
-    text = (data.pageRSS.length + data.pageRSSHub.length) + ''
+    text = (data.pageRSS.filter(rss => !rss.uncertain).length + data.pageRSSHub.length) + ''
   } else if (data.websiteRSSHub.length) {
     text = ' '
   }
   setBadge(text, tabId)
+}
+
+export const setRSS = async (tabId, data: {
+  pageRSS: RSSData[],
+  pageRSSHub: RSSData[],
+  websiteRSSHub: RSSData[],
+}) => {
+  applyRSS(tabId, data)
+
+  const res = await sendToContentScript({
+    name: "parseRSS",
+    tabId,
+    body: data.pageRSS.filter(rss => rss.uncertain).map(rss => rss.url)
+  })
+  data.pageRSS = data.pageRSS.filter(rss => {
+    if (rss.uncertain) {
+      const parsed = res.find(r => r.url === rss.url)
+      if (parsed && parsed.title !== null) {
+        if (parsed.title) {
+          rss.title = parsed.title
+        }
+        rss.uncertain = false
+        return true
+      } else {
+        return false
+      }
+    } else {
+      return true
+    }
+  })
+  
+  applyRSS(tabId, data)
 }
 
 export const deleteCachedRSS = (tabId) => {

@@ -157,12 +157,20 @@ export async function getPageRSS(data: {
             feed.title = result.title;
           }
           pageRSS.push(feed);
-          unique.save(feed.url)
+        } else {
+          pageRSS.push({
+            ...feed,
+            uncertain: true
+          });
         }
-        resolve()
       } catch (error) {
-        resolve()
+        pageRSS.push({
+          ...feed,
+          uncertain: true
+        });
       }
+      unique.save(feed.url)
+      resolve()
     })
   }))
 
