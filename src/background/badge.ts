@@ -1,10 +1,10 @@
 import { getConfig } from "~/lib/config"
 
-chrome.action.setBadgeBackgroundColor({
+chrome.action?.setBadgeBackgroundColor?.({
   color: "#F62800",
 })
 
-chrome.action.setBadgeTextColor({
+chrome.action?.setBadgeTextColor?.({
   color: "#fff",
 })
 
