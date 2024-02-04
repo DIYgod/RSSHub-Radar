@@ -52,7 +52,7 @@
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
     "autoprefixer": "^10.4.17",
-    "husky": "9.0.9",
+    "husky": "9.0.10",
     "lint-staged": "15.2.1",
     "postcss": "^8.4.33",
     "prettier": "3.2.4",
