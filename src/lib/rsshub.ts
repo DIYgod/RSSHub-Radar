@@ -8,9 +8,9 @@ function ruleHandler(rule: Rule, params, url, html, success, fail) {
   const run = () => {
     let resultWithParams
     if (typeof rule.target === "function") {
-      const parser = new DOMParser()
-      const document = parser.parseFromString(html, "text/html")
       try {
+        const parser = new DOMParser()
+        const document = parser.parseFromString(html, "text/html")
         resultWithParams = rule.target(params, url, document)
       } catch (error) {
         resultWithParams = ""
