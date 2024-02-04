@@ -22,51 +22,60 @@ const savedRSS: {
   }
 } = {}
 
-const lock = new AsyncLock()
+const lock = new AsyncLock({
+  maxExecutionTime: 3000,
+})
 export const getRSS = async (tabId, url) => {
-  await lock.acquire(tabId, async () => {
-    if (savedRSS[tabId]) {
-      setRSS(tabId, savedRSS[tabId])
-      return
-    }
+  if (!tabId || !url || !url.startsWith("http")) {
+    return
+  }
+  try {
+    await lock.acquire(tabId, async () => {
+      if (savedRSS[tabId]) {
+        setRSS(tabId, savedRSS[tabId])
+        return
+      }
 
-    report({
-      url,
-    })
-    const html = await sendToContentScript({
-      name: "requestHTML",
-      tabId,
-    })
-
-    if (chrome.offscreen) {
-      await setupOffscreenDocument("tabs/offscreen.html")
-      chrome.runtime.sendMessage({
-        target: "offscreen",
-        data: {
-          name: "requestRSSHub",
-          body: {
-            tabId,
-            html,
-            url,
-            rules: await storage.get("rules"),
-          },
-        },
-      })
-    } else {
-      const rsshub = sandboxGetRSSHub({
-        html,
+      report({
         url,
-        rules: await storage.get("rules"),
       })
-      setRSS(tabId, rsshub)
-    }
+      const html = await sendToContentScript({
+        name: "requestHTML",
+        tabId,
+      })
 
-    const pageRSS = await sendToContentScript({
-      name: "requestPageRSS",
-      tabId,
+      if (chrome.offscreen) {
+        await setupOffscreenDocument("tabs/offscreen.html")
+        chrome.runtime.sendMessage({
+          target: "offscreen",
+          data: {
+            name: "requestRSSHub",
+            body: {
+              tabId,
+              html,
+              url,
+              rules: await storage.get("rules"),
+            },
+          },
+        })
+      } else {
+        const rsshub = sandboxGetRSSHub({
+          html,
+          url,
+          rules: await storage.get("rules"),
+        })
+        setRSS(tabId, rsshub)
+      }
+
+      const pageRSS = await sendToContentScript({
+        name: "requestPageRSS",
+        tabId,
+      })
+      setRSS(tabId, pageRSS)
     })
-    setRSS(tabId, pageRSS)
-  })
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 export const getCachedRSS = (tabId) => {
