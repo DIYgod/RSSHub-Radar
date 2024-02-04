@@ -1,20 +1,17 @@
-import { getPageRSS } from "~/lib/rss"
 import { getPageRSSHub, getWebsiteRSSHub } from "~/lib/rsshub"
 import { parseRules } from "~/lib/rules"
 import { removeFunctionFields } from "~/lib/utils"
 
 export {}
 
-export const getRSS = async ({
+export const getRSSHub = ({
   html,
   url,
   rules,
-  callback,
 }: {
   html: string
   url: string
   rules: string
-  callback
 }) => {
   const pageRSSHub = getPageRSSHub({
     html,
@@ -25,20 +22,10 @@ export const getRSS = async ({
     url,
     rules,
   })
-  callback({
-    pageRSS: [],
+  return {
     pageRSSHub,
     websiteRSSHub,
-  })
-  const pageRSS = await getPageRSS({
-    html,
-    url,
-  })
-  callback({
-    pageRSS,
-    pageRSSHub,
-    websiteRSSHub,
-  })
+  }
 }
 
 export const getDisplayedRules = (rules: string) => {
@@ -53,7 +40,7 @@ if (typeof window !== "undefined") {
     (
       event: MessageEvent<
         | {
-            name: "requestRSS"
+            name: "requestRSSHub"
             body: {
               html: string
               url: string
@@ -70,25 +57,23 @@ if (typeof window !== "undefined") {
       >,
     ) => {
       switch (event.data?.name) {
-        case "requestRSS": {
-          getRSS({
+        case "requestRSSHub": {
+          const rsshub = getRSSHub({
             html: event.data.body.html,
             url: event.data.body.url,
             rules: event.data.body.rules,
-            callback: (rss) => {
-              event.source.postMessage(
-                {
-                  name: "responseRSS",
-                  body: {
-                    url: "url" in event.data.body && event.data.body.url,
-                    tabId: "tabId" in event.data.body && event.data.body.tabId,
-                    rss,
-                  },
-                },
-                event.origin as any,
-              )
-            },
           })
+          event.source.postMessage(
+            {
+              name: "responseRSS",
+              body: {
+                url: "url" in event.data.body && event.data.body.url,
+                tabId: "tabId" in event.data.body && event.data.body.tabId,
+                rss: rsshub,
+              },
+            },
+            event.origin as any,
+          )
           break
         }
         case "requestDisplayedRules": {

@@ -6,7 +6,7 @@ import { Storage } from "@plasmohq/storage"
 import { setupOffscreenDocument } from "~/lib/offscreen"
 import report from "~/lib/report"
 import type { RSSData } from "~/lib/types"
-import { getRSS as sandboxGetRSS } from "~/sandboxes"
+import { getRSSHub as sandboxGetRSSHub } from "~/sandboxes"
 
 import { setBadge } from "./badge"
 
@@ -16,9 +16,9 @@ const storage = new Storage({
 
 const savedRSS: {
   [tabId: number]: {
-    pageRSS: RSSData[]
     pageRSSHub: RSSData[]
     websiteRSSHub: RSSData[]
+    pageRSS: RSSData[]
   }
 } = {}
 
@@ -43,7 +43,7 @@ export const getRSS = async (tabId, url) => {
       chrome.runtime.sendMessage({
         target: "offscreen",
         data: {
-          name: "requestRSS",
+          name: "requestRSSHub",
           body: {
             tabId,
             html,
@@ -52,16 +52,20 @@ export const getRSS = async (tabId, url) => {
           },
         },
       })
-
-      await new Promise((resolve) => setTimeout(resolve, 100))
     } else {
-      sandboxGetRSS({
+      const rsshub = sandboxGetRSSHub({
         html,
         url,
         rules: await storage.get("rules"),
-        callback: (rss) => setRSS(tabId, rss),
       })
+      setRSS(tabId, rsshub)
     }
+
+    const pageRSS = await sendToContentScript({
+      name: "requestPageRSS",
+      tabId,
+    })
+    setRSS(tabId, pageRSS)
   })
 }
 
@@ -69,61 +73,42 @@ export const getCachedRSS = (tabId) => {
   return savedRSS[tabId]
 }
 
-function applyRSS(
-  tabId,
-  data: {
-    pageRSS: RSSData[]
-    pageRSSHub: RSSData[]
-    websiteRSSHub: RSSData[]
-  },
-) {
-  savedRSS[tabId] = data
-
-  let text = ""
-  if (data.pageRSS.length || data.pageRSSHub.length) {
-    text =
-      data.pageRSS.filter((rss) => !rss.uncertain).length +
-      data.pageRSSHub.length +
-      ""
-  } else if (data.websiteRSSHub.length) {
-    text = " "
-  }
-  setBadge(text, tabId)
-}
-
 export const setRSS = async (
   tabId,
   data: {
     pageRSS: RSSData[]
+  } | {
     pageRSSHub: RSSData[]
     websiteRSSHub: RSSData[]
   },
 ) => {
-  applyRSS(tabId, data)
-
-  const res = await sendToContentScript({
-    name: "parseRSS",
-    tabId,
-    body: data.pageRSS.filter((rss) => rss.uncertain).map((rss) => rss.url),
-  })
-  data.pageRSS = data.pageRSS.filter((rss) => {
-    if (rss.uncertain) {
-      const parsed = res.find((r) => r.url === rss.url)
-      if (parsed && parsed.title !== null) {
-        if (parsed.title) {
-          rss.title = parsed.title
-        }
-        rss.uncertain = false
-        return true
-      } else {
-        return false
-      }
-    } else {
-      return true
+  if (!data) {
+    return
+  }
+  if (!savedRSS[tabId]) {
+    savedRSS[tabId] = {
+      pageRSS: [],
+      pageRSSHub: [],
+      websiteRSSHub: [],
     }
-  })
+  }
+  if ("pageRSS" in data) {
+    savedRSS[tabId].pageRSS = data.pageRSS
+  } else {
+    savedRSS[tabId].pageRSSHub = data.pageRSSHub
+    savedRSS[tabId].websiteRSSHub = data.websiteRSSHub
+  }
 
-  applyRSS(tabId, data)
+  let text = ""
+  if (savedRSS[tabId].pageRSS.length || savedRSS[tabId].pageRSSHub.length) {
+    text =
+      savedRSS[tabId].pageRSS.length +
+      savedRSS[tabId].pageRSSHub.length +
+      ""
+  } else if (savedRSS[tabId].websiteRSSHub.length) {
+    text = " "
+  }
+  setBadge(text, tabId)
 }
 
 export const deleteCachedRSS = (tabId) => {

@@ -1,11 +1,7 @@
 import type { RSSData } from "./types"
 import { fetchRSSContent, parseRSS } from "./utils"
 
-export async function getPageRSS(data: { html: string; url: string }) {
-  const parser = new DOMParser()
-  const document = parser.parseFromString(data.html, "text/html")
-  const location = new URL(data.url)
-
+export async function getPageRSS() {
   const defaultTitle =
     document.querySelector("title") &&
     document.querySelector("title").innerHTML &&
@@ -22,7 +18,7 @@ export async function getPageRSS(data: { html: string; url: string }) {
 
   function handleUrl(url) {
     return new URL(
-      url.replace(/^(feed:\/\/)/, "https://").replace(/^(feed:)/, ""),
+      url.replace(/^(feed:\/\/)/, "https://").replace(/^(feed:)/, "").replace(/^(http:\/\/)/, "https://"),
       location.href,
     ).toString()
   }
@@ -61,7 +57,9 @@ export async function getPageRSS(data: { html: string; url: string }) {
       })
 
       // skip the following check if this page is an RSS feed
-      return pageRSS
+      return {
+        pageRSS,
+      }
     }
   }
 
@@ -158,23 +156,15 @@ export async function getPageRSS(data: { html: string; url: string }) {
               feed.title = result.title
             }
             pageRSS.push(feed)
-          } else {
-            pageRSS.push({
-              ...feed,
-              uncertain: true,
-            })
+            unique.save(feed.url)
           }
-        } catch (error) {
-          pageRSS.push({
-            ...feed,
-            uncertain: true,
-          })
-        }
-        unique.save(feed.url)
+        } catch (error) { }
         resolve()
       })
     }),
   )
 
-  return pageRSS
+  return {
+    pageRSS,
+  }
 }

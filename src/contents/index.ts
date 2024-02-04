@@ -1,32 +1,16 @@
 import { sendToBackground } from "@plasmohq/messaging"
 
-import { fetchRSSContent, parseRSS } from "~/lib/utils"
+import { getPageRSS } from "~/lib/rss"
 
 sendToBackground({
   name: "contentReady",
 })
 
-async function getRSS(url) {
-  let title = null
-  try {
-    const content = await fetchRSSContent(url)
-    const result = parseRSS(content)
-    if (result) {
-      title = result.title || ""
-    }
-  } catch (error) {}
-
-  return {
-    url,
-    title,
-  }
-}
-
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.name === "requestHTML") {
     sendResponse(document.documentElement.outerHTML)
-  } else if (msg.name === "parseRSS") {
-    Promise.all(msg.body?.map(getRSS)).then((data) => {
+  } else if (msg.name === "requestPageRSS") {
+    getPageRSS().then((data) => {
       sendResponse(data)
     })
     return true
