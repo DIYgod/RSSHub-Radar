@@ -54,7 +54,7 @@
     "autoprefixer": "^10.4.17",
     "husky": "9.0.9",
     "lint-staged": "15.2.1",
-    "postcss": "^8.4.33",
+    "postcss": "^8.4.34",
     "prettier": "3.2.4",
     "prettier-package-json": "2.8.0",
     "shadcn-ui": "^0.8.0",
