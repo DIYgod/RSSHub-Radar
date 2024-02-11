@@ -1,3 +1,8 @@
+function isSampled(rate) {
+  const randomNumber = Math.floor(Math.random() * 100);
+  return randomNumber < rate * 100;
+}
+
 function report({
   url = "https://radar.rsshub",
   name,
@@ -7,7 +12,8 @@ function report({
 }) {
   if (
     process.env.PLASMO_PUBLIC_UMAMI_ID &&
-    process.env.PLASMO_PUBLIC_UMAMI_URL
+    process.env.PLASMO_PUBLIC_UMAMI_URL &&
+    isSampled(parseFloat(process.env.PLASMO_PUBLIC_UMAMI_SAMPLE_RATE) || 0.1)
   ) {
     let hostname = ""
     try {
