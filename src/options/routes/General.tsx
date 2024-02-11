@@ -39,7 +39,7 @@ function General() {
 
   return (
     <div>
-      <h1 className="text-3xl font-medium leading-10 mb-6 text-orange-500 border-b pb-4">
+      <h1 className="text-3xl font-medium leading-10 mb-6 text-primary border-b pb-4">
         {chrome.i18n.getMessage("general")}
       </h1>
       <div className="space-y-4">

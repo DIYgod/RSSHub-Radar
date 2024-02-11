@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react"
-
 import "~/lib/style.css"
+
+import { useEffect, useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
+import { useDark } from "~/lib/hooks/use-dark"
 import report from "~/lib/report"
 
 import RSSList from "./RSSList"
 
 function IndexPopup() {
+  useDark()
+
   const [data, setData] = useState({
     pageRSS: [],
     pageRSSHub: [],
@@ -50,7 +53,7 @@ function IndexPopup() {
         href="/options.html"
         target="_blank"
       >
-        <i className="i-mingcute-settings-3-line w-5 h-5 text-slate-600 hover:text-black transition-colors"></i>
+        <i className="i-mingcute-settings-3-line w-5 h-5 text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors"></i>
       </a>
       {!data.pageRSS.length &&
         !data.pageRSSHub.length &&

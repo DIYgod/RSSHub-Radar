@@ -32,7 +32,7 @@ function Rules() {
 
   return (
     <div>
-      <h1 className="text-3xl font-medium leading-10 mb-6 text-orange-500 border-b pb-4">
+      <h1 className="text-3xl font-medium leading-10 mb-6 text-primary border-b pb-4">
         {chrome.i18n.getMessage("rules")}
       </h1>
       <div className="content mb-6 space-y-2">
@@ -70,7 +70,7 @@ function Rules() {
                                     <div key={key + item + index}>
                                       <div className="flex items-center space-x-2">
                                         <div className="flex-1">
-                                          <p className="text-sm text-zinc-700">
+                                          <p className="text-sm text-foreground/70">
                                             {subdomainRule.title}
                                           </p>
                                         </div>
