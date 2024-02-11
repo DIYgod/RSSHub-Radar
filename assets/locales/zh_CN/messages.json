@@ -148,5 +148,11 @@
   },
   "current": {
     "message": "当前"
+  },
+  "paginationPrevious": {
+    "message": "上一页"
+  },
+  "paginationNext": {
+    "message": "下一页"
   }
 }
