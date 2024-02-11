@@ -12,12 +12,12 @@ function About() {
 
   return (
     <div>
-      <h1 className="text-3xl font-medium leading-10 mb-6 text-orange-500 border-b pb-4">
+      <h1 className="text-3xl font-medium leading-10 mb-6 text-primary border-b pb-4">
         {chrome.i18n.getMessage("about")}
       </h1>
       <div className="space-y-4">
         <Card>
-          <CardContent className="space-y-4 content text-zinc-700 py-10">
+          <CardContent className="space-y-4 content text-zinc-700 dark:text-zinc-300 py-10">
             <p
               dangerouslySetInnerHTML={{
                 __html: chrome.i18n.getMessage("RSSHubRadarInfo"),
@@ -60,10 +60,7 @@ function About() {
             <p>&nbsp;</p>
             <p>
               Made with <span className="text-red-500">♥</span> by{" "}
-              <a
-                className="underline text-orange-500"
-                href="https://diygod.cc/"
-              >
+              <a className="underline text-primary" href="https://diygod.cc/">
                 DIYgod
               </a>
             </p>

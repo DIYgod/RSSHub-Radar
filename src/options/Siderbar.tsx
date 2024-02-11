@@ -1,6 +1,7 @@
 import RSSHubIcon from "data-base64:~/assets/icon.png"
 import { Link, useLocation } from "react-router-dom"
 
+import { AppearanceSwitch } from "~/lib/components/AppearanceSwitch"
 import { cn } from "~/lib/utils"
 
 import info from "../../package.json"
@@ -28,7 +29,7 @@ function Siderbar() {
   return (
     <div className="flex flex-col h-[calc(100vh-80px)] sticky top-10">
       <div>
-        <div className="px-4 flex items-center space-x-2 text-orange-500 text-xl font-bold mb-8">
+        <div className="px-4 flex items-center space-x-2 text-primary text-xl font-bold mb-8">
           <img className="w-10 h-10" src={RSSHubIcon} />
           <span>RSSHub Radar</span>
         </div>
@@ -40,9 +41,9 @@ function Siderbar() {
               to={link.path}
               className={cn(
                 location.pathname === link.path
-                  ? "bg-orange-50 text-orange-500"
+                  ? "bg-primary/10 text-primary"
                   : "",
-                "px-4 py-3 hover:bg-orange-50 transition-colors rounded-lg flex items-center space-x-2",
+                "px-4 py-3 hover:bg-primary/10 transition-colors rounded-lg flex items-center space-x-2",
               )}
             >
               <i className={link.icon + " w-5 h-5"}></i>
@@ -52,10 +53,11 @@ function Siderbar() {
         ))}
       </ul>
       <footer className="text-zinc-500 text-center text-sm">
+        <AppearanceSwitch className="mx-auto mb-2 text-2xl" />
         <p>Version v{info.version}</p>
         <p>
           Made with <span className="text-red-500">♥</span> by{" "}
-          <a className="underline text-orange-500" href="https://diygod.cc/">
+          <a className="underline text-primary" href="https://diygod.cc/">
             DIYgod
           </a>
         </p>

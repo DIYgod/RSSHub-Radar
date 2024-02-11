@@ -52,7 +52,7 @@ function RSSItem({
       <a
         target="_blank"
         href={url}
-        className="w-48 cursor-pointer flex flex-col justify-between text-black flex-1"
+        className="w-48 cursor-pointer flex flex-col justify-between text-black dark:text-white flex-1"
       >
         <span className="text-[13px] truncate">{item.title}</span>
         <span className="text-xs truncate text-zinc-400">
