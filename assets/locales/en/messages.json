@@ -148,5 +148,11 @@
   },
   "current": {
     "message": "Current"
+  },
+  "paginationPrevious": {
+    "message": "Previous"
+  },
+  "paginationNext": {
+    "message": "Next"
   }
 }
