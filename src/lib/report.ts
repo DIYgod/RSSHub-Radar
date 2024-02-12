@@ -13,7 +13,7 @@ function report({
   if (
     process.env.PLASMO_PUBLIC_UMAMI_ID &&
     process.env.PLASMO_PUBLIC_UMAMI_URL &&
-    isSampled(parseFloat(process.env.PLASMO_PUBLIC_UMAMI_SAMPLE_RATE) || 0.1)
+    (name || isSampled(parseFloat(process.env.PLASMO_PUBLIC_UMAMI_SAMPLE_RATE) || 0.01))
   ) {
     let hostname = ""
     try {
