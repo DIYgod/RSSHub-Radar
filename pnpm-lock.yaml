@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@iconify-json/mingcute':
     specifier: ^1.1.16
@@ -74,8 +78,8 @@ dependencies:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.4.1)
   tldts:
-    specifier: ^6.1.10
-    version: 6.1.10
+    specifier: ^6.1.11
+    version: 6.1.11
   usehooks-ts:
     specifier: ^2.14.0
     version: 2.14.0(react@18.2.0)
@@ -7029,15 +7033,15 @@ packages:
     resolution: {integrity: sha512-qsdtZH+vMoCARQtyod4imc2nIJwg9Cc7lPRrw9CzF8ZKR0khdr8+2nX80PBhET3tcyTtJDxAffGh2rXH4tyU8A==}
     dev: false
 
-  /tldts-core@6.1.10:
-    resolution: {integrity: sha512-Xm4W3CEpPyH1HZFbgMtNs9KFgfUkGHadbiIYvQf4iZSK1XTcOZvpiebt9tpqioZ0QTv9fEaMYMDZtFpDOP1+7g==}
+  /tldts-core@6.1.11:
+    resolution: {integrity: sha512-ZFcT+/fdEc5VRndQIJtArNBHsaq4udRoeE4E6cwLzGaH0dq7Ng2L7cAoea6riM2uhNFD09EDa1bN8lrfrOBCLg==}
     dev: false
 
-  /tldts@6.1.10:
-    resolution: {integrity: sha512-AbYk9o6nUn4CrlBnnu/rXI9dEUGeAe86YQIYe9Qo5AXvSxevdJnldkrHAm9kGXznQQiNUDDSLwUS+s0lO0yY6Q==}
+  /tldts@6.1.11:
+    resolution: {integrity: sha512-AAgE/IWvbsg4Lr4KGFNR7bL/MhQfBlgGV9UBg2uy5mCwSGi5f12eZ7ZydAqv4ACys6pUYjNoV2qfZdcCn4RS+Q==}
     hasBin: true
     dependencies:
-      tldts-core: 6.1.10
+      tldts-core: 6.1.11
     dev: false
 
   /tmp@0.0.33:
@@ -7392,7 +7396,3 @@ packages:
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
     dev: true
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

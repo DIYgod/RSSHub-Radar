@@ -41,7 +41,7 @@
     "rss-parser": "3.13.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "tldts": "^6.1.10",
+    "tldts": "^6.1.11",
     "usehooks-ts": "^2.14.0",
     "xss": "1.0.14"
   },
