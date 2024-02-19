@@ -177,24 +177,26 @@ function General() {
           <CardContent className="space-y-4">
             {quickSubscriptions.map((quickSubscription) => (
               <div
-                className="flex items-center space-x-2 h-10"
+                className="flex sm:items-center gap-2 sm:flex-row flex-col"
                 key={quickSubscription.key}
               >
-                <Switch
-                  id={quickSubscription.key}
-                  checked={config.submitto[quickSubscription.key]}
-                  onCheckedChange={(value) =>
-                    setConfig({
-                      submitto: {
-                        [quickSubscription.key]: value,
-                      },
-                    } as any)
-                  }
-                />
-                <Label className="w-28" htmlFor={quickSubscription.key}>
-                  {chrome.i18n.getMessage(quickSubscription.name) ||
-                    quickSubscription.name}
-                </Label>
+                <div className="flex items-center gap-2 h-10">
+                  <Switch
+                    id={quickSubscription.key}
+                    checked={config.submitto[quickSubscription.key]}
+                    onCheckedChange={(value) =>
+                      setConfig({
+                        submitto: {
+                          [quickSubscription.key]: value,
+                        },
+                      } as any)
+                    }
+                  />
+                  <Label className="w-28" htmlFor={quickSubscription.key}>
+                    {chrome.i18n.getMessage(quickSubscription.name) ||
+                      quickSubscription.name}
+                  </Label>
+                </div>
                 {config.submitto[quickSubscription.key] &&
                   ("subscribeDomainKey" in quickSubscription ? (
                     <Input

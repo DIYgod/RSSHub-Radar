@@ -9,7 +9,7 @@ function RSSList({ type, list }: { type: string; list: RSSData[] }) {
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold">{chrome.i18n.getMessage(type)}</h2>
-      <ul>
+      <ul className="overflow-x-auto">
         {list.map((item) => (
           <RSSItem key={item.url + item.title} item={item} type={type} />
         ))}
