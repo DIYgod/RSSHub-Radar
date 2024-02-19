@@ -50,7 +50,7 @@
     "@ianvs/prettier-plugin-sort-imports": "4.1.1",
     "@types/chrome": "^0.0.260",
     "@types/node": "20.11.17",
-    "@types/react": "18.2.55",
+    "@types/react": "18.2.56",
     "@types/react-dom": "18.2.19",
     "autoprefixer": "^10.4.17",
     "husky": "9.0.10",
