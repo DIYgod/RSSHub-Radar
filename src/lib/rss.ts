@@ -14,7 +14,7 @@ export async function getPageRSS() {
       handleUrl(
         document.querySelector('link[rel~="icon"]').getAttribute("href"),
       )) ||
-    location.origin + "/favicon.ico"
+    `https://icons.duckduckgo.com/ip3/${location.hostname}.ico`
 
   function handleUrl(url) {
     return new URL(
