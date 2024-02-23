@@ -43,7 +43,7 @@
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "tldts": "^6.1.11",
-    "usehooks-ts": "^2.14.0",
+    "usehooks-ts": "^2.15.1",
     "xss": "1.0.14"
   },
   "devDependencies": {
