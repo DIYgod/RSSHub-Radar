@@ -4,13 +4,18 @@ import { parse } from "tldts"
 import { parseRules } from "./rules"
 import type { RSSData, Rule } from "./types"
 
+const parseHtml = (html) => {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return template.content; 
+}
+
 function ruleHandler(rule: Rule, params, url, html, success, fail) {
   const run = () => {
     let resultWithParams
     if (typeof rule.target === "function") {
       try {
-        const parser = new DOMParser()
-        const document = parser.parseFromString(html, "text/html")
+        const document = parseHtml(html)
         resultWithParams = rule.target(params, url, document)
       } catch (error) {
         resultWithParams = ""
