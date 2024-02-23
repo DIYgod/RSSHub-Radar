@@ -14,12 +14,15 @@ import {
   CardHeader,
   CardTitle,
 } from "~/lib/components/Card"
+import { useDark } from "~/lib/hooks/use-dark"
 import { fetchRSSContent } from "~/lib/utils"
 import RSSItem from "~/popup/RSSItem"
 
 const parser = new Parser()
 
 function PreviewPage() {
+  useDark()
+
   const url = new URLSearchParams(window.location.search).get("url")
 
   const [parsed, setParsed] = useState<
