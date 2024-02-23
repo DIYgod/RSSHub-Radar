@@ -98,8 +98,8 @@ devDependencies:
     specifier: 4.1.1
     version: 4.1.1(prettier@3.2.5)
   '@types/chrome':
-    specifier: ^0.0.260
-    version: 0.0.260
+    specifier: ^0.0.261
+    version: 0.0.261
   '@types/node':
     specifier: 20.11.19
     version: 20.11.19
@@ -3458,8 +3458,8 @@ packages:
       path-browserify: 1.0.1
     dev: true
 
-  /@types/chrome@0.0.260:
-    resolution: {integrity: sha512-lX6QpgfsZRTDpNcCJ+3vzfFnFXq9bScFRTlfhbK5oecSAjamsno+ejFTCbNtc5O/TPnVK9Tja/PyecvWQe0F2w==}
+  /@types/chrome@0.0.261:
+    resolution: {integrity: sha512-u8Nhu54/qP32fM2Ni5sdln6Evvzy2V9TJjWnFrab2GcKDpcBpJ3ZtsBUqCwaoTxada+k5Vj8Zn5g8AsdbRDqKg==}
     dependencies:
       '@types/filesystem': 0.0.35
       '@types/har-format': 1.2.15
