@@ -7,7 +7,7 @@ import type { RSSData, Rule } from "./types"
 const parseHtml = (html) => {
   const template = document.createElement('template');
   template.innerHTML = html;
-  return template.content; 
+  return template; 
 }
 
 function ruleHandler(rule: Rule, params, url, html, success, fail) {
@@ -15,8 +15,9 @@ function ruleHandler(rule: Rule, params, url, html, success, fail) {
     let resultWithParams
     if (typeof rule.target === "function") {
       try {
-        const document = parseHtml(html)
-        resultWithParams = rule.target(params, url, document)
+        const template = parseHtml(html)
+        resultWithParams = rule.target(params, url, template.content)
+        template.remove()
       } catch (error) {
         resultWithParams = ""
       }
