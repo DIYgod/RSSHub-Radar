@@ -4,20 +4,12 @@ import { parse } from "tldts"
 import { parseRules } from "./rules"
 import type { RSSData, Rule } from "./types"
 
-const parseHtml = (html) => {
-  const template = document.createElement('template');
-  template.innerHTML = html;
-  return template; 
-}
-
 function ruleHandler(rule: Rule, params, url, html, success, fail) {
   const run = () => {
     let resultWithParams
     if (typeof rule.target === "function") {
       try {
-        const template = parseHtml(html)
-        resultWithParams = rule.target(params, url, template.content)
-        template.remove()
+        resultWithParams = rule.target(params, url)
       } catch (error) {
         resultWithParams = ""
       }

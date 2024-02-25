@@ -2,7 +2,7 @@ export type Rule = {
   title: string
   docs: string
   source: string[]
-  target: string | ((params: any, url: string, document: DocumentFragment) => string)
+  target: string | ((params: any, url: string) => string)
 }
 
 export type Rules = {
