@@ -3,11 +3,13 @@ import "~/lib/style.css"
 import { Toaster } from "react-hot-toast"
 import { MemoryRouter } from "react-router-dom"
 
+import { useDark } from "~/lib/hooks/use-dark"
 import { Routing } from "~/options/routes"
 
 import Siderbar from "./Siderbar"
 
 function Options() {
+  useDark()
   return (
     <div className="max-w-screen-lg mx-auto text-base py-10 px-4">
       <Toaster
