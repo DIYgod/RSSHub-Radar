@@ -69,18 +69,26 @@ function General() {
               <Switch
                 id="updateNotification"
                 checked={isNotificationPermissionGranted}
-                onCheckedChange={async (value) => {
+                onCheckedChange={(value) => {
                   if (!value) {
-                    await chrome.permissions.remove({
-                      permissions: ["notifications"],
-                    })
-                    setIsNotificationPermissionGranted(false)
+                    chrome.permissions.remove(
+                      {
+                        permissions: ["notifications"],
+                      },
+                      (removed) => {
+                        setIsNotificationPermissionGranted(!removed)
+                      },
+                    )
                     return
                   }
-                  const granted = await chrome.permissions.request({
-                    permissions: ["notifications"],
-                  })
-                  setIsNotificationPermissionGranted(granted)
+                  chrome.permissions.request(
+                    {
+                      permissions: ["notifications"],
+                    },
+                    (granted) => {
+                      setIsNotificationPermissionGranted(granted)
+                    },
+                  )
                 }}
               />
             </div>
