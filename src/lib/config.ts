@@ -19,7 +19,6 @@ export const defaultConfig = {
   rsshubAccessControl: {
     accessKey: "",
   },
-  updateNotification: true,
   notice: {
     badge: true,
   },

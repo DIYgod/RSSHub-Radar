@@ -37,6 +37,20 @@ function General() {
 
   const [rulesUpdating, setRulesUpdating] = useState(false)
 
+  const [isNotificationPermissionGranted, setIsNotificationPermissionGranted] =
+    useState(false)
+
+  useEffect(() => {
+    chrome.permissions.contains(
+      {
+        permissions: ["notifications"],
+      },
+      (granted) => {
+        setIsNotificationPermissionGranted(granted)
+      },
+    )
+  }, [])
+
   return (
     <div>
       <h1 className="text-3xl font-medium leading-10 mb-6 text-primary border-b pb-4">
@@ -54,12 +68,20 @@ function General() {
               </Label>
               <Switch
                 id="updateNotification"
-                checked={config.updateNotification}
-                onCheckedChange={(value) =>
-                  setConfig({
-                    updateNotification: value,
+                checked={isNotificationPermissionGranted}
+                onCheckedChange={async (value) => {
+                  if (!value) {
+                    await chrome.permissions.remove({
+                      permissions: ["notifications"],
+                    })
+                    setIsNotificationPermissionGranted(false)
+                    return
+                  }
+                  const granted = await chrome.permissions.request({
+                    permissions: ["notifications"],
                   })
-                }
+                  setIsNotificationPermissionGranted(granted)
+                }}
               />
             </div>
             <div className="grid w-full items-center gap-2">

@@ -2,8 +2,6 @@ import RSSHubIcon from "data-base64:~/assets/icon.png"
 
 import { Storage } from "@plasmohq/storage"
 
-import { getConfig } from "~/lib/config"
-
 import info from "../../package.json"
 
 const storage = new Storage({
@@ -12,8 +10,7 @@ const storage = new Storage({
 
 export const initUpdateNotifications = async () => {
   const version = await storage.get("version")
-  const { updateNotification } = await getConfig()
-  if (!updateNotification || version === info.version) return
+  if (version === info.version) return
 
   chrome.notifications?.create("RSSHubRadarUpdate", {
     type: "basic",
