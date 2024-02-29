@@ -49,6 +49,20 @@ function General() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid w-full items-center gap-2">
+              <Label htmlFor="updateNotification">
+                {chrome.i18n.getMessage("updateNotification")}
+              </Label>
+              <Switch
+                id="updateNotification"
+                checked={config.updateNotification}
+                onCheckedChange={(value) =>
+                  setConfig({
+                    updateNotification: value,
+                  })
+                }
+              />
+            </div>
+            <div className="grid w-full items-center gap-2">
               <Label htmlFor="notificationsAndReminders">
                 {chrome.i18n.getMessage("notificationsAndReminders")}
               </Label>

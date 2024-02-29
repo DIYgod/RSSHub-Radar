@@ -71,6 +71,9 @@
   "localReader": {
     "message": "Local reader"
   },
+  "updateNotification": {
+    "message": "Update notification"
+  },
   "notificationsAndReminders": {
     "message": "Badge reminder"
   },
