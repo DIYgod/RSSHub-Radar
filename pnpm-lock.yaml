@@ -39,8 +39,8 @@ dependencies:
     specifier: ^2.1.0
     version: 2.1.0
   foxact:
-    specifier: ^0.2.31
-    version: 0.2.31(react@18.2.0)
+    specifier: ^0.2.32
+    version: 0.2.32(react@18.2.0)
   he:
     specifier: 1.2.0
     version: 1.2.0
@@ -4649,8 +4649,8 @@ packages:
       fetch-blob: 3.2.0
     dev: true
 
-  /foxact@0.2.31(react@18.2.0):
-    resolution: {integrity: sha512-NxO/aw7e7wFf+xp8JQi8lDrfrKtIDsWwiFHRBajCO+2oLLgupxSqZV++/amOzxC9dmanDHBN3O2YHGv2LJsJrA==}
+  /foxact@0.2.32(react@18.2.0):
+    resolution: {integrity: sha512-7H529zn9R08qGp5QcG3ZAn2fQ6V1RDkAfxbo8WBwvTbidZyq9jvdus21yniq8g1xfxmvtPfii/3/ALwDIBRnFw==}
     peerDependencies:
       react: '*'
     peerDependenciesMeta:
