@@ -84,8 +84,8 @@ dependencies:
     specifier: ^6.1.11
     version: 6.1.11
   usehooks-ts:
-    specifier: ^2.14.0
-    version: 2.14.0(react@18.2.0)
+    specifier: ^2.16.0
+    version: 2.16.0(react@18.2.0)
   xss:
     specifier: 1.0.14
     version: 1.0.14
@@ -7469,8 +7469,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /usehooks-ts@2.14.0(react@18.2.0):
-    resolution: {integrity: sha512-jnhrjTRJoJS7cFxz63tRYc5mzTKf/h+Ii8P0PDHymT9qDe4ZA2/gzDRmDR4WGausg5X8wMIdghwi3BBCN9JKow==}
+  /usehooks-ts@2.16.0(react@18.2.0):
+    resolution: {integrity: sha512-bez95WqYujxp6hFdM/CpRDiVPirZPxlMzOH2QB8yopoKQMXpscyZoxOjpEdaxvV+CAWUDSM62cWnqHE0E/MZ7w==}
     engines: {node: '>=16.15.0'}
     peerDependencies:
       react: ^16.8.0  || ^17 || ^18
