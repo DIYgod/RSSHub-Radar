@@ -75,8 +75,10 @@
       "tabs",
       "offscreen",
       "storage",
-      "notifications",
       "alarms"
+    ],
+    "optional_permissions": [
+      "notifications"
     ],
     "browser_specific_settings": {
       "gecko": {

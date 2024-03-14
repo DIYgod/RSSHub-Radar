@@ -38,6 +38,20 @@ function General() {
 
   const [rulesUpdating, setRulesUpdating] = useState(false)
 
+  const [isNotificationPermissionGranted, setIsNotificationPermissionGranted] =
+    useState(false)
+
+  useEffect(() => {
+    chrome.permissions.contains(
+      {
+        permissions: ["notifications"],
+      },
+      (granted) => {
+        setIsNotificationPermissionGranted(granted)
+      },
+    )
+  }, [])
+
   return (
     <div>
       <h1 className="text-3xl font-medium leading-10 mb-6 text-primary border-b pb-4">
@@ -49,6 +63,36 @@ function General() {
             <CardTitle>{chrome.i18n.getMessage("settings")}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
+            <div className="grid w-full items-center gap-2">
+              <Label htmlFor="updateNotification">
+                {chrome.i18n.getMessage("updateNotification")}
+              </Label>
+              <Switch
+                id="updateNotification"
+                checked={isNotificationPermissionGranted}
+                onCheckedChange={(value) => {
+                  if (!value) {
+                    chrome.permissions.remove(
+                      {
+                        permissions: ["notifications"],
+                      },
+                      (removed) => {
+                        setIsNotificationPermissionGranted(!removed)
+                      },
+                    )
+                    return
+                  }
+                  chrome.permissions.request(
+                    {
+                      permissions: ["notifications"],
+                    },
+                    (granted) => {
+                      setIsNotificationPermissionGranted(granted)
+                    },
+                  )
+                }}
+              />
+            </div>
             <div className="grid w-full items-center gap-2">
               <Label htmlFor="notificationsAndReminders">
                 {chrome.i18n.getMessage("notificationsAndReminders")}
