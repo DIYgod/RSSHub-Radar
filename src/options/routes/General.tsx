@@ -16,6 +16,7 @@ import { quickSubscriptions } from "~/lib/quick-subscriptions"
 import report from "~/lib/report"
 import { getRulesCount, parseRules } from "~/lib/rules"
 import type { Rules as IRules } from "~/lib/types"
+import { getRadarRulesUrl } from "~/lib/utils"
 
 function General() {
   let [config] = useStorage("config")
@@ -133,12 +134,8 @@ function General() {
               </Label>
               <Input
                 id="remoteRulesUrl"
-                value={config.remoteRulesUrl}
-                onChange={(e) =>
-                  setConfig({
-                    remoteRulesUrl: e.target.value,
-                  })
-                }
+                disabled
+                value={getRadarRulesUrl(config.rsshubDomain)}
               />
             </div>
             <div className="grid w-full items-center gap-2">

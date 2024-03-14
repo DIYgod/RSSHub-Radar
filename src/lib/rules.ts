@@ -1,20 +1,17 @@
 import _ from "lodash"
 
-import { defaultConfig, getConfig } from "./config"
+import { getConfig } from "./config"
 import { defaultRules } from "./radar-rules"
 import type { Rules } from "./types"
+import { getRadarRulesUrl } from "./utils"
 
 export function parseRules(rules: string, forceJSON?: boolean) {
   let incomeRules = rules
   if (incomeRules) {
     if (typeof rules === "string") {
-      if (defaultConfig.enableFullRemoteRules && !forceJSON) {
-        incomeRules = window["lave".split("").reverse().join("")](rules)
-      } else {
-        try {
-          incomeRules = JSON.parse(rules)
-        } catch (error) {}
-      }
+      try {
+        incomeRules = JSON.parse(rules)
+      } catch (error) {}
     }
   }
   return _.mergeWith(defaultRules, incomeRules, (objValue, srcValue) => {
@@ -43,7 +40,7 @@ export function getRemoteRules() {
   return new Promise<string>(async (resolve, reject) => {
     const config = await getConfig()
     try {
-      const res = await fetch(config.remoteRulesUrl)
+      const res = await fetch(getRadarRulesUrl(config.rsshubDomain))
       resolve(res.text())
     } catch (error) {
       reject(error)

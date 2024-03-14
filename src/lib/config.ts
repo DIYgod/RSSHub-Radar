@@ -5,15 +5,6 @@ import { Storage } from "@plasmohq/storage"
 
 const storage = new Storage()
 
-const enableFullRemoteRules = !(
-  navigator.userAgent.match(/firefox/i) ||
-  (navigator.userAgent.match(/safari/i) &&
-    !navigator.userAgent.match(/chrome/i))
-)
-const remoteRulesUrl = enableFullRemoteRules
-  ? "https://rsshub.js.org/build/radar-rules.js"
-  : "https://rsshub.js.org/build/radar-rules.json"
-
 export const defaultConfig = {
   rsshubDomain: "https://rsshub.app",
   rsshubAccessControl: {
@@ -45,8 +36,6 @@ export const defaultConfig = {
     local: true,
   },
   refreshTimeout: 2 * 60 * 60,
-  enableFullRemoteRules,
-  remoteRulesUrl,
 }
 
 export async function getConfig() {
