@@ -72,7 +72,7 @@
     "message": "Local reader"
   },
   "updateNotification": {
-    "message": "Update notification"
+    "message": "Extension update notification"
   },
   "notificationsAndReminders": {
     "message": "Badge reminder"
