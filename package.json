@@ -17,7 +17,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@iconify-json/mingcute": "^1.1.16",
+    "@iconify-json/mingcute": "^1.1.17",
     "@plasmohq/messaging": "^0.6.2",
     "@plasmohq/storage": "^1.9.3",
     "@radix-ui/react-accordion": "^1.1.2",
