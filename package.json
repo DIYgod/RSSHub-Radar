@@ -19,7 +19,7 @@
   "dependencies": {
     "@iconify-json/mingcute": "^1.1.16",
     "@plasmohq/messaging": "^0.6.2",
-    "@plasmohq/storage": "^1.9.3",
+    "@plasmohq/storage": "^1.10.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-dialog": "1.0.5",
     "@radix-ui/react-label": "^2.0.2",
