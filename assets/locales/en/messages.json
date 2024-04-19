@@ -54,7 +54,7 @@
     "message": "Full remote updates are disabled due to browser limitations"
   },
   "forMoreRulesJoinUs": {
-    "message": "For more rules support, <a target=\"_blank\" href=\"https://docs.rsshub.app/joinus/quick-start.html\">join us</a>！"
+    "message": "For more rules support, <a target=\"_blank\" href=\"https://docs.rsshub.app/joinus/#quick-start\">join us</a>！"
   },
   "general": {
     "message": "General"

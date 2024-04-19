@@ -54,7 +54,7 @@
     "message": "由于浏览器限制，完整的远程更新被禁用"
   },
   "forMoreRulesJoinUs": {
-    "message": "更多规则支持中，快来<a target=\"_blank\" href=\"https://docs.rsshub.app/zh/joinus/quick-start.html\">参与我们</a>吧！"
+    "message": "更多规则支持中，快来<a target=\"_blank\" href=\"https://docs.rsshub.app/zh/joinus/#quick-start\">参与我们</a>吧！"
   },
   "general": {
     "message": "常规"
