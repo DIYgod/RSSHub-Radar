@@ -151,7 +151,7 @@ function General() {
                 <a
                   className="h-[14px] ml-1"
                   target="_blank"
-                  href="https://docs.rsshub.app/install/config#access-keycode"
+                  href="https://docs.rsshub.app/deploy/config#access-control-configurations"
                 >
                   <i className="i-mingcute-question-line"></i>
                 </a>
