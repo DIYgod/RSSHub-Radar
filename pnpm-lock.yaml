@@ -81,8 +81,8 @@ dependencies:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.4.1)
   tldts:
-    specifier: ^6.1.11
-    version: 6.1.11
+    specifier: ^6.1.18
+    version: 6.1.18
   usehooks-ts:
     specifier: ^2.14.0
     version: 2.14.0(react@18.2.0)
@@ -7242,15 +7242,15 @@ packages:
     resolution: {integrity: sha512-qsdtZH+vMoCARQtyod4imc2nIJwg9Cc7lPRrw9CzF8ZKR0khdr8+2nX80PBhET3tcyTtJDxAffGh2rXH4tyU8A==}
     dev: false
 
-  /tldts-core@6.1.11:
-    resolution: {integrity: sha512-ZFcT+/fdEc5VRndQIJtArNBHsaq4udRoeE4E6cwLzGaH0dq7Ng2L7cAoea6riM2uhNFD09EDa1bN8lrfrOBCLg==}
+  /tldts-core@6.1.18:
+    resolution: {integrity: sha512-e4wx32F/7dMBSZyKAx825Yte3U0PQtZZ0bkWxYQiwLteRVnQ5zM40fEbi0IyNtwQssgJAk3GCr7Q+w39hX0VKA==}
     dev: false
 
-  /tldts@6.1.11:
-    resolution: {integrity: sha512-AAgE/IWvbsg4Lr4KGFNR7bL/MhQfBlgGV9UBg2uy5mCwSGi5f12eZ7ZydAqv4ACys6pUYjNoV2qfZdcCn4RS+Q==}
+  /tldts@6.1.18:
+    resolution: {integrity: sha512-F+6zjPFnFxZ0h6uGb8neQWwHQm8u3orZVFribsGq4eBgEVrzSkHxzWS2l6aKr19T1vXiOMFjqfff4fQt+WgJFg==}
     hasBin: true
     dependencies:
-      tldts-core: 6.1.11
+      tldts-core: 6.1.18
     dev: false
 
   /tmp@0.0.33:
