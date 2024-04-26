@@ -43,7 +43,6 @@ function RSSItem({
       chrome.i18n.getMessage("current"),
     )
   }
-  url = encodeURI(url)
   const encodedUrl = encodeURIComponent(url)
 
   return (
