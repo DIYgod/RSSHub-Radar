@@ -44,7 +44,7 @@ export const getRSS = async (tabId, url) => {
         tabId,
       })
 
-      if (chrome.offscreen) {
+      if (chrome.offscreen && chrome.runtime.getContexts) {
         await setupOffscreenDocument("tabs/offscreen.html")
         chrome.runtime.sendMessage({
           target: "offscreen",
