@@ -17,6 +17,13 @@ function ruleHandler(rule: Rule, params, url, html, success, fail) {
       resultWithParams = rule.target
     }
 
+    // clean params with regex requirements
+    // /npm/package/:name{(@[a-z0-9-~][a-z0-9-._~]*/)?[a-z0-9-~][a-z0-9-._~]*} -> /npm/package/:name
+    resultWithParams = resultWithParams.replace(
+      /\/:\w+\{[^}]*\}(?=\/|$)/g,
+      (match) => match.replace(/\{[^}]*\}/, ""),
+    )
+
     if (resultWithParams) {
       // if no :param in resultWithParams, requiredParams will be null
       // in that case, just skip the following steps and return resultWithParams

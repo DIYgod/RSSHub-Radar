@@ -19,7 +19,9 @@ function RSSItem({
   hidePreview?: boolean
 }) {
   const [config, setConfig] = useState(defaultConfig)
-  getConfig().then(setConfig)
+  useEffect(() => {
+    getConfig().then(setConfig)
+  }, [])
   const [_, copy] = useCopyToClipboard()
   const [copied, setCopied] = useState(false)
   useEffect(() => {
@@ -43,7 +45,6 @@ function RSSItem({
       chrome.i18n.getMessage("current"),
     )
   }
-  url = encodeURI(url)
   const encodedUrl = encodeURIComponent(url)
 
   return (
