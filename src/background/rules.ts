@@ -12,7 +12,7 @@ const storage = new Storage({
 export const refreshRules = async () => {
   const rules = await getRemoteRules()
   await storage.set("rules", rules)
-  if (chrome.offscreen) {
+  if (chrome.offscreen && chrome.runtime.getContexts) {
     await setupOffscreenDocument("tabs/offscreen.html")
     chrome.runtime.sendMessage({
       target: "offscreen",
