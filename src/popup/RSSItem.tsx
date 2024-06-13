@@ -19,7 +19,9 @@ function RSSItem({
   hidePreview?: boolean
 }) {
   const [config, setConfig] = useState(defaultConfig)
-  getConfig().then(setConfig)
+  useEffect(() => {
+    getConfig().then(setConfig)
+  }, [])
   const [_, copy] = useCopyToClipboard()
   const [copied, setCopied] = useState(false)
   useEffect(() => {
