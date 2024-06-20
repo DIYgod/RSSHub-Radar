@@ -27,7 +27,7 @@
     "@radix-ui/react-switch": "^1.0.3",
     "async-lock": "^1.4.1",
     "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.0",
+    "clsx": "^2.1.1",
     "foxact": "^0.2.31",
     "he": "1.2.0",
     "lodash": "^4.17.21",
