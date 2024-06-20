@@ -44,7 +44,7 @@
     "tailwindcss-animate": "^1.0.7",
     "tldts": "^6.1.11",
     "usehooks-ts": "^2.14.0",
-    "xss": "1.0.14"
+    "xss": "1.0.15"
   },
   "devDependencies": {
     "@egoist/tailwindcss-icons": "^1.7.4",
