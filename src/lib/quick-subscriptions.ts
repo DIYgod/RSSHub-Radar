@@ -18,6 +18,14 @@ export const quickSubscriptions: ({
     }
 ))[] = [
   {
+    name: "Follow",
+    projectUrl: "https://github.com/RSSNext/follow",
+    key: "follow",
+    subscribeDomain: "follow://",
+    themeColor: "#ff5c00",
+    getSubscribePath: (data) => `add?url=${data.encodedUrl}`,
+  },
+  {
     name: "Miniflux",
     projectUrl: "https://miniflux.app",
     key: "miniflux",
