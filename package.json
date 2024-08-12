@@ -4,6 +4,7 @@
   "version": "2.0.19",
   "description": "__MSG_extensionDescription__",
   "author": "DIYgod",
+  "packageManager": "pnpm@9.7.0",
   "scripts": {
     "dev": "plasmo dev --no-cs-reload",
     "build": "plasmo build",
