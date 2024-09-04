@@ -40,8 +40,15 @@ export function getRemoteRules() {
   return new Promise<string>(async (resolve, reject) => {
     const config = await getConfig()
     try {
-      const res = await fetch(getRadarRulesUrl(config.rsshubDomain))
-      resolve(res.text())
+		var url = getRadarRulesUrl(config.rsshubDomain)
+		if(config.rsshubAccessControl.accessKey&&url.indexOf('rsshub.app')==-1){
+			if(url.endsWith('/')){
+				url = url.substring(0,url.length-1)
+			}
+			url += "?key="+encodeURIComponent(config.rsshubAccessControl.accessKey)
+		}
+		const res = await fetch(url)
+        resolve(res.text())
     } catch (error) {
       reject(error)
     }
