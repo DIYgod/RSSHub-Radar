@@ -1,5 +1,6 @@
 import _ from "lodash"
 
+import MD5 from "md5.js"
 import { getConfig } from "./config"
 import { defaultRules } from "./radar-rules"
 import type { Rules } from "./types"
@@ -40,7 +41,15 @@ export function getRemoteRules() {
   return new Promise<string>(async (resolve, reject) => {
     const config = await getConfig()
     try {
-      const res = await fetch(getRadarRulesUrl(config.rsshubDomain))
+      let url = getRadarRulesUrl(config.rsshubDomain)
+      
+      if (config.rsshubAccessControl.accessKey) {
+        const path = new URL(url).pathname
+        const code = new MD5().update(path + config.rsshubAccessControl.accessKey).digest("hex")
+        url = `${url}?code=${code}`
+      }
+
+      const res = await fetch(url)
       resolve(res.text())
     } catch (error) {
       reject(error)
