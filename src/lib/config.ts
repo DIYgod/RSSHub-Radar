@@ -33,7 +33,8 @@ export const defaultConfig = {
     qireaderDomain: "https://www.qireader.com",
     feedspub: false,
     bazqux: false,
-    local: true,
+    local: false,
+    follow: true,
   },
   refreshTimeout: 2 * 60 * 60,
 }

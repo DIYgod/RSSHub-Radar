@@ -19,19 +19,11 @@ export const quickSubscriptions: ({
 ))[] = [
   {
     name: "Follow",
-    projectUrl: "https://github.com/RSSNext/follow",
+    projectUrl: "https://follow.is",
     key: "follow",
     subscribeDomain: "follow://",
     themeColor: "#ff5c00",
     getSubscribePath: (data) => `add?url=${data.encodedUrl}`,
-  },
-  {
-    name: "Miniflux",
-    projectUrl: "https://miniflux.app",
-    key: "miniflux",
-    subscribeDomainKey: "minifluxDomain",
-    themeColor: "#33995b",
-    getSubscribePath: (data) => `/bookmarklet?uri=${data.encodedUrl}`,
   },
   {
     name: "Inoreader",
@@ -40,6 +32,14 @@ export const quickSubscriptions: ({
     subscribeDomainKey: "inoreaderDomain",
     themeColor: "#0099eb",
     getSubscribePath: (data) => `/?add_feed=${data.encodedUrl}`,
+  },
+  {
+    name: "Miniflux",
+    projectUrl: "https://miniflux.app",
+    key: "miniflux",
+    subscribeDomainKey: "minifluxDomain",
+    themeColor: "#33995b",
+    getSubscribePath: (data) => `/bookmarklet?uri=${data.encodedUrl}`,
   },
   {
     name: "Feedly",
