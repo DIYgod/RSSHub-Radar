@@ -8,6 +8,9 @@
   "accessKey": {
     "message": "Access key"
   },
+  "accessKeyType": {
+    "message": "Access key format"
+  },
   "clickToSet": {
     "message": "Click to set"
   },

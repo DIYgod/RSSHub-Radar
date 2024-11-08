@@ -8,6 +8,9 @@
   "accessKey": {
     "message": "访问密钥"
   },
+  "accessKeyType": {
+    "message": "访问密钥格式"
+  },
   "clickToSet": {
     "message": "点此设置"
   },

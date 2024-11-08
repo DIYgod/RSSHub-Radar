@@ -9,6 +9,7 @@ export const defaultConfig = {
   rsshubDomain: "https://rsshub.app",
   rsshubAccessControl: {
     accessKey: "",
+    accessKeyType: "code",
   },
   notice: {
     badge: true,
