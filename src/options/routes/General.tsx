@@ -171,6 +171,43 @@ function General() {
                   "configurationRequiredIfAccessKeysEnabled",
                 )}
               />
+              {config.rsshubAccessControl.accessKey && (
+                <div className="flex items-center space-x-2">
+                  <Label>{chrome.i18n.getMessage("accessKeyType")}</Label>
+                  <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="radio"
+                        id="accessKeyTypeCode"
+                        checked={config.rsshubAccessControl.accessKeyType === "code"}
+                        onChange={() =>
+                          setConfig({
+                            rsshubAccessControl: {
+                              accessKeyType: "code",
+                            },
+                          })
+                        }
+                      />
+                      <label htmlFor="accessKeyTypeCode">code={"{md5}"}</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="radio"
+                        id="accessKeyTypeKey"
+                        checked={config.rsshubAccessControl.accessKeyType === "key"}
+                        onChange={() =>
+                          setConfig({
+                            rsshubAccessControl: {
+                              accessKeyType: "key",
+                            },
+                          })
+                        }
+                      />
+                      <label htmlFor="accessKeyTypeKey">key={"{accessKey}"}</label>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
             <div className="grid w-full items-center gap-2">
               <Label htmlFor="remoteRulesUrl">

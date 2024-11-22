@@ -38,7 +38,11 @@ function RSSItem({
   ).replace(/\/$/, "")
 
   if (type === "currentPageRSSHub" && config.rsshubAccessControl.accessKey) {
-    url = `${url}?code=${new MD5().update(item.path.replace(/\/$/, "") + config.rsshubAccessControl.accessKey).digest("hex")}`
+    if (config.rsshubAccessControl.accessKeyType === "key") {
+      url = `${url}?key=${config.rsshubAccessControl.accessKey}`
+    } else {
+      url = `${url}?code=${new MD5().update(item.path.replace(/\/$/, "") + config.rsshubAccessControl.accessKey).digest("hex")}`
+    }
   }
   if (type === "currentPageRSSHub") {
     item.title = item.title.replace(
