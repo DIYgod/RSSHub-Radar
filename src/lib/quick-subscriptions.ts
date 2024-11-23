@@ -112,7 +112,7 @@ export const quickSubscriptions: ({
     key: "qireader",
     subscribeDomainKey: "qireaderDomain",
     themeColor: "#e79317",
-    getSubscribePath: (data) => `/discover?search=${data.encodedUrl}`,
+    getSubscribePath: (data) => `/discover?query=${data.encodedUrl}`,
   },
   {
     name: "CheckChan",
