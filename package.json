@@ -29,7 +29,7 @@
     "async-lock": "^1.4.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "foxact": "^0.2.39",
+    "foxact": "^0.2.43",
     "he": "1.2.0",
     "lodash": "^4.17.21",
     "lucide-react": "^0.452.0",
