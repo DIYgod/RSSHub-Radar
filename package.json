@@ -86,5 +86,17 @@
         "id": "i@diygod.me"
       }
     }
+  },
+  "pnpm": {
+    "overrides": {
+      "function-bind": "npm:@nolyfill/function-bind@1.0.21",
+      "has-proto": "npm:@nolyfill/has-proto@1.0.29",
+      "has-symbols": "npm:@nolyfill/has-symbols@1.0.21",
+      "hasown": "npm:@nolyfill/hasown@1.0.29",
+      "is-core-module": "npm:@nolyfill/is-core-module@1.0.39",
+      "safe-buffer": "npm:@nolyfill/safe-buffer@1.0.41",
+      "safer-buffer": "npm:@nolyfill/safer-buffer@1.0.41",
+      "set-function-length": "npm:@nolyfill/set-function-length@1.0.25"
+    }
   }
 }
