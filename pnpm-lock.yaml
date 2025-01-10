@@ -110,8 +110,8 @@ importers:
         specifier: 4.3.1
         version: 4.3.1(@vue/compiler-sfc@3.5.12)(prettier@3.3.3)
       '@types/chrome':
-        specifier: ^0.0.277
-        version: 0.0.277
+        specifier: ^0.0.293
+        version: 0.0.293
       '@types/node':
         specifier: 22.7.5
         version: 22.7.5
@@ -1828,8 +1828,8 @@ packages:
   '@ts-morph/common@0.19.0':
     resolution: {integrity: sha512-Unz/WHmd4pGax91rdIKWi51wnVUW11QttMEPpBiBgIewnc9UQIX7UDLxr5vRlqeByXCwhkF6VabSsI0raWcyAQ==}
 
-  '@types/chrome@0.0.277':
-    resolution: {integrity: sha512-qoTgBcDWblSsX+jvFnpUlLUE3LAuOhZfBh9MyMWMQHDsQiYVgBvdZWu9COrdB9+aNnInEyXcFgfc2HE16sdSYQ==}
+  '@types/chrome@0.0.293':
+    resolution: {integrity: sha512-pghCOLVHsnePWcMEHCxkAfMRx8qJWmj4lUoyF3ZpANniKz8AucIGLSld7smsrTdLUkk/p5JjOCGVDRdUDHx+uA==}
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
@@ -6149,7 +6149,7 @@ snapshots:
       mkdirp: 2.1.6
       path-browserify: 1.0.1
 
-  '@types/chrome@0.0.277':
+  '@types/chrome@0.0.293':
     dependencies:
       '@types/filesystem': 0.0.36
       '@types/har-format': 1.2.16
