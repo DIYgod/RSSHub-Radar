@@ -1,7 +1,7 @@
 import "~/lib/style.css"
 
 import { Toaster } from "react-hot-toast"
-import { MemoryRouter } from "react-router-dom"
+import { MemoryRouter } from "react-router"
 
 import { useDark } from "~/lib/hooks/use-dark"
 import { Routing } from "~/options/routes"

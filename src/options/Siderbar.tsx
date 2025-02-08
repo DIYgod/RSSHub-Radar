@@ -1,5 +1,5 @@
 import RSSHubIcon from "data-base64:~/assets/icon.png"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router"
 import { useMediaQuery } from "usehooks-ts"
 
 import { AppearanceSwitch } from "~/lib/components/AppearanceSwitch"
