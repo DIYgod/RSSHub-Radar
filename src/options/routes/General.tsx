@@ -17,6 +17,7 @@ import report from "~/lib/report"
 import { getRulesCount, parseRules } from "~/lib/rules"
 import type { Rules as IRules } from "~/lib/types"
 import { getRadarRulesUrl } from "~/lib/utils"
+import { logoMap } from "~/lib/quick-subscriptions-logos"
 
 function General() {
   let [config] = useStorage("config")
@@ -270,9 +271,17 @@ function General() {
                       } as any)
                     }
                   />
-                  <Label className="w-28" htmlFor={quickSubscription.key}>
-                    {chrome.i18n.getMessage(quickSubscription.name) ||
-                      quickSubscription.name}
+                  <Label className="w-28 flex gap-2 items-center" htmlFor={quickSubscription.key}>
+                    {logoMap.get(quickSubscription.key) && (
+                      <img
+                        src={logoMap.get(quickSubscription.key)}
+                        className="w-5 h-5 rounded"
+                      />
+                    )}
+                    <span className="shrink-0">
+                      {chrome.i18n.getMessage(quickSubscription.name) ||
+                        quickSubscription.name}
+                    </span>
                   </Label>
                 </div>
                 {config.submitto[quickSubscription.key] &&
