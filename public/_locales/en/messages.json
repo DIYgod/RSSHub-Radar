@@ -163,5 +163,8 @@
   },
   "paginationNext": {
     "message": "Next"
+  },
+  "previousInstances": {
+    "message": "Previous instances"
   }
 }

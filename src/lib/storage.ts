@@ -1,5 +1,6 @@
 const LEGACY_STORAGE_KEYS = [
   "config",
+  "rsshubHistory",
   "rules",
   "displayedRules",
   "version",

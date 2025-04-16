@@ -1,5 +1,5 @@
 import _ from "lodash"
-import { Loader2 } from "lucide-react"
+import { Loader2, X } from "lucide-react"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 
@@ -14,6 +14,7 @@ import { quickSubscriptions } from "~/lib/quick-subscriptions"
 import { logoMap } from "~/lib/quick-subscriptions-logos"
 import report from "~/lib/report"
 import { getRulesCount, parseRules } from "~/lib/rules"
+import { getLocalStorage, setLocalStorage } from "~/lib/storage"
 import type { Rules as IRules } from "~/lib/types"
 import { getRadarRulesUrl } from "~/lib/utils"
 
@@ -29,8 +30,21 @@ function General() {
   }
 
   const [rules, setRules] = useState<IRules>({})
+  const [rsshubInstanceHistory, setRsshubInstanceHistoryState] = useState<
+    string[]
+  >([defaultConfig.rsshubDomain])
+  const setRsshubInstanceHistory = (history: string[]) => {
+    setRsshubInstanceHistoryState(history)
+    void setLocalStorage("rsshubHistory", history)
+  }
+  const [showHistory, setShowHistory] = useState(false)
   useEffect(() => {
     getConfig().then(setConfigState)
+    getLocalStorage<string[]>("rsshubHistory").then((history) => {
+      if (history) {
+        setRsshubInstanceHistoryState(history)
+      }
+    })
 
     sendToBackground({
       name: "requestDisplayedRules",
@@ -42,7 +56,21 @@ function General() {
       },
       areaName: string,
     ) => {
-      if (areaName !== "local" || !changes.config) {
+      if (areaName !== "local") {
+        return
+      }
+      if (changes.rsshubHistory) {
+        const history = changes.rsshubHistory.newValue
+        setRsshubInstanceHistoryState(
+          Array.isArray(history) &&
+            history.every(
+              (domain): domain is string => typeof domain === "string",
+            )
+            ? history
+            : [defaultConfig.rsshubDomain],
+        )
+      }
+      if (!changes.config) {
         return
       }
 
@@ -86,6 +114,19 @@ function General() {
       },
     )
   }, [])
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showHistory && !(event.target as Element).closest(".relative")) {
+        setShowHistory(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [showHistory])
 
   return (
     <div>
@@ -170,15 +211,51 @@ function General() {
               <Label htmlFor="customRSSHubDomain">
                 {chrome.i18n.getMessage("customRSSHubDomain")}
               </Label>
-              <Input
-                id="customRSSHubDomain"
-                value={config.rsshubDomain}
-                onChange={(e) =>
-                  updateConfig({
-                    rsshubDomain: e.target.value,
-                  })
-                }
-              />
+              <div className="relative">
+                <Input
+                  id="customRSSHubDomain"
+                  value={config.rsshubDomain}
+                  onChange={(e) =>
+                    updateConfig({
+                      rsshubDomain: e.target.value,
+                    })
+                  }
+                  onFocus={() => setShowHistory(true)}
+                />
+
+                {showHistory && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-white border rounded-md shadow-lg z-50">
+                    {rsshubInstanceHistory.map((domain) => (
+                      <div
+                        key={domain}
+                        className="flex items-center justify-between px-3 py-2 hover:bg-gray-100"
+                      >
+                        <button
+                          className="flex-1 text-left"
+                          onClick={() => {
+                            updateConfig({ rsshubDomain: domain })
+                            setShowHistory(false)
+                          }}
+                        >
+                          {domain}
+                        </button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setRsshubInstanceHistory(
+                              rsshubInstanceHistory.filter((d) => d !== domain),
+                            )
+                          }}
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
             <div className="grid w-full items-center gap-2">
               <Label htmlFor="accessKey" className="flex items-center">
@@ -273,6 +350,12 @@ function General() {
                 disabled={rulesUpdating}
                 onClick={() => {
                   setRulesUpdating(true)
+                  if (!rsshubInstanceHistory.includes(config.rsshubDomain)) {
+                    setRsshubInstanceHistory([
+                      ...rsshubInstanceHistory,
+                      config.rsshubDomain,
+                    ])
+                  }
                   sendToBackground({
                     name: "refreshRules",
                   })
