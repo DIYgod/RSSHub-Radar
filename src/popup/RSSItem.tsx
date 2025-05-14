@@ -97,7 +97,8 @@ function RSSItem({
         subscriptionDomain = subscriptionDomain.replace(/(?<!\/)\/$/, "")
 
         const isRSSHubRouteSupported =
-          quickSubscription.key === "follow" && type === "currentPageRSSHub"
+          quickSubscription.isRSSHubRouteSupported &&
+          type === "currentPageRSSHub"
 
         const subscribeUrl = isRSSHubRouteSupported ? rsshubRoute : url
         const subscribeEncodedUrl = isRSSHubRouteSupported
