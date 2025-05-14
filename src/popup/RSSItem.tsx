@@ -4,11 +4,22 @@ import { useEffect, useState } from "react"
 import { useCopyToClipboard } from "usehooks-ts"
 
 import { Button } from "~/lib/components/Button"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "~/lib/components/Tooltip"
 import { defaultConfig, getConfig } from "~/lib/config"
 import { quickSubscriptions } from "~/lib/quick-subscriptions"
+import { logoMap } from "~/lib/quick-subscriptions-logos"
 import report from "~/lib/report"
 import type { RSSData } from "~/lib/types"
-import { logoMap } from "~/lib/quick-subscriptions-logos"
+
+export type RSSItemType =
+  | "currentPageRSS"
+  | "currentPageRSSHub"
+  | "currentSiteRSSHub"
 
 function RSSItem({
   item,
@@ -16,7 +27,7 @@ function RSSItem({
   hidePreview,
 }: {
   item: RSSData
-  type: string
+  type: RSSItemType
   hidePreview?: boolean
 }) {
   const [config, setConfig] = useState(defaultConfig)
@@ -24,28 +35,21 @@ function RSSItem({
     getConfig().then(setConfig)
   }, [])
   const [_, copy] = useCopyToClipboard()
-  const [copied, setCopied] = useState(false)
-  useEffect(() => {
-    if (copied) {
-      setTimeout(() => {
-        setCopied(false)
-      }, 1000)
-    }
-  }, [copied])
 
-  let url = item.url.replace(
-    "{rsshubDomain}",
-    config.rsshubDomain.replace(/\/$/, ""),
-  ).replace(/\/$/, "")
+  let url = item.url
+    .replace("{rsshubDomain}", config.rsshubDomain.replace(/\/$/, ""))
+    .replace(/\/$/, "")
 
   if (type === "currentPageRSSHub" && config.rsshubAccessControl.accessKey) {
     const urlObj = new URL(url)
 
     if (config.rsshubAccessControl.accessKeyType === "key") {
-      urlObj.searchParams.append('key', config.rsshubAccessControl.accessKey)
+      urlObj.searchParams.append("key", config.rsshubAccessControl.accessKey)
     } else {
-      const md5 = new MD5().update(urlObj.pathname + config.rsshubAccessControl.accessKey).digest("hex")
-      urlObj.searchParams.append('code', md5)
+      const md5 = new MD5()
+        .update(urlObj.pathname + config.rsshubAccessControl.accessKey)
+        .digest("hex")
+      urlObj.searchParams.append("code", md5)
     }
 
     url = urlObj.toString()
@@ -112,10 +116,15 @@ function RSSItem({
                 image: item.image,
               })}`}
             >
-              {logoMap.get(quickSubscription.key) ?
-                <img className="w-5 h-5 rounded" src={logoMap.get(quickSubscription.key)} /> : (chrome.i18n.getMessage(quickSubscription.name) ||
-                quickSubscription.name)
-              }
+              {logoMap.get(quickSubscription.key) ? (
+                <img
+                  className="w-5 h-5 rounded"
+                  src={logoMap.get(quickSubscription.key)}
+                />
+              ) : (
+                chrome.i18n.getMessage(quickSubscription.name) ||
+                quickSubscription.name
+              )}
             </a>
           </Button>
         )
@@ -137,20 +146,18 @@ function RSSItem({
         </Button>
       )}
       {!item.isDocs && (
-        <Button
-          variant="ghost"
-          size="sm"
-          className="text-primary hover:text-primary text-lg"
-          onClick={() => {
-            copy(url)
-            setCopied(true)
-            report({
-              name: "popup-copy",
-            })
-          }}
-        >
-          <i className={copied ? "i-mingcute-check-line" : "i-mingcute-copy-2-line"}></i>
-        </Button>
+        <CopyButton
+          text={url}
+          iconVariant={1}
+          tooltip={chrome.i18n.getMessage("copyRssHubURL")}
+        />
+      )}
+      {type === "currentPageRSSHub" && (
+        <CopyButton
+          text={item.url.replace("{rsshubDomain}", "rsshub:/")}
+          iconVariant={2}
+          tooltip={chrome.i18n.getMessage("copyRssHubRoute")}
+        />
       )}
       {!item.isDocs && !hidePreview && (
         <Button
@@ -158,12 +165,74 @@ function RSSItem({
           size="sm"
           className="text-primary hover:text-primary text-lg"
         >
-          <a target="_blank" href={`/tabs/preview.html?url=${encodedUrl}`} className="flex center">
+          <a
+            target="_blank"
+            href={`/tabs/preview.html?url=${encodedUrl}`}
+            className="flex center"
+          >
             <i className="i-mingcute-eye-line"></i>
           </a>
         </Button>
       )}
     </li>
+  )
+}
+
+function CopyButton({
+  text,
+  iconVariant,
+  tooltip,
+}: {
+  tooltip: string
+  text: string
+  iconVariant: 1 | 2 | 3
+}) {
+  const [_, copy] = useCopyToClipboard()
+  const [copied, setCopied] = useState(false)
+  useEffect(() => {
+    if (copied) {
+      setTimeout(() => {
+        setCopied(false)
+      }, 1000)
+    }
+  }, [copied])
+
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-primary hover:text-primary text-lg"
+            onClick={() => {
+              copy(text)
+              setCopied(true)
+              report({
+                name: "popup-copy",
+              })
+            }}
+          >
+            <i
+              className={
+                copied
+                  ? "i-mingcute-check-line"
+                  : iconVariant === 1
+                    ? "i-mingcute-copy-line"
+                    : iconVariant === 2
+                      ? "i-mingcute-copy-2-line"
+                      : iconVariant === 3
+                        ? "i-mingcute-copy-3-line"
+                        : "i-mingcute-copy-line"
+              }
+            ></i>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{tooltip}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   )
 }
 
