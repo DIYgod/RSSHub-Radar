@@ -161,8 +161,8 @@
   "paginationNext": {
     "message": "Next"
   },
-  "copyRSSHubURL": {
-    "message": "Copy RSSHub URL"
+  "copyURL": {
+    "message": "Copy URL"
   },
   "copyRSSHubRoute": {
     "message": "Copy RSSHub Route"

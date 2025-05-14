@@ -161,8 +161,8 @@
   "paginationNext": {
     "message": "下一页"
   },
-  "copyRSSHubURL": {
-    "message": "复制 RSSHub 链接"
+  "copyURL": {
+    "message": "复制链接"
   },
   "copyRSSHubRoute": {
     "message": "复制 RSSHub 路由"

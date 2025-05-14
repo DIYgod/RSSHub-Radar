@@ -161,7 +161,7 @@ function RSSItem({
         <CopyButton
           text={url}
           iconVariant={1}
-          tooltip={chrome.i18n.getMessage("copyRssHubURL")}
+          tooltip={chrome.i18n.getMessage("copyURL")}
         />
       )}
       {type === "currentPageRSSHub" && (
