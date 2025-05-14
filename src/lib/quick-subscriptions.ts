@@ -18,7 +18,7 @@ export const quickSubscriptions: ({
     }
 ))[] = [
   {
-    name: "Follow",
+    name: "Folo",
     projectUrl: "https://follow.is",
     key: "follow",
     subscribeDomain: "follow://",

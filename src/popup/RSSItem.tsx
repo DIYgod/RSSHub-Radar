@@ -62,6 +62,9 @@ function RSSItem({
   }
   const encodedUrl = encodeURIComponent(url)
 
+  const rsshubRoute = item.url.replace("{rsshubDomain}", "rsshub:/")
+  const encodedRsshubRoute = encodeURIComponent(rsshubRoute)
+
   return (
     <li className="flex mb-4 items-center w-max min-w-full">
       <img className="w-8 h-8" src={item.image || RSSHubIcon} />
@@ -93,6 +96,14 @@ function RSSItem({
         }
         subscriptionDomain = subscriptionDomain.replace(/(?<!\/)\/$/, "")
 
+        const isRSSHubRouteSupported =
+          quickSubscription.key === "follow" && type === "currentPageRSSHub"
+
+        const subscribeUrl = isRSSHubRouteSupported ? rsshubRoute : url
+        const subscribeEncodedUrl = isRSSHubRouteSupported
+          ? encodedRsshubRoute
+          : encodedUrl
+
         return (
           <Button
             variant="ghost"
@@ -110,8 +121,8 @@ function RSSItem({
             <a
               target="_blank"
               href={`${subscriptionDomain}${quickSubscription.getSubscribePath({
-                url,
-                encodedUrl,
+                url: subscribeUrl,
+                encodedUrl: subscribeEncodedUrl,
                 title: item.title,
                 image: item.image,
               })}`}
@@ -154,7 +165,7 @@ function RSSItem({
       )}
       {type === "currentPageRSSHub" && (
         <CopyButton
-          text={item.url.replace("{rsshubDomain}", "rsshub:/")}
+          text={rsshubRoute}
           iconVariant={2}
           tooltip={chrome.i18n.getMessage("copyRssHubRoute")}
         />
