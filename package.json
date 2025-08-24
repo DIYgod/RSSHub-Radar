@@ -41,7 +41,7 @@
     "react-router": "^7.1.5",
     "route-recognizer": "^0.3.4",
     "rss-parser": "3.13.0",
-    "tailwind-merge": "^2.5.3",
+    "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "tldts": "^6.1.76",
     "usehooks-ts": "^3.1.1",
