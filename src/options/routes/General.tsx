@@ -1,5 +1,5 @@
 import _ from "lodash"
-import { Loader2 } from "lucide-react"
+import { Loader2, X } from "lucide-react"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 
@@ -13,16 +13,21 @@ import { Label } from "~/lib/components/Label"
 import { Switch } from "~/lib/components/Switch"
 import { defaultConfig, setConfig } from "~/lib/config"
 import { quickSubscriptions } from "~/lib/quick-subscriptions"
+import { logoMap } from "~/lib/quick-subscriptions-logos"
 import report from "~/lib/report"
 import { getRulesCount, parseRules } from "~/lib/rules"
 import type { Rules as IRules } from "~/lib/types"
 import { getRadarRulesUrl } from "~/lib/utils"
-import { logoMap } from "~/lib/quick-subscriptions-logos"
 
 function General() {
   let [config] = useStorage("config")
   config = _.merge({}, defaultConfig, config)
   const [rules, setRules] = useState<IRules>({})
+  const [rsshubInstanceHistory, setRsshubInstanceHistory] = useStorage(
+    "rsshubHistory",
+    [defaultConfig.rsshubDomain],
+  )
+  const [showHistory, setShowHistory] = useState(false)
   useEffect(() => {
     sendToBackground({
       name: "requestDisplayedRules",
@@ -52,6 +57,19 @@ function General() {
       },
     )
   }, [])
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showHistory && !(event.target as Element).closest(".relative")) {
+        setShowHistory(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [showHistory])
 
   return (
     <div>
@@ -136,15 +154,51 @@ function General() {
               <Label htmlFor="customRSSHubDomain">
                 {chrome.i18n.getMessage("customRSSHubDomain")}
               </Label>
-              <Input
-                id="customRSSHubDomain"
-                value={config.rsshubDomain}
-                onChange={(e) =>
-                  setConfig({
-                    rsshubDomain: e.target.value,
-                  })
-                }
-              />
+              <div className="relative">
+                <Input
+                  id="customRSSHubDomain"
+                  value={config.rsshubDomain}
+                  onChange={(e) =>
+                    setConfig({
+                      rsshubDomain: e.target.value,
+                    })
+                  }
+                  onFocus={() => setShowHistory(true)}
+                />
+
+                {showHistory && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-white border rounded-md shadow-lg z-50">
+                    {rsshubInstanceHistory.map((domain) => (
+                      <div
+                        key={domain}
+                        className="flex items-center justify-between px-3 py-2 hover:bg-gray-100"
+                      >
+                        <button
+                          className="flex-1 text-left"
+                          onClick={() => {
+                            setConfig({ rsshubDomain: domain })
+                            setShowHistory(false)
+                          }}
+                        >
+                          {domain}
+                        </button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setRsshubInstanceHistory(
+                              rsshubInstanceHistory.filter((d) => d !== domain),
+                            )
+                          }}
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
             <div className="grid w-full items-center gap-2">
               <Label htmlFor="accessKey" className="flex items-center">
@@ -180,7 +234,9 @@ function General() {
                       <input
                         type="radio"
                         id="accessKeyTypeCode"
-                        checked={config.rsshubAccessControl.accessKeyType === "code"}
+                        checked={
+                          config.rsshubAccessControl.accessKeyType === "code"
+                        }
                         onChange={() =>
                           setConfig({
                             rsshubAccessControl: {
@@ -195,7 +251,9 @@ function General() {
                       <input
                         type="radio"
                         id="accessKeyTypeKey"
-                        checked={config.rsshubAccessControl.accessKeyType === "key"}
+                        checked={
+                          config.rsshubAccessControl.accessKeyType === "key"
+                        }
                         onChange={() =>
                           setConfig({
                             rsshubAccessControl: {
@@ -204,7 +262,9 @@ function General() {
                           })
                         }
                       />
-                      <label htmlFor="accessKeyTypeKey">key={"{accessKey}"}</label>
+                      <label htmlFor="accessKeyTypeKey">
+                        key={"{accessKey}"}
+                      </label>
                     </div>
                   </div>
                 </div>
@@ -233,6 +293,12 @@ function General() {
                 disabled={rulesUpdating}
                 onClick={() => {
                   setRulesUpdating(true)
+                  if (!rsshubInstanceHistory.includes(config.rsshubDomain)) {
+                    setRsshubInstanceHistory([
+                      ...rsshubInstanceHistory,
+                      config.rsshubDomain,
+                    ])
+                  }
                   sendToBackground({
                     name: "refreshRules",
                   }).then((res) => {
@@ -271,7 +337,10 @@ function General() {
                       } as any)
                     }
                   />
-                  <Label className="w-28 flex gap-2 items-center" htmlFor={quickSubscription.key}>
+                  <Label
+                    className="w-28 flex gap-2 items-center"
+                    htmlFor={quickSubscription.key}
+                  >
                     {logoMap.get(quickSubscription.key) && (
                       <img
                         src={logoMap.get(quickSubscription.key)}

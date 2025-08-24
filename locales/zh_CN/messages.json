@@ -160,5 +160,8 @@
   },
   "paginationNext": {
     "message": "下一页"
+  },
+  "previousInstances": {
+    "message": "使用过的实例"
   }
 }
