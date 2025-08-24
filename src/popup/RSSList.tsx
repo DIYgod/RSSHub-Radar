@@ -1,8 +1,8 @@
 import type { RSSData } from "~/lib/types"
 
-import RSSItem from "./RSSItem"
+import RSSItem, { type RSSItemType } from "./RSSItem"
 
-function RSSList({ type, list }: { type: string; list: RSSData[] }) {
+function RSSList({ type, list }: { type: RSSItemType; list: RSSData[] }) {
   if (list.length === 0) {
     return null
   }
