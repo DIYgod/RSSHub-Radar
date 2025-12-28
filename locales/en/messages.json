@@ -111,7 +111,7 @@
     "message": "Version"
   },
   "RSSHubRadarInfo": {
-    "message": "RSSHub Radar is a spin-off of <a target=\"_blank\" href=\"https://docs.rsshub.app\">RSSHub</a> that helps you quickly discover and subscribe to RSS and RSSHub for your current site, and the project is <a target=\"_blank\" href=\"https://github.com/DIYgod/RSSHub-Radar\">open source</a> under the MIT license and is completely free to use."
+    "message": "RSSHub Radar is a spin-off of <a target=\"_blank\" href=\"https://docs.rsshub.app\">RSSHub</a> that helps you quickly discover and subscribe to RSS and RSSHub for your current site, and the project is <a target=\"_blank\" href=\"https://github.com/DIYgod/RSSHub-Radar\">open source</a> under the AGPL-3.0 license and is completely free to use."
   },
   "sponsoredDevelopment": {
     "message": "⭐️ Sponsor RSSHub Radar: <a target=\"_blank\" href=\"https://docs.rsshub.app/sponsor\">https://docs.rsshub.app/sponsor</a>"
