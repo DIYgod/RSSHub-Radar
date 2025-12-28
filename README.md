@@ -103,7 +103,7 @@ Get the `build/chrome-mv3-dev` directory, the installation method refers to [man
 
 ## Author
 
-**RSSHub Radar** © [DIYgod](https://github.com/DIYgod), Released under the [MIT](./LICENSE) License.<br>
+**RSSHub Radar** © [DIYgod](https://github.com/DIYgod), Released under the [AGPL-3.0](./LICENSE) License.<br>
 Authored and maintained by DIYgod with help from contributors ([list](https://github.com/DIYgod/RSSHub-radar/contributors)).
 
 > Blog [@DIYgod](https://diygod.cc) · GitHub [@DIYgod](https://github.com/DIYgod) · Twitter [@DIYgod](https://twitter.com/DIYgod) · Telegram Channel [@awesomeDIYgod](https://t.me/awesomeDIYgod)
