@@ -36,6 +36,8 @@ export const defaultConfig = {
     bazqux: false,
     local: false,
     follow: true,
+    commafeed: false,
+    commafeedDomain: "https://commafeed.com"
   },
   refreshTimeout: 2 * 60 * 60,
 }

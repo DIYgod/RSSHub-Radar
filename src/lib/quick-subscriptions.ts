@@ -127,7 +127,7 @@ export const quickSubscriptions: ({
     name: "CommaFeed",
     projectUrl: "https://commafeed.com",
     key: "commafeed",
-    subscribeDomain: "https://commafeed.com",
+    subscribeDomainKey: "commafeedDomain",
     themeColor: "#ffa94d",
     getSubscribePath: (data) =>
       `/rest/feed/subscribe?url=${data.encodedUrl}`,
