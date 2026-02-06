@@ -36,6 +36,8 @@ export const defaultConfig = {
     bazqux: false,
     local: false,
     follow: true,
+    newsblur: false,
+    newsblurDomain: "https://www.newsblur.com",
   },
   refreshTimeout: 2 * 60 * 60,
 }
