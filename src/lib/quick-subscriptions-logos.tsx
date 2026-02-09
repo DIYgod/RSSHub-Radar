@@ -4,6 +4,7 @@ import MinifluxLogo from "data-base64:~/assets/miniflux.ico"
 import FreshRSSLogo from "data-base64:~/assets/freshrss.svg"
 import TinyTinyRSSLogo from "data-base64:~/assets/ttrss.png"
 import FeedlyLogo from "data-base64:~/assets/feedly.png"
+import NewsBlurLogo from "data-base64:~/assets/newsblur.png"
 
 export const logoMap = new Map<string, string>([
   ["follow", FollowLogo],
@@ -12,4 +13,5 @@ export const logoMap = new Map<string, string>([
   ["freshrss", FreshRSSLogo],
   ["ttrss", TinyTinyRSSLogo],
   ["feedly", FeedlyLogo],
+  ["newsblur", NewsBlurLogo],
 ])

@@ -139,4 +139,12 @@ export const quickSubscriptions: ({
     themeColor: "#f28f34",
     getSubscribePath: (data) => data.url.replace(/^https?:\/\//, ""),
   },
+  {
+    name: "NewsBlur",
+    projectUrl: "https://newsblur.com/",
+    key: "newsblur",
+    subscribeDomainKey: "newsblurDomain" ,
+    themeColor: "#eebd10",
+    getSubscribePath: (data) => `/?url=${data.encodedUrl}`,
+  },
 ]
