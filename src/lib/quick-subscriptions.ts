@@ -9,6 +9,7 @@ export const quickSubscriptions: ({
     title: string
     image: string
   }) => string
+  isRSSHubRouteSupported?: boolean
 } & (
   | {
       subscribeDomainKey: string
@@ -18,12 +19,13 @@ export const quickSubscriptions: ({
     }
 ))[] = [
   {
-    name: "Follow",
+    name: "Folo",
     projectUrl: "https://follow.is",
     key: "follow",
     subscribeDomain: "follow://",
     themeColor: "#ff5c00",
     getSubscribePath: (data) => `add?url=${data.encodedUrl}`,
+    isRSSHubRouteSupported: true,
   },
   {
     name: "Inoreader",

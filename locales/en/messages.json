@@ -160,5 +160,11 @@
   },
   "paginationNext": {
     "message": "Next"
+  },
+  "copyURL": {
+    "message": "Copy URL"
+  },
+  "copyRSSHubRoute": {
+    "message": "Copy RSSHub Route"
   }
 }
