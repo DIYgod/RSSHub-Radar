@@ -28,6 +28,8 @@ yarn-error.log*
 out/
 build/
 dist/
+.wxt/
+.output/
 
 # plasmo - https://www.plasmo.com
 .plasmo
