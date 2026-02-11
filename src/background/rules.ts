@@ -30,9 +30,15 @@ export const getDisplayedRules = () => getLocalStorage("displayedRules")
 export const setDisplayedRules = (displayedRules) =>
   setLocalStorage("displayedRules", displayedRules)
 
+const refreshRulesSafely = () => {
+  refreshRules().catch((error) => {
+    console.error(error)
+  })
+}
+
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === "refreshRulesAlarm") {
-    refreshRules()
+    refreshRulesSafely()
   }
 })
 
@@ -41,7 +47,7 @@ export async function initSchedule() {
   const rules = await getLocalStorage("rules")
   if (!rules) {
     setTimeout(() => {
-      refreshRules()
+      refreshRulesSafely()
     }, 60 * 1000)
   }
 

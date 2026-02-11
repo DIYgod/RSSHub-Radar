@@ -275,10 +275,30 @@ function General() {
                   setRulesUpdating(true)
                   sendToBackground({
                     name: "refreshRules",
-                  }).then((res) => {
-                    setRulesUpdating(false)
-                    toast.success(chrome.i18n.getMessage("updateSuccessful"))
                   })
+                    .then((res?: { success?: boolean; error?: string }) => {
+                      if (!res?.success) {
+                        toast.error(
+                          res?.error ||
+                            chrome.i18n.getMessage("updateFailed") ||
+                            "Update failed",
+                        )
+                        return
+                      }
+
+                      toast.success(chrome.i18n.getMessage("updateSuccessful"))
+                    })
+                    .catch((error: unknown) => {
+                      toast.error(
+                        error instanceof Error
+                          ? error.message
+                          : chrome.i18n.getMessage("updateFailed") ||
+                              "Update failed",
+                      )
+                    })
+                    .finally(() => {
+                      setRulesUpdating(false)
+                    })
                 }}
               >
                 {rulesUpdating && (

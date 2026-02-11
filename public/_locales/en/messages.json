@@ -134,6 +134,9 @@
   "updateSuccessful": {
     "message": "Update successful"
   },
+  "updateFailed": {
+    "message": "Update failed"
+  },
   "updateTip": {
     "message": "Automatically update every two hours, you can also manually update."
   },

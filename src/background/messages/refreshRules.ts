@@ -4,8 +4,21 @@ const handler = async (
   _message?: unknown,
   _sender?: chrome.runtime.MessageSender,
 ) => {
-  await refreshRules()
-  return true
+  try {
+    await refreshRules()
+    return {
+      success: true,
+    }
+  } catch (error) {
+    console.error(error)
+    return {
+      success: false,
+      error:
+        error instanceof Error
+          ? error.message
+          : "Unknown error while refreshing rules",
+    }
+  }
 }
 
 export default handler
