@@ -1,9 +1,7 @@
 import _ from "lodash"
 import toast from "react-hot-toast"
 
-import { Storage } from "@plasmohq/storage"
-
-const storage = new Storage()
+import { getLocalStorage, setLocalStorage } from "~/lib/storage"
 
 export const defaultConfig = {
   rsshubDomain: "https://rsshub.app",
@@ -36,6 +34,8 @@ export const defaultConfig = {
     bazqux: false,
     local: false,
     follow: true,
+    newsblur: false,
+    newsblurDomain: "https://www.newsblur.com",
   },
   refreshTimeout: 2 * 60 * 60,
 }
@@ -43,7 +43,7 @@ export const defaultConfig = {
 export async function getConfig() {
   let storagedConfig = {}
   try {
-    storagedConfig = await storage.get("config")
+    storagedConfig = await getLocalStorage("config")
   } catch (error) {}
   return _.merge({}, defaultConfig, storagedConfig) as typeof defaultConfig
 }
@@ -52,10 +52,10 @@ let toastId: string | undefined
 export async function setConfig(config: Partial<typeof defaultConfig>) {
   let storagedConfig = {}
   try {
-    storagedConfig = await storage.get("config")
+    storagedConfig = await getLocalStorage("config")
   } catch (error) {}
   config = _.merge({}, storagedConfig, config)
-  await storage.set("config", config)
+  await setLocalStorage("config", config)
   toastId = toast.success("Saved", {
     id: toastId,
   })

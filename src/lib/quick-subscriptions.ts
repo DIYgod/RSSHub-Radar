@@ -124,10 +124,27 @@ export const quickSubscriptions: ({
       `/index.html#/check/add?title=${encodeURIComponent(data.title)}&url=${data.encodedUrl}&type=rss&icon=${encodeURIComponent(data.image)}`,
   },
   {
+    name: "CommaFeed",
+    projectUrl: "https://commafeed.com",
+    key: "commafeed",
+    subscribeDomain: "https://commafeed.com",
+    themeColor: "#ffa94d",
+    getSubscribePath: (data) =>
+      `/rest/feed/subscribe?url=${data.encodedUrl}`,
+  },
+  {
     name: "localReader",
     key: "local",
     subscribeDomain: "feed://",
     themeColor: "#f28f34",
     getSubscribePath: (data) => data.url.replace(/^https?:\/\//, ""),
+  },
+  {
+    name: "NewsBlur",
+    projectUrl: "https://newsblur.com/",
+    key: "newsblur",
+    subscribeDomainKey: "newsblurDomain" ,
+    themeColor: "#eebd10",
+    getSubscribePath: (data) => `/?url=${data.encodedUrl}`,
   },
 ]

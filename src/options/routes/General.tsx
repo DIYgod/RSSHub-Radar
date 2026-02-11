@@ -3,33 +3,67 @@ import { Loader2 } from "lucide-react"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 
-import { sendToBackground } from "@plasmohq/messaging"
-import { useStorage } from "@plasmohq/storage/hook"
-
 import { Button } from "~/lib/components/Button"
 import { Card, CardContent, CardHeader, CardTitle } from "~/lib/components/Card"
 import { Input } from "~/lib/components/Input"
 import { Label } from "~/lib/components/Label"
 import { Switch } from "~/lib/components/Switch"
-import { defaultConfig, setConfig } from "~/lib/config"
+import { defaultConfig, getConfig, setConfig } from "~/lib/config"
+import { sendToBackground } from "~/lib/messaging"
 import { quickSubscriptions } from "~/lib/quick-subscriptions"
+import { logoMap } from "~/lib/quick-subscriptions-logos"
 import report from "~/lib/report"
 import { getRulesCount, parseRules } from "~/lib/rules"
 import type { Rules as IRules } from "~/lib/types"
 import { getRadarRulesUrl } from "~/lib/utils"
-import { logoMap } from "~/lib/quick-subscriptions-logos"
 
 function General() {
-  let [config] = useStorage("config")
-  config = _.merge({}, defaultConfig, config)
+  const [config, setConfigState] = useState(defaultConfig)
+
+  const updateConfig = (partialConfig: Partial<typeof defaultConfig>) => {
+    setConfigState(
+      (currentConfig) =>
+        _.merge({}, currentConfig, partialConfig) as typeof defaultConfig,
+    )
+    void setConfig(partialConfig)
+  }
+
   const [rules, setRules] = useState<IRules>({})
   useEffect(() => {
+    getConfig().then(setConfigState)
+
     sendToBackground({
       name: "requestDisplayedRules",
     }).then((res) => setRules(parseRules(res, true)))
+
+    const onStorageChange = (
+      changes: {
+        [key: string]: chrome.storage.StorageChange
+      },
+      areaName: string,
+    ) => {
+      if (areaName !== "local" || !changes.config) {
+        return
+      }
+
+      setConfigState(
+        _.merge(
+          {},
+          defaultConfig,
+          changes.config.newValue,
+        ) as typeof defaultConfig,
+      )
+    }
+
+    chrome.storage.onChanged.addListener(onStorageChange)
+
     report({
       name: "options-general",
     })
+
+    return () => {
+      chrome.storage.onChanged.removeListener(onStorageChange)
+    }
   }, [])
 
   const [count, setCount] = useState(0)
@@ -102,7 +136,7 @@ function General() {
                 id="notificationsAndReminders"
                 checked={config.notice.badge}
                 onCheckedChange={(value) =>
-                  setConfig({
+                  updateConfig({
                     notice: {
                       badge: value,
                     },
@@ -140,7 +174,7 @@ function General() {
                 id="customRSSHubDomain"
                 value={config.rsshubDomain}
                 onChange={(e) =>
-                  setConfig({
+                  updateConfig({
                     rsshubDomain: e.target.value,
                   })
                 }
@@ -162,11 +196,11 @@ function General() {
                 id="accessKey"
                 value={config.rsshubAccessControl.accessKey}
                 onChange={(e) =>
-                  setConfig({
+                  updateConfig({
                     rsshubAccessControl: {
                       accessKey: e.target.value,
                     },
-                  })
+                  } as any)
                 }
                 placeholder={chrome.i18n.getMessage(
                   "configurationRequiredIfAccessKeysEnabled",
@@ -180,13 +214,15 @@ function General() {
                       <input
                         type="radio"
                         id="accessKeyTypeCode"
-                        checked={config.rsshubAccessControl.accessKeyType === "code"}
+                        checked={
+                          config.rsshubAccessControl.accessKeyType === "code"
+                        }
                         onChange={() =>
-                          setConfig({
+                          updateConfig({
                             rsshubAccessControl: {
                               accessKeyType: "code",
                             },
-                          })
+                          } as any)
                         }
                       />
                       <label htmlFor="accessKeyTypeCode">code={"{md5}"}</label>
@@ -195,16 +231,20 @@ function General() {
                       <input
                         type="radio"
                         id="accessKeyTypeKey"
-                        checked={config.rsshubAccessControl.accessKeyType === "key"}
+                        checked={
+                          config.rsshubAccessControl.accessKeyType === "key"
+                        }
                         onChange={() =>
-                          setConfig({
+                          updateConfig({
                             rsshubAccessControl: {
                               accessKeyType: "key",
                             },
-                          })
+                          } as any)
                         }
                       />
-                      <label htmlFor="accessKeyTypeKey">key={"{accessKey}"}</label>
+                      <label htmlFor="accessKeyTypeKey">
+                        key={"{accessKey}"}
+                      </label>
                     </div>
                   </div>
                 </div>
@@ -235,10 +275,30 @@ function General() {
                   setRulesUpdating(true)
                   sendToBackground({
                     name: "refreshRules",
-                  }).then((res) => {
-                    setRulesUpdating(false)
-                    toast.success(chrome.i18n.getMessage("updateSuccessful"))
                   })
+                    .then((res?: { success?: boolean; error?: string }) => {
+                      if (!res?.success) {
+                        toast.error(
+                          res?.error ||
+                            chrome.i18n.getMessage("updateFailed") ||
+                            "Update failed",
+                        )
+                        return
+                      }
+
+                      toast.success(chrome.i18n.getMessage("updateSuccessful"))
+                    })
+                    .catch((error: unknown) => {
+                      toast.error(
+                        error instanceof Error
+                          ? error.message
+                          : chrome.i18n.getMessage("updateFailed") ||
+                              "Update failed",
+                      )
+                    })
+                    .finally(() => {
+                      setRulesUpdating(false)
+                    })
                 }}
               >
                 {rulesUpdating && (
@@ -264,14 +324,17 @@ function General() {
                     id={quickSubscription.key}
                     checked={config.submitto[quickSubscription.key]}
                     onCheckedChange={(value) =>
-                      setConfig({
+                      updateConfig({
                         submitto: {
                           [quickSubscription.key]: value,
                         },
                       } as any)
                     }
                   />
-                  <Label className="w-28 flex gap-2 items-center" htmlFor={quickSubscription.key}>
+                  <Label
+                    className="w-28 flex gap-2 items-center"
+                    htmlFor={quickSubscription.key}
+                  >
                     {logoMap.get(quickSubscription.key) && (
                       <img
                         src={logoMap.get(quickSubscription.key)}
@@ -293,7 +356,7 @@ function General() {
                         config.submitto[quickSubscription.subscribeDomainKey]
                       }
                       onChange={(e) =>
-                        setConfig({
+                        updateConfig({
                           submitto: {
                             [quickSubscription.subscribeDomainKey]:
                               e.target.value,

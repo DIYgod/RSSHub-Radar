@@ -4,8 +4,9 @@ on:
   push:
 
 env:
-  PLASMO_PUBLIC_UMAMI_ID: ${{ vars.PLASMO_PUBLIC_UMAMI_ID }}
-  PLASMO_PUBLIC_UMAMI_URL: ${{ vars.PLASMO_PUBLIC_UMAMI_URL }}
+  WXT_UMAMI_ID: ${{ vars.WXT_UMAMI_ID || vars.PLASMO_PUBLIC_UMAMI_ID }}
+  WXT_UMAMI_URL: ${{ vars.WXT_UMAMI_URL || vars.PLASMO_PUBLIC_UMAMI_URL }}
+  WXT_UMAMI_SAMPLE_RATE: ${{ vars.WXT_UMAMI_SAMPLE_RATE || vars.PLASMO_PUBLIC_UMAMI_SAMPLE_RATE }}
 
 jobs:
   build:
@@ -30,9 +31,9 @@ jobs:
           node-version: 22.x
           cache: "pnpm"
       - name: Package the extension for Chrome
-        run: pnpm build --zip
+        run: pnpm zip
       - name: Package the extension for Firefox
-        run: pnpm build:firefox --zip
+        run: pnpm zip:firefox
       - name: Package the extension for Safari
         run: pnpm build:safari:zip
       - name: Archive production artifacts

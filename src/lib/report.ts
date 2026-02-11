@@ -1,6 +1,6 @@
 function isSampled(rate) {
-  const randomNumber = Math.floor(Math.random() * 100);
-  return randomNumber < rate * 100;
+  const randomNumber = Math.floor(Math.random() * 100)
+  return randomNumber < rate * 100
 }
 
 function report({
@@ -10,11 +10,12 @@ function report({
   url?: string
   name?: string
 }) {
-  if (
-    process.env.PLASMO_PUBLIC_UMAMI_ID &&
-    process.env.PLASMO_PUBLIC_UMAMI_URL &&
-    (name || isSampled(parseFloat(process.env.PLASMO_PUBLIC_UMAMI_SAMPLE_RATE) || 0.01))
-  ) {
+  const umamiId = import.meta.env.WXT_UMAMI_ID
+  const umamiUrl = import.meta.env.WXT_UMAMI_URL
+  const sampleRate =
+    parseFloat(import.meta.env.WXT_UMAMI_SAMPLE_RATE || "") || 0.01
+
+  if (umamiId && umamiUrl && (name || isSampled(sampleRate))) {
     let hostname = ""
     try {
       hostname = new URL(url).hostname
@@ -26,13 +27,13 @@ function report({
         language: chrome?.i18n?.getUILanguage(),
         referrer: hostname,
         url: hostname,
-        website: process.env.PLASMO_PUBLIC_UMAMI_ID,
+        website: umamiId,
         name: name,
       },
       type: "event",
     }
 
-    fetch(`${process.env.PLASMO_PUBLIC_UMAMI_URL}/api/send`, {
+    fetch(`${umamiUrl}/api/send`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

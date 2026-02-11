@@ -1,19 +1,14 @@
-import { Storage } from "@plasmohq/storage"
-
 import { getConfig } from "~/lib/config"
 import { setupOffscreenDocument } from "~/lib/offscreen"
 import { getRemoteRules } from "~/lib/rules"
-import { getDisplayedRules as sandboxGetDisplayedRules } from "~/sandboxes"
-
-const storage = new Storage({
-  area: "local",
-})
+import { getLocalStorage, setLocalStorage } from "~/lib/storage"
+import { getDisplayedRules as sandboxGetDisplayedRules } from "~/tabs/sandboxes"
 
 export const refreshRules = async () => {
   const rules = await getRemoteRules()
-  await storage.set("rules", rules)
-  if (chrome.offscreen && chrome.runtime.getContexts) {
-    await setupOffscreenDocument("tabs/offscreen.html")
+  await setLocalStorage("rules", rules)
+  if (chrome.offscreen && (chrome.runtime as any).getContexts) {
+    await setupOffscreenDocument("offscreen.html")
     chrome.runtime.sendMessage({
       target: "offscreen",
       data: {
@@ -30,23 +25,29 @@ export const refreshRules = async () => {
   return rules
 }
 
-export const getDisplayedRules = () => storage.get("displayedRules")
+export const getDisplayedRules = () => getLocalStorage("displayedRules")
 
 export const setDisplayedRules = (displayedRules) =>
-  storage.set("displayedRules", displayedRules)
+  setLocalStorage("displayedRules", displayedRules)
+
+const refreshRulesSafely = () => {
+  refreshRules().catch((error) => {
+    console.error(error)
+  })
+}
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === "refreshRulesAlarm") {
-    refreshRules()
+    refreshRulesSafely()
   }
 })
 
 export async function initSchedule() {
   const config = await getConfig()
-  const rules = await storage.get("rules")
+  const rules = await getLocalStorage("rules")
   if (!rules) {
     setTimeout(() => {
-      refreshRules()
+      refreshRulesSafely()
     }, 60 * 1000)
   }
 

@@ -14,7 +14,7 @@ quickSubscriptions.forEach((subscription) => {
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ["./**/*.tsx"],
+  content: ["./src/**/*.{ts,tsx,html}"],
   safelist,
   theme: {
     container: {
