@@ -67,7 +67,7 @@ Open the upper right corner `Developer mode`
 
 Click `Load unpacked extension` in the upper left corner
 
-Select the unzipped `dist` directory
+Select the unzipped extension directory containing `manifest.json`
 
 **Firefox install extension:**
 
@@ -75,13 +75,13 @@ Open `about:debugging`
 
 Click `Load Temporary Extension` in the upper right corner
 
-Select the `manifest.json` file in the unzipped `dist` directory
+Select the `manifest.json` file in the unzipped extension directory
 
 ## Join us
 
 ### Start the Development Server
 
-Also refer to: https://docs.plasmo.com/framework/workflows/dev
+Also refer to: https://wxt.dev/guide/installation
 
 ```
 pnpm i
@@ -95,7 +95,7 @@ npm install
 npm run dev
 ```
 
-Get the `build/chrome-mv3-dev` directory, the installation method refers to [manual installation](#manual installation)
+Get the `.output/chrome-mv3` directory, the installation method refers to [manual installation](#manual installation)
 
 ### Submit New RSSHub Radar Rules
 

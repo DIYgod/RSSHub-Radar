@@ -1,8 +1,6 @@
 import _ from "lodash"
 import { useEffect, useMemo, useState } from "react"
 
-import { sendToBackground } from "@plasmohq/messaging"
-
 import {
   Accordion,
   AccordionContent,
@@ -19,6 +17,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "~/lib/components/Pagination"
+import { sendToBackground } from "~/lib/messaging"
 import report from "~/lib/report"
 import { getRulesCount, parseRules } from "~/lib/rules"
 import type { Rules as IRules } from "~/lib/types"

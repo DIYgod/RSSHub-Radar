@@ -1,11 +1,10 @@
-import type { PlasmoMessaging } from "@plasmohq/messaging"
-
 import { refreshRules } from "~/background/rules"
 
-const handler: PlasmoMessaging.MessageHandler = (req, res) => {
-  refreshRules().then(() => {
-    res.send(true)
-  })
+const handler = async (
+  _message?: unknown,
+  _sender?: chrome.runtime.MessageSender,
+) => {
+  await refreshRules()
   return true
 }
 

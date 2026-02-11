@@ -1,10 +1,10 @@
-import FollowLogo from "data-base64:~/assets/follow.svg"
-import InoreaderLogo from "data-base64:~/assets/inoreader.svg"
-import MinifluxLogo from "data-base64:~/assets/miniflux.ico"
-import FreshRSSLogo from "data-base64:~/assets/freshrss.svg"
-import TinyTinyRSSLogo from "data-base64:~/assets/ttrss.png"
-import FeedlyLogo from "data-base64:~/assets/feedly.png"
-import NewsBlurLogo from "data-base64:~/assets/newsblur.png"
+import FeedlyLogo from "~/assets/feedly.png"
+import FollowLogo from "~/assets/follow.svg"
+import FreshRSSLogo from "~/assets/freshrss.svg"
+import InoreaderLogo from "~/assets/inoreader.svg"
+import MinifluxLogo from "~/assets/miniflux.ico"
+import NewsBlurLogo from "~/assets/newsblur.png"
+import TinyTinyRSSLogo from "~/assets/ttrss.png"
 
 export const logoMap = new Map<string, string>([
   ["follow", FollowLogo],

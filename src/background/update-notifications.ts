@@ -1,15 +1,10 @@
-import RSSHubIcon from "data-base64:~/assets/icon.png"
-
-import { Storage } from "@plasmohq/storage"
+import RSSHubIcon from "~/assets/icon.png"
+import { getLocalStorage, setLocalStorage } from "~/lib/storage"
 
 import info from "../../package.json"
 
-const storage = new Storage({
-  area: "local",
-})
-
 export const initUpdateNotifications = async () => {
-  const version = await storage.get("version")
+  const version = await getLocalStorage("version")
   if (version === info.version) return
 
   chrome.notifications?.create("RSSHubRadarUpdate", {
@@ -28,5 +23,5 @@ export const initUpdateNotifications = async () => {
       chrome.notifications?.clear("RSSHubRadarUpdate")
     }
   })
-  await storage.set("version", info.version)
+  await setLocalStorage("version", info.version)
 }
