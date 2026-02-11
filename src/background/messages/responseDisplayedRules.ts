@@ -1,10 +1,11 @@
-import type { PlasmoMessaging } from "@plasmohq/messaging"
-
 import { setDisplayedRules } from "~/background/rules"
 
-const handler: PlasmoMessaging.MessageHandler = (req, res) => {
-  setDisplayedRules(req.body.displayedRules)
-  res.send("")
+const handler = (
+  message: { body?: { displayedRules?: any } },
+  _sender?: chrome.runtime.MessageSender,
+) => {
+  setDisplayedRules(message?.body?.displayedRules)
+  return ""
 }
 
 export default handler

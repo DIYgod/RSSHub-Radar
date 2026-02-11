@@ -1,10 +1,17 @@
 name: "Submit to Web Store"
 on:
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Run submission in dry-run mode"
+        required: false
+        default: false
+        type: boolean
 
 env:
-  PLASMO_PUBLIC_UMAMI_ID: ${{ vars.PLASMO_PUBLIC_UMAMI_ID }}
-  PLASMO_PUBLIC_UMAMI_URL: ${{ vars.PLASMO_PUBLIC_UMAMI_URL }}
+  WXT_UMAMI_ID: ${{ vars.WXT_UMAMI_ID || vars.PLASMO_PUBLIC_UMAMI_ID }}
+  WXT_UMAMI_URL: ${{ vars.WXT_UMAMI_URL || vars.PLASMO_PUBLIC_UMAMI_URL }}
+  WXT_UMAMI_SAMPLE_RATE: ${{ vars.WXT_UMAMI_SAMPLE_RATE || vars.PLASMO_PUBLIC_UMAMI_SAMPLE_RATE }}
 
 jobs:
   build:
@@ -28,14 +35,30 @@ jobs:
           node-version: 22.x
           cache: "pnpm"
       - name: Package the extension for Chrome
-        run: pnpm build --zip
+        run: pnpm zip
       - name: Package the extension for Firefox
-        run: pnpm build:firefox --zip
-      - name: Browser Platform Publish
-        uses: PlasmoHQ/bpp@v3
-        with:
-          keys: ${{ secrets.SUBMIT_KEYS }}
-          chrome-file: build/chrome-mv3-prod.zip
-          edge-file: build/chrome-mv3-prod.zip
-          firefox-file: build/firefox-mv3-prod.zip
-          notes: "RSSHub Radar is an open source project, you can find the source code at https://github.com/DIYgod/RSSHub-Radar"
+        run: pnpm zip:firefox
+      - name: Submit to web stores
+        env:
+          CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID || vars.CHROME_EXTENSION_ID }}
+          CHROME_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID || vars.CHROME_CLIENT_ID }}
+          CHROME_CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET || vars.CHROME_CLIENT_SECRET }}
+          CHROME_REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN || vars.CHROME_REFRESH_TOKEN }}
+          FIREFOX_EXTENSION_ID: ${{ secrets.FIREFOX_EXTENSION_ID || vars.FIREFOX_EXTENSION_ID }}
+          FIREFOX_JWT_ISSUER: ${{ secrets.FIREFOX_JWT_ISSUER || vars.FIREFOX_JWT_ISSUER }}
+          FIREFOX_JWT_SECRET: ${{ secrets.FIREFOX_JWT_SECRET || vars.FIREFOX_JWT_SECRET }}
+          EDGE_PRODUCT_ID: ${{ secrets.EDGE_PRODUCT_ID || vars.EDGE_PRODUCT_ID }}
+          EDGE_CLIENT_ID: ${{ secrets.EDGE_CLIENT_ID || vars.EDGE_CLIENT_ID }}
+          EDGE_API_KEY: ${{ secrets.EDGE_API_KEY || vars.EDGE_API_KEY }}
+        run: |
+          DRY_RUN_FLAG=""
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            DRY_RUN_FLAG="--dry-run"
+          fi
+
+          pnpm wxt submit \
+            --chrome-zip .output/*-chrome.zip \
+            --firefox-zip .output/*-firefox.zip \
+            --firefox-sources-zip .output/*-sources.zip \
+            --edge-zip .output/*-chrome.zip \
+            ${DRY_RUN_FLAG}

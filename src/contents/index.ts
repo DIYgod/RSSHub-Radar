@@ -1,5 +1,4 @@
-import { sendToBackground } from "@plasmohq/messaging"
-
+import { sendToBackground } from "~/lib/messaging"
 import { getPageRSS } from "~/lib/rss"
 
 sendToBackground({

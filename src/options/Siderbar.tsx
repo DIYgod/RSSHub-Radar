@@ -1,7 +1,7 @@
-import RSSHubIcon from "data-base64:~/assets/icon.png"
 import { Link, useLocation } from "react-router"
 import { useMediaQuery } from "usehooks-ts"
 
+import RSSHubIcon from "~/assets/icon.png"
 import { AppearanceSwitch } from "~/lib/components/AppearanceSwitch"
 import {
   Sheet,
@@ -13,11 +13,7 @@ import { cn } from "~/lib/utils"
 
 import info from "../../package.json"
 
-function SiderbarContent({
-  withClose,
-}: {
-  withClose?: boolean
-}) {
+function SiderbarContent({ withClose }: { withClose?: boolean }) {
   const location = useLocation()
   const links = [
     {

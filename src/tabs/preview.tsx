@@ -3,9 +3,9 @@ import Parser from "rss-parser"
 
 import "~/lib/style.css"
 
-import RSSHubIcon from "data-base64:~/assets/icon.png"
 import xss from "xss"
 
+import RSSHubIcon from "~/assets/icon.png"
 import {
   Card,
   CardContent,

@@ -1,14 +1,14 @@
-import RSSHubIcon from "data-base64:~/assets/icon.png"
 import MD5 from "md5.js"
 import { useEffect, useState } from "react"
 import { useCopyToClipboard } from "usehooks-ts"
 
+import RSSHubIcon from "~/assets/icon.png"
 import { Button } from "~/lib/components/Button"
 import { defaultConfig, getConfig } from "~/lib/config"
 import { quickSubscriptions } from "~/lib/quick-subscriptions"
+import { logoMap } from "~/lib/quick-subscriptions-logos"
 import report from "~/lib/report"
 import type { RSSData } from "~/lib/types"
-import { logoMap } from "~/lib/quick-subscriptions-logos"
 
 function RSSItem({
   item,
@@ -33,19 +33,20 @@ function RSSItem({
     }
   }, [copied])
 
-  let url = item.url.replace(
-    "{rsshubDomain}",
-    config.rsshubDomain.replace(/\/$/, ""),
-  ).replace(/\/$/, "")
+  let url = item.url
+    .replace("{rsshubDomain}", config.rsshubDomain.replace(/\/$/, ""))
+    .replace(/\/$/, "")
 
   if (type === "currentPageRSSHub" && config.rsshubAccessControl.accessKey) {
     const urlObj = new URL(url)
 
     if (config.rsshubAccessControl.accessKeyType === "key") {
-      urlObj.searchParams.append('key', config.rsshubAccessControl.accessKey)
+      urlObj.searchParams.append("key", config.rsshubAccessControl.accessKey)
     } else {
-      const md5 = new MD5().update(urlObj.pathname + config.rsshubAccessControl.accessKey).digest("hex")
-      urlObj.searchParams.append('code', md5)
+      const md5 = new MD5()
+        .update(urlObj.pathname + config.rsshubAccessControl.accessKey)
+        .digest("hex")
+      urlObj.searchParams.append("code", md5)
     }
 
     url = urlObj.toString()
@@ -112,10 +113,15 @@ function RSSItem({
                 image: item.image,
               })}`}
             >
-              {logoMap.get(quickSubscription.key) ?
-                <img className="w-5 h-5 rounded" src={logoMap.get(quickSubscription.key)} /> : (chrome.i18n.getMessage(quickSubscription.name) ||
-                quickSubscription.name)
-              }
+              {logoMap.get(quickSubscription.key) ? (
+                <img
+                  className="w-5 h-5 rounded"
+                  src={logoMap.get(quickSubscription.key)}
+                />
+              ) : (
+                chrome.i18n.getMessage(quickSubscription.name) ||
+                quickSubscription.name
+              )}
             </a>
           </Button>
         )
@@ -149,7 +155,11 @@ function RSSItem({
             })
           }}
         >
-          <i className={copied ? "i-mingcute-check-line" : "i-mingcute-copy-2-line"}></i>
+          <i
+            className={
+              copied ? "i-mingcute-check-line" : "i-mingcute-copy-2-line"
+            }
+          ></i>
         </Button>
       )}
       {!item.isDocs && !hidePreview && (
@@ -158,7 +168,11 @@ function RSSItem({
           size="sm"
           className="text-primary hover:text-primary text-lg"
         >
-          <a target="_blank" href={`/tabs/preview.html?url=${encodedUrl}`} className="flex center">
+          <a
+            target="_blank"
+            href={`/preview.html?url=${encodedUrl}`}
+            className="flex center"
+          >
             <i className="i-mingcute-eye-line"></i>
           </a>
         </Button>

@@ -2,9 +2,8 @@ import "~/lib/style.css"
 
 import { useEffect, useState } from "react"
 
-import { sendToBackground } from "@plasmohq/messaging"
-
 import { useDark } from "~/lib/hooks/use-dark"
+import { sendToBackground } from "~/lib/messaging"
 import report from "~/lib/report"
 
 import RSSList from "./RSSList"

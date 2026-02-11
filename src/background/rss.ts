@@ -1,18 +1,13 @@
 import AsyncLock from "async-lock"
 
-import { sendToContentScript } from "@plasmohq/messaging"
-import { Storage } from "@plasmohq/storage"
-
+import { sendToContentScript } from "~/lib/messaging"
 import { setupOffscreenDocument } from "~/lib/offscreen"
 import report from "~/lib/report"
+import { getLocalStorage } from "~/lib/storage"
 import type { RSSData } from "~/lib/types"
-import { getRSSHub as sandboxGetRSSHub } from "~/sandboxes"
+import { getRSSHub as sandboxGetRSSHub } from "~/tabs/sandboxes"
 
 import { setBadge } from "./badge"
-
-const storage = new Storage({
-  area: "local",
-})
 
 const savedRSS: {
   [tabId: number]: {
@@ -44,8 +39,8 @@ export const getRSS = async (tabId, url) => {
         tabId,
       })
 
-      if (chrome.offscreen && chrome.runtime.getContexts) {
-        await setupOffscreenDocument("tabs/offscreen.html")
+      if (chrome.offscreen && (chrome.runtime as any).getContexts) {
+        await setupOffscreenDocument("offscreen.html")
         chrome.runtime.sendMessage({
           target: "offscreen",
           data: {
@@ -54,7 +49,7 @@ export const getRSS = async (tabId, url) => {
               tabId,
               html,
               url,
-              rules: await storage.get("rules"),
+              rules: await getLocalStorage("rules"),
             },
           },
         })
@@ -62,7 +57,7 @@ export const getRSS = async (tabId, url) => {
         const rsshub = sandboxGetRSSHub({
           html,
           url,
-          rules: await storage.get("rules"),
+          rules: await getLocalStorage("rules"),
         })
         setRSS(tabId, rsshub)
       }
@@ -84,12 +79,14 @@ export const getCachedRSS = (tabId) => {
 
 export const setRSS = async (
   tabId,
-  data: {
-    pageRSS: RSSData[]
-  } | {
-    pageRSSHub: RSSData[]
-    websiteRSSHub: RSSData[]
-  },
+  data:
+    | {
+        pageRSS: RSSData[]
+      }
+    | {
+        pageRSSHub: RSSData[]
+        websiteRSSHub: RSSData[]
+      },
 ) => {
   if (!data) {
     return
@@ -111,9 +108,7 @@ export const setRSS = async (
   let text = ""
   if (savedRSS[tabId].pageRSS.length || savedRSS[tabId].pageRSSHub.length) {
     text =
-      savedRSS[tabId].pageRSS.length +
-      savedRSS[tabId].pageRSSHub.length +
-      ""
+      savedRSS[tabId].pageRSS.length + savedRSS[tabId].pageRSSHub.length + ""
   } else if (savedRSS[tabId].websiteRSSHub.length) {
     text = " "
   }

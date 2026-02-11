@@ -1,14 +1,15 @@
 // https://developer.chrome.com/docs/extensions/reference/api/offscreen
 let creating
-async function setupOffscreenDocument(path) {
-  const offscreenUrl = chrome.runtime.getURL(path)
-  // @ts-ignore
-  const existingContexts = await chrome.runtime.getContexts({
-    contextTypes: ["OFFSCREEN_DOCUMENT"],
-    documentUrls: [offscreenUrl],
-  })
 
-  if (existingContexts.length > 0) {
+async function setupOffscreenDocument(path: string) {
+  const offscreenUrl = chrome.runtime.getURL(path)
+
+  const existingContexts = (await (chrome.runtime as any).getContexts({
+    contextTypes: ["OFFSCREEN_DOCUMENT"] as any,
+    documentUrls: [offscreenUrl],
+  })) as chrome.runtime.ExtensionContext[] | undefined
+
+  if (existingContexts?.length) {
     return
   }
 
@@ -16,7 +17,7 @@ async function setupOffscreenDocument(path) {
     await creating
   } else {
     creating = chrome.offscreen.createDocument({
-      url: chrome.runtime.getURL("tabs/offscreen.html"),
+      url: offscreenUrl,
       reasons: [chrome.offscreen.Reason.IFRAME_SCRIPTING],
       justification: "Get RSS in the sandbox for enhanced security.",
     })
