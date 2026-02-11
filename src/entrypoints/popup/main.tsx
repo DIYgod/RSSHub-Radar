@@ -1,3 +1,5 @@
+import "~/lib/google-analytics"
+
 import ReactDOM from "react-dom/client"
 
 import IndexPopup from "~/popup/index"

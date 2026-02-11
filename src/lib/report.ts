@@ -1,47 +1,63 @@
-function isSampled(rate) {
-  const randomNumber = Math.floor(Math.random() * 100)
-  return randomNumber < rate * 100
-}
-
-function report({
-  url = "https://radar.rsshub",
-  name,
-}: {
+type ReportPayload = {
   url?: string
   name?: string
-}) {
-  const umamiId = import.meta.env.WXT_UMAMI_ID
-  const umamiUrl = import.meta.env.WXT_UMAMI_URL
-  const sampleRate =
-    parseFloat(import.meta.env.WXT_UMAMI_SAMPLE_RATE || "") || 0.01
+}
 
-  if (umamiId && umamiUrl && (name || isSampled(sampleRate))) {
-    let hostname = ""
-    try {
-      hostname = new URL(url).hostname
-    } catch (error) {}
+const DEFAULT_URL = "https://radar.rsshub.app"
+const PAGE_VIEW_EVENT = "page_view"
 
-    const umamiData = {
-      payload: {
-        hostname,
-        language: chrome?.i18n?.getUILanguage(),
-        referrer: hostname,
-        url: hostname,
-        website: umamiId,
-        name: name,
-      },
-      type: "event",
-    }
-
-    fetch(`${umamiUrl}/api/send`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(umamiData),
-      keepalive: true,
-    })
+function getHostname(url: string) {
+  try {
+    return new URL(url).hostname
+  } catch {
+    return ""
   }
+}
+
+function report({ url = DEFAULT_URL, name }: ReportPayload) {
+  const measurementId = import.meta.env.WXT_GA_MEASUREMENT_ID
+
+  if (!measurementId) {
+    return
+  }
+
+  const eventName = name || PAGE_VIEW_EVENT
+  const hostname = getHostname(url)
+  const language = chrome?.i18n?.getUILanguage()
+
+  const payload: Record<string, string | number | undefined> = {
+    page_location: url,
+    page_referrer: hostname,
+    page_title: hostname,
+    language,
+  }
+
+  if (eventName !== PAGE_VIEW_EVENT) {
+    payload.event_category = "extension"
+    payload.page_path = hostname
+  }
+
+  if (typeof window === "undefined") {
+    chrome.runtime.sendMessage(
+      {
+        name: "trackEvent",
+        body: {
+          name: eventName,
+          payload,
+        },
+      },
+      () => {
+        void chrome.runtime.lastError
+      },
+    )
+    return
+  }
+
+  if (typeof window.gtag !== "function") {
+    return
+  }
+
+  window.gtag("event", eventName, payload)
 }
 
 export default report

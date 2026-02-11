@@ -26,7 +26,26 @@ function OffscreenPage() {
       }
     }
 
-    const onRuntimeMessage = (msg: { data?: unknown }) => {
+    const onRuntimeMessage = (msg: {
+      target?: string
+      data?: {
+        name?: string
+        body?: {
+          name?: string
+          payload?: Record<string, string | number | undefined>
+        }
+      }
+    }) => {
+      if (
+        msg?.target === "offscreen" &&
+        msg?.data?.name === "trackEvent" &&
+        msg?.data?.body?.name &&
+        typeof window.gtag === "function"
+      ) {
+        window.gtag("event", msg.data.body.name, msg.data.body.payload)
+        return
+      }
+
       iframeRef.current?.contentWindow?.postMessage(msg.data, "*")
     }
 

@@ -4,6 +4,7 @@ import refreshRules from "./messages/refreshRules"
 import requestDisplayedRules from "./messages/requestDisplayedRules"
 import responseDisplayedRules from "./messages/responseDisplayedRules"
 import responseRSS from "./messages/responseRSS"
+import trackEvent from "./messages/trackEvent"
 import { deleteCachedRSS, getRSS } from "./rss"
 import { initSchedule } from "./rules"
 import { initUpdateNotifications } from "./update-notifications"
@@ -50,6 +51,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         return responseDisplayedRules(msg, sender)
       case "responseRSS":
         return responseRSS(msg, sender)
+      case "trackEvent":
+        return trackEvent(msg, sender)
       default:
         return undefined
     }

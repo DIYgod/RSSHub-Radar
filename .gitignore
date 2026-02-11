@@ -37,3 +37,6 @@ keys.json
 
 # typescript
 .tsbuildinfo
+
+.wxt
+.output
