@@ -36,6 +36,16 @@ jobs:
         run: pnpm zip
       - name: Package the extension for Firefox
         run: pnpm zip:firefox
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: submit-build
+          path: |
+            build/chrome-mv3-prod.zip
+            build/firefox-mv3-prod.zip
+            .output/*-chrome.zip
+            .output/*-firefox.zip
+            .output/*-sources.zip
       - name: Submit to web stores
         env:
           CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID || vars.CHROME_EXTENSION_ID }}
