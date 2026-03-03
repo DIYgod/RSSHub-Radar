@@ -7,9 +7,9 @@
 >
 > Everything is RSSible
 
-[![version](https://img.shields.io/chrome-web-store/v/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square&logo=googlechrome&logoColor=fff)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
-[![users](https://img.shields.io/chrome-web-store/users/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
-[![rating](https://img.shields.io/chrome-web-store/rating/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
+[![version](https://img.shields.io/chrome-web-store/v/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square&logo=googlechrome&logoColor=fff)](https://chromewebstore.google.com/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
+[![users](https://img.shields.io/chrome-web-store/users/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chromewebstore.google.com/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
+[![rating](https://img.shields.io/chrome-web-store/rating/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chromewebstore.google.com/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
 
 [![Mozilla Add-on](https://img.shields.io/amo/v/rsshub-radar?style=flat-square&logo=firefoxbrowser&logoColor=fff)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
 [![Mozilla Add-on](https://img.shields.io/amo/users/rsshub-radar?color=%2344cc11&style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
@@ -23,13 +23,13 @@
 
 Tested for compatibility with the following browsers (other Chromium-based browsers should also work):
 
-<a href="https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/chrome/chrome_128x128.png" width="48" /></a>
+<a href="https://chromewebstore.google.com/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/chrome/chrome_128x128.png" width="48" /></a>
 <a href="https://microsoftedge.microsoft.com/addons/detail/gangkeiaobmjcjokiofpkfpcobpbmnln"><img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/edge/edge_128x128.png" width="48" /></a>
 <a href="https://addons.mozilla.org/firefox/addon/rsshub-radar/"><img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/firefox/firefox_128x128.png" width="48" /></a>
 <a href="https://apps.apple.com/us/app/rsshub-radar/id1610744717?l=zh&mt=12"><img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/safari/safari_128x128.png" width="48" /></a>
-<a href="https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://i.imgur.com/ofOUkIB.png" width="48" /></a>
-<a href="https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://i.imgur.com/9RH7UNb.png" width="48" /></a>
-<a href="https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/vivaldi/vivaldi_128x128.png" width="48" /></a>
+<a href="https://chromewebstore.google.com/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://i.imgur.com/ofOUkIB.png" width="48" /></a>
+<a href="https://chromewebstore.google.com/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://i.imgur.com/9RH7UNb.png" width="48" /></a>
+<a href="https://chromewebstore.google.com/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/vivaldi/vivaldi_128x128.png" width="48" /></a>
 
 ## Introduction
 
@@ -50,7 +50,7 @@ RSSHub Radar is a spin-off project of [RSSHub](https://github.com/DIYgod/RSSHub)
 
 ### Webstore
 
-<a href="https://chrome.google.com/webstore/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/chrome/chrome_128x128.png" width="48" /></a>
+<a href="https://chromewebstore.google.com/detail/kefjpfngnndepjbopdmoebkipbgkggaa"><img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/chrome/chrome_128x128.png" width="48" /></a>
 <a href="https://microsoftedge.microsoft.com/addons/detail/gangkeiaobmjcjokiofpkfpcobpbmnln"><img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/edge/edge_128x128.png" width="48" /></a>
 <a href="https://addons.mozilla.org/firefox/addon/rsshub-radar/"><img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/firefox/firefox_128x128.png" width="48" /></a>
 <a href="https://apps.apple.com/us/app/rsshub-radar/id1610744717?l=zh&mt=12"><img src="https://raw.githubusercontent.com/alrra/browser-logos/main/src/safari/safari_128x128.png" width="48" /></a>
