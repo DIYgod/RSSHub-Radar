@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Parser from "rss-parser"
+import Parser from "rss-parser/dist/rss-parser.min.js"
 
 import "~/lib/style.css"
 
