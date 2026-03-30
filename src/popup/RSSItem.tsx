@@ -1,4 +1,4 @@
-import MD5 from "md5.js"
+import md5 from "blueimp-md5"
 import { useEffect, useState } from "react"
 import { useCopyToClipboard } from "usehooks-ts"
 
@@ -43,10 +43,10 @@ function RSSItem({
     if (config.rsshubAccessControl.accessKeyType === "key") {
       urlObj.searchParams.append("key", config.rsshubAccessControl.accessKey)
     } else {
-      const md5 = new MD5()
-        .update(urlObj.pathname + config.rsshubAccessControl.accessKey)
-        .digest("hex")
-      urlObj.searchParams.append("code", md5)
+      urlObj.searchParams.append(
+        "code",
+        md5(urlObj.pathname + config.rsshubAccessControl.accessKey),
+      )
     }
 
     url = urlObj.toString()

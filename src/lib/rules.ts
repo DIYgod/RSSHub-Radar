@@ -1,5 +1,5 @@
+import md5 from "blueimp-md5"
 import _ from "lodash"
-import MD5 from "md5.js"
 
 import { getConfig } from "./config"
 import { defaultRules } from "./radar-rules"
@@ -47,12 +47,14 @@ export async function getRemoteRules() {
   const config = await getConfig()
   let url = getRadarRulesUrl(config.rsshubDomain)
 
-  if (config.rsshubAccessControl.accessKey) {
-    const path = new URL(url).pathname
-    const code = new MD5()
-      .update(path + config.rsshubAccessControl.accessKey)
-      .digest("hex")
-    url = `${url}?code=${code}`
+  if (config.rsshubAccessControl.accessKey?.trim()) {
+    const accessKey = config.rsshubAccessControl.accessKey.trim()
+
+    if (config.rsshubAccessControl.accessKeyType === "key") {
+      url = `${url}?key=${encodeURIComponent(accessKey)}`
+    } else {
+      url = `${url}?code=${md5(new URL(url).pathname + accessKey)}`
+    }
   }
 
   const res = await fetch(url)

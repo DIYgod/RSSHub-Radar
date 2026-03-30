@@ -44,5 +44,5 @@ export async function fetchRSSContent(url: string) {
 }
 
 export function getRadarRulesUrl(rsshubDomain: string) {
-  return `${rsshubDomain}/api/radar/rules`
+  return `${rsshubDomain.replace(/\/+$/, "")}/api/radar/rules`
 }
