@@ -4,6 +4,17 @@ import { parse } from "tldts"
 import { parseRules } from "./rules"
 import type { RSSData, Rule } from "./types"
 
+function getRuleDocsUrl(rule: Rule) {
+  if (typeof rule.target === "string") {
+    const namespace = rule.target.match(/^\/([^/:?]+)/)?.[1]
+    if (namespace) {
+      return `https://docs.rsshub.app/routes/${namespace}`
+    }
+  }
+
+  return rule.docs
+}
+
 function ruleHandler(rule: Rule, params, url, html, success, fail) {
   const run = () => {
     let resultWithParams
@@ -186,7 +197,7 @@ export function getPageRSSHub(data: {
                           rules[domain]._name ? "Current" : "",
                           rule[recog.handler].title,
                         ),
-                        url: rule[recog.handler].docs,
+                        url: getRuleDocsUrl(rule[recog.handler]),
                         isDocs: true,
                       })
                     }
@@ -233,7 +244,7 @@ export function getWebsiteRSSHub(data: { url: string; rules: string }) {
         (rule) =>
           ({
             title: formatBlank(rules[domain]._name, rule.title),
-            url: rule.docs,
+            url: getRuleDocsUrl(rule),
             isDocs: true,
           }) as RSSData,
       )
