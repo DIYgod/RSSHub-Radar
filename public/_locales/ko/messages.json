@@ -1,0 +1,167 @@
+{
+  "extensionDescription": {
+    "message": "RSS와 RSSHub를 손쉽게 찾아 구독하세요."
+  },
+  "about": {
+    "message": "정보"
+  },
+  "accessKey": {
+    "message": "액세스 키"
+  },
+  "accessKeyType": {
+    "message": "액세스 키 형식"
+  },
+  "clickToSet": {
+    "message": "클릭하여 설정"
+  },
+  "configurationRequiredIfAccessKeysEnabled": {
+    "message": "인스턴스에서 액세스 키를 사용하도록 설정한 경우에만 구성이 필요합니다"
+  },
+  "copied": {
+    "message": "복사됨"
+  },
+  "copy": {
+    "message": "복사"
+  },
+  "currentPageRSS": {
+    "message": "현재 페이지의 RSS"
+  },
+  "currentPageRSSHub": {
+    "message": "현재 페이지의 RSSHub"
+  },
+  "customRSSHubDomain": {
+    "message": "RSSHub 인스턴스"
+  },
+  "currentSiteRSSHub": {
+    "message": "현재 사이트의 RSSHub"
+  },
+  "document": {
+    "message": "문서"
+  },
+  "iWillUpdateAutomaticallyAndYouCan": {
+    "message": "자동으로 업데이트되며, 다음을 수행할 수 있습니다"
+  },
+  "updating": {
+    "message": "업데이트 중"
+  },
+  "updateNow": {
+    "message": "지금 업데이트"
+  },
+  "beforeUpdate": {
+    "message": "업데이트 전"
+  },
+  "afterAutomaticUpdate": {
+    "message": "자동 업데이트 후"
+  },
+  "fullRemoteUpdatesAreDisabledDueToBrowserLimitations": {
+    "message": "브라우저 제한으로 인해 전체 원격 업데이트가 비활성화되어 있습니다"
+  },
+  "forMoreRulesJoinUs": {
+    "message": "더 많은 규칙을 지원하려면 <a target=\"_blank\" href=\"https://docs.rsshub.app/joinus/#quick-start\">참여해 주세요</a>！"
+  },
+  "general": {
+    "message": "일반"
+  },
+  "popupWindowHotKey": {
+    "message": "팝업 창 단축키"
+  },
+  "joinRSSHub": {
+    "message": "<a href=\"https://docs.rsshub.app\" target=\"_blank\">RSSHub</a>에 참여해 모든 것을 RSS로 만들어보세요!"
+  },
+  "listOfRules": {
+    "message": "규칙 목록"
+  },
+  "localReader": {
+    "message": "로컬 리더"
+  },
+  "updateNotification": {
+    "message": "확장 프로그램 업데이트 알림"
+  },
+  "notificationsAndReminders": {
+    "message": "배지 알림"
+  },
+  "RSSNotFound": {
+    "message": "RSS를 찾을 수 없습니다"
+  },
+  "rules": {
+    "message": "레이더 규칙"
+  },
+  "manuallyUpdate": {
+    "message": "레이더 규칙 수동 업데이트"
+  },
+  "rulesUpdate": {
+    "message": "규칙 업데이트"
+  },
+  "settings": {
+    "message": "확장 프로그램 설정"
+  },
+  "RSSHubRelatedSettings": {
+    "message": "RSSHub 설정"
+  },
+  "quickSubscription": {
+    "message": "빠른 구독"
+  },
+  "showCornerBadge": {
+    "message": "코너 배지 표시"
+  },
+  "updatedTimeAgo": {
+    "message": "마지막 업데이트로부터 %{hours}시간 %{minutes}분 경과"
+  },
+  "version": {
+    "message": "버전"
+  },
+  "RSSHubRadarInfo": {
+    "message": "RSSHub Radar는 <a target=\"_blank\" href=\"https://docs.rsshub.app\">RSSHub</a>에서 파생된 프로젝트로, 현재 사이트의 RSS와 RSSHub를 빠르게 찾아 구독할 수 있도록 도와줍니다. 이 프로젝트는 AGPL-3.0 라이선스로 <a target=\"_blank\" href=\"https://github.com/DIYgod/RSSHub-Radar\">오픈소스</a>로 공개되어 있으며 완전히 무료로 사용할 수 있습니다."
+  },
+  "sponsoredDevelopment": {
+    "message": "⭐️ RSSHub Radar 후원하기: <a target=\"_blank\" href=\"https://docs.rsshub.app/sponsor\">https://docs.rsshub.app/sponsor</a>"
+  },
+  "updateLog": {
+    "message": "📝 업데이트 로그"
+  },
+  "questionFeedback": {
+    "message": "🙋 질문 및 피드백"
+  },
+  "RSSHubDocumentation": {
+    "message": "🗞️ RSSHub 문서: <a target=\"_blank\" href=\"https://docs.rsshub.app\">https://docs.rsshub.app</a>"
+  },
+  "fillInstanceDomain": {
+    "message": "인스턴스 도메인을 입력해 주세요"
+  },
+  "totalNumberOfRules": {
+    "message": "전체 규칙 수"
+  },
+  "updateSuccessful": {
+    "message": "업데이트 성공"
+  },
+  "updateFailed": {
+    "message": "업데이트 실패"
+  },
+  "updateTip": {
+    "message": "2시간마다 자동으로 업데이트되며, 수동으로도 업데이트할 수 있습니다."
+  },
+  "extensionInstallTip": {
+    "message": "🎉 RSSHub Radar가 설치되었습니다"
+  },
+  "extensionUpdateTip": {
+    "message": "🎉 RSSHub Radar가 업데이트되었습니다"
+  },
+  "clickToViewChangeLog": {
+    "message": "클릭하면 변경 로그를 볼 수 있습니다."
+  },
+  "remoteRulesUrl": {
+    "message": "원격 레이더 규칙 URL"
+  },
+  "preview": {
+    "message": "미리보기"
+  },
+  "current": {
+    "message": "현재"
+  },
+  "paginationPrevious": {
+    "message": "이전"
+  },
+  "paginationNext": {
+    "message": "다음"
+  }
+}
