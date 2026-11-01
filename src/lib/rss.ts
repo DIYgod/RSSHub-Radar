@@ -18,7 +18,10 @@ export async function getPageRSS() {
 
   function handleUrl(url) {
     return new URL(
-      url.replace(/^(feed:\/\/)/, "https://").replace(/^(feed:)/, "").replace(/^(http:\/\/)/, "https://"),
+      url
+        .replace(/^(feed:\/\/)/, "https://")
+        .replace(/^(feed:)/, "")
+        .replace(/^(http:\/\/)/, "https://"),
       location.href,
     ).toString()
   }
@@ -118,18 +121,21 @@ export async function getPageRSS() {
   // normal a
   const aEles = document.querySelectorAll("a")
   const check = /([^a-zA-Z]|^)rss([^a-zA-Z]|$)/i
+  const feedTextCheck =
+    /^\s*(subscribe\s+(via|to)\s+)?(rss|atom|feed)(\s+feed)?\s*$/i
   const uncertain = []
   for (let i = 0; i < aEles.length; i++) {
     if (aEles[i].hasAttribute("href")) {
       const href = aEles[i].getAttribute("href")
+      const title = aEles[i].getAttribute("title")
+      const className = aEles[i].getAttribute("class")
+      const text = aEles[i].innerText?.trim()
 
       if (
         href.match(/\/(feed|rss|atom)(\.(xml|rss|atom))?\/?$/) ||
-        (aEles[i].hasAttribute("title") &&
-          aEles[i].getAttribute("title").match(check)) ||
-        (aEles[i].hasAttribute("class") &&
-          aEles[i].getAttribute("class").match(check)) ||
-        (aEles[i].innerText && aEles[i].innerText.match(check))
+        (title && title.match(check)) ||
+        (className && className.match(check)) ||
+        (text && feedTextCheck.test(text))
       ) {
         const feed = {
           url: handleUrl(href),
@@ -158,7 +164,7 @@ export async function getPageRSS() {
             pageRSS.push(feed)
             unique.save(feed.url)
           }
-        } catch (error) { }
+        } catch (error) {}
         resolve()
       })
     }),
