@@ -105,9 +105,27 @@ export function getPageRSSHub(data: {
   const { url, html } = data
   const rules = parseRules(data.rules)
 
+  let urlObject: URL
+  try {
+    urlObject = new URL(url)
+  } catch (error) {
+    return []
+  }
+
+  // route-recognizer treats `#` as the end of the path, so replace it with a
+  // regular segment before matching hash-based routes.
+  const normalizeHash = (path: string) => path.replace(/#/g, "__RADAR_HASH__")
+  const pathCandidates = [urlObject.pathname]
+  if (urlObject.hash) {
+    pathCandidates.push(urlObject.pathname + urlObject.hash)
+    if (urlObject.pathname === "/" || urlObject.pathname === "") {
+      pathCandidates.push(urlObject.hash.slice(1))
+    }
+  }
+
   let parsedDomain
   try {
-    parsedDomain = parse(new URL(url).hostname)
+    parsedDomain = parse(urlObject.hostname)
   } catch (error) {
     return []
   }
@@ -159,15 +177,18 @@ export function getPageRSSHub(data: {
             const router = new RouteRecognizer()
             router.add([
               {
-                path: source,
+                path: normalizeHash(source),
                 handler: index,
               },
             ])
-            const result = router.recognize(
-              new URL(url).pathname.replace(/\/$/, ""),
-            )
-            if (result && result[0]) {
-              recognized.push(result[0])
+            for (const candidate of pathCandidates) {
+              const result = router.recognize(
+                normalizeHash(candidate).replace(/\/$/, ""),
+              )
+              if (result && result[0]) {
+                recognized.push(result[0])
+                break
+              }
             }
           })
         })
