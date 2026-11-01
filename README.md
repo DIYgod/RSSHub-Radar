@@ -99,7 +99,7 @@ Get the `.output/chrome-mv3` directory, the installation method refers to [manua
 
 ### Submit New RSSHub Radar Rules
 
-[See documentation](https://docs.rsshub.app/joinus/new-radar)
+[See documentation](https://docs.rsshub.app/joinus/new-rss/submit-route) ([GitHub source](https://github.com/RSSNext/rsshub-docs/blob/main/src/joinus/new-rss/submit-route.md))
 
 ## Author
 
