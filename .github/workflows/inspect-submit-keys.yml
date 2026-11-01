@@ -1,0 +1,18 @@
+name: inspect-submit-keys
+
+on:
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print secret key paths
+        env:
+          SUBMIT_KEYS: ${{ secrets.SUBMIT_KEYS }}
+        run: |
+          if ! echo "$SUBMIT_KEYS" | jq -e . >/dev/null 2>&1; then
+            echo "SUBMIT_KEYS is not valid JSON"
+            exit 0
+          fi
+          echo "$SUBMIT_KEYS" | jq -r 'paths(scalars) | map(tostring) | join(".")' | sort
