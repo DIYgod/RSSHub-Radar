@@ -11,13 +11,13 @@
 [![users](https://img.shields.io/chrome-web-store/users/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chromewebstore.google.com/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
 [![rating](https://img.shields.io/chrome-web-store/rating/kefjpfngnndepjbopdmoebkipbgkggaa.svg?style=flat-square)](https://chromewebstore.google.com/detail/kefjpfngnndepjbopdmoebkipbgkggaa)
 
-[![Mozilla Add-on](https://img.shields.io/amo/v/rsshub-radar?style=flat-square&logo=firefoxbrowser&logoColor=fff)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
-[![Mozilla Add-on](https://img.shields.io/amo/users/rsshub-radar?color=%2344cc11&style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
-[![Mozilla Add-on](https://img.shields.io/amo/rating/rsshub-radar?style=flat-square)](https://addons.mozilla.org/zh-CN/firefox/addon/rsshub-radar/)
+[![Mozilla Add-on](https://img.shields.io/amo/v/rsshub-radar?style=flat-square&logo=firefoxbrowser&logoColor=fff)](https://addons.mozilla.org/firefox/addon/rsshub-radar/)
+[![Mozilla Add-on](https://img.shields.io/amo/users/rsshub-radar?color=%2344cc11&style=flat-square)](https://addons.mozilla.org/firefox/addon/rsshub-radar/)
+[![Mozilla Add-on](https://img.shields.io/amo/rating/rsshub-radar?style=flat-square)](https://addons.mozilla.org/firefox/addon/rsshub-radar/)
 
-[![](https://img.shields.io/badge/dynamic/json?label=edge%20add-on&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fgangkeiaobmjcjokiofpkfpcobpbmnln&style=flat-square&logo=microsoftedge&logoColor=fff)](https://microsoftedge.microsoft.com/addons/detail/arxivutils/gangkeiaobmjcjokiofpkfpcobpbmnln)
-[![](https://img.shields.io/badge/dynamic/json?label=users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fgangkeiaobmjcjokiofpkfpcobpbmnln&style=flat-square&color=%2344cc11)](https://microsoftedge.microsoft.com/addons/detail/arxivutils/gangkeiaobmjcjokiofpkfpcobpbmnln)
-[![](https://img.shields.io/badge/dynamic/json?label=rating&suffix=/5&query=%24.averageRating&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fgangkeiaobmjcjokiofpkfpcobpbmnln&style=flat-square&color=%2344cc11)](https://microsoftedge.microsoft.com/addons/detail/arxivutils/gangkeiaobmjcjokiofpkfpcobpbmnln)
+[![](https://img.shields.io/badge/dynamic/json?label=edge%20add-on&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fgangkeiaobmjcjokiofpkfpcobpbmnln&style=flat-square&logo=microsoftedge&logoColor=fff)](https://microsoftedge.microsoft.com/addons/detail/rsshub-radar/gangkeiaobmjcjokiofpkfpcobpbmnln)
+[![](https://img.shields.io/badge/dynamic/json?label=users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fgangkeiaobmjcjokiofpkfpcobpbmnln&style=flat-square&color=%2344cc11)](https://microsoftedge.microsoft.com/addons/detail/rsshub-radar/gangkeiaobmjcjokiofpkfpcobpbmnln)
+[![](https://img.shields.io/badge/dynamic/json?label=rating&suffix=/5&query=%24.averageRating&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fgangkeiaobmjcjokiofpkfpcobpbmnln&style=flat-square&color=%2344cc11)](https://microsoftedge.microsoft.com/addons/detail/rsshub-radar/gangkeiaobmjcjokiofpkfpcobpbmnln)
 
 [![iTunes App Store](https://img.shields.io/itunes/v/1610744717?label=apple%20app%20store&style=flat-square&logo=appstore&logoColor=fff)](https://apps.apple.com/us/app/rsshub-radar/id1610744717)
 
