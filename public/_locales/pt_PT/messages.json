@@ -1,0 +1,167 @@
+{
+  "extensionDescription": {
+    "message": "Encontre e subscreva RSS e RSSHub com facilidade."
+  },
+  "about": {
+    "message": "Sobre"
+  },
+  "accessKey": {
+    "message": "Chave de acesso"
+  },
+  "accessKeyType": {
+    "message": "Formato da chave de acesso"
+  },
+  "clickToSet": {
+    "message": "Clique para definir"
+  },
+  "configurationRequiredIfAccessKeysEnabled": {
+    "message": "A configuração só é necessária se a instância tiver a chave de acesso ativada"
+  },
+  "copied": {
+    "message": "Copiado"
+  },
+  "copy": {
+    "message": "Copiar"
+  },
+  "currentPageRSS": {
+    "message": "RSS na página atual"
+  },
+  "currentPageRSSHub": {
+    "message": "RSSHub para a página atual"
+  },
+  "customRSSHubDomain": {
+    "message": "Instância RSSHub"
+  },
+  "currentSiteRSSHub": {
+    "message": "RSSHub para o site atual"
+  },
+  "document": {
+    "message": "Doc"
+  },
+  "iWillUpdateAutomaticallyAndYouCan": {
+    "message": "Vou atualizar automaticamente, e pode"
+  },
+  "updating": {
+    "message": "A atualizar"
+  },
+  "updateNow": {
+    "message": "Atualizar agora"
+  },
+  "beforeUpdate": {
+    "message": "antes da atualização"
+  },
+  "afterAutomaticUpdate": {
+    "message": "após a atualização automática"
+  },
+  "fullRemoteUpdatesAreDisabledDueToBrowserLimitations": {
+    "message": "As atualizações remotas completas estão desativadas devido a limitações do navegador"
+  },
+  "forMoreRulesJoinUs": {
+    "message": "Para suporte a mais regras, <a target=\"_blank\" href=\"https://docs.rsshub.app/joinus/#quick-start\">junte-se a nós</a>!"
+  },
+  "general": {
+    "message": "Geral"
+  },
+  "popupWindowHotKey": {
+    "message": "Atalho da janela pop-up"
+  },
+  "joinRSSHub": {
+    "message": "Junte-se ao <a href=\"https://docs.rsshub.app\" target=\"_blank\">RSSHub</a> para tornar tudo subscritível por RSS!"
+  },
+  "listOfRules": {
+    "message": "Lista de regras"
+  },
+  "localReader": {
+    "message": "Leitor local"
+  },
+  "updateNotification": {
+    "message": "Notificação de atualização da extensão"
+  },
+  "notificationsAndReminders": {
+    "message": "Lembrete no ícone"
+  },
+  "RSSNotFound": {
+    "message": "Nenhum RSS encontrado"
+  },
+  "rules": {
+    "message": "Regras do Radar"
+  },
+  "manuallyUpdate": {
+    "message": "Atualizar manualmente as regras do Radar"
+  },
+  "rulesUpdate": {
+    "message": "Atualização de regras"
+  },
+  "settings": {
+    "message": "Definições da extensão"
+  },
+  "RSSHubRelatedSettings": {
+    "message": "Definições do RSSHub"
+  },
+  "quickSubscription": {
+    "message": "Subscrições rápidas"
+  },
+  "showCornerBadge": {
+    "message": "Mostrar emblema no canto"
+  },
+  "updatedTimeAgo": {
+    "message": "%{hours}h %{minutes}m desde a última atualização"
+  },
+  "version": {
+    "message": "Versão"
+  },
+  "RSSHubRadarInfo": {
+    "message": "O RSSHub Radar é um derivado do <a target=\"_blank\" href=\"https://docs.rsshub.app\">RSSHub</a> que ajuda a descobrir e subscrever rapidamente o RSS e o RSSHub do site atual. O projeto é <a target=\"_blank\" href=\"https://github.com/DIYgod/RSSHub-Radar\">de código aberto</a> sob a licença AGPL-3.0 e é totalmente gratuito."
+  },
+  "sponsoredDevelopment": {
+    "message": "⭐️ Patrocine o RSSHub Radar: <a target=\"_blank\" href=\"https://docs.rsshub.app/sponsor\">https://docs.rsshub.app/sponsor</a>"
+  },
+  "updateLog": {
+    "message": "📝 Registo de atualizações"
+  },
+  "questionFeedback": {
+    "message": "🙋 Perguntas e comentários"
+  },
+  "RSSHubDocumentation": {
+    "message": "🗞️ Documentação do RSSHub: <a target=\"_blank\" href=\"https://docs.rsshub.app\">https://docs.rsshub.app</a>"
+  },
+  "fillInstanceDomain": {
+    "message": "Preencha o domínio da sua instância"
+  },
+  "totalNumberOfRules": {
+    "message": "Número total de regras"
+  },
+  "updateSuccessful": {
+    "message": "Atualização concluída com sucesso"
+  },
+  "updateFailed": {
+    "message": "Falha na atualização"
+  },
+  "updateTip": {
+    "message": "Atualiza automaticamente de duas em duas horas; também pode atualizar manualmente."
+  },
+  "extensionInstallTip": {
+    "message": "🎉 RSSHub Radar instalado"
+  },
+  "extensionUpdateTip": {
+    "message": "🎉 RSSHub Radar atualizado"
+  },
+  "clickToViewChangeLog": {
+    "message": "clique para ver o registo de alterações."
+  },
+  "remoteRulesUrl": {
+    "message": "URL remoto das regras do Radar"
+  },
+  "preview": {
+    "message": "Pré-visualização"
+  },
+  "current": {
+    "message": "Atual"
+  },
+  "paginationPrevious": {
+    "message": "Anterior"
+  },
+  "paginationNext": {
+    "message": "Seguinte"
+  }
+}
