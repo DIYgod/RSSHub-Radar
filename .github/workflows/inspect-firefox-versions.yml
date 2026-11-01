@@ -21,5 +21,9 @@ jobs:
             const sig = crypto.createHmac("sha256", process.env.FIREFOX_JWT_SECRET).update(`${header}.${payload}`).digest("base64url");
             process.stdout.write(`${header}.${payload}.${sig}`);
           ')
+          echo "=== addon status ==="
+          curl -sS -H "Authorization: JWT $TOKEN" "https://addons.mozilla.org/api/v5/addons/addon/i%40diygod.me/" \
+            | jq -r '{status, is_disabled, is_disabled_by_mozilla, is_disabled_by_developer, channels, current_version: .current_version.version, latest_unlisted_version: .latest_unlisted_version.version}'
+          echo "=== versions ==="
           curl -sS -H "Authorization: JWT $TOKEN" "https://addons.mozilla.org/api/v5/addons/addon/i%40diygod.me/versions/?filter=all_with_unlisted&page_size=50" \
             | jq -r 'if .results then .results[] | [.version, .channel, .file.status, .created] | @tsv else . end'
