@@ -24,6 +24,8 @@ jobs:
           echo "=== addon status ==="
           curl -sS -H "Authorization: JWT $TOKEN" "https://addons.mozilla.org/api/v5/addons/addon/i%40diygod.me/" \
             | jq -r '{status, is_disabled, is_disabled_by_mozilla, is_disabled_by_developer, channels, current_version: .current_version.version, latest_unlisted_version: .latest_unlisted_version.version}'
-          echo "=== versions ==="
-          curl -sS -H "Authorization: JWT $TOKEN" "https://addons.mozilla.org/api/v5/addons/addon/i%40diygod.me/versions/?filter=all_with_unlisted&page_size=50" \
-            | jq -r 'if .results then .results[] | [.version, .channel, .file.status, .created] | @tsv else . end'
+          echo "=== version details ==="
+          for v in 2.3.0 2.2.0 2.1.1; do
+            curl -sS -H "Authorization: JWT $TOKEN" "https://addons.mozilla.org/api/v5/addons/addon/i%40diygod.me/versions/v$v/" \
+              | jq -r '{version, channel, file_status: .file.status, reviewed, approval_notes}'
+          done
