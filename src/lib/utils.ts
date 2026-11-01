@@ -17,11 +17,13 @@ export function removeFunctionFields(obj) {
 }
 export function parseRSS(content: string) {
   content = content.replaceAll("&lt;", "<").replaceAll("&gt;", ">")
-  if (content.includes("<rss ") || content.includes("<feed ")) {
-    const titleContent = content.match(/<title>(.*)<\/title>/)?.[1]
+  if (/<rss(?:\s|>)/i.test(content) || /<feed(?:\s|>)/i.test(content)) {
+    const titleContent = content.match(
+      /<title(?:\s[^>]*)?>([\s\S]*?)<\/title>/i,
+    )?.[1]
     const title = titleContent
       ? decode(titleContent)
-          ?.replace(/<!\[CDATA\[(.*)]]>/, (match, p1) => p1)
+          ?.replace(/<!\[CDATA\[([\s\S]*?)]]>/g, (match, p1) => p1)
           ?.trim()
       : ""
     return {

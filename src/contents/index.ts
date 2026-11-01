@@ -3,6 +3,8 @@ import { getPageRSS } from "~/lib/rss"
 
 sendToBackground({
   name: "contentReady",
+}).catch((error) => {
+  console.error("Failed to notify background that content is ready", error)
 })
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
