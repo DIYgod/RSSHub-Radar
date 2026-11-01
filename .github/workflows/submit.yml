@@ -35,7 +35,7 @@ jobs:
         run: pnpm zip:firefox
       - name: Check Chrome Web Store credentials
         if: ${{ inputs.dry_run == true }}
-        uses: wdzeng/chrome-extension@v2.1.1
+        uses: wdzeng/chrome-extension@v2.0.0
         with:
           action: check-credentials
           client-id: ${{ vars.CHROME_CLIENT_ID }}
@@ -43,7 +43,7 @@ jobs:
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
       - name: Submit to Chrome Web Store
         if: ${{ inputs.dry_run == false }}
-        uses: wdzeng/chrome-extension@v2.1.1
+        uses: wdzeng/chrome-extension@v2.0.0
         with:
           extension-id: ${{ vars.CHROME_EXTENSION_ID }}
           zip-path: .output/*-chrome.zip
