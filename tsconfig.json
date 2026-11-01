@@ -4,7 +4,8 @@
     "allowImportingTsExtensions": true,
     "jsx": "react-jsx",
     "strict": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "types": ["chrome"]
   },
   "exclude": ["node_modules"]
 }

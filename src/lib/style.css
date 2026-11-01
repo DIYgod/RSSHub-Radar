@@ -1,6 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@config "../../tailwind.config.js";
+@plugin "@egoist/tailwindcss-icons";
+@source "../**/*.{ts,tsx,html}";
 
 :root {
   --background: 0 0% 100%;

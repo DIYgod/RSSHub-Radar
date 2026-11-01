@@ -14,21 +14,21 @@ jobs:
     name: Build assets
     steps:
       - uses: actions/checkout@v7
-      - name: Cache pnpm modules
-        uses: actions/cache@v6
+      - uses: pnpm/action-setup@v6
         with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-
-      - uses: pnpm/action-setup@v6.0.10
+          version: 12.16.1
+          run_install: false
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v7
         with:
-          run_install: true
-      - name: Use Node.js 22.x
-        uses: actions/setup-node@v7.0.0
-        with:
-          node-version: 22.x
+          node-version: 24.x
           cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Type check
+        run: pnpm typecheck
+      - name: Check formatting
+        run: pnpm format:check
       - name: Package the extension for Chrome
         run: pnpm zip
       - name: Package the extension for Firefox
