@@ -12,8 +12,13 @@ on:
         required: false
         default: true
         type: boolean
-      firefox_edge:
-        description: "Submit to Firefox and Edge stores"
+      firefox:
+        description: "Submit to Firefox Add-ons (AMO)"
+        required: false
+        default: true
+        type: boolean
+      edge:
+        description: "Submit to Microsoft Edge Add-ons"
         required: false
         default: true
         type: boolean
@@ -61,12 +66,25 @@ jobs:
           client-id: ${{ vars.CHROME_CLIENT_ID }}
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
-      - name: Submit to Firefox and Edge stores
-        if: ${{ inputs.firefox_edge }}
+      - name: Submit to Firefox Add-ons
+        if: ${{ inputs.firefox }}
         env:
           FIREFOX_EXTENSION_ID: ${{ secrets.FIREFOX_EXTENSION_ID || vars.FIREFOX_EXTENSION_ID }}
           FIREFOX_JWT_ISSUER: ${{ secrets.FIREFOX_JWT_ISSUER || vars.FIREFOX_JWT_ISSUER }}
           FIREFOX_JWT_SECRET: ${{ secrets.FIREFOX_JWT_SECRET || vars.FIREFOX_JWT_SECRET }}
+        run: |
+          DRY_RUN_FLAG=""
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            DRY_RUN_FLAG="--dry-run"
+          fi
+
+          pnpm wxt submit \
+            --firefox-zip .output/*-firefox.zip \
+            --firefox-sources-zip .output/*-sources.zip \
+            ${DRY_RUN_FLAG}
+      - name: Submit to Microsoft Edge Add-ons
+        if: ${{ inputs.edge }}
+        env:
           EDGE_PRODUCT_ID: ${{ secrets.EDGE_PRODUCT_ID || vars.EDGE_PRODUCT_ID }}
           EDGE_CLIENT_ID: ${{ secrets.EDGE_CLIENT_ID || vars.EDGE_CLIENT_ID }}
           EDGE_API_KEY: ${{ secrets.EDGE_API_KEY || vars.EDGE_API_KEY }}
@@ -77,7 +95,5 @@ jobs:
           fi
 
           pnpm wxt submit \
-            --firefox-zip .output/*-firefox.zip \
-            --firefox-sources-zip .output/*-sources.zip \
             --edge-zip .output/*-chrome.zip \
             ${DRY_RUN_FLAG}
