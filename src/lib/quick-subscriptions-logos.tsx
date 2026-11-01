@@ -1,3 +1,4 @@
+import CommafeedLogo from "~/assets/commafeed.svg"
 import FeedlyLogo from "~/assets/feedly.png"
 import FollowLogo from "~/assets/follow.svg"
 import FreshRSSLogo from "~/assets/freshrss.svg"
@@ -14,4 +15,5 @@ export const logoMap = new Map<string, string>([
   ["ttrss", TinyTinyRSSLogo],
   ["feedly", FeedlyLogo],
   ["newsblur", NewsBlurLogo],
+  ["commafeed", CommafeedLogo],
 ])

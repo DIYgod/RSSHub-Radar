@@ -127,10 +127,9 @@ export const quickSubscriptions: ({
     name: "CommaFeed",
     projectUrl: "https://commafeed.com",
     key: "commafeed",
-    subscribeDomain: "https://commafeed.com",
+    subscribeDomainKey: "commafeedDomain",
     themeColor: "#ffa94d",
-    getSubscribePath: (data) =>
-      `/rest/feed/subscribe?url=${data.encodedUrl}`,
+    getSubscribePath: (data) => `/rest/feed/subscribe?url=${data.encodedUrl}`,
   },
   {
     name: "localReader",
@@ -143,7 +142,7 @@ export const quickSubscriptions: ({
     name: "NewsBlur",
     projectUrl: "https://newsblur.com/",
     key: "newsblur",
-    subscribeDomainKey: "newsblurDomain" ,
+    subscribeDomainKey: "newsblurDomain",
     themeColor: "#eebd10",
     getSubscribePath: (data) => `/?url=${data.encodedUrl}`,
   },

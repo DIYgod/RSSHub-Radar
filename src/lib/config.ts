@@ -36,6 +36,8 @@ export const defaultConfig = {
     follow: true,
     newsblur: false,
     newsblurDomain: "https://www.newsblur.com",
+    commafeed: false,
+    commafeedDomain: "https://commafeed.com",
   },
   refreshTimeout: 2 * 60 * 60,
 }
