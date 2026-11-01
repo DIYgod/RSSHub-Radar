@@ -9,7 +9,7 @@ export const refreshRules = async () => {
   await setLocalStorage("rules", rules)
   if (chrome.offscreen && (chrome.runtime as any).getContexts) {
     await setupOffscreenDocument("offscreen.html")
-    chrome.runtime.sendMessage({
+    await chrome.runtime.sendMessage({
       target: "offscreen",
       data: {
         name: "requestDisplayedRules",
