@@ -1,0 +1,25 @@
+name: inspect-firefox-versions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: macos-latest
+    steps:
+      - name: List all Firefox versions
+        env:
+          FIREFOX_JWT_ISSUER: ${{ secrets.FIREFOX_JWT_ISSUER || vars.FIREFOX_JWT_ISSUER }}
+          FIREFOX_JWT_SECRET: ${{ secrets.FIREFOX_JWT_SECRET || vars.FIREFOX_JWT_SECRET }}
+        run: |
+          TOKEN=$(node -e '
+            const crypto = require("crypto");
+            const b64 = (v) => Buffer.from(JSON.stringify(v)).toString("base64url");
+            const iat = Math.floor(Date.now() / 1000);
+            const header = b64({ alg: "HS256", typ: "JWT" });
+            const payload = b64({ iat, exp: iat + 60, iss: process.env.FIREFOX_JWT_ISSUER, jti: Math.random().toString() });
+            const sig = crypto.createHmac("sha256", process.env.FIREFOX_JWT_SECRET).update(`${header}.${payload}`).digest("base64url");
+            process.stdout.write(`${header}.${payload}.${sig}`);
+          ')
+          curl -sS -H "Authorization: JWT $TOKEN" "https://addons.mozilla.org/api/v5/addons/addon/i%40diygod.me/versions/?filter=all_with_unlisted&page_size=50" \
+            | jq -r 'if .results then .results[] | [.version, .channel, .file.status, .created] | @tsv else . end'
