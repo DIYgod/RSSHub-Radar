@@ -7,6 +7,16 @@ on:
         required: false
         default: false
         type: boolean
+      chrome:
+        description: "Submit to Chrome Web Store"
+        required: false
+        default: true
+        type: boolean
+      firefox_edge:
+        description: "Submit to Firefox and Edge stores"
+        required: false
+        default: true
+        type: boolean
 
 env:
   WXT_UMAMI_ID: ${{ vars.WXT_UMAMI_ID || vars.PLASMO_PUBLIC_UMAMI_ID }}
@@ -34,7 +44,7 @@ jobs:
       - name: Package the extension for Firefox
         run: pnpm zip:firefox
       - name: Check Chrome Web Store credentials
-        if: ${{ inputs.dry_run == true }}
+        if: ${{ inputs.chrome && inputs.dry_run }}
         uses: wdzeng/chrome-extension@v2.0.0
         with:
           action: check-credentials
@@ -42,7 +52,7 @@ jobs:
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
       - name: Submit to Chrome Web Store
-        if: ${{ inputs.dry_run == false }}
+        if: ${{ inputs.chrome && !inputs.dry_run }}
         uses: wdzeng/chrome-extension@v2.0.0
         with:
           extension-id: ${{ vars.CHROME_EXTENSION_ID }}
@@ -52,6 +62,7 @@ jobs:
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
       - name: Submit to Firefox and Edge stores
+        if: ${{ inputs.firefox_edge }}
         env:
           FIREFOX_EXTENSION_ID: ${{ secrets.FIREFOX_EXTENSION_ID || vars.FIREFOX_EXTENSION_ID }}
           FIREFOX_JWT_ISSUER: ${{ secrets.FIREFOX_JWT_ISSUER || vars.FIREFOX_JWT_ISSUER }}
