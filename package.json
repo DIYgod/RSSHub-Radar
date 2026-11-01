@@ -1,7 +1,7 @@
 {
   "name": "rsshub-radar",
   "displayName": "RSSHub Radar",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "__MSG_extensionDescription__",
   "author": "DIYgod",
   "packageManager": "pnpm@12.16.1+sha512.091d1dee7927575661b25dab3c2ae31cafc1c54d6b71ed6a6600cf0c1cb10434a447eae14015f1b23e2e6bedeed79df94a932e2164d2832280dce3fb32f656d1",
@@ -13,7 +13,7 @@
     "build:safari": "wxt build -b safari --mv3",
     "zip": "wxt zip && mkdir -p build && cp .output/rsshub-radar-*-chrome.zip build/chrome-mv3-prod.zip",
     "zip:firefox": "wxt zip -b firefox --mv3 && mkdir -p build && cp .output/rsshub-radar-*-firefox.zip build/firefox-mv3-prod.zip",
-    "safari-convert": "xcrun safari-web-extension-converter .output/safari-mv3 --project-location build --bundle-identifier app.rsshub.RSSHub-Radar --force",
+    "safari-convert": "xcrun safari-web-extension-converter .output/safari-mv3 --project-location build --bundle-identifier app.rsshub.RSSHub-Radar --force --no-open --no-prompt",
     "safari-zip": "zip -r build/safari-mv3-prod.zip \"build/RSSHub Radar\"",
     "build:safari:zip": "pnpm build:safari && pnpm safari-convert && pnpm safari-zip",
     "package": "pnpm zip && pnpm zip:firefox",
