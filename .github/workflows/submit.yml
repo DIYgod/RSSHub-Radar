@@ -33,12 +33,26 @@ jobs:
         run: pnpm zip
       - name: Package the extension for Firefox
         run: pnpm zip:firefox
-      - name: Submit to web stores
+      - name: Check Chrome Web Store credentials
+        if: ${{ inputs.dry_run == true }}
+        uses: wdzeng/chrome-extension@v2.1.1
+        with:
+          action: check-credentials
+          client-id: ${{ vars.CHROME_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+      - name: Submit to Chrome Web Store
+        if: ${{ inputs.dry_run == false }}
+        uses: wdzeng/chrome-extension@v2.1.1
+        with:
+          extension-id: ${{ vars.CHROME_EXTENSION_ID }}
+          zip-path: .output/*-chrome.zip
+          publisher-id: ${{ vars.CHROME_PUBLISHER_ID }}
+          client-id: ${{ vars.CHROME_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+      - name: Submit to Firefox and Edge stores
         env:
-          CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID || vars.CHROME_EXTENSION_ID }}
-          CHROME_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID || vars.CHROME_CLIENT_ID }}
-          CHROME_CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET || vars.CHROME_CLIENT_SECRET }}
-          CHROME_REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN || vars.CHROME_REFRESH_TOKEN }}
           FIREFOX_EXTENSION_ID: ${{ secrets.FIREFOX_EXTENSION_ID || vars.FIREFOX_EXTENSION_ID }}
           FIREFOX_JWT_ISSUER: ${{ secrets.FIREFOX_JWT_ISSUER || vars.FIREFOX_JWT_ISSUER }}
           FIREFOX_JWT_SECRET: ${{ secrets.FIREFOX_JWT_SECRET || vars.FIREFOX_JWT_SECRET }}
@@ -52,7 +66,6 @@ jobs:
           fi
 
           pnpm wxt submit \
-            --chrome-zip .output/*-chrome.zip \
             --firefox-zip .output/*-firefox.zip \
             --firefox-sources-zip .output/*-sources.zip \
             --edge-zip .output/*-chrome.zip \
