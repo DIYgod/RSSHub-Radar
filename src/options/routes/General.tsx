@@ -1,5 +1,5 @@
 import _ from "lodash"
-import { Loader2, X } from "lucide-react"
+import { Loader2 } from "lucide-react"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 
@@ -33,18 +33,25 @@ function General() {
   const [rsshubInstanceHistory, setRsshubInstanceHistoryState] = useState<
     string[]
   >([defaultConfig.rsshubDomain])
+  const [historyLoaded, setHistoryLoaded] = useState(false)
   const setRsshubInstanceHistory = (history: string[]) => {
     setRsshubInstanceHistoryState(history)
     void setLocalStorage("rsshubHistory", history)
   }
+  const instanceToSave = config.rsshubDomain.trim()
   const [showHistory, setShowHistory] = useState(false)
   useEffect(() => {
-    getConfig().then(setConfigState)
-    getLocalStorage<string[]>("rsshubHistory").then((history) => {
-      if (history) {
-        setRsshubInstanceHistoryState(history)
-      }
-    })
+    Promise.all([getConfig(), getLocalStorage<string[]>("rsshubHistory")])
+      .then(([savedConfig, history]) => {
+        setConfigState(savedConfig)
+        if (history) {
+          setRsshubInstanceHistoryState(history)
+        }
+      })
+      .catch((error: unknown) => {
+        console.error("Failed to load RSSHub instance history", error)
+      })
+      .finally(() => setHistoryLoaded(true))
 
     sendToBackground({
       name: "requestDisplayedRules",
@@ -220,15 +227,16 @@ function General() {
                       rsshubDomain: e.target.value,
                     })
                   }
+                  disabled={!historyLoaded}
                   onFocus={() => setShowHistory(true)}
                 />
 
                 {showHistory && (
-                  <div className="absolute top-full left-0 right-0 mt-1 bg-white border rounded-md shadow-lg z-50">
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-popover text-popover-foreground border rounded-md shadow-lg z-50">
                     {rsshubInstanceHistory.map((domain) => (
                       <div
                         key={domain}
-                        className="flex items-center justify-between px-3 py-2 hover:bg-gray-100"
+                        className="flex items-center justify-between px-3 py-2 hover:bg-accent hover:text-accent-foreground"
                       >
                         <button
                           className="flex-1 text-left"
@@ -249,7 +257,10 @@ function General() {
                             )
                           }}
                         >
-                          <X className="h-4 w-4" />
+                          <i
+                            className="i-mingcute-close-line h-4 w-4"
+                            aria-hidden="true"
+                          />
                         </Button>
                       </div>
                     ))}
@@ -347,15 +358,9 @@ function General() {
               </p>
               <Button
                 variant="secondary"
-                disabled={rulesUpdating}
+                disabled={rulesUpdating || !historyLoaded}
                 onClick={() => {
                   setRulesUpdating(true)
-                  if (!rsshubInstanceHistory.includes(config.rsshubDomain)) {
-                    setRsshubInstanceHistory([
-                      ...rsshubInstanceHistory,
-                      config.rsshubDomain,
-                    ])
-                  }
                   sendToBackground({
                     name: "refreshRules",
                   })
@@ -369,6 +374,15 @@ function General() {
                         return
                       }
 
+                      if (
+                        isValidInstance(instanceToSave) &&
+                        !rsshubInstanceHistory.includes(instanceToSave)
+                      ) {
+                        setRsshubInstanceHistory([
+                          ...rsshubInstanceHistory,
+                          instanceToSave,
+                        ])
+                      }
                       toast.success(chrome.i18n.getMessage("updateSuccessful"))
                     })
                     .catch((error: unknown) => {
@@ -462,6 +476,15 @@ function General() {
       </div>
     </div>
   )
+}
+
+function isValidInstance(value: string) {
+  try {
+    const url = new URL(value)
+    return url.protocol === "https:" || url.protocol === "http:"
+  } catch {
+    return false
+  }
 }
 
 export { General }
