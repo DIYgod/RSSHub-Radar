@@ -39,10 +39,14 @@ export async function getPageRSS() {
 
   // self rss feed
   let html
-  if (
+  const rootName = document.documentElement?.localName.toLowerCase()
+  if (rootName === "rss" || rootName === "feed") {
+    // Firefox exposes RSS/Atom as an XML document, without document.body.
+    html = document.documentElement.outerHTML
+  } else if (
     // Detect RSS without correct Content-Type setting
     // @ts-ignore
-    document.body.childNodes?.[0]?.tagName?.toLowerCase() === "pre"
+    document.body?.childNodes?.[0]?.tagName?.toLowerCase() === "pre"
   ) {
     // @ts-ignore
     html = document.body.childNodes[0].innerText
