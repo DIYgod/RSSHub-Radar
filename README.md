@@ -79,6 +79,44 @@ Select the `manifest.json` file in the unzipped extension directory
 
 ## Join us
 
+### Reproduce the Firefox release build (Mozilla reviewers)
+
+Build environment: macOS on Apple Silicon, Node.js **24.22.1**, and pnpm
+**12.16.1**. Install Node.js from https://nodejs.org/en/download and install the
+exact pnpm version with `npm install --global pnpm@12.16.1`.
+
+Extract the source ZIP for the submitted version into an empty directory, then
+run these commands from its root:
+
+```sh
+pnpm install --frozen-lockfile
+pnpm zip:firefox
+```
+
+The unpacked extension is written to `.output/firefox-mv3/`. The uploadable
+extension is `.output/rsshub-radar-2.3.1-firefox.zip` (also copied to
+`build/firefox-mv3-prod.zip`), and its matching source package is
+`.output/rsshub-radar-2.3.1-sources.zip`. Compare the extracted extension files
+with the submitted unsigned ZIP. No credentials, `.env` file, private packages,
+or downloaded RSSHub rules are needed to build. Use the included lockfile;
+installing with npm or updating dependencies can change the generated code.
+
+Firefox builds exclude browsing and interaction analytics even when
+`WXT_UMAMI_ID`, `WXT_UMAMI_URL`, or `WXT_UMAMI_SAMPLE_RATE` are set in the build
+environment. Feed lists use a bundled icon instead of loading site favicons or
+sending visited domains to a favicon service. Feed and route detection runs
+locally. The extension downloads rule data from the configured RSSHub instance;
+that request does not contain the current page URL. Opening or previewing a feed
+contacts its URL, and a subscription button sends the selected feed link to the
+reader chosen by the user. Those actions occur only when the user invokes them.
+
+To test without an account, load `.output/firefox-mv3/manifest.json` via
+`about:debugging` → **This Firefox** → **Load Temporary Add-on**. Open a page
+with an RSS/Atom link, then open RSSHub Radar to inspect and copy its feed link.
+Also check direct RSS URLs, feed previews, and the General, Rules, and About
+options pages. Browsing, opening the popup, copying links, and visiting options
+must not send analytics requests.
+
 ### Start the Development Server
 
 Also refer to: https://wxt.dev/guide/installation
