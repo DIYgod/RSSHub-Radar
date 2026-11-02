@@ -13,7 +13,7 @@
     "build:safari": "wxt build -b safari --mv3",
     "zip": "wxt zip && mkdir -p build && cp .output/rsshub-radar-$(node -p \"require('./package.json').version\")-chrome.zip build/chrome-mv3-prod.zip",
     "zip:firefox": "wxt zip -b firefox --mv3 && mkdir -p build && cp .output/rsshub-radar-$(node -p \"require('./package.json').version\")-firefox.zip build/firefox-mv3-prod.zip",
-    "safari-convert": "xcrun safari-web-extension-converter .output/safari-mv3 --project-location build --bundle-identifier app.rsshub.RSSHub-Radar --force --no-open --no-prompt",
+    "safari-convert": "xcrun safari-web-extension-converter .output/safari-mv3 --project-location build --bundle-identifier app.rsshub.RSSHub-Radar --force --no-open --no-prompt && plutil -insert LSApplicationCategoryType -string public.app-category.productivity \"build/RSSHub Radar/macOS (App)/Info.plist\"",
     "safari-zip": "zip -r build/safari-mv3-prod.zip \"build/RSSHub Radar\"",
     "build:safari:zip": "pnpm build:safari && pnpm safari-convert && pnpm safari-zip",
     "package": "pnpm zip && pnpm zip:firefox",
