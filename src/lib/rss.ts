@@ -1,5 +1,5 @@
 import type { RSSData } from "./types"
-import { fetchRSSContent, parseRSS } from "./utils"
+import { fetchRSSContent, isSameDocumentUrl, parseRSS } from "./utils"
 
 export async function getPageRSS() {
   const defaultTitle =
@@ -149,7 +149,12 @@ export async function getPageRSS() {
             defaultTitle,
           image,
         }
-        if (!unique.check(feed.url)) {
+        // Links such as `href="#"` resolve to the current page; requesting it
+        // again can invalidate session or CSRF state on the site.
+        if (
+          !unique.check(feed.url) &&
+          !isSameDocumentUrl(feed.url, location.href)
+        ) {
           uncertain.push(feed)
         }
       }

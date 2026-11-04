@@ -5,7 +5,7 @@ import { setupOffscreenDocument } from "~/lib/offscreen"
 import report from "~/lib/report"
 import { getLocalStorage } from "~/lib/storage"
 import type { RSSData } from "~/lib/types"
-import { parseRSS } from "~/lib/utils"
+import { isLikelyFeedUrl, parseRSS } from "~/lib/utils"
 import { getRSSHub as sandboxGetRSSHub } from "~/tabs/sandboxes"
 
 import { setBadge } from "./badge"
@@ -41,9 +41,21 @@ const requestContentScript = async <T>(name: string, tabId: number) => {
   }
 }
 
+const isTabComplete = (tabId: number) =>
+  new Promise<boolean>((resolve) => {
+    chrome.tabs.get(tabId, (tab) => {
+      resolve(!chrome.runtime.lastError && tab?.status === "complete")
+    })
+  })
+
 const getDirectFeed = async (url: string) => {
   try {
-    const content = await (await fetch(url)).text()
+    // This request is made outside the page, so it must never send or replace
+    // the site's cookies: that would rotate session, CSRF or captcha state.
+    const response = await fetch(url, {
+      credentials: "omit",
+    })
+    const content = await response.text()
     const prefix = content.slice(0, 4096)
     if (!/^\s*(?:<\?xml[^>]*>\s*)?<(?:rss|feed)\b/i.test(prefix)) {
       return
@@ -80,11 +92,19 @@ export const getRSS = async (tabId, url) => {
       })
       const html = await requestContentScript<string>("requestHTML", tabId)
       if (typeof html !== "string") {
-        const directFeed = await getDirectFeed(url)
-        if (directFeed) {
-          setRSS(tabId, {
-            pageRSS: [directFeed],
-          })
+        // No content script: the page is still loading (contentReady runs the
+        // detection once it is ready), was opened before the extension was
+        // installed or updated, or blocks extensions. Only fall back to
+        // requesting the URL when the page has loaded and looks like a feed, so
+        // ordinary pages such as login forms are never requested a second time
+        // (#1192, #1193).
+        if (isLikelyFeedUrl(url) && (await isTabComplete(tabId))) {
+          const directFeed = await getDirectFeed(url)
+          if (directFeed) {
+            setRSS(tabId, {
+              pageRSS: [directFeed],
+            })
+          }
         }
         return
       }
@@ -116,16 +136,9 @@ export const getRSS = async (tabId, url) => {
         "requestPageRSS",
         tabId,
       )
-      if (pageRSS?.pageRSS.length) {
-        setRSS(tabId, pageRSS)
-      } else {
-        const directFeed = await getDirectFeed(url)
-        if (directFeed) {
-          setRSS(tabId, {
-            pageRSS: [directFeed],
-          })
-        }
-      }
+      // The content script reads the document already loaded in the tab,
+      // including feeds opened directly, so never request the page again here.
+      setRSS(tabId, pageRSS)
     })
   } catch (error) {
     console.error(error)
