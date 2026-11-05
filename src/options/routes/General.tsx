@@ -1,6 +1,6 @@
 import _ from "lodash"
 import { Loader2 } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import toast from "react-hot-toast"
 
 import { Button } from "~/lib/components/Button"
@@ -14,6 +14,7 @@ import { quickSubscriptions } from "~/lib/quick-subscriptions"
 import { logoMap } from "~/lib/quick-subscriptions-logos"
 import report from "~/lib/report"
 import { getRulesCount, parseRules } from "~/lib/rules"
+import { getLocalStorage, setLocalStorage } from "~/lib/storage"
 import type { Rules as IRules } from "~/lib/types"
 import { getRadarRulesUrl } from "~/lib/utils"
 
@@ -29,8 +30,29 @@ function General() {
   }
 
   const [rules, setRules] = useState<IRules>({})
+  const [rsshubInstanceHistory, setRsshubInstanceHistoryState] = useState<
+    string[]
+  >([defaultConfig.rsshubDomain])
+  const [historyLoaded, setHistoryLoaded] = useState(false)
+  const setRsshubInstanceHistory = (history: string[]) => {
+    setRsshubInstanceHistoryState(history)
+    void setLocalStorage("rsshubHistory", history)
+  }
+  const instanceToSave = config.rsshubDomain.trim()
+  const [showHistory, setShowHistory] = useState(false)
+  const historyRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    getConfig().then(setConfigState)
+    Promise.all([getConfig(), getLocalStorage<string[]>("rsshubHistory")])
+      .then(([savedConfig, history]) => {
+        setConfigState(savedConfig)
+        if (history) {
+          setRsshubInstanceHistoryState(history)
+        }
+      })
+      .catch((error: unknown) => {
+        console.error("Failed to load RSSHub instance history", error)
+      })
+      .finally(() => setHistoryLoaded(true))
 
     sendToBackground({
       name: "requestDisplayedRules",
@@ -42,7 +64,21 @@ function General() {
       },
       areaName: string,
     ) => {
-      if (areaName !== "local" || !changes.config) {
+      if (areaName !== "local") {
+        return
+      }
+      if (changes.rsshubHistory) {
+        const history = changes.rsshubHistory.newValue
+        setRsshubInstanceHistoryState(
+          Array.isArray(history) &&
+            history.every(
+              (domain): domain is string => typeof domain === "string",
+            )
+            ? history
+            : [defaultConfig.rsshubDomain],
+        )
+      }
+      if (!changes.config) {
         return
       }
 
@@ -86,6 +122,23 @@ function General() {
       },
     )
   }, [])
+
+  useEffect(() => {
+    if (!showHistory) {
+      return
+    }
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!historyRef.current?.contains(event.target as Node)) {
+        setShowHistory(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [showHistory])
 
   return (
     <div>
@@ -170,15 +223,55 @@ function General() {
               <Label htmlFor="customRSSHubDomain">
                 {chrome.i18n.getMessage("customRSSHubDomain")}
               </Label>
-              <Input
-                id="customRSSHubDomain"
-                value={config.rsshubDomain}
-                onChange={(e) =>
-                  updateConfig({
-                    rsshubDomain: e.target.value,
-                  })
-                }
-              />
+              <div className="relative" ref={historyRef}>
+                <Input
+                  id="customRSSHubDomain"
+                  value={config.rsshubDomain}
+                  onChange={(e) =>
+                    updateConfig({
+                      rsshubDomain: e.target.value,
+                    })
+                  }
+                  disabled={!historyLoaded}
+                  onFocus={() => setShowHistory(true)}
+                />
+
+                {showHistory && rsshubInstanceHistory.length > 0 && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-popover text-popover-foreground border rounded-md shadow-lg z-50">
+                    {rsshubInstanceHistory.map((domain) => (
+                      <div
+                        key={domain}
+                        className="flex items-center justify-between px-3 py-2 hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <button
+                          className="flex-1 text-left"
+                          onClick={() => {
+                            updateConfig({ rsshubDomain: domain })
+                            setShowHistory(false)
+                          }}
+                        >
+                          {domain}
+                        </button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setRsshubInstanceHistory(
+                              rsshubInstanceHistory.filter((d) => d !== domain),
+                            )
+                          }}
+                        >
+                          <i
+                            className="i-mingcute-close-line h-4 w-4"
+                            aria-hidden="true"
+                          />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
             <div className="grid w-full items-center gap-2">
               <Label htmlFor="accessKey" className="flex items-center">
@@ -270,7 +363,7 @@ function General() {
               </p>
               <Button
                 variant="secondary"
-                disabled={rulesUpdating}
+                disabled={rulesUpdating || !historyLoaded}
                 onClick={() => {
                   setRulesUpdating(true)
                   sendToBackground({
@@ -286,6 +379,15 @@ function General() {
                         return
                       }
 
+                      if (
+                        isValidInstance(instanceToSave) &&
+                        !rsshubInstanceHistory.includes(instanceToSave)
+                      ) {
+                        setRsshubInstanceHistory([
+                          ...rsshubInstanceHistory,
+                          instanceToSave,
+                        ])
+                      }
                       toast.success(chrome.i18n.getMessage("updateSuccessful"))
                     })
                     .catch((error: unknown) => {
@@ -379,6 +481,15 @@ function General() {
       </div>
     </div>
   )
+}
+
+function isValidInstance(value: string) {
+  try {
+    const url = new URL(value)
+    return url.protocol === "https:" || url.protocol === "http:"
+  } catch {
+    return false
+  }
 }
 
 export { General }
