@@ -1,5 +1,5 @@
 import type { RSSData } from "./types"
-import { fetchRSSContent, parseRSS } from "./utils"
+import { fetchRSSContent, isSameDocumentUrl, parseRSS } from "./utils"
 
 export async function getPageRSS() {
   const defaultTitle =
@@ -39,10 +39,14 @@ export async function getPageRSS() {
 
   // self rss feed
   let html
-  if (
+  const rootName = document.documentElement?.localName.toLowerCase()
+  if (rootName === "rss" || rootName === "feed") {
+    // Firefox exposes RSS/Atom as an XML document, without document.body.
+    html = document.documentElement.outerHTML
+  } else if (
     // Detect RSS without correct Content-Type setting
     // @ts-ignore
-    document.body.childNodes?.[0]?.tagName?.toLowerCase() === "pre"
+    document.body?.childNodes?.[0]?.tagName?.toLowerCase() === "pre"
   ) {
     // @ts-ignore
     html = document.body.childNodes[0].innerText
@@ -145,7 +149,12 @@ export async function getPageRSS() {
             defaultTitle,
           image,
         }
-        if (!unique.check(feed.url)) {
+        // Links such as `href="#"` resolve to the current page; requesting it
+        // again can invalidate session or CSRF state on the site.
+        if (
+          !unique.check(feed.url) &&
+          !isSameDocumentUrl(feed.url, location.href)
+        ) {
           uncertain.push(feed)
         }
       }

@@ -61,7 +61,14 @@ function RSSItem({
 
   return (
     <li className="flex mb-4 items-center w-max min-w-full">
-      <img className="w-8 h-8" src={item.image || RSSHubIcon} />
+      <img
+        className="w-8 h-8"
+        src={
+          import.meta.env.BROWSER === "firefox"
+            ? RSSHubIcon
+            : item.image || RSSHubIcon
+        }
+      />
       <a
         target="_blank"
         href={url}

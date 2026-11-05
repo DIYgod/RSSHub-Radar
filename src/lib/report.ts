@@ -10,6 +10,12 @@ function report({
   url?: string
   name?: string
 }) {
+  // Firefox builds do not collect browsing or interaction analytics. Keep this
+  // check at build time so telemetry is omitted even when CI provides Umami vars.
+  if (import.meta.env.BROWSER === "firefox") {
+    return
+  }
+
   const umamiId = import.meta.env.WXT_UMAMI_ID
   const umamiUrl = import.meta.env.WXT_UMAMI_URL
   const sampleRate =

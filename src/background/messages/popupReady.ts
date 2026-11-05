@@ -1,4 +1,4 @@
-import { getCachedRSS } from "~/background/rss"
+import { getCachedRSS, getRSS } from "~/background/rss"
 
 const handler = (
   _message?: unknown,
@@ -10,8 +10,23 @@ const handler = (
         active: true,
         lastFocusedWindow: true,
       },
-      ([tab]) => {
-        resolve(getCachedRSS(tab.id))
+      async ([tab]) => {
+        if (!tab?.id || !tab.url) {
+          resolve(undefined)
+          return
+        }
+
+        try {
+          let cachedRSS = getCachedRSS(tab.id)
+          if (!cachedRSS) {
+            await getRSS(tab.id, tab.url)
+            cachedRSS = getCachedRSS(tab.id)
+          }
+          resolve(cachedRSS)
+        } catch (error) {
+          console.error(error)
+          resolve(undefined)
+        }
       },
     )
   })

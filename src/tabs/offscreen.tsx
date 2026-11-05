@@ -18,16 +18,19 @@ function OffscreenPage() {
         typeof event.data?.name === "string" &&
         event.data.name.startsWith("response")
       ) {
-        chrome.runtime.sendMessage(event.data)
-        sendToBackground({
+        void sendToBackground({
           name: event.data.name,
           body: event.data.body,
+        }).catch((error) => {
+          console.error("Failed to forward sandbox response", error)
         })
       }
     }
 
-    const onRuntimeMessage = (msg: { data?: unknown }) => {
-      iframeRef.current?.contentWindow?.postMessage(msg.data, "*")
+    const onRuntimeMessage = (msg: { target?: string; data?: unknown }) => {
+      if (msg.target === "offscreen") {
+        iframeRef.current?.contentWindow?.postMessage(msg.data, "*")
+      }
     }
 
     window.addEventListener("message", onWindowMessage)
@@ -39,7 +42,21 @@ function OffscreenPage() {
     }
   }, [])
 
-  return <iframe id="sandbox" src="/sandbox.html" ref={iframeRef}></iframe>
+  return (
+    <iframe
+      id="sandbox"
+      src="/sandbox.html"
+      ref={iframeRef}
+      onLoad={() => {
+        void sendToBackground({ name: "offscreenReady" }).catch((error) => {
+          console.error(
+            "Failed to notify background that offscreen is ready",
+            error,
+          )
+        })
+      }}
+    ></iframe>
+  )
 }
 
 export default OffscreenPage

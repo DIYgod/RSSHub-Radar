@@ -1,4 +1,5 @@
 import contentReady from "./messages/contentReady"
+import offscreenReady from "./messages/offscreenReady"
 import popupReady from "./messages/popupReady"
 import refreshRules from "./messages/refreshRules"
 import requestDisplayedRules from "./messages/requestDisplayedRules"
@@ -40,6 +41,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     switch (msg?.name) {
       case "contentReady":
         return contentReady(msg, sender)
+      case "offscreenReady":
+        return offscreenReady()
       case "popupReady":
         return popupReady(msg, sender)
       case "refreshRules":
