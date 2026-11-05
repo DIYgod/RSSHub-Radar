@@ -1,6 +1,6 @@
 import _ from "lodash"
 import { Loader2 } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import toast from "react-hot-toast"
 
 import { Button } from "~/lib/components/Button"
@@ -40,6 +40,7 @@ function General() {
   }
   const instanceToSave = config.rsshubDomain.trim()
   const [showHistory, setShowHistory] = useState(false)
+  const historyRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     Promise.all([getConfig(), getLocalStorage<string[]>("rsshubHistory")])
       .then(([savedConfig, history]) => {
@@ -123,8 +124,12 @@ function General() {
   }, [])
 
   useEffect(() => {
+    if (!showHistory) {
+      return
+    }
+
     const handleClickOutside = (event: MouseEvent) => {
-      if (showHistory && !(event.target as Element).closest(".relative")) {
+      if (!historyRef.current?.contains(event.target as Node)) {
         setShowHistory(false)
       }
     }
@@ -218,7 +223,7 @@ function General() {
               <Label htmlFor="customRSSHubDomain">
                 {chrome.i18n.getMessage("customRSSHubDomain")}
               </Label>
-              <div className="relative">
+              <div className="relative" ref={historyRef}>
                 <Input
                   id="customRSSHubDomain"
                   value={config.rsshubDomain}
@@ -231,7 +236,7 @@ function General() {
                   onFocus={() => setShowHistory(true)}
                 />
 
-                {showHistory && (
+                {showHistory && rsshubInstanceHistory.length > 0 && (
                   <div className="absolute top-full left-0 right-0 mt-1 bg-popover text-popover-foreground border rounded-md shadow-lg z-50">
                     {rsshubInstanceHistory.map((domain) => (
                       <div
