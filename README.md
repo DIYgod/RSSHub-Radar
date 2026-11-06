@@ -40,7 +40,13 @@ RSSHub Radar is a spin-off project of [RSSHub](https://github.com/DIYgod/RSSHub)
 - Discover and subscribe to the RSS feeds associated with the current page effortlessly.
 - Explore and subscribe to the RSSHub supported by the current page promptly.
 - Easily identify the RSSHubs supported by the current website quickly.
-- Supports one-click RSS subscription for various platforms including Tiny Tiny RSS, Miniflux, FreshRSS, Feedly, Inoreader, Feedbin, The Old Reader, Feeds.Pub, Local Reader...
+- Supports one-click RSS subscription for various platforms including Tiny Tiny RSS, Miniflux, FreshRSS, WyrmRSS, Feedly, Inoreader, Feedbin, The Old Reader, Feeds.Pub, Local Reader...
+
+For WyrmRSS, enable it under **Quick subscriptions** and enter your instance's base
+URL (for example, `https://wyrm.example.com`). This requires a WyrmRSS version
+supporting `/subscribe?url=…&title=…` ([reader-side support](https://github.com/kryoseu/WyrmRSS/pull/366)).
+The subscription button opens WyrmRSS with the feed URL and title prefilled for
+confirmation. Authenticate in WyrmRSS as usual; no API key is needed in Radar.
 
 ![image](https://github.com/DIYgod/RSSHub-Radar/assets/8266075/3474727c-fa8c-4949-bd86-afc3a471a020)
 ![image](https://github.com/DIYgod/RSSHub-Radar/assets/8266075/42103b61-cb13-489a-b00b-c8c786a4cc30)
