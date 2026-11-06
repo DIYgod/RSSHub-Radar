@@ -6,12 +6,14 @@ import InoreaderLogo from "~/assets/inoreader.svg"
 import MinifluxLogo from "~/assets/miniflux.ico"
 import NewsBlurLogo from "~/assets/newsblur.png"
 import TinyTinyRSSLogo from "~/assets/ttrss.png"
+import WyrmRSSLogo from "~/assets/wyrmrss.svg"
 
 export const logoMap = new Map<string, string>([
   ["follow", FollowLogo],
   ["inoreader", InoreaderLogo],
   ["miniflux", MinifluxLogo],
   ["freshrss", FreshRSSLogo],
+  ["wyrmrss", WyrmRSSLogo],
   ["ttrss", TinyTinyRSSLogo],
   ["feedly", FeedlyLogo],
   ["newsblur", NewsBlurLogo],

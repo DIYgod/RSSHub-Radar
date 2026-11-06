@@ -58,6 +58,15 @@ export const quickSubscriptions: ({
     getSubscribePath: (data) => `/i/?c=feed&a=add&url_rss=${data.encodedUrl}`,
   },
   {
+    name: "WyrmRSS",
+    projectUrl: "https://github.com/kryoseu/WyrmRSS",
+    key: "wyrmrss",
+    subscribeDomainKey: "wyrmrssDomain",
+    themeColor: "#ee7a41",
+    getSubscribePath: (data) =>
+      `/subscribe?url=${data.encodedUrl}&title=${encodeURIComponent(data.title)}`,
+  },
+  {
     name: "Tiny Tiny RSS",
     projectUrl: "https://tt-rss.org/",
     key: "ttrss",
