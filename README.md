@@ -44,7 +44,9 @@ RSSHub Radar is a spin-off project of [RSSHub](https://github.com/DIYgod/RSSHub)
 
 For WyrmRSS, enable it under **Quick subscriptions** and enter your instance's base
 URL (for example, `https://wyrm.example.com`). This requires a WyrmRSS version
-supporting `/subscribe?url=…&title=…` ([reader-side support](https://github.com/kryoseu/WyrmRSS/pull/366)).
+supporting `/subscribe?url=…&title=…` and RSSHub subscriptions.
+This integration is pending a WyrmRSS release; v0.35.1 does not support it.
+The minimum supported version will be documented when that release is available.
 The subscription button opens WyrmRSS with the feed URL and title prefilled for
 confirmation. Authenticate in WyrmRSS as usual; no API key is needed in Radar.
 
