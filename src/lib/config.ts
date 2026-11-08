@@ -21,6 +21,8 @@ export const defaultConfig = {
     minifluxDomain: "",
     freshrss: false,
     freshrssDomain: "",
+    wyrmrss: false,
+    wyrmrssDomain: "",
     nextcloudnews: false,
     nextcloudnewsDomain: "",
     feedly: false,
