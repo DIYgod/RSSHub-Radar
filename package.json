@@ -53,7 +53,7 @@
   "devDependencies": {
     "@egoist/tailwindcss-icons": "^1.9.2",
     "@ianvs/prettier-plugin-sort-imports": "4.7.1",
-    "@tailwindcss/postcss": "^4.3.3",
+    "@tailwindcss/postcss": "^4.3.5",
     "@types/chrome": "^0.3.7",
     "@types/node": "26.6.6",
     "@types/react": "19.3.0",
