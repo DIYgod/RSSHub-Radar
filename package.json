@@ -38,7 +38,7 @@
     "foxact": "^0.3.12",
     "he": "2.0.0",
     "lodash": "^4.18.1",
-    "lucide-react": "^1.66.0",
+    "lucide-react": "^1.71.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-hot-toast": "^2.6.1",
